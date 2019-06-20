@@ -2,44 +2,45 @@ import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import { CropFreeRounded,MonetizationOnOutlined , AssignmentReturnedOutlined, ShareOutlined } from '@material-ui/icons';
+import { CropFreeRounded, MonetizationOnOutlined, AssignmentReturnedOutlined, ShareOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100vw',
-      backgroundColor:'#fe4365',
+      backgroundColor: '#fe4365',
       height: '100%',
-      '& button':{
+      '& button': {
         marginTop: 4,
         outline: 'none',
         marginBottom: 4,
-        color:'#fffde5',
-        fill:'#fffde5',
-        height: '100%',
+        color: '#fffde5',
+        fill: '#fffde5',
+        height: '100%'
       },
-      '& svg':{
+      '& svg': {
         width: 30,
-        height: 30,
+        height: 30
       },
-      '& span':{
-        marginTop: 3,
-      },
-    },
-  }),
+      '& span': {
+        marginTop: 3
+      }
+    }
+  })
 );
 
 export const Loadpages = key => {
-  var temp:any = null;
+  var temp: any = null;
   switch (key) {
-    case "scan":
+    case 'scan':
+      // @ts-ignore
       window.weisen.getscan();
       break;
-    case "pay":
+    case 'pay':
       break;
-    case "income":
+    case 'income':
       break;
-    case "share":
+    case 'share':
       break;
     default:
       temp = null;
@@ -57,12 +58,7 @@ export default function LongMenu() {
 
   return (
     <div>
-      <BottomNavigation
-        showLabels
-        className={classes.root}
-        value={value}
-        onChange={handleChange}
-      >
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
         <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />
         <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
