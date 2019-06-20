@@ -1,0 +1,29 @@
+#jh-appbar {
+  height: 30px;
+  background-color: #fe4365;
+  position: fixed;
+  top: 35px;
+  z-index: 1;
+  div{
+    min-height: 0px;
+    height: 30px;
+    span{
+      background-color: #fffde5;
+    }
+  }
+  button{
+    min-height: 0px;
+    height: 30px;
+    margin-top: -1px;
+    span:first-child{
+      background-color: #fe4365;
+    }
+    span{
+      background-color: transparent;
+    }
+  }
+  button:hover {
+    outline: none;
+    color: #fffde5;
+  }
+}

@@ -1,0 +1,56 @@
+#buttns {
+  outline: none;
+  float: right;
+  color: #fffde5;
+  padding: 0;
+  margin: 6px 6px 0 6px;
+}
+#jh-searchicon-id-longmenu {
+  fill: #fffde5;
+}
+#long-menu {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#jh-locations {
+  float: left;
+  margin-top: 6px;
+  margin-left: 6px;
+  fill:#fffde5;
+}
+#jh-locations-address {
+  float: left;
+  margin-top: 6px;
+  margin-bottom: 0px;
+  margin-right: 6px;
+  color: #fffde5;
+  width: 65px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  transition: 200ms;
+}
+.jh-longmenu {
+  height: 35px;
+  background-color: #fe4365;
+  position: fixed;
+  width: 100%;
+}
+#jh-longmenu-search {
+  margin-top: 4px;
+  float: right;
+  display: inline-block;
+  min-width: calc(100vw - 137px - 55px);
+}
+#jh-longmenu-inputInput {
+  transition: 200ms;
+  color: #fffde5;
+  width: calc(100vw - 137px - 55px);
+}
+
+#jh-jh-longmenu {
+  height: 35px;
+  *{
+    z-index:1000;
+  }
+}

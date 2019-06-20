@@ -1,0 +1,16 @@
+{
+  "name": "consumer",
+  "short_name": "consumer",
+  "icons": [
+      {
+          "src": "./content/images/sys1.png",
+          "sizes": "192x192",
+          "type": "image/png"
+      }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#e0e0e0",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait"
+}
