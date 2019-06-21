@@ -4,7 +4,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import { ShoppingCartRounded, BrightnessLowRounded } from '@material-ui/icons';
+import { ShoppingCartRounded, SettingsRounded } from '@material-ui/icons';
 import Orders from './orders';
 import VipService from './vipservice';
 import Mytool from './mytool';
@@ -100,7 +100,7 @@ export default function LongMenu() {
           <div className={classes.nameOne}>
             <span className={classes.name}>昵称（VIP）</span>
             <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
-              <BrightnessLowRounded />
+              <SettingsRounded />
             </IconButton>
             <IconButton
               color="primary"
