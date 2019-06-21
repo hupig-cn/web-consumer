@@ -32,10 +32,10 @@ export class App extends React.Component<IAppProps> {
   render() {
     return (
       <Router basename={baseHref}>
-              <ErrorBoundary>
-                <AppRoutes />
-              </ErrorBoundary>
-            {<BottomNavigation />}
+        <ErrorBoundary>
+          <AppRoutes />
+        </ErrorBoundary>
+        <BottomNavigation />
       </Router>
     );
   }
