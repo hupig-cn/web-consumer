@@ -15,7 +15,7 @@
   float: left;
   margin-top: 6px;
   margin-left: 6px;
-  fill:#fffde5;
+  fill: #fffde5;
 }
 #jh-locations-address {
   float: left;
@@ -36,21 +36,9 @@
   position: fixed;
   width: 100%;
 }
-#jh-longmenu-search {
-  margin-top: 4px;
-  float: right;
-  display: inline-block;
-  min-width: calc(100vw - 137px - 55px);
-}
-#jh-longmenu-inputInput {
-  transition: 200ms;
-  color: #fffde5;
-  width: calc(100vw - 137px - 55px);
-}
-
 #jh-jh-longmenu {
   height: 35px;
-  *{
-    z-index:1000;
+  * {
+    z-index: 1000;
   }
 }

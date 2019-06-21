@@ -46,16 +46,15 @@ export const useStyles = makeStyles((theme: Theme) =>
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.black, 0.15),
+      marginTop: '4px',
+      float: 'right',
+      display: 'inline-block',
+      minWidth: document.body.offsetWidth - 137 - 55 + 'px',
       '&:hover': {
         backgroundColor: fade(theme.palette.common.black, 0.25)
       },
       marginRight: 'auto',
-      height: '28px',
-      float: 'left',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto'
-      }
+      height: '28px'
     },
     searchIcon: {
       width: theme.spacing(4.5),
@@ -71,16 +70,12 @@ export const useStyles = makeStyles((theme: Theme) =>
       minWidth: '100%'
     },
     inputInput: {
+      transition: '200ms',
+      color: '#fffde5',
+      width: document.body.offsetWidth - 137 - 55 - 17 + 'px',
       padding: theme.spacing(1, 1, 1, 1),
-      transition: theme.transitions.create('black'),
       marginLeft: '28px',
-      height: '12px',
-      [theme.breakpoints.up('sm')]: {
-        width: 20,
-        '&:focus': {
-          width: 200
-        }
-      }
+      height: '12px'
     }
   })
 );
