@@ -125,9 +125,8 @@ export default function LongMenu() {
         value={value}
         onChange={handleChange}
       >
-        <BottomNavigationAction label="余额" value="scan" icon={'225.00'} />
-        <BottomNavigationAction label="收益" value="pay" icon={'751'} />
-        <BottomNavigationAction label="我的足迹" value="income" icon={'81'} />
+        <BottomNavigationAction label="积分" value="scan" icon={'225'} />
+        <BottomNavigationAction label="余额" value="pay" icon={'751.00'} />
         <BottomNavigationAction label="优惠卷" value="share" icon={'360'} />
       </BottomNavigation>
       <div style={{ height: '130px' }} />
