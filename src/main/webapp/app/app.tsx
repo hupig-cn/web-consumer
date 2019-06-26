@@ -12,7 +12,6 @@ import { getProfile } from 'app/shared/reducers/application-profile';
 import { setLocale } from 'app/shared/reducers/locale';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
-import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 
@@ -32,9 +31,7 @@ export class App extends React.Component<IAppProps> {
   render() {
     return (
       <Router basename={baseHref}>
-        <ErrorBoundary>
-          <AppRoutes />
-        </ErrorBoundary>
+        <AppRoutes />
         <BottomNavigation />
       </Router>
     );
