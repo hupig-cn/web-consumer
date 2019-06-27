@@ -16,7 +16,7 @@ export class Consumer extends React.Component<IConsumerProp> {
 
   render() {
     return (
-      <div className = "jh-body">
+      <div id="jh-body">
         <Home />
         <Enddiv />
       </div>

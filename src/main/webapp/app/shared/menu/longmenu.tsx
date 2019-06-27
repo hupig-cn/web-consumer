@@ -9,6 +9,10 @@ import { LocationOnRounded } from '@material-ui/icons';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
+import Reposition from '../public/reposition';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Enddiv from 'app/shared/menu/enddiv';
 
 export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 
@@ -80,6 +84,12 @@ export const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export const bodyEl = document.getElementById('root');
+
+export const switchLocation = () => {
+  ReactDOM.render(<Reposition />, bodyEl);
+};
+
 export default function LongMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -143,9 +153,7 @@ export default function LongMenu() {
             marginLeft: '2px'
           }}
           onClick={() => {
-            {
-              ReLocation();
-            }
+            switchLocation();
           }}
         >
           <ReLocation />
