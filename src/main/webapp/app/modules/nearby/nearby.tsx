@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 
-import LongMenu from "app/shared/menu/longmenu";
-import Nearbytabs from "./nearbytabs";
+import LongMenu from 'app/shared/menu/longmenu';
+import Nearbytabs from './nearbytabs';
 
 export interface INearbyProp extends StateProps, DispatchProps {}
 
