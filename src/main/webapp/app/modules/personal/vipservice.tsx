@@ -2,6 +2,7 @@ import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import Mytool from 'app/modules/personal/mytool';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -89,6 +90,7 @@ export default function LongMenu() {
         <BottomNavigationAction label="我的佣金" value="key7" icon={<img src="./content/images/vip7.png" />} />
         <BottomNavigationAction label="问题反馈" value="key8" icon={<img src="./content/images/vip8.png" />} />
       </BottomNavigation>
+      <Mytool />
     </div>
   );
 }

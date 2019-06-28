@@ -1,5 +1,3 @@
-import './longmenu.scss';
-
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -11,8 +9,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 import Reposition from '../public/reposition';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import Enddiv from 'app/shared/menu/enddiv';
 
 export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 
@@ -135,22 +131,33 @@ export default function LongMenu() {
   }
 
   return (
-    <div id="jh-jh-longmenu">
-      <div className="jh-longmenu">
-        <LocationOnRounded
-          id="jh-locations"
-          onClick={() => {
-            {
-              ReLocation();
-            }
-          }}
-        />
+    <div style={{ height: '35px' }}>
+      <div className="jh-longmenu" style={{ zIndex: 1000, height: '36px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}>
+        <span style={{ float: 'left', marginTop: '6px', marginLeft: '6px', color: '#fffde5' }}>
+          <LocationOnRounded
+            onClick={() => {
+              {
+                ReLocation();
+              }
+            }}
+          />
+        </span>
         <p
           id="jh-locations-address"
           style={{
             fontSize: '0.9rem',
             marginTop: '8px',
-            marginLeft: '2px'
+            marginLeft: '2px',
+            float: 'left',
+            marginBottom: '0px',
+            marginRight: '6px',
+            color: '#fffde5',
+            width: '65px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            textAlign: 'left',
+            transition: '200ms'
           }}
           onClick={() => {
             switchLocation();
@@ -158,20 +165,23 @@ export default function LongMenu() {
         >
           <ReLocation />
         </p>
-        <IconButton id="buttns" aria-label="More" aria-controls="long-menu" aria-haspopup="true" onClick={handleClick}>
+        <IconButton
+          aria-label="More"
+          aria-controls="long-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          style={{ outline: 'none', float: 'right', color: '#fffde5', padding: '0px', margin: '6px 6px 0px 6px' }}
+        >
           <MoreVertIcon />
         </IconButton>
         <div className={classes.search} id="jh-longmenu-search">
-          <div className={classes.searchIcon} id="jh-longmenu-icon">
-            <SearchIcon id="jh-searchicon-id-longmenu" />
+          <div className={classes.searchIcon}>
+            <SearchIcon style={{ fill: '#fffde5' }} />
           </div>
           <InputBase
             id="jh-longmenu-inputInput"
             placeholder="搜索..."
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput
-            }}
+            classes={{ root: classes.inputRoot, input: classes.inputInput }}
             inputProps={{ 'aria-label': 'Search' }}
             onFocus={() => {
               onSelectFocus();
@@ -182,18 +192,12 @@ export default function LongMenu() {
           />
         </div>
         <Menu
-          id="long-menu"
+          style={{ backgroundColor: '#00000060' }}
           anchorEl={anchorEl}
           keepMounted
           open={open}
           onClose={handleClose}
-          PaperProps={{
-            style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: 148,
-              sIndex: 1001
-            }
-          }}
+          PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: 148, sIndex: 1001 } }}
         >
           {options.map(option => (
             <MenuItem

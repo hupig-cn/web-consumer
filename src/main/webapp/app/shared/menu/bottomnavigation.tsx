@@ -1,7 +1,7 @@
 import React from 'react';
 import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { StoreRounded, NearMeRounded, TextsmsRounded, AccountCircleRounded } from '@material-ui/icons';
-import Home from 'app/modules/home/home';
+import Consumer from 'app/modules/consumer/consumer';
 import Nearby from 'app/modules/nearby/nearby';
 import Information from 'app/modules/information/information';
 import Personal from 'app/modules/personal/personal';
@@ -9,10 +9,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
-import Enddiv from './enddiv';
 import Badge from '@material-ui/core/Badge';
 
-export const bodyEl = document.getElementById('root').getElementsByClassName('jh-body');
+export const bodyEl = document.getElementsByClassName('jh-body');
 
 const store = initStore();
 registerLocale(store);
@@ -21,7 +20,7 @@ export const Loadpages = key => {
   var temp: any = null;
   switch (key) {
     case 'home':
-      temp = <Home />;
+      temp = <Consumer />;
       break;
     case 'nearby':
       temp = <Nearby />;
@@ -36,13 +35,7 @@ export const Loadpages = key => {
       temp = null;
       break;
   }
-  ReactDOM.render(
-    <Provider store={store}>
-      {temp}
-      <Enddiv />
-    </Provider>,
-    bodyEl.item(0)
-  );
+  ReactDOM.render(<Provider store={store}>{temp}</Provider>, bodyEl.item(0));
 };
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

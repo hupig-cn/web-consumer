@@ -14,6 +14,7 @@ import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
+import Enddiv from 'app/shared/menu/enddiv';
 
 const baseHref = document
   .querySelector('base')
@@ -32,6 +33,7 @@ export class App extends React.Component<IAppProps> {
     return (
       <Router basename={baseHref}>
         <AppRoutes />
+        <Enddiv />
         <BottomNavigation />
       </Router>
     );

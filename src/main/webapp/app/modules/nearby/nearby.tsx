@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 
-import LongMenu from 'app/shared/menu/longmenu';
+import LongMenu from '../public/longmenu';
 import Nearbytabs from './nearbytabs';
 
 export interface INearbyProp extends StateProps, DispatchProps {}
@@ -15,7 +15,7 @@ export class Nearby extends React.Component<INearbyProp> {
 
   render() {
     return (
-      <div className="jh-nearby">
+      <div>
         <LongMenu />
         <Nearbytabs />
       </div>

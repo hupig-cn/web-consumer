@@ -2,16 +2,14 @@ import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import { PaymentRounded, MoveToInboxRounded, ThumbsUpDownRounded, RateReviewRounded, EventNoteRounded } from '@material-ui/icons';
-import { Button } from '@material-ui/core';
-import Order from './orderList/order';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import PaymentRounded from '@material-ui/icons/PaymentRounded';
+import MoveToInboxRounded from '@material-ui/icons/MoveToInboxRounded';
+import ThumbsUpDownRounded from '@material-ui/icons/ThumbsUpDownRounded';
+import RateReviewRounded from '@material-ui/icons/RateReviewRounded';
+import EventNoteRounded from '@material-ui/icons/EventNoteRounded';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
-import Enddiv from '../../shared/menu/enddiv';
-
-export const bodyEl = document.getElementById('root').getElementsByClassName('jh-body');
+import VipService from 'app/modules/personal/vipservice';
 
 const store = initStore();
 registerLocale(store);
@@ -44,36 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Loadpages = key => {
-  var temp: any = null;
-  switch (key) {
-    case 'key1':
-      temp = <Order />;
-      break;
-    case 'key2':
-      temp = <Order />;
-      break;
-    case 'key3':
-      temp = <Order />;
-      break;
-    case 'key4':
-      temp = <Order />;
-      break;
-    case 'order':
-      temp = <Order />;
-      break;
-    default:
-      temp = null;
-      break;
-  }
-  ReactDOM.render(
-    <Provider store={store}>
-      {temp}
-      <Enddiv />
-    </Provider>,
-    bodyEl.item(0)
-  );
-};
+export const Loadpages = key => {};
 
 export default function LongMenu() {
   const classes = useStyles();
@@ -85,13 +54,7 @@ export default function LongMenu() {
   }
 
   return (
-    <div
-      style={{
-        paddingTop: '12px',
-        backgroundColor: 'white',
-        borderBottom: '1px solid #f0f0f0'
-      }}
-    >
+    <div style={{ paddingTop: '12px', backgroundColor: 'white', borderBottom: '1px solid #f0f0f0' }}>
       <div className={classes.divTitleName}>
         <span style={{ float: 'left' }}>我的订单</span>
       </div>
@@ -102,6 +65,11 @@ export default function LongMenu() {
         <BottomNavigationAction label="售后退款" value="key4" icon={<RateReviewRounded />} />
         <BottomNavigationAction label="我的订单" value="order" icon={<EventNoteRounded />} />
       </BottomNavigation>
+      <img
+        src="./content/images/profit.png"
+        style={{ width: '100%', height: '55px', padding: '5px', borderRadius: '10px', marginTop: '10px' }}
+      />
+      <VipService />
     </div>
   );
 }
