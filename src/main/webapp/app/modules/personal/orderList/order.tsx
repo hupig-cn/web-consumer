@@ -6,9 +6,9 @@ import { getSession } from 'app/shared/reducers/authentication';
 import LongMenu from 'app/shared/menu/longmenu';
 import Ordertabs from './ordertabs';
 
-export interface INearbyProp extends StateProps, DispatchProps {}
+export interface IOrderProp extends StateProps, DispatchProps {}
 
-export class Nearby extends React.Component<INearbyProp> {
+export class Order extends React.Component<IOrderProp> {
   componentDidMount() {
     this.props.getSession();
   }
@@ -36,4 +36,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Nearby);
+)(Order);

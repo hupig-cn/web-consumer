@@ -1,4 +1,4 @@
-import './nearbytabs.scss';
+import './ordertabs.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -25,6 +25,12 @@ export const Setlistbox = keys => {
       temp = <Orderlistbox />;
       break;
     case '2':
+      temp = <Orderlistbox />;
+      break;
+    case '3':
+      temp = <Orderlistbox />;
+      break;
+    case '4':
       temp = <Orderlistbox />;
       break;
     default:
