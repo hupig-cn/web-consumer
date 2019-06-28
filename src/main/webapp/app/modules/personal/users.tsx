@@ -92,13 +92,17 @@ export default function LongMenu() {
     Loadpages(newValue);
   }
 
+  function login() {
+    alert("登录")
+  }
+
   return (
     <div>
       <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
         <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
         <div className={classes.namePlusSetting}>
           <div className={classes.nameOne}>
-            <span className={classes.name}>昵称（VIP）</span>
+            <span className={classes.name} onClick={login}>昵称（VIP）</span>
             <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
               <SettingsRounded />
             </IconButton>
