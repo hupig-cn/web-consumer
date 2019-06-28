@@ -12,7 +12,10 @@ import { Provider } from 'react-redux';
 import Consumer from 'app/modules/consumer/consumer';
 
 export const Title = () => {
-  function goBack() {}
+  function goBack() {
+    history.go(0);
+  }
+
   return (
     <div
       style={{

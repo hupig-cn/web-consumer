@@ -1,24 +1,23 @@
-import './consumer.scss';
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
-import Home from '../home/home';
-import Enddiv from '../../shared/menu/enddiv';
 
-export interface IConsumerProp extends StateProps, DispatchProps {}
+import LongMenu from 'app/shared/menu/longmenu';
+import Ordertabs from './ordertabs';
 
-export class Consumer extends React.Component<IConsumerProp> {
+export interface INearbyProp extends StateProps, DispatchProps {}
+
+export class Nearby extends React.Component<INearbyProp> {
   componentDidMount() {
     this.props.getSession();
   }
 
   render() {
     return (
-      <div id="jh-body" className="jh-body">
-        <Home />
-        <Enddiv />
+      <div className="jh-nearby">
+        <LongMenu />
+        <Ordertabs />
       </div>
     );
   }
@@ -37,4 +36,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Consumer);
+)(Nearby);

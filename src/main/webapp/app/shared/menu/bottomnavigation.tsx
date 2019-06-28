@@ -12,7 +12,7 @@ import { registerLocale } from 'app/config/translation';
 import Enddiv from './enddiv';
 import Badge from '@material-ui/core/Badge';
 
-export const bodyEl = document.getElementById('root');
+export const bodyEl = document.getElementById('root').getElementsByClassName('jh-body');
 
 const store = initStore();
 registerLocale(store);
@@ -41,7 +41,7 @@ export const Loadpages = key => {
       {temp}
       <Enddiv />
     </Provider>,
-    bodyEl
+    bodyEl.item(0)
   );
 };
 const useStyles = makeStyles((theme: Theme) =>
