@@ -12,75 +12,83 @@ import Avatar from '@material-ui/core/Avatar';
 const messages = [
   {
     id: 1,
-    primary: '探虾迹小龙虾（蟹·烧烤·市桥店）',
+    primary: '【官网价直降1111元】Apple/苹果 iPhone XR 256G 移动联通电信4G手机双卡双待苹果XR iPhonexr',
     star: '4.9',
     sale: '90',
     distance: '38分钟 4.0km',
     consumption: '人均 ￥69 积分 50%',
-    person: './content/images/shop1.jpg'
+    person: './content/images/commodity1.jpg',
+    price: '6488.00'
   },
   {
     id: 2,
-    primary: '德州汉堡（市桥黄编店）',
+    primary: '分期Apple/苹果 iPhone XS Max苹果xsmax苹果XR双卡正品手机国行8',
     star: '4.4',
     sale: '826',
     distance: '36分钟 3.5km',
     consumption: '人均 ￥23 积分 30%',
-    person: './content/images/shop2.jpg'
+    person: './content/images/commodity4.jpg',
+    price: '4008.00'
   },
   {
     id: 3,
-    primary: '华莱士炸鸡汉堡（市桥店）',
+    primary: 'Apple/苹果 iPhone 8 Plus 4G全网通 美版国行8代 无锁苹果8plus',
     star: '4.0',
     sale: '2394',
     distance: '38分钟 4.5km',
     consumption: '人均 ￥23 积分 50%',
-    person: './content/images/shop3.jpg'
+    person: './content/images/commodity5.jpg',
+    price: '3980.00'
   },
   {
     id: 4,
-    primary: '菠萝油港澳餐厅',
+    primary: '【官网价直降1111元】Apple/苹果 iPhone XR 256G 移动联通电信4G手机双卡双待苹果XR iPhonexr',
     star: '4.3',
     sale: '796',
     distance: '41分钟 4.6km',
     consumption: '人均 ￥21 积分 50%',
-    person: './content/images/shop4.jpg'
+    person: './content/images/commodity1.jpg',
+    price: '6488.00'
   },
   {
     id: 5,
-    primary: '广州麦当劳光明北得来速餐厅',
+    primary: '分期Apple/苹果 iPhone XS Max苹果xsmax苹果XR双卡正品手机国行8',
     star: '4.5',
     sale: '2634',
     distance: '30分钟 2.5km',
     consumption: '人均 ￥37 积分 15%',
-    person: './content/images/shop5.jpg'
+    person: './content/images/commodity4.jpg',
+    price: '4008.00'
   },
   {
     id: 6,
-    primary: '开心花甲粉（市桥店）',
+    primary: 'Apple/苹果 iPhone 8 Plus 4G全网通 美版国行8代 无锁苹果8plus',
     star: '3.5',
     sale: '7981',
     distance: '35分钟 3.5km',
     consumption: '人均 ￥17 积分 50%',
-    person: './content/images/shop6.jpg'
+    person: './content/images/commodity5.jpg',
+    price: '3980.00'
   },
   {
     id: 7,
-    primary: '窑鸡王（市桥店）',
+    primary: '【官网价直降1111元】Apple/苹果 iPhone XR 256G 移动联通电信4G手机双卡双待苹果XR iPhonexr',
     star: '4.5',
     sale: '1449',
     distance: '40分钟 5.1km',
     consumption: '人均 ￥80 积分 30%',
-    person: './content/images/shop7.jpg'
+    person: './content/images/commodity1.jpg',
+    price: '6488.00'
   },
   {
     id: 8,
-    primary: '叫了只炸鸡（市桥店）',
+    primary: '分期Apple/苹果 iPhone XS Max苹果xsmax苹果XR双卡正品手机国行8',
     star: '4.3',
     sale: '3421',
     distance: '43分钟 4.0km',
     consumption: '人均 ￥28 积分 50%',
-    person: './content/images/shop8.jpg'
+    person: './content/images/commodity4.jpg',
+    price: '4008.00'
   }
 ];
 
@@ -128,7 +136,7 @@ export default function BottomAppBar() {
       <CssBaseline />
       <Paper square className={classes.paper}>
         <List className={classes.list}>
-          {messages.map(({ id, primary, star, sale, distance, consumption, person }) => (
+          {messages.map(({ id, primary, star, sale, distance, consumption, person, price }) => (
             <React.Fragment key={id}>
               <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }}>
                 <ListItemAvatar>
@@ -152,25 +160,15 @@ export default function BottomAppBar() {
                   primary={primary}
                   secondary={
                     <React.Fragment>
-                      <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
-                        <span style={{ color: '#fe4365' }}>★{star}</span> （月销售：{sale}）
-                      </Typography>
                       <span
                         style={{
-                          float: 'right'
-                        }}
-                      >
-                        {distance}
-                      </span>
-                      <span
-                        style={{
-                          float: 'left',
+                          float: 'right',
                           position: 'absolute',
                           bottom: 0,
-                          left: 0
+                          left: '80%'
                         }}
                       >
-                        {consumption}
+                        ¥{price}
                       </span>
                     </React.Fragment>
                   }
