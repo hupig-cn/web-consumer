@@ -4,10 +4,9 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import { ShoppingCartRounded, SettingsRounded } from '@material-ui/icons';
+import ShoppingCartRounded from '@material-ui/icons/ShoppingCartRounded';
+import SettingsRounded from '@material-ui/icons/SettingsRounded';
 import Orders from './orders';
-import VipService from './vipservice';
-import Mytool from './mytool';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -92,13 +91,19 @@ export default function LongMenu() {
     Loadpages(newValue);
   }
 
+  function login() {
+    alert('登录');
+  }
+
   return (
     <div>
       <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
         <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
         <div className={classes.namePlusSetting}>
           <div className={classes.nameOne}>
-            <span className={classes.name}>昵称（VIP）</span>
+            <span className={classes.name} onClick={login}>
+              昵称（VIP）
+            </span>
             <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
               <SettingsRounded />
             </IconButton>
@@ -114,36 +119,18 @@ export default function LongMenu() {
         </div>
       </div>
       <BottomNavigation
-        style={{
-          position: 'fixed',
-          top: '60px',
-          height: 'auto',
-          zIndex: 1000
-        }}
+        style={{ position: 'fixed', top: '60px', height: 'auto', zIndex: 1000 }}
         showLabels
         className={classes.root}
         value={value}
         onChange={handleChange}
       >
-        <BottomNavigationAction label="余额" value="scan" icon={'225.00'} />
-        <BottomNavigationAction label="收益" value="pay" icon={'751'} />
-        <BottomNavigationAction label="我的足迹" value="income" icon={'81'} />
+        <BottomNavigationAction label="积分" value="scan" icon={'225'} />
+        <BottomNavigationAction label="余额" value="pay" icon={'751.00'} />
         <BottomNavigationAction label="优惠卷" value="share" icon={'360'} />
       </BottomNavigation>
       <div style={{ height: '130px' }} />
       <Orders />
-      <img
-        style={{
-          width: '100%',
-          height: '55px',
-          padding: '5px',
-          borderRadius: '10px',
-          marginTop: '10px'
-        }}
-        src="./content/images/profit.png"
-      />
-      <VipService />
-      <Mytool />
     </div>
   );
 }

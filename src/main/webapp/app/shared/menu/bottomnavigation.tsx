@@ -1,48 +1,41 @@
 import React from 'react';
-import {BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme} from '@material-ui/core';
+import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { StoreRounded, NearMeRounded, TextsmsRounded, AccountCircleRounded } from '@material-ui/icons';
-import Home from 'app/modules/home/home';
+import Consumer from 'app/modules/consumer/consumer';
 import Nearby from 'app/modules/nearby/nearby';
 import Information from 'app/modules/information/information';
 import Personal from 'app/modules/personal/personal';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
-import Enddiv from './enddiv';
 import Badge from '@material-ui/core/Badge';
 
-export const bodyEl = document.getElementById('root').getElementsByClassName("jh-body");
+export const bodyEl = document.getElementsByClassName('jh-body');
 
 const store = initStore();
 registerLocale(store);
 
 export const Loadpages = key => {
-  var temp:any = null;
+  var temp: any = null;
   switch (key) {
-    case "home":
-      temp = <Home />;
+    case 'home':
+      temp = <Consumer />;
       break;
-    case "nearby":
+    case 'nearby':
       temp = <Nearby />;
       break;
-    case "information":
+    case 'information':
       temp = <Information />;
       break;
-    case "personal":
+    case 'personal':
       temp = <Personal />;
       break;
     default:
       temp = null;
       break;
   }
-  ReactDOM.render(
-    <Provider store={ store }>
-      {temp}
-      <Enddiv />
-    </Provider>,
-    bodyEl.item(0)
-  );
+  ReactDOM.render(<Provider store={store}>{temp}</Provider>, bodyEl.item(0));
 };
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,31 +50,29 @@ const useStyles = makeStyles((theme: Theme) =>
         minWidth: '50px',
         paddingBottom: '0px',
         paddingTop: '0px',
-        height: '46px',
+        height: '46px'
       },
-      '& button.Mui-selected':{
+      '& button.Mui-selected': {
         color: '#fe4365',
         fontSize: '0.65rem',
         paddingTop: '0px',
-        outline: 'none',
+        outline: 'none'
       },
       '& svg': {
-        paddingTop: '2px',
+        paddingTop: '2px'
       },
       '& span': {
         minFontSize: '0.1rem',
-        fontSize: '0.65rem',
+        fontSize: '0.65rem'
       },
       '& span.Mui-selected': {
         minFontSize: '0.1rem',
         fontSize: '0.65rem',
-        paddingTop: '0px',
-      },
+        paddingTop: '0px'
+      }
     },
-    margin: {
-
-    },
-  }),
+    margin: {}
+  })
 );
 
 export default function LabelBottomNavigation() {
@@ -92,14 +83,18 @@ export default function LabelBottomNavigation() {
     setValue(newValue);
   }
   return (
-    <BottomNavigation  id="nav-bottoms" className={classes.root} showLabels value={value} onChange={handleChange}>
+    <BottomNavigation id="nav-bottoms" className={classes.root} showLabels value={value} onChange={handleChange}>
       <BottomNavigationAction label="首页" value="home" icon={<StoreRounded />} />
       <BottomNavigationAction label="附近" value="nearby" icon={<NearMeRounded />} />
-      <BottomNavigationAction label="消息" value="information" icon={
-        <Badge className={classes.margin} color="secondary" variant="dot">
-          <TextsmsRounded />
-        </Badge>
-      } />
+      <BottomNavigationAction
+        label="消息"
+        value="information"
+        icon={
+          <Badge className={classes.margin} color="secondary" variant="dot">
+            <TextsmsRounded />
+          </Badge>
+        }
+      />
       <BottomNavigationAction label="我的" value="personal" icon={<AccountCircleRounded />} />
     </BottomNavigation>
   );

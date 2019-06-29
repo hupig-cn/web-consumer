@@ -2,7 +2,11 @@ import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import { CropFreeRounded, MonetizationOnOutlined, AssignmentReturnedOutlined, ShareOutlined } from '@material-ui/icons';
+import CropFreeRounded from '@material-ui/icons/CropFreeRounded';
+import MonetizationOnOutlined from '@material-ui/icons/MonetizationOnOutlined';
+import AssignmentReturnedOutlined from '@material-ui/icons/AssignmentReturnedOutlined';
+import ShareOutlined from '@material-ui/icons/ShareOutlined';
+import Homequickaccessdown from './homequickaccessdown';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,13 +61,14 @@ export default function LongMenu() {
   }
 
   return (
-    <div>
+    <div className="jh-consumer-quickaccess">
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
         <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />
         <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
         <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
       </BottomNavigation>
+      <Homequickaccessdown />
     </div>
   );
 }

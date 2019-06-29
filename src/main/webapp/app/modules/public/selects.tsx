@@ -4,16 +4,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import Informationlistbox from 'app/modules/information/informationlistbox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
-      marginTop: '35px',
       flexGrow: 1,
       height: '37px',
       zIndex: 999,
-      position: 'fixed',
       top: 0,
       width: '100%'
     },
@@ -59,24 +56,36 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   return (
-    <div>
-      <div className={classes.grow}>
-        <AppBar position="static" style={{ backgroundColor: '#f0f0f0', boxShadow: 'none', height: '100%' }}>
-          <Toolbar style={{ minHeight: '0px', margin: '5px 0px 5px 0px' }}>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="查找消息..."
-                classes={{ root: classes.inputRoot, input: classes.inputInput }}
-                inputProps={{ 'aria-label': 'Search' }}
-              />
+    <div className={classes.grow}>
+      <AppBar
+        position="static"
+        style={{
+          backgroundColor: '#f0f0f0',
+          boxShadow: 'none',
+          height: '100%'
+        }}
+      >
+        <Toolbar
+          style={{
+            minHeight: '0px',
+            margin: '5px 0px 5px 0px'
+          }}
+        >
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
             </div>
-          </Toolbar>
-        </AppBar>
-      </div>
-      <Informationlistbox />
+            <InputBase
+              placeholder="查找城市..."
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput
+              }}
+              inputProps={{ 'aria-label': 'Search' }}
+            />
+          </div>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }
