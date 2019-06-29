@@ -7,6 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartRounded from '@material-ui/icons/ShoppingCartRounded';
 import SettingsRounded from '@material-ui/icons/SettingsRounded';
 import Orders from './orders';
+import { Link, Route } from 'react-router-dom';
+import { Translate } from 'react-jhipster';
+import { Row, Col, Alert } from 'reactstrap';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -104,6 +107,15 @@ export default function LongMenu() {
             <span className={classes.name} onClick={login}>
               昵称（VIP）
             </span>
+            <Route>
+              <div>
+                <Alert color="warning">
+                  <Link to="/login" className="alert-link">
+                    <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
+                  </Link>
+                </Alert>
+              </div>
+            </Route>
             <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
               <SettingsRounded />
             </IconButton>

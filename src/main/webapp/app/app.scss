@@ -12,8 +12,6 @@ a {
 }
 
 * {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   &:after,
   &::before {
     -moz-box-sizing: border-box;
@@ -25,12 +23,12 @@ a {
   box-sizing: border-box;
   .view-container {
     width: 100%;
-    height: calc(100% - 40px);
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 1rem;
+    padding: 0px;
     .card {
-      //padding: 1rem;
+      border: 0px;
     }
     .view-routes {
       height: 100%;
@@ -40,7 +38,7 @@ a {
     }
   }
 }
-.jh-card{
+.jh-card {
   width: 100%;
 }
 
