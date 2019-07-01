@@ -1,11 +1,19 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import PaymentRounded from '@material-ui/icons/PaymentRounded';
+// tslint:disable-next-line: no-submodule-imports
 import MoveToInboxRounded from '@material-ui/icons/MoveToInboxRounded';
+// tslint:disable-next-line: no-submodule-imports
 import ThumbsUpDownRounded from '@material-ui/icons/ThumbsUpDownRounded';
+// tslint:disable-next-line: no-submodule-imports
 import RateReviewRounded from '@material-ui/icons/RateReviewRounded';
+// tslint:disable-next-line: no-submodule-imports
 import EventNoteRounded from '@material-ui/icons/EventNoteRounded';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';

@@ -1,5 +1,7 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import MobileStepper from '@material-ui/core/MobileStepper';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
@@ -7,6 +9,7 @@ import Homelabelcard from './homelabelcard';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
+// tslint:disable-next-line: prefer-const
 let tutorialSteps = [
   {
     label: '1号内容',

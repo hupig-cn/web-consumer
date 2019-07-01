@@ -1,10 +1,17 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import CropFreeRounded from '@material-ui/icons/CropFreeRounded';
+// tslint:disable-next-line: no-submodule-imports
 import MonetizationOnOutlined from '@material-ui/icons/MonetizationOnOutlined';
+// tslint:disable-next-line: no-submodule-imports
 import AssignmentReturnedOutlined from '@material-ui/icons/AssignmentReturnedOutlined';
+// tslint:disable-next-line: no-submodule-imports
 import ShareOutlined from '@material-ui/icons/ShareOutlined';
 import Homequickaccessdown from './homequickaccessdown';
 
@@ -34,7 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Loadpages = key => {
-  var temp: any = null;
+  // tslint:disable-next-line: no-var-keyword
+  let temp: any = null;
   switch (key) {
     case 'scan':
       // @ts-ignore

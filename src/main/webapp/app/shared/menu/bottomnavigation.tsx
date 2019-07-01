@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
+// tslint:disable-next-line: no-submodule-imports
 import Badge from '@material-ui/core/Badge';
 import { Link } from 'react-router-dom';
 
@@ -26,36 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: '0px',
       borderTop: '1px solid #f0f0f0',
       height: '47px',
-      textAlign: 'center',
-      '& a': {
-        width: '100%',
-        '& button': {
-          outline: 'none',
-          minWidth: '50px',
-          paddingBottom: '0px',
-          paddingTop: '0px',
-          height: '46px'
-        },
-        '& button.Mui-selected': {
-          color: '#fe4365',
-          fontSize: '0.65rem',
-          paddingTop: '0px',
-          outline: 'none'
-        }
-      },
-      '& svg': {
-        paddingTop: '2px'
-      },
-      '& span': {
-        minFontSize: '0.1rem',
-        fontSize: '0.65rem',
-        opacity: '1'
-      },
-      '& span.Mui-selected': {
-        minFontSize: '0.1rem',
-        fontSize: '0.65rem',
-        paddingTop: '0px'
-      }
+      textAlign: 'center'
     }
   })
 );

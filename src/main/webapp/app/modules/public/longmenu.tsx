@@ -1,11 +1,19 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import IconButton from '@material-ui/core/IconButton';
+// tslint:disable-next-line: no-submodule-imports
 import Menu from '@material-ui/core/Menu';
+// tslint:disable-next-line: no-submodule-imports
 import MenuItem from '@material-ui/core/MenuItem';
+// tslint:disable-next-line: no-submodule-imports
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+// tslint:disable-next-line: no-submodule-imports
 import { LocationOnRounded } from '@material-ui/icons';
+// tslint:disable-next-line: no-submodule-imports
 import InputBase from '@material-ui/core/InputBase';
+// tslint:disable-next-line: no-submodule-imports
 import SearchIcon from '@material-ui/icons/Search';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 import Reposition from '../public/reposition';
 import ReactDOM from 'react-dom';
@@ -15,12 +23,13 @@ export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 export const ITEM_HEIGHT = 48;
 
 export const ReLocation = () => {
-  let locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
+  const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
+  let city;
   try {
     // @ts-ignore
-    var city = window.weisen.getcity();
+    city = window.weisen.getcity();
   } catch (e) {
-    var city = '定位失败';
+    city = '定位失败';
   }
   if (null != locationp) {
     locationp.textContent = city;
@@ -109,6 +118,7 @@ export default function LongMenu() {
         break;
     }
     setAnchorEl(null);
+    return null;
   };
 
   function handleClick(event: React.MouseEvent<HTMLElement>) {
@@ -118,14 +128,14 @@ export default function LongMenu() {
     setAnchorEl(null);
   }
   function onSelectFocus() {
-    let locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
-    let selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
+    const selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
     locationp.style.width = 0 + 'px';
     selects.style.width = document.body.offsetWidth - 72 - 55 + 'px';
   }
   function onSelectBlur() {
-    let locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
-    let selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
+    const selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
     selects.style.width = document.body.offsetWidth - 137 - 55 + 'px';
     locationp.style.width = 65 + 'px';
   }
@@ -134,13 +144,7 @@ export default function LongMenu() {
     <div style={{ height: '35px' }}>
       <div className="jh-longmenu" style={{ zIndex: 1000, height: '36px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}>
         <span style={{ float: 'left', marginTop: '6px', marginLeft: '6px', color: '#fffde5' }}>
-          <LocationOnRounded
-            onClick={() => {
-              {
-                ReLocation();
-              }
-            }}
-          />
+          <LocationOnRounded onClick={ReLocation()} />
         </span>
         <p
           id="jh-locations-address"
@@ -158,9 +162,6 @@ export default function LongMenu() {
             whiteSpace: 'nowrap',
             textAlign: 'left',
             transition: '200ms'
-          }}
-          onClick={() => {
-            switchLocation();
           }}
         >
           <ReLocation />
@@ -183,12 +184,8 @@ export default function LongMenu() {
             placeholder="搜索..."
             classes={{ root: classes.inputRoot, input: classes.inputInput }}
             inputProps={{ 'aria-label': 'Search' }}
-            onFocus={() => {
-              onSelectFocus();
-            }}
-            onBlur={() => {
-              onSelectBlur();
-            }}
+            onFocus={onSelectFocus}
+            onBlur={onSelectBlur}
           />
         </div>
         <Menu
@@ -200,13 +197,7 @@ export default function LongMenu() {
           PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: 148, sIndex: 1001 } }}
         >
           {options.map(option => (
-            <MenuItem
-              key={option}
-              selected={option === 'Pyxis'}
-              onClick={() => {
-                itemOnClick({ option }.option);
-              }}
-            >
+            <MenuItem key={option} selected={option === 'Pyxis'} onClick={itemOnClick({ option }.option)}>
               {option}
             </MenuItem>
           ))}

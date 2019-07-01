@@ -1,8 +1,13 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import GridList from '@material-ui/core/GridList';
+// tslint:disable-next-line: no-submodule-imports
 import GridListTile from '@material-ui/core/GridListTile';
+// tslint:disable-next-line: no-submodule-imports
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+// tslint:disable-next-line: no-submodule-imports
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme: Theme) =>
