@@ -197,7 +197,14 @@ export default function LongMenu() {
           PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: 148, sIndex: 1001 } }}
         >
           {options.map(option => (
-            <MenuItem key={option} selected={option === 'Pyxis'} onClick={itemOnClick({ option }.option)}>
+            // tslint:disable-next-line: jsx-no-lambda
+            <MenuItem
+              key={option}
+              selected={option === 'Pyxis'}
+              onClick={() => {
+                itemOnClick({ option }.option);
+              }}
+            >
               {option}
             </MenuItem>
           ))}
