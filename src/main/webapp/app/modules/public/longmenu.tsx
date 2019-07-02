@@ -210,7 +210,7 @@ export default function LongMenu() {
           {options.map(option => (
             // tslint:disable-next-line: jsx-no-lambda
             <MenuItem
-              key={option}
+              keys={option}
               selected={option === 'Pyxis'}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
