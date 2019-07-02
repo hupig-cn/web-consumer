@@ -1,15 +1,29 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import PaymentRounded from '@material-ui/icons/PaymentRounded';
+// tslint:disable-next-line: no-submodule-imports
 import MoveToInboxRounded from '@material-ui/icons/MoveToInboxRounded';
+// tslint:disable-next-line: no-submodule-imports
 import ThumbsUpDownRounded from '@material-ui/icons/ThumbsUpDownRounded';
+// tslint:disable-next-line: no-submodule-imports
 import RateReviewRounded from '@material-ui/icons/RateReviewRounded';
+// tslint:disable-next-line: no-submodule-imports
 import EventNoteRounded from '@material-ui/icons/EventNoteRounded';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
 import VipService from 'app/modules/personal/vipservice';
+import Order from 'app/modules/personal/orderList/order';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Enddiv from 'app/shared/menu/enddiv';
+
+export const bodyEl = document.getElementById('root');
 
 const store = initStore();
 registerLocale(store);
@@ -42,7 +56,36 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Loadpages = key => {};
+export const Loadpages = key => {
+  let temp: any = null;
+  switch (key) {
+    case 'key1':
+      temp = <Order />;
+      break;
+    case 'key2':
+      temp = <Order />;
+      break;
+    case 'key3':
+      temp = <Order />;
+      break;
+    case 'key4':
+      temp = <Order />;
+      break;
+    case 'order':
+      temp = <Order />;
+      break;
+    default:
+      temp = null;
+      break;
+  }
+  ReactDOM.render(
+    <Provider store={store}>
+      {temp}
+      <Enddiv />
+    </Provider>,
+    bodyEl
+  );
+};
 
 export default function LongMenu() {
   const classes = useStyles();

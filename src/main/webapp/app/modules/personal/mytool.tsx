@@ -1,6 +1,9 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import Grid from '@material-ui/core/Grid';
+// tslint:disable-next-line: no-submodule-imports
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Loadpages = key => {
-  var temp: any = null;
+  let temp: any = null;
   switch (key) {
     case 'key1':
       break;
@@ -75,7 +78,7 @@ export const Loadpages = key => {
   }
 };
 
-let tutorialSteps = [
+const tutorialSteps = [
   {
     label: '个人信息',
     test: '个人信息更完善',
@@ -115,9 +118,14 @@ export default function LongMenu() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
-
+  function handleUnfinishedOnClick() {
+    alert('功能正在开发中');
+  }
   return (
-    <div style={{ paddingTop: '12px', backgroundColor: 'white', borderBottom: '1px solid #f0f0f0', marginTop: '10px' }}>
+    <div
+      style={{ paddingTop: '12px', backgroundColor: 'white', borderBottom: '1px solid #f0f0f0', marginTop: '10px' }}
+      onClick={handleUnfinishedOnClick}
+    >
       <div className={classes.divTitleName}>
         <span style={{ float: 'left' }}>我的工具</span>
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部工具 ></span>

@@ -1,8 +1,13 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import GridList from '@material-ui/core/GridList';
+// tslint:disable-next-line: no-submodule-imports
 import GridListTile from '@material-ui/core/GridListTile';
+// tslint:disable-next-line: no-submodule-imports
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+// tslint:disable-next-line: no-submodule-imports
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -80,30 +85,30 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const tileData = [
   {
-    img: './content/images/commodity1.jpg',
+    img: './content/images/commodity1.png',
     title: '【官网价直降1111元】Apple/苹果 iPhone XR 256G 移动联通电信4G手机双卡双待苹果XR iPhonexr',
     author: '6488.00'
   },
   {
-    img: './content/images/commodity2.jpg',
+    img: './content/images/commodity2.png',
     title: 'Dior/迪奥口红烈艳蓝金旗舰唇膏999 520 740 888 女 哑光滋润',
     author: '316.00'
   },
   {
-    img: './content/images/commodity3.jpg',
+    img: './content/images/commodity3.png',
     title: 'poryuu孕妇口红专用孕妇化妆品孕妇护肤品怀孕期彩妆唇膏哺乳',
     author: '299.99'
   },
   {
-    img: './content/images/commodity4.jpg',
+    img: './content/images/commodity4.png',
     title: '分期Apple/苹果 iPhone XS Max苹果xsmax苹果XR双卡正品手机国行8',
     author: '4008.00'
   },
   {
-    img: './content/images/commodity5.jpg',
+    img: './content/images/commodity5.png',
     title: 'Apple/苹果 iPhone 8 Plus 4G全网通 美版国行8代 无锁苹果8plus',
     author: '3980.00'
-  },
+  }
 ];
 
 export default function TitlebarGridList() {

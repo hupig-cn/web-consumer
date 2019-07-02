@@ -1,11 +1,22 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import Table from '@material-ui/core/Table';
+// tslint:disable-next-line: no-submodule-imports
 import TableBody from '@material-ui/core/TableBody';
+// tslint:disable-next-line: no-submodule-imports
 import TableCell from '@material-ui/core/TableCell';
+// tslint:disable-next-line: no-submodule-imports
 import TableRow from '@material-ui/core/TableRow';
+// tslint:disable-next-line: no-submodule-imports
 import Paper from '@material-ui/core/Paper';
 import Selects from './selects';
+// tslint:disable-next-line: no-submodule-imports
+import Button from '@material-ui/core/Button';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Consumer from 'app/modules/consumer/consumer';
 
 export const Title = () => {
   function goBack() {

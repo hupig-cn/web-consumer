@@ -5,24 +5,22 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import MobileStepper from '@material-ui/core/MobileStepper';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import Homelabelcard from './homelabelcard';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-// tslint:disable-next-line: prefer-const
-let tutorialSteps = [
-  {
-    label: '1号内容',
-    imgPath: './content/images/barner1.png'
-  },
-  {
-    label: '2号内容',
-    imgPath: './content/images/barner2.png'
-  },
-  {
-    label: '3号内容',
-    imgPath: './content/images/barner3.png'
-  }
+const tutorialSteps = [
+  // {
+  //   label: '1号内容',
+  //   imgPath: './content/images/barner1.jpg'
+  // },
+  // {
+  //   label: '2号内容',
+  //   imgPath: './content/images/barner2.jpg'
+  // },
+  // {
+  //   label: '3号内容',
+  //   imgPath: './content/images/barner3.jpg'
+  // }
 ];
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -96,7 +94,6 @@ function SwipeableTextMobileStepper() {
         nextButton={null}
         backButton={null}
       />
-      <Homelabelcard />
     </div>
   );
 }

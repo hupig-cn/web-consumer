@@ -2,21 +2,28 @@ import './nearbytabs.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+// tslint:disable-next-line: no-submodule-imports
 import { makeStyles, Theme, useTheme, createStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import AppBar from '@material-ui/core/AppBar';
+// tslint:disable-next-line: no-submodule-imports
 import Tabs from '@material-ui/core/Tabs';
+// tslint:disable-next-line: no-submodule-imports
 import Tab from '@material-ui/core/Tab';
+// tslint:disable-next-line: no-submodule-imports
 import Typography from '@material-ui/core/Typography';
+// tslint:disable-next-line: no-submodule-imports
 import Nearbylistbox from './nearbylistbox';
 import SwipeableViews from 'react-swipeable-views';
 
+// tslint:disable-next-line: interface-name
 interface TabContainerProps {
   children?: React.ReactNode;
   dir?: string;
 }
 
 export const Setlistbox = keys => {
-  var temp: any = null;
+  let temp: any = null;
   switch (keys) {
     case '0':
       temp = <Nearbylistbox />;
@@ -74,7 +81,7 @@ export default function SimpleTabs() {
           <Tab label="积分最高" style={{ width: '33%' }} />
         </Tabs>
       </AppBar>
-      <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleChange}>
+      <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
         <TabContainer dir={theme.direction}>0</TabContainer>
         <TabContainer dir={theme.direction}>1</TabContainer>
         <TabContainer dir={theme.direction}>2</TabContainer>

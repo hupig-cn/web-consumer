@@ -1,10 +1,17 @@
 import React from 'react';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+// tslint:disable-next-line: no-submodule-imports
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+// tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
+// tslint:disable-next-line: no-submodule-imports
 import IconButton from '@material-ui/core/IconButton';
+// tslint:disable-next-line: no-submodule-imports
 import ShoppingCartRounded from '@material-ui/icons/ShoppingCartRounded';
+// tslint:disable-next-line: no-submodule-imports
 import SettingsRounded from '@material-ui/icons/SettingsRounded';
 import Orders from './orders';
 import { Link, Route } from 'react-router-dom';
@@ -70,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Loadpages = key => {
-  var temp: any = null;
+  let temp: any = null;
   switch (key) {
     case 'scan':
       break;
@@ -98,6 +105,9 @@ export default function LongMenu() {
     alert('登录');
   }
 
+  function handleUnfinishedOnClick() {
+    alert('功能正在开发中');
+  }
   return (
     <div>
       <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
@@ -131,6 +141,7 @@ export default function LongMenu() {
         </div>
       </div>
       <BottomNavigation
+        onClick={handleUnfinishedOnClick}
         style={{ position: 'fixed', top: '60px', height: 'auto', zIndex: 1000 }}
         showLabels
         className={classes.root}
