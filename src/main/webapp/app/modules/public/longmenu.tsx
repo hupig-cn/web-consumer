@@ -144,7 +144,14 @@ export default function LongMenu() {
     <div style={{ height: '35px' }}>
       <div className="jh-longmenu" style={{ zIndex: 1000, height: '36px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}>
         <span style={{ float: 'left', marginTop: '6px', marginLeft: '6px', color: '#fffde5' }}>
-          <LocationOnRounded onClick={ReLocation()} />
+          <LocationOnRounded
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={() => {
+              {
+                ReLocation();
+              }
+            }}
+          />
         </span>
         <p
           id="jh-locations-address"
@@ -201,6 +208,7 @@ export default function LongMenu() {
             <MenuItem
               key={option}
               selected={option === 'Pyxis'}
+              // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 itemOnClick({ option }.option);
               }}
