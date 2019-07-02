@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
-import LongMenu from '../../public/longmenu';
 
 import Ordertabs from './ordertabs';
 
@@ -16,7 +15,6 @@ export class Order extends React.Component<IOrderProp> {
   render() {
     return (
       <div>
-        <LongMenu />
         <Ordertabs />
       </div>
     );
