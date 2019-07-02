@@ -6,10 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Selects from './selects';
-import Button from '@material-ui/core/Button';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import Consumer from 'app/modules/consumer/consumer';
 
 export const Title = () => {
   function goBack() {

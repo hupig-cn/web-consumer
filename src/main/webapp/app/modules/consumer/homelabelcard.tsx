@@ -104,31 +104,6 @@ const tileData = [
     title: 'Apple/苹果 iPhone 8 Plus 4G全网通 美版国行8代 无锁苹果8plus',
     author: '3980.00'
   },
-  {
-    img: './content/images/commodity1.jpg',
-    title: '现货Apple/苹果 iPhone XR 苹果xs max iphonexr国行手机iphone8x',
-    author: '5199.00'
-  },
-  {
-    img: './content/images/commodity2.jpg',
-    title: '【直营】法国Christian Louboutin进口萝卜丁女王权杖口红 多色',
-    author: '788.00 '
-  },
-  {
-    img: './content/images/commodity3.jpg',
-    title: '欧莱雅小钢笔唇釉129哑光雾面染唇液口红女130唇彩唇蜜豆沙色正品',
-    author: '141.00'
-  },
-  {
-    img: './content/images/commodity4.jpg',
-    title: '【限量抢券低至7988元】Apple/苹果 iPhone Xs Max 256G 全网通4G手机 双卡双待苹果iphonexsmax',
-    author: '9088.00'
-  },
-  {
-    img: './content/images/commodity5.jpg',
-    title: 'Apple/苹果iPhone 8美版8Plus三网4G无锁全网通8x正品8代全新手机',
-    author: '4010.00'
-  }
 ];
 
 export default function TitlebarGridList() {
