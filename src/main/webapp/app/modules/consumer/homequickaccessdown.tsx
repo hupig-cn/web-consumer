@@ -60,15 +60,19 @@ export default function LongMenu() {
     Loadpages(newValue);
   }
 
+  function handleUnfinishedOnClick() {
+    alert('功能正在开发中');
+  }
+
   return (
     <div style={{ paddingTop: '12px', backgroundColor: 'white' }}>
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange} onClick={handleUnfinishedOnClick}>
         <BottomNavigationAction label="积分精选" value="key1" icon={<img src="./content/images/icon1.png" />} />
         <BottomNavigationAction label="热门促销" value="key2" icon={<img src="./content/images/icon2.png" />} />
         <BottomNavigationAction label="团购" value="key3" icon={<img src="./content/images/icon3.png" />} />
         <BottomNavigationAction label="出行" value="key4" icon={<img src="./content/images/icon4.png" />} />
       </BottomNavigation>
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange} onClick={handleUnfinishedOnClick}>
         <BottomNavigationAction label="充值" value="key5" icon={<img src="./content/images/icon5.png" />} />
         <BottomNavigationAction label="积分夺宝" value="key6" icon={<img src="./content/images/icon6.png" />} />
         <BottomNavigationAction label="签到" value="key7" icon={<img src="./content/images/icon7.png" />} />

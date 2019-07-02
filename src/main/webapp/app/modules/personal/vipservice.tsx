@@ -68,6 +68,10 @@ export default function LongMenu() {
     Loadpages(newValue);
   }
 
+  function handleUnfinishedOnClick() {
+    alert('功能正在开发中');
+  }
+
   return (
     <div
       style={{
@@ -81,13 +85,13 @@ export default function LongMenu() {
         <span style={{ float: 'left' }}>VIP服务</span>
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>更多 ></span>
       </div>
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange} onClick={handleUnfinishedOnClick}>
         <BottomNavigationAction label="账户安全" value="key1" icon={<img src="./content/images/vip1.png" />} />
         <BottomNavigationAction label="账号绑定" value="key2" icon={<img src="./content/images/vip2.png" />} />
         <BottomNavigationAction label="合伙人" value="key3" icon={<img src="./content/images/vip3.png" />} />
         <BottomNavigationAction label="我要合作" value="key4" icon={<img src="./content/images/vip4.png" />} />
       </BottomNavigation>
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange} onClick={handleUnfinishedOnClick}>
         <BottomNavigationAction label="客服中心" value="key5" icon={<img src="./content/images/vip5.png" />} />
         <BottomNavigationAction label="积分明细" value="key6" icon={<img src="./content/images/vip6.png" />} />
         <BottomNavigationAction label="我的佣金" value="key7" icon={<img src="./content/images/vip7.png" />} />

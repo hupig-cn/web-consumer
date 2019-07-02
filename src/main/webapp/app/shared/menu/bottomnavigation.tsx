@@ -38,26 +38,38 @@ export default function LabelBottomNavigation() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     setValue(newValue);
   }
+  function handleUnfinishedOnClick() {
+    alert('功能正在开发中');
+  }
+
   return (
     <BottomNavigation id="nav-bottoms" className={classes.root} showLabels value={value} onChange={handleChange}>
       <Link to="/">
         <BottomNavigationAction style={{ paddingTop: '0px' }} label="首页" value="consumer" icon={<StoreRounded />} />
       </Link>
-      <Link to="/nearby">
-        <BottomNavigationAction style={{ paddingTop: '0px' }} label="附近" value="nearby" icon={<NearMeRounded />} />
-      </Link>
-      <Link to="/information">
-        <BottomNavigationAction
-          style={{ paddingTop: '0px' }}
-          label="消息"
-          value="information"
-          icon={
-            <Badge color="secondary" variant="dot">
-              <TextsmsRounded />
-            </Badge>
-          }
-        />
-      </Link>
+      {/*<Link to="/nearby">*/}
+      <BottomNavigationAction
+        style={{ paddingTop: '0px' }}
+        // label="附近"
+        // tslint:disable-next-line: no-multi-spaces
+        value="nearby"
+        icon={<NearMeRounded />}
+        onClick={handleUnfinishedOnClick}
+      />
+      {/*</Link>*/}
+      {/*<Link to="/information">*/}
+      <BottomNavigationAction
+        style={{ paddingTop: '0px' }}
+        // label="消息"
+        value="information"
+        icon={
+          <Badge color="secondary" variant="dot">
+            <TextsmsRounded />
+          </Badge>
+        }
+        onClick={handleUnfinishedOnClick}
+      />
+      {/*</Link>*/}
       <Link to="/personal">
         <BottomNavigationAction style={{ paddingTop: '0px' }} label="我的" value="personal" icon={<AccountCircleRounded />} />
       </Link>

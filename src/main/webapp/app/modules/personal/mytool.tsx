@@ -118,9 +118,14 @@ export default function LongMenu() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
-
+  function handleUnfinishedOnClick() {
+    alert('功能正在开发中');
+  }
   return (
-    <div style={{ paddingTop: '12px', backgroundColor: 'white', borderBottom: '1px solid #f0f0f0', marginTop: '10px' }}>
+    <div
+      style={{ paddingTop: '12px', backgroundColor: 'white', borderBottom: '1px solid #f0f0f0', marginTop: '10px' }}
+      onClick={handleUnfinishedOnClick}
+    >
       <div className={classes.divTitleName}>
         <span style={{ float: 'left' }}>我的工具</span>
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部工具 ></span>

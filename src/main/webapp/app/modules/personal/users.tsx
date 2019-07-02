@@ -105,6 +105,9 @@ export default function LongMenu() {
     alert('登录');
   }
 
+  function handleUnfinishedOnClick() {
+    alert('功能正在开发中');
+  }
   return (
     <div>
       <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
@@ -138,6 +141,7 @@ export default function LongMenu() {
         </div>
       </div>
       <BottomNavigation
+        onClick={handleUnfinishedOnClick}
         style={{ position: 'fixed', top: '60px', height: 'auto', zIndex: 1000 }}
         showLabels
         className={classes.root}
