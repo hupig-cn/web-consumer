@@ -39,7 +39,7 @@ export const ReLocation = () => {
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     menuButton: {
       marginRight: theme.spacing(2)
@@ -142,8 +142,12 @@ export default function LongMenu() {
 
   return (
     <div style={{ height: '35px' }}>
-      <div className="jh-longmenu" style={{ zIndex: 1000, height: '36px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}>
-        <span style={{ float: 'left', marginTop: '6px', marginLeft: '6px', color: '#fffde5' }}>
+      <div className="jh-longmenu" style={{ zIndex: 1000, height: '36px',
+        lineHeight: '24px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}>
+        <span style={{ float: 'left', marginTop: '6px',
+          marginLeft: '6px', color: '#fffde5',height: '26px',
+          fontSize: '0.875rem', letterSpacing: '0px',
+        }}>
           <LocationOnRounded
             // tslint:disable-next-line: jsx-no-lambda
             onClick={() => {

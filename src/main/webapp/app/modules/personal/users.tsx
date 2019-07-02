@@ -17,6 +17,7 @@ import Orders from './orders';
 import { Link, Route } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
 import { Row, Col, Alert } from 'reactstrap';
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: '#fffde5',
       float: 'left',
       fontSize: '0.7rem'
-    }
+    },
   })
 );
 
@@ -114,26 +115,30 @@ export default function LongMenu() {
         <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
         <div className={classes.namePlusSetting}>
           <div className={classes.nameOne}>
+            <Link to="/login" className="alert-link" style={{
+              textAlign:"center",
+            }}>
+              <p
+                style={{
+                  borderRadius: '5px',
+                  backgroundColor: '#fffde5',
+                  color: '#fe4365',
+                  height: '45px',
+                  fontSize: '1.4rem',
+                  padding: '6px',
+                  marginBottom: '0px'
+                }}>立即登录</p>
+            </Link>
             <span className={classes.name} onClick={login}>
               昵称（VIP）
             </span>
-            <Route>
-              <div>
-                <Alert color="warning">
-                  <Link to="/login" className="alert-link">
-                    <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
-                  </Link>
-                </Alert>
-              </div>
-            </Route>
             <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
               <SettingsRounded />
             </IconButton>
             <IconButton
               color="primary"
               aria-label="setting"
-              style={{ marginRight: '10px', padding: '0px', float: 'right', outline: 'none' }}
-            >
+              style={{ marginRight: '10px', padding: '0px', float: 'right', outline: 'none' }}>
               <ShoppingCartRounded />
             </IconButton>
           </div>
@@ -148,9 +153,9 @@ export default function LongMenu() {
         value={value}
         onChange={handleChange}
       >
-        <BottomNavigationAction label="积分" value="scan" icon={'225'} />
-        <BottomNavigationAction label="余额" value="pay" icon={'751.00'} />
-        <BottomNavigationAction label="优惠卷" value="share" icon={'360'} />
+        <BottomNavigationAction label="积分" value="scan" icon={'0'} />
+        <BottomNavigationAction label="余额" value="pay" icon={'0.00'} />
+        <BottomNavigationAction label="优惠卷" value="share" icon={'0'} />
       </BottomNavigation>
       <div style={{ height: '130px' }} />
       <Orders />
