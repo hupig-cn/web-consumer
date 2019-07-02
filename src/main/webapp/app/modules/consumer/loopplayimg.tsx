@@ -13,23 +13,15 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 let tutorialSteps = [
   {
     label: '1号内容',
-    imgPath: './content/images/barner1.jpg'
+    imgPath: './content/images/barner1.png'
   },
   {
     label: '2号内容',
-    imgPath: './content/images/barner2.jpg'
+    imgPath: './content/images/barner2.png'
   },
   {
     label: '3号内容',
-    imgPath: './content/images/barner3.jpg'
-  },
-  {
-    label: '4号内容',
-    imgPath: './content/images/barner4.jpg'
-  },
-  {
-    label: '5号内容',
-    imgPath: './content/images/barner5.jpg'
+    imgPath: './content/images/barner3.png'
   }
 ];
 
@@ -97,7 +89,7 @@ function SwipeableTextMobileStepper() {
       </AutoPlaySwipeableViews>
       <MobileStepper
         variant="dots"
-        steps={5}
+        steps={3}
         position="static"
         activeStep={activeStep}
         className={classes.spot}

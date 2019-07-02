@@ -26,7 +26,7 @@ const messages = [
     sale: '90',
     distance: '38分钟 4.0km',
     consumption: '人均 ￥69 积分 50%',
-    person: './content/images/shop1.jpg'
+    person: './content/images/shop1.png'
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const messages = [
     sale: '826',
     distance: '36分钟 3.5km',
     consumption: '人均 ￥23 积分 30%',
-    person: './content/images/shop2.jpg'
+    person: './content/images/shop2.png'
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ const messages = [
     sale: '2394',
     distance: '38分钟 4.5km',
     consumption: '人均 ￥23 积分 50%',
-    person: './content/images/shop3.jpg'
+    person: './content/images/shop3.png'
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const messages = [
     sale: '796',
     distance: '41分钟 4.6km',
     consumption: '人均 ￥21 积分 50%',
-    person: './content/images/shop4.jpg'
+    person: './content/images/shop4.png'
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ const messages = [
     sale: '2634',
     distance: '30分钟 2.5km',
     consumption: '人均 ￥37 积分 15%',
-    person: './content/images/shop5.jpg'
+    person: './content/images/shop5.png'
   },
   {
     id: 6,
@@ -71,25 +71,7 @@ const messages = [
     sale: '7981',
     distance: '35分钟 3.5km',
     consumption: '人均 ￥17 积分 50%',
-    person: './content/images/shop6.jpg'
-  },
-  {
-    id: 7,
-    primary: '窑鸡王（市桥店）',
-    star: '4.5',
-    sale: '1449',
-    distance: '40分钟 5.1km',
-    consumption: '人均 ￥80 积分 30%',
-    person: './content/images/shop7.jpg'
-  },
-  {
-    id: 8,
-    primary: '叫了只炸鸡（市桥店）',
-    star: '4.3',
-    sale: '3421',
-    distance: '43分钟 4.0km',
-    consumption: '人均 ￥28 积分 50%',
-    person: './content/images/shop8.jpg'
+    person: './content/images/shop6.png'
   }
 ];
 

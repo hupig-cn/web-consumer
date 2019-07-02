@@ -102,34 +102,6 @@ const messages = [
     content: '广州麦当劳光明北得来速餐厅，消费8.00元',
     time: '2019-6-16 9:30',
     person: './content/images/sys2.png'
-  },
-  {
-    id: 13,
-    title: '【消费提醒】',
-    content: '广州麦当劳光明北得来速餐厅，消费18.00元',
-    time: '2019-6-16 9:25',
-    person: './content/images/sys2.png'
-  },
-  {
-    id: 14,
-    title: '【消费提醒】',
-    content: '广州麦当劳光明北得来速餐厅，消费82.00元',
-    time: '2019-6-16 9:23',
-    person: './content/images/sys2.png'
-  },
-  {
-    id: 15,
-    title: '【消费提醒】',
-    content: '广州麦当劳光明北得来速餐厅，消费8.00元',
-    time: '2019-6-16 9:20',
-    person: './content/images/sys2.png'
-  },
-  {
-    id: 16,
-    title: '【消费提醒】',
-    content: '开心花甲粉（市桥店），消费14.00元',
-    time: '2019-6-16 9:06',
-    person: './content/images/sys2.png'
   }
 ];
 
