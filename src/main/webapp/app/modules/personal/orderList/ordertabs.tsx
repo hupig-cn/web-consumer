@@ -77,24 +77,62 @@ export default function SimpleTabs() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
   }
+
+  function goBack() {
+    history.go(0);
+  }
+
   return (
-    <div className={classes.root}>
-      <AppBar position="static" id="jh-appbar">
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="全部" style={{ width: '20%' }} />
-          <Tab label="待付款" style={{ width: '20%' }} />
-          <Tab label="待发货" style={{ width: '20%' }} />
-          <Tab label="待收货" style={{ width: '20%' }} />
-          <Tab label="待评价" style={{ width: '20%' }} />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
-        <TabContainer dir={theme.direction}>0</TabContainer>
-        <TabContainer dir={theme.direction}>1</TabContainer>
-        <TabContainer dir={theme.direction}>2</TabContainer>
-        <TabContainer dir={theme.direction}>3</TabContainer>
-        <TabContainer dir={theme.direction}>4</TabContainer>
-      </SwipeableViews>
+    <div>
+      <div
+        style={{
+          backgroundColor: '#fe4365',
+          height: '40px',
+          textAlign: 'center',
+          padding: '7px',
+          width: '100%',
+          position: 'fixed',
+          top: '0px',
+          zIndex: 1000
+        }}
+      >
+        <span onClick={goBack} style={{ float: 'left' }}>
+          <img
+            src="./content/images/back.png"
+            style={{
+              width: '24px',
+              height: '24px'
+            }}
+          />
+        </span>
+        <h5
+          style={{
+            color: '#fffde5',
+            marginTop: '3px',
+            fontSize: '1.05rem'
+          }}
+        >
+          订单列表
+        </h5>
+      </div>
+      <div className={classes.root}>
+        <AppBar position="static" id="jh-appbar">
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="全部" style={{ width: '20%' }} />
+            <Tab label="待付款" style={{ width: '20%' }} />
+            <Tab label="待发货" style={{ width: '20%' }} />
+            <Tab label="待收货" style={{ width: '20%' }} />
+            <Tab label="待评价" style={{ width: '20%' }} />
+          </Tabs>
+        </AppBar>
+        <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
+          <TabContainer dir={theme.direction}>0</TabContainer>
+          <TabContainer dir={theme.direction}>1</TabContainer>
+          <TabContainer dir={theme.direction}>2</TabContainer>
+          <TabContainer dir={theme.direction}>3</TabContainer>
+          <TabContainer dir={theme.direction}>4</TabContainer>
+        </SwipeableViews>
+      </div>
     </div>
   );
 }
