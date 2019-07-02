@@ -13,7 +13,31 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: '0px',
       borderTop: '1px solid #f0f0f0',
       height: '47px',
-      color: '#fe4365',
+      lineHeight: '18px',
+      '& button': {
+        minWidth: '50px',
+        paddingBottom: '0px',
+        paddingTop: '0px',
+        height: '46px',
+        '& span': {
+          minFontSize: '0.1rem',
+          fontSize: '0.65rem',
+          '& svg': {
+            paddingTop: '2px',
+          },
+        },
+      },
+      '& button.Mui-selected':{
+        color: '#fe4365',
+        fontSize: '0.65rem',
+        paddingTop: '0px',
+        outline: 'none',
+        '& span.Mui-selected': {
+          minFontSize: '0.1rem',
+          fontSize: '0.65rem',
+          paddingTop: '0px',
+        },
+      },
     }
   })
 );
