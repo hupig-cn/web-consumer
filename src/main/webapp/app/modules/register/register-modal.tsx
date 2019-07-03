@@ -2,12 +2,12 @@ import React from 'react';
 import { Translate, translate } from 'react-jhipster';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Alert, Row, Col } from 'reactstrap';
 import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
-import { Link } from 'react-router-dom';
 
 export interface ILoginModalProps {
   showModal: boolean;
   loginError: boolean;
   handleLogin: Function;
+  handleSendCode: Function;
   handleClose: Function;
 }
 
@@ -15,6 +15,11 @@ class RegisterModal extends React.Component<ILoginModalProps> {
   handleSubmit = (event, errors, { username, password, rememberMe }) => {
     const { handleLogin } = this.props;
     handleLogin(username, password, rememberMe);
+  };
+  handleSend = () => {
+    const { handleSendCode } = this.props;
+    let phone = document.getElementById('register-phone');
+    handleSendCode(phone.value);
   };
 
   render() {
@@ -47,11 +52,13 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                     marginTop: '30px',
                     height: '40px'
                   }}
+                  onClick={this.handleSend}
                 >
                   发送验证码
                 </button>
                 <AvField
-                  name="username"
+                  name="phone"
+                  id="register-phone"
                   label={'手机号'}
                   placeholder={'请输入手机号'}
                   required
@@ -90,20 +97,14 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                 <AvGroup check inline>
                   <Label className="form-check-label">
                     <AvInput type="checkbox" name="rememberMe" />
-                    我已阅读并同意《用户协议》
+                    我已阅读并同意<u>《用户协议》</u>
                   </Label>
                 </AvGroup>
               </Col>
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button
-              style={{
-                width: '50%'
-              }}
-              onClick={handleClose}
-              tabIndex="1"
-            >
+            <Button style={{ width: '50%' }} onClick={handleClose} tabIndex="1">
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
             <Button

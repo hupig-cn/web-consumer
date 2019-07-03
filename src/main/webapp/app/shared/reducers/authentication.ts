@@ -118,6 +118,15 @@ export const login = (username, password, rememberMe = false) => async (dispatch
   await dispatch(getSession());
 };
 
+export const send = (phone, act) => async (dispatch, getState) => {
+  const result = await dispatch({
+    type: ACTION_TYPES.LOGIN,
+    payload: axios.post('services/basic/api/send-code', { phone, act })
+  });
+  // return result;
+  await dispatch(getSession());
+};
+
 export const logout = () => async dispatch => {
   await dispatch({
     type: ACTION_TYPES.LOGOUT,
