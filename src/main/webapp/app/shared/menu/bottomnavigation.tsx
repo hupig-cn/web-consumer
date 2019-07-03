@@ -1,6 +1,5 @@
 import React from 'react';
-import Badge from '@material-ui/core/Badge';
-import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme, Badge } from '@material-ui/core';
 import { StoreRounded, NearMeRounded, TextsmsRounded, AccountCircleRounded } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
