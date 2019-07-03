@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 
 import { IRootState } from 'app/shared/reducers';
-import { login } from 'app/shared/reducers/authentication';
+import { login, send } from 'app/shared/reducers/authentication';
+
 import RegisterModal from './register-modal';
 
 export interface ILoginProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
@@ -27,6 +28,11 @@ export class Register extends React.Component<ILoginProps, ILoginState> {
     this.props.login(username, password, rememberMe);
   };
 
+  handleSendCode = username => {
+    // console.log(username)
+    this.props.send(username, '1');
+  };
+
   handleClose = () => {
     this.setState({ showModal: false });
     this.props.history.push('/personal');
@@ -43,6 +49,7 @@ export class Register extends React.Component<ILoginProps, ILoginState> {
       <RegisterModal
         showModal={showModal}
         handleLogin={this.handleLogin}
+        handleSendCode={this.handleSendCode}
         handleClose={this.handleClose}
         loginError={this.props.loginError}
       />
@@ -56,7 +63,7 @@ const mapStateToProps = ({ authentication }: IRootState) => ({
   showModal: authentication.showModalLogin
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { login, send };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
