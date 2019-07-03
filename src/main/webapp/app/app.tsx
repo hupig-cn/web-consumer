@@ -19,6 +19,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import Enddiv from 'app/shared/menu/enddiv';
+import PaymentCode from 'app/modules/public/paymentCode';
 
 const baseHref = document
   .querySelector('base')
@@ -35,6 +36,7 @@ export class App extends React.Component<IAppProps> {
 
   render() {
     return (
+      //   <PaymentCode />
       <Router basename={baseHref}>
         <div className="app-container">
           <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
