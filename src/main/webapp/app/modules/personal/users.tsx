@@ -14,9 +14,7 @@ import ShoppingCartRounded from '@material-ui/icons/ShoppingCartRounded';
 // tslint:disable-next-line: no-submodule-imports
 import SettingsRounded from '@material-ui/icons/SettingsRounded';
 import Orders from './orders';
-import { Link, Route } from 'react-router-dom';
-import { Translate } from 'react-jhipster';
-import { Row, Col, Alert } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,7 +73,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-
 export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
@@ -92,54 +89,64 @@ export const Loadpages = key => {
       break;
   }
 };
-
-export default function LongMenu() {
+export default function LongMenu(props) {
   const classes = useStyles();
   const [value] = React.useState('home');
-
+  const { login, account } = props;
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
-
-  function login() {
-    alert('登录');
-  }
-
   function handleUnfinishedOnClick() {
     alert('功能正在开发中');
   }
   return (
     <div>
-      <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
-        <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
-        <div className={classes.namePlusSetting}>
-          <div className={classes.nameOne}>
-            <span className={classes.name} onClick={login}>
-              昵称（VIP）
-            </span>
-            <Route>
-              <div>
-                <Alert color="warning">
-                  <Link to="/login" className="alert-link">
-                    <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
-                  </Link>
-                </Alert>
-              </div>
-            </Route>
-            <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
-              <SettingsRounded />
-            </IconButton>
-            <IconButton
-              color="primary"
-              aria-label="setting"
-              style={{ marginRight: '10px', padding: '0px', float: 'right', outline: 'none' }}
-            >
-              <ShoppingCartRounded />
-            </IconButton>
+      {login ? (
+        <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
+          <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
+          <div className={classes.namePlusSetting}>
+            <div className={classes.nameOne}>
+              <span className={classes.name}>{account.firstName}</span>
+              <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
+                <SettingsRounded />
+              </IconButton>
+              <IconButton
+                color="primary"
+                aria-label="setting"
+                style={{ marginRight: '10px', padding: '0px', float: 'right', outline: 'none' }}
+              >
+                <ShoppingCartRounded />
+              </IconButton>
+            </div>
+            <div className={classes.login}>{account.login}</div>
           </div>
-          <div className={classes.login}>13800138000</div>
         </div>
-      </div>
+      ) : (
+        <Link
+          to="/login"
+          className="alert-link"
+          style={{
+            textAlign: 'center'
+          }}
+        >
+          <p
+            style={{
+              position: 'fixed',
+              top: '0px',
+              backgroundColor: '#fe4365',
+              color: '#fffde5',
+              height: '60px',
+              fontSize: '1.4rem',
+              padding: '15px',
+              marginBottom: '0px',
+              width: '100%',
+              zIndex: 1000
+            }}
+          >
+            注册/登录
+          </p>
+        </Link>
+      )}
       <BottomNavigation
         onClick={handleUnfinishedOnClick}
         style={{ position: 'fixed', top: '60px', height: 'auto', zIndex: 1000 }}
@@ -148,9 +155,9 @@ export default function LongMenu() {
         value={value}
         onChange={handleChange}
       >
-        <BottomNavigationAction label="积分" value="scan" icon={'225'} />
-        <BottomNavigationAction label="余额" value="pay" icon={'751.00'} />
-        <BottomNavigationAction label="优惠卷" value="share" icon={'360'} />
+        <BottomNavigationAction label="积分" value="scan" icon={'0'} />
+        <BottomNavigationAction label="余额" value="pay" icon={'0.00'} />
+        <BottomNavigationAction label="优惠卷" value="share" icon={'0'} />
       </BottomNavigation>
       <div style={{ height: '130px' }} />
       <Orders />

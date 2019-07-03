@@ -13,9 +13,10 @@ export class Personal extends React.Component<IPersonalProp> {
   }
 
   render() {
+    const { account } = this.props;
     return (
       <div className="jh-personal">
-        <Users />
+        <Users login={account && account.login ? true : false} account={account} />
       </div>
     );
   }

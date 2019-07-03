@@ -1,5 +1,3 @@
-import './nearbytabs.scss';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 // tslint:disable-next-line: no-submodule-imports
@@ -60,6 +58,39 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       backgroundColor: theme.palette.background.paper,
       height: '100%'
+    },
+    appbar: {
+      height: '30px',
+      backgroundColor: '#fe4365',
+      position: 'fixed',
+      top: '35px',
+      zIndex: 1,
+      '& div': {
+        minHeight: '0px',
+        height: '30px',
+        '& div': {
+          '& div': {
+            '& button': {
+              minHeight: '0px',
+              height: '30px',
+              marginTop: '-1px',
+              '& span': {
+                backgroundColor: 'transparent'
+              },
+              '& span:first-child': {
+                backgroundColor: '#fe4365'
+              }
+            },
+            '& button:hover': {
+              outline: 'none',
+              color: '#fffde5'
+            },
+            '& span': {
+              backgroundColor: '#fffde5'
+            }
+          }
+        }
+      }
     }
   })
 );
@@ -74,7 +105,7 @@ export default function SimpleTabs() {
   }
   return (
     <div className={classes.root}>
-      <AppBar position="static" id="jh-appbar">
+      <AppBar position="static" className={classes.appbar}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="附近热门" style={{ width: '33%' }} />
           <Tab label="距离最近" style={{ width: '34%' }} />

@@ -142,8 +142,21 @@ export default function LongMenu() {
 
   return (
     <div style={{ height: '35px' }}>
-      <div className="jh-longmenu" style={{ zIndex: 1000, height: '36px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}>
-        <span style={{ float: 'left', marginTop: '6px', marginLeft: '6px', color: '#fffde5' }}>
+      <div
+        className="jh-longmenu"
+        style={{ zIndex: 1000, height: '36px', lineHeight: '24px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}
+      >
+        <span
+          style={{
+            float: 'left',
+            marginTop: '6px',
+            marginLeft: '6px',
+            color: '#fffde5',
+            height: '26px',
+            fontSize: '0.875rem',
+            letterSpacing: '0px'
+          }}
+        >
           <LocationOnRounded
             // tslint:disable-next-line: jsx-no-lambda
             onClick={() => {
@@ -206,7 +219,7 @@ export default function LongMenu() {
           {options.map(option => (
             // tslint:disable-next-line: jsx-no-lambda
             <MenuItem
-              key={option}
+              keys={option}
               selected={option === 'Pyxis'}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {

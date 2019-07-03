@@ -5,6 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'reactstrap';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 import { hot } from 'react-hot-loader';
 
@@ -12,8 +13,6 @@ import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
 import { setLocale } from 'app/shared/reducers/locale';
-import Header from 'app/shared/layout/header/header';
-import Footer from 'app/shared/layout/footer/footer';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
@@ -26,7 +25,7 @@ const baseHref = document
   .getAttribute('href')
   .replace(/\/$/, '');
 
-export interface IAppProps extends StateProps, DispatchProps {}
+export interface IAppProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class App extends React.Component<IAppProps> {
   componentDidMount() {

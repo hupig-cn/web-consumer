@@ -43,7 +43,7 @@ class LoginModal extends React.Component<ILoginModalProps> {
                   label={translate('global.form.username.label')}
                   placeholder={translate('global.form.username.placeholder')}
                   required
-                  errorMessage="Username cannot be empty!"
+                  errorMessage="用户名不能为空!"
                   autoFocus
                 />
                 <AvField
@@ -52,22 +52,43 @@ class LoginModal extends React.Component<ILoginModalProps> {
                   label={translate('login.form.password')}
                   placeholder={translate('login.form.password.placeholder')}
                   required
-                  errorMessage="Password cannot be empty!"
+                  errorMessage="密码不能为空!"
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
                     <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">Remember me</Translate>
                   </Label>
                 </AvGroup>
+                <AvGroup check inline style={{ float: 'right' }}>
+                  <Label className="form-check-label">
+                    <span>
+                      <Link to={'/'} style={{ color: '#fe4365', textDecoration: 'underline' }}>
+                        注册账户
+                      </Link>
+                    </span>
+                  </Label>
+                </AvGroup>
               </Col>
             </Row>
-            <div className="mt-1">&nbsp;</div>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={handleClose} tabIndex="1">
+            <Button
+              style={{
+                width: '50%'
+              }}
+              onClick={handleClose}
+              tabIndex="1"
+            >
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
-            <Button color="primary" type="submit">
+            <Button
+              style={{
+                backgroundColor: '#fe4365',
+                border: '1px solid #fe4365',
+                width: '50%'
+              }}
+              type="submit"
+            >
               <Translate contentKey="login.form.button">Sign in</Translate>
             </Button>
           </ModalFooter>

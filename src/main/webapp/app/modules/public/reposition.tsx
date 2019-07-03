@@ -12,11 +12,6 @@ import TableRow from '@material-ui/core/TableRow';
 // tslint:disable-next-line: no-submodule-imports
 import Paper from '@material-ui/core/Paper';
 import Selects from './selects';
-// tslint:disable-next-line: no-submodule-imports
-import Button from '@material-ui/core/Button';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import Consumer from 'app/modules/consumer/consumer';
 
 export const Title = () => {
   function goBack() {
@@ -65,11 +60,6 @@ function createData(name: string, calories: string) {
 }
 
 const rows = [
-  createData('北京', 'B'),
-  createData('天津', 'T'),
-  createData('上海', 'S'),
-  createData('深圳', 'S'),
-  createData('广州', 'G'),
   createData('北京', 'B'),
   createData('天津', 'T'),
   createData('上海', 'S'),
