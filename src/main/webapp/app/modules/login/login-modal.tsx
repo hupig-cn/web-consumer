@@ -64,10 +64,16 @@ class LoginModal extends React.Component<ILoginModalProps> {
             <div className="mt-1">&nbsp;</div>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={handleClose} tabIndex="1">
+            <Button style={{
+              width: '50%'
+            }} onClick={handleClose} tabIndex="1">
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
-            <Button color="primary" type="submit">
+            <Button style={{
+              backgroundColor: '#fe4365',
+              border: '1px solid #fe4365',
+              width: '50%'
+            }} type="submit">
               <Translate contentKey="login.form.button">Sign in</Translate>
             </Button>
           </ModalFooter>
