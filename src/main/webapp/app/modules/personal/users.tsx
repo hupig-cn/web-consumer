@@ -155,7 +155,9 @@ export default function LongMenu(props) {
         value={value}
         onChange={handleChange}
       >
-        <BottomNavigationAction label="积分" value="scan" icon={'0'} />
+        <Link to="/register">
+          <BottomNavigationAction label="积分" value="scan" icon={'0'} />
+        </Link>
         <BottomNavigationAction label="余额" value="pay" icon={'0.00'} />
         <BottomNavigationAction label="优惠卷" value="share" icon={'0'} />
       </BottomNavigation>

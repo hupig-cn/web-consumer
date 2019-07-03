@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import Login from 'app/modules/login/login';
+import Register from 'app/modules/register/register';
 import Logout from 'app/modules/login/logout';
 import Consumer from 'app/modules/consumer/consumer';
 import Nearby from 'app/modules/nearby/nearby';
@@ -14,6 +15,7 @@ const Routes = () => (
   <div className="view-routes">
     <Switch>
       <ErrorBoundaryRoute path="/login" component={Login} />
+      <ErrorBoundaryRoute path="/register" component={Register} />
       <ErrorBoundaryRoute path="/logout" component={Logout} />
       <ErrorBoundaryRoute path="/nearby" component={Nearby} />
       <ErrorBoundaryRoute path="/information" component={Information} />
