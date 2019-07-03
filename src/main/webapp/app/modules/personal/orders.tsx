@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
           marginBottom: 5,
           width: 28,
           height: 28
+        },
+        '& span.Mui-selected': {
+          fontSize: '0.75rem',
         }
       }
     },

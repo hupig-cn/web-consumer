@@ -136,7 +136,7 @@ export default function LongMenu() {
             <ButtonBase className={classes.image} style={{ outline: 'none' }}>
               <div className={classes.buttonBaseDiv}>
                 <span>{step.label}</span>
-                <span style={{ fontSize: '0.25rem' }}>{step.test}</span>
+                <span style={{ fontSize: '0.8rem' }}>{step.test}</span>
               </div>
               <img className={classes.img} alt="complex" src={step.imgPath} />
             </ButtonBase>
