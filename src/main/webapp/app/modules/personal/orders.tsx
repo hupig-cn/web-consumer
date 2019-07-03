@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
           height: 28
         },
         '& span.Mui-selected': {
-          fontSize: '0.75rem',
+          fontSize: '0.75rem'
         }
       }
     },
@@ -111,11 +111,6 @@ export default function LongMenu() {
         <BottomNavigationAction label="售后退款" value="key4" icon={<RateReviewRounded />} />
         <BottomNavigationAction label="我的订单" value="order" icon={<EventNoteRounded />} />
       </BottomNavigation>
-      <img
-        src="./content/images/profit.png"
-        style={{ width: '100%', height: '55px', padding: '5px', borderRadius: '10px', marginTop: '10px' }}
-      />
-      <VipService />
     </div>
   );
 }

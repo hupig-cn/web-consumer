@@ -13,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartRounded from '@material-ui/icons/ShoppingCartRounded';
 // tslint:disable-next-line: no-submodule-imports
 import SettingsRounded from '@material-ui/icons/SettingsRounded';
-import Orders from './orders';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -155,14 +154,11 @@ export default function LongMenu(props) {
         value={value}
         onChange={handleChange}
       >
-        <Link to="/register">
-          <BottomNavigationAction label="积分" value="scan" icon={'0'} />
-        </Link>
+        <BottomNavigationAction label="积分" value="scan" icon={'0'} />
         <BottomNavigationAction label="余额" value="pay" icon={'0.00'} />
         <BottomNavigationAction label="优惠卷" value="share" icon={'0'} />
       </BottomNavigation>
       <div style={{ height: '130px' }} />
-      <Orders />
     </div>
   );
 }

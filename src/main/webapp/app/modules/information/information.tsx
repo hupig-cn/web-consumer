@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import Title from './title';
+import Informationlistbox from 'app/modules/information/informationlistbox';
+import Selects from 'app/modules/information/selects';
 
 export interface IInformationProp extends StateProps, DispatchProps {}
 
@@ -15,6 +17,8 @@ export class Information extends React.Component<IInformationProp> {
     return (
       <div className="jh-information">
         <Title />
+        <Selects />
+        <Informationlistbox />
       </div>
     );
   }

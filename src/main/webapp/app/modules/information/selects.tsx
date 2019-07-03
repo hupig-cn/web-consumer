@@ -9,7 +9,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 // tslint:disable-next-line: no-submodule-imports
 import SearchIcon from '@material-ui/icons/Search';
-import Informationlistbox from 'app/modules/information/informationlistbox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +80,6 @@ export default function PrimarySearchAppBar() {
           </Toolbar>
         </AppBar>
       </div>
-      <Informationlistbox />
     </div>
   );
 }

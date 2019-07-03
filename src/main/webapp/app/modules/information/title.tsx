@@ -1,7 +1,6 @@
 import React from 'react';
 // tslint:disable-next-line: no-submodule-imports
 import Button from '@material-ui/core/Button';
-import Selects from 'app/modules/information/selects';
 
 export default function PrimarySearchAppBar() {
   return (
@@ -37,7 +36,6 @@ export default function PrimarySearchAppBar() {
           管理
         </Button>
       </div>
-      <Selects />
     </div>
   );
 }

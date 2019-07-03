@@ -5,7 +5,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import Loopplayimg from './loopplayimg';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,7 +77,6 @@ export default function LongMenu() {
         <BottomNavigationAction label="签到" value="key7" icon={<img src="./content/images/icon7.png" />} />
         <BottomNavigationAction label="更多服务" value="key8" icon={<img src="./content/images/icon8.png" />} />
       </BottomNavigation>
-      <Loopplayimg />
     </div>
   );
 }

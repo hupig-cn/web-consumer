@@ -13,7 +13,6 @@ import MonetizationOnOutlined from '@material-ui/icons/MonetizationOnOutlined';
 import AssignmentReturnedOutlined from '@material-ui/icons/AssignmentReturnedOutlined';
 // tslint:disable-next-line: no-submodule-imports
 import ShareOutlined from '@material-ui/icons/ShareOutlined';
-import Homequickaccessdown from './homequickaccessdown';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,7 +79,6 @@ export default function LongMenu() {
         <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
         <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
       </BottomNavigation>
-      <Homequickaccessdown />
     </div>
   );
 }
