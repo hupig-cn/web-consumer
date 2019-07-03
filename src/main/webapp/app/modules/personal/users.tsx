@@ -139,7 +139,7 @@ export default function LongMenu(props) {
               marginBottom: '0px',
               width: '100%',
               zIndex: 1000
-            }}>立即登录</p>
+            }}>注册/登录</p>
         </Link>
       )}
       <BottomNavigation
