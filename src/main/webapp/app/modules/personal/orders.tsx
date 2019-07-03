@@ -89,7 +89,7 @@ export const Loadpages = key => {
 
 export default function LongMenu() {
   const classes = useStyles();
-  const [value, setValue] = React.useState('home');
+  const [value, setValue] = React.useState('order');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
