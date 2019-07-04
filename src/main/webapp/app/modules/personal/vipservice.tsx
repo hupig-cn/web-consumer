@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Loadpages = key => {
+  // tslint:disable-next-line: switch-default
   switch (key) {
     case 'key1':
       toast.info('提示：功能正在开发中.');

@@ -24,52 +24,65 @@ export class Mydemos extends React.Component<IMydemosProp> {
     this.props.getSession();
   }
   render() {
+    // tslint:disable-next-line: prefer-const
     let styles = { width: 'calc(100% - 20px)', margin: '10px' };
     const BASICPOST = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口BASIC-POST');
       this.props.createEntityBasic(this.props.account.id);
     };
     const BASICDELETE = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口BASIC-DELETE');
       this.props.deleteEntityBasic(this.props.mystringEntity.name);
     };
     const BASICPUT = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口BASIC-PUT');
       this.props.updateEntityBasic(this.props.account.id);
     };
     const BASICGET = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口BASIC-GET');
       this.props.getEntityBasic(this.props.mystringEntity.name);
     };
     const MERCHANTPOST = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口MERCHANT-POST');
       this.props.createEntityMerchant(this.props.account.id);
     };
     const MERCHANTDELETE = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口MERCHANT-DELETE');
       this.props.deleteEntityMerchant(this.props.mystringEntity.name);
     };
     const MERCHANTPUT = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口MERCHANT-PUT');
       this.props.updateEntityMerchant(this.props.account.id);
     };
     const MERCHANTGET = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口MERCHANT-GET');
       this.props.getEntityMerchant(this.props.mystringEntity.name);
     };
     const SHOPMALLPOST = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口SHOPMALL-POST');
       this.props.createEntityShopmall(this.props.account.id);
     };
     const SHOPMALLDELETE = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口SHOPMALL-DELETE');
       this.props.deleteEntityShopmall(this.props.mystringEntity.name);
     };
     const SHOPMALLPUT = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口SHOPMALL-PUT');
       this.props.updateEntityShopmall(this.props.account.id);
     };
     const SHOPMALLGET = () => {
+      // tslint:disable-next-line: no-console
       console.log('调用接口SHOPMALL-GET');
       this.props.getEntityShopmall(this.props.mystringEntity.name);
     };
