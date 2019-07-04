@@ -5,6 +5,7 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 // tslint:disable-next-line: no-submodule-imports
 import ButtonBase from '@material-ui/core/ButtonBase';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -119,7 +120,7 @@ export default function LongMenu() {
     Loadpages(newValue);
   }
   function handleUnfinishedOnClick() {
-    alert('功能正在开发中');
+    toast.info('提示：功能正在开发中.');
   }
   return (
     <div

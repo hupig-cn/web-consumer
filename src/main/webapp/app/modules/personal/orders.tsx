@@ -109,7 +109,16 @@ export default function LongMenu() {
         <BottomNavigationAction label="待收货" value="key2" icon={<MoveToInboxRounded />} />
         <BottomNavigationAction label="待评价" value="key3" icon={<ThumbsUpDownRounded />} />
         <BottomNavigationAction label="售后退款" value="key4" icon={<RateReviewRounded />} />
-        <BottomNavigationAction label="我的订单" value="order" icon={<EventNoteRounded />} />
+        <BottomNavigationAction
+          style={{
+            backgroundColor: '#f0f0f0',
+            color: '#fe4365',
+            fill: '#fe4365'
+          }}
+          label="我的订单"
+          value="order"
+          icon={<EventNoteRounded />}
+        />
       </BottomNavigation>
     </div>
   );

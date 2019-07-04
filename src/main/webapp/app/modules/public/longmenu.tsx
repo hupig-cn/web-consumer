@@ -17,6 +17,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 import Reposition from '../public/reposition';
 import ReactDOM from 'react-dom';
+import { toast } from 'react-toastify';
 
 export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 
@@ -107,14 +108,14 @@ export default function LongMenu() {
         window.weisen.getscan();
         break;
       case '付款':
-        alert('功能开发中');
+        toast.info('提示：功能正在开发中.');
         break;
       case '收钱':
         break;
       case '推荐好友':
         break;
       default:
-        alert('操作错误');
+        toast.error('提示：操作错误.');
         break;
     }
     setAnchorEl(null);

@@ -13,6 +13,7 @@ import MonetizationOnOutlined from '@material-ui/icons/MonetizationOnOutlined';
 import AssignmentReturnedOutlined from '@material-ui/icons/AssignmentReturnedOutlined';
 // tslint:disable-next-line: no-submodule-imports
 import ShareOutlined from '@material-ui/icons/ShareOutlined';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,7 +69,7 @@ export default function LongMenu() {
   }
 
   function handleUnfinishedOnClick() {
-    alert('功能正在开发中');
+    toast.info('提示：功能正在开发中.');
   }
 
   return (

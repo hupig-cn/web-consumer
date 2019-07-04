@@ -107,9 +107,9 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="附近热门" style={{ width: '33%' }} />
-          <Tab label="距离最近" style={{ width: '34%' }} />
-          <Tab label="积分最高" style={{ width: '33%' }} />
+          <Tab label="附近热门" style={{ width: '33%', maxWidth: '100%' }} />
+          <Tab label="距离最近" style={{ width: '34%', maxWidth: '100%' }} />
+          <Tab label="积分最高" style={{ width: '33%', maxWidth: '100%' }} />
         </Tabs>
       </AppBar>
       <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
