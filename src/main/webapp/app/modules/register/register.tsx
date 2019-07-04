@@ -29,7 +29,6 @@ export class Register extends React.Component<ILoginProps, ILoginState> {
   };
 
   handleSendCode = username => {
-    // console.log(username)
     this.props.send(username, '1');
   };
 

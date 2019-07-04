@@ -37,22 +37,8 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 ) : null}
               </Col>
               <Col md="12">
-                <AvField
-                  name="username"
-                  label={translate('global.form.username.label')}
-                  placeholder={translate('global.form.username.placeholder')}
-                  required
-                  errorMessage="用户名不能为空!"
-                  autoFocus
-                />
-                <AvField
-                  name="password"
-                  type="password"
-                  label={translate('login.form.password')}
-                  placeholder={translate('login.form.password.placeholder')}
-                  required
-                  errorMessage="密码不能为空!"
-                />
+                <AvField name="username" label={'手机号'} placeholder={'请输入手机号'} errorMessage="手机号不能为空!" autoFocus />
+                <AvField name="password" type="password" label={'密码'} placeholder={'请输入密码'} required errorMessage="密码不能为空!" />
                 <AvGroup check inline>
                   <Label className="form-check-label">
                     <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">Remember me</Translate>

@@ -63,7 +63,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                   label={'手机号'}
                   placeholder={'请输入手机号'}
                   required
-                  errorMessage="用户名不能为空!"
+                  errorMessage="手机号不能为空!"
                   autoFocus
                   style={{
                     width: '55%'

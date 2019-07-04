@@ -11,11 +11,11 @@
     <meta name="theme-color" content="#000000">
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
-    <style type="text/css">
-        * {
-            background: #ffffff;
-        }
-    </style>
+    <script src="http://pv.sohu.com/cityjson"></script>
+    <script type="text/javascript">
+        console.log('访问完成')
+        console.log(returnCitySN["cname"])
+    </script>
 </head>
 <body>
 <!--[if lt IE 9]>
@@ -41,7 +41,7 @@
 <script type="text/javascript" language="javascript">
     window.onload=function() {
         setTimeout(showError, 4000);
-    }
+    };
     function showError() {
         var errorElm = document.getElementById("jhipster-error");
         if (errorElm && errorElm.style) {

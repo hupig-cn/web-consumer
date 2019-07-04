@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
         marginLeft: 3,
         marginRight: 3,
         height: '100%',
-        width: '100%',
+        width: 'calc(100% - 6px)',
         display: 'block',
         '& span': {
           '& span': {
@@ -133,9 +133,11 @@ export default function TitlebarGridList() {
                     wordWrapL: 'break-word',
                     overflow: 'hidden',
                     display: '-webkit-box',
-                    '-webkit-box-orient': 'vertical',
-                    '-webkit-line-clamp': '2',
-                    lineHeight: '19px'
+                    lineHeight: '19px',
+                    height: '2.4rem',
+                    fontSize: '0.8rem',
+                    position: 'relative',
+                    margin: '0px'
                   }}
                 >
                   {tile.title}

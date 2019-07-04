@@ -95,8 +95,6 @@ export default function LongMenu(props) {
   const { login, account } = props;
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
-  }
-  function handleUnfinishedOnClick() {
     toast.info('提示：功能正在开发中.');
   }
   return (
@@ -148,7 +146,6 @@ export default function LongMenu(props) {
         </Link>
       )}
       <BottomNavigation
-        onClick={handleUnfinishedOnClick}
         style={{ position: 'fixed', top: '60px', height: 'auto', zIndex: 1000 }}
         showLabels
         className={classes.root}
