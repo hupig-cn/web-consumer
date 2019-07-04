@@ -8,8 +8,9 @@ import Consumer from 'app/modules/consumer/consumer';
 import Nearby from 'app/modules/nearby/nearby';
 import Information from 'app/modules/information/information';
 import Personal from 'app/modules/personal/personal';
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
+import Mydomos from 'app/modules/personal/mydemos';
 import PageNotFound from 'app/shared/error/page-not-found';
+import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
 const Routes = () => (
   <div className="view-routes">
@@ -20,6 +21,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/nearby" component={Nearby} />
       <ErrorBoundaryRoute path="/information" component={Information} />
       <ErrorBoundaryRoute path="/personal" component={Personal} />
+      <ErrorBoundaryRoute path="/mydomos" component={Mydomos} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>
