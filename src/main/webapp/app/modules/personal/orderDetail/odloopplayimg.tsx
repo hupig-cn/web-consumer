@@ -9,25 +9,27 @@ import { autoPlay } from 'react-swipeable-views-utils';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
-  // {
-  //   label: '1号内容',
-  //   imgPath: './content/images/barner1.jpg'
-  // },
-  // {
-  //   label: '2号内容',
-  //   imgPath: './content/images/barner2.jpg'
-  // },
-  // {
-  //   label: '3号内容',
-  //   imgPath: './content/images/barner3.jpg'
-  // }
+  {
+    label: '0号内容',
+    imgPath: 'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'
+  },
+  {
+    label: '1号内容',
+    imgPath: 'https://img.alicdn.com/bao/uploaded/O1CN01Ks0Xie1DJoA7zcatH_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'
+  },
+  {
+    label: '2号内容',
+    imgPath: 'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'
+  },
+  {
+    label: '3号内容',
+    imgPath: 'https://img.alicdn.com/bao/uploaded/O1CN01Ks0Xie1DJoA7zcatH_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'
+  }
 ];
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: '8px',
-      marginBottom: '8px',
       flexGrow: 1,
       position: 'relative',
       width: '100%'
@@ -39,10 +41,12 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: theme.spacing(4),
       backgroundColor: theme.palette.background.default
     },
+    loopplaying: {
+      height: '350px',
+      width: '100%',
+      overflow: 'hidden'
+    },
     img: {
-      height: '95px',
-      display: 'block',
-      overflow: 'hidden',
       width: '100%'
     },
     spot: {
@@ -80,14 +84,14 @@ function SwipeableTextMobileStepper() {
         enableMouseEvents
       >
         {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
+          <div className={classes.loopplaying} key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? <img className={classes.img} src={step.imgPath} alt={step.label} /> : null}
           </div>
         ))}
       </AutoPlaySwipeableViews>
       <MobileStepper
         variant="dots"
-        steps={3}
+        steps={4}
         position="static"
         activeStep={activeStep}
         className={classes.spot}
