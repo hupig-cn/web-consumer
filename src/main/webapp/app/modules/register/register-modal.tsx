@@ -18,7 +18,8 @@ class RegisterModal extends React.Component<ILoginModalProps> {
   };
   handleSend = () => {
     const { handleSendCode } = this.props;
-    let phone = document.getElementById('register-phone');
+    const phone = document.getElementById('register-phone');
+    // @ts-ignore
     handleSendCode(phone.value);
   };
 
