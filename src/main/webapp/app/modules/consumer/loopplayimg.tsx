@@ -5,7 +5,6 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import MobileStepper from '@material-ui/core/MobileStepper';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import Homelabelcard from './homelabelcard';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -96,7 +95,6 @@ function SwipeableTextMobileStepper() {
         nextButton={null}
         backButton={null}
       />
-      <Homelabelcard />
     </div>
   );
 }

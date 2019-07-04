@@ -4,6 +4,10 @@ import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 
 import Users from './users';
+import Orders from './orders';
+import Advertising from './advertising';
+import VipService from './vipservice';
+import Mytool from 'app/modules/personal/mytool';
 
 export interface IPersonalProp extends StateProps, DispatchProps {}
 
@@ -17,6 +21,10 @@ export class Personal extends React.Component<IPersonalProp> {
     return (
       <div className="jh-personal">
         <Users login={account && account.login ? true : false} account={account} />
+        <Orders />
+        <Advertising />
+        <VipService />
+        <Mytool />
       </div>
     );
   }
