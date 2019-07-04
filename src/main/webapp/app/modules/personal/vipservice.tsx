@@ -6,7 +6,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { toast } from 'react-toastify';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Loadpages = key => {
+  // tslint:disable-next-line: switch-default
   switch (key) {
     case 'key1':
       toast.info('提示：功能正在开发中.');
@@ -79,14 +80,14 @@ export default function LongMenu() {
         <span style={{ float: 'left' }}>VIP服务</span>
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>更多 ></span>
       </div>
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange} onClick={handleChange}>
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction label="账户安全" value="key1" icon={<img src="./content/images/vip1.png" />} />
         <BottomNavigationAction label="账号绑定" value="key2" icon={<img src="./content/images/vip2.png" />} />
         <BottomNavigationAction label="合伙人" value="key3" icon={<img src="./content/images/vip3.png" />} />
         <BottomNavigationAction label="商家" value="key4" icon={<img src="./content/images/vip4.png" />} />
       </BottomNavigation>
       <Link id="app-modules-personal-vipservice-BottomNavigation-BottomNavigationAction-link" to="/mydomos" />
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange} onClick={handleChange}>
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction label="测试按钮" value="key5" icon={<img src="./content/images/vip5.png" />} />
         <BottomNavigationAction label="积分明细" value="key6" icon={<img src="./content/images/vip6.png" />} />
         <BottomNavigationAction label="我的佣金" value="key7" icon={<img src="./content/images/vip7.png" />} />
