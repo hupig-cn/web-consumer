@@ -69,7 +69,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     inputInput: {
       transition: '200ms',
       color: '#fffde5',
-      width: 'calc(100vw - 205px)',
+      width: 'calc(100vw - 220px)',
       padding: theme.spacing(1, 1, 1, 1),
       marginLeft: '28px',
       height: '12px'
@@ -111,15 +111,19 @@ export default function LongMenu() {
   }
   function onSelectFocus() {
     const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
-    const selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const inputInput = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const selects = document.getElementById('jh-longmenu-search') as HTMLDivElement;
     locationp.style.width = 0 + 'px';
-    selects.style.width = 'calc(100vw - 120px)';
+    inputInput.style.width = 'calc(100vw - 135px)';
+    selects.style.cssFloat = 'left';
   }
   function onSelectBlur() {
     const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
-    const selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
-    selects.style.width = 'calc(100vw - 205px)';
+    const inputInput = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const selects = document.getElementById('jh-longmenu-search') as HTMLDivElement;
     locationp.style.width = 85 + 'px';
+    inputInput.style.width = 'calc(100vw - 220px)';
+    selects.style.cssFloat = 'right';
   }
 
   return (
