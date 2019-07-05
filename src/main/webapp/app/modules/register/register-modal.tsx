@@ -26,17 +26,19 @@ class RegisterModal extends React.Component<ILoginModalProps> {
   Register = () => {
     const { handleRegister } = this.props;
     const agreement = document.getElementById('register-agreement');
-    console.log(agreement.value);
+    // @ts-ignore
     if (agreement.value === false) {
       alert('注册需要同意用户协议哦');
     } else {
       const checkPassword = document.getElementById('password-again');
       const password = document.getElementById('register-password');
+      // @ts-ignore
       if (password.value !== checkPassword.value) {
         alert('两次密码不一致哦');
       } else {
         const phone = document.getElementById('register-phone');
         const code = document.getElementById('register-code');
+        // @ts-ignore
         handleRegister(phone.value, password.value, code.value);
       }
     }

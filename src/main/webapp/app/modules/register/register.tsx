@@ -30,19 +30,20 @@ export class Register extends React.Component<ILoginProps, ILoginState> {
   };
 
   handleSendCode = phone => {
-    // console.log(username)
     const result = this.props.sendCode(phone, '1');
+    // @ts-ignore
     result.then(res => {
       alert(res.value.data.message);
     });
-    console.log(result);
   };
   handleRegister = (phone, password, code) => {
     const respone = this.props.checkCode(phone, '1', code);
-    console.log(respone);
+    // @ts-ignore
     respone.then(res => {
       if (res.value.data.code === 1) {
         const info = this.props.register(phone, password);
+        // @ts-ignore
+        // tslint:disable-next-line: no-shadowed-variable
         info.then(res => {
           if ('注册成功' === res.value.data) {
             alert('注册成功');
