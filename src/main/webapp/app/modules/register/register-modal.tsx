@@ -9,6 +9,7 @@ export interface ILoginModalProps {
   handleLogin: Function;
   handleSendCode: Function;
   handleClose: Function;
+  handleRegister: Function;
 }
 
 class RegisterModal extends React.Component<ILoginModalProps> {
@@ -22,7 +23,24 @@ class RegisterModal extends React.Component<ILoginModalProps> {
     // @ts-ignore
     handleSendCode(phone.value);
   };
-
+  Register = () => {
+    const { handleRegister } = this.props;
+    const agreement = document.getElementById('register-agreement');
+    console.log(agreement.value);
+    if (agreement.value === false) {
+      alert('注册需要同意用户协议哦');
+    } else {
+      const checkPassword = document.getElementById('password-again');
+      const password = document.getElementById('register-password');
+      if (password.value !== checkPassword.value) {
+        alert('两次密码不一致哦');
+      } else {
+        const phone = document.getElementById('register-phone');
+        const code = document.getElementById('register-code');
+        handleRegister(phone.value, password.value, code.value);
+      }
+    }
+  };
   render() {
     const { loginError, handleClose } = this.props;
 
@@ -63,7 +81,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                   label={'手机号'}
                   placeholder={'请输入手机号'}
                   required
-                  errorMessage="用户名不能为空!"
+                  errorMessage="手机号不能为空!"
                   autoFocus
                   style={{
                     width: '55%'
@@ -71,6 +89,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                 />
                 <AvField
                   name="code"
+                  id="register-code"
                   label={<span style={{ float: 'left', marginTop: '7px' }}>验证码：</span>}
                   placeholder={'请输入验证码'}
                   required
@@ -79,6 +98,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                 />
                 <AvField
                   name="password"
+                  id="register-password"
                   type="password"
                   label={<span style={{ float: 'left', marginTop: '7px' }}>密码：</span>}
                   placeholder={'请输入密码'}
@@ -89,6 +109,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                 <AvField
                   name="repassword"
                   type="password"
+                  id="password-again"
                   label={<span style={{ float: 'left', marginTop: '7px' }}>重复密码：</span>}
                   placeholder={'请重复输入密码'}
                   required
@@ -97,7 +118,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
-                    <AvInput type="checkbox" name="rememberMe" />
+                    <AvInput type="checkbox" name="agreement" id="register-agreement" />
                     我已阅读并同意<u>《用户协议》</u>
                   </Label>
                 </AvGroup>
@@ -114,7 +135,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                 border: '1px solid #fe4365',
                 width: '50%'
               }}
-              type="submit"
+              onClick={this.Register}
             >
               注册
             </Button>

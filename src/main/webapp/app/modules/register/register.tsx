@@ -6,6 +6,7 @@ import { IRootState } from 'app/shared/reducers';
 import { login, send } from 'app/shared/reducers/authentication';
 
 import RegisterModal from './register-modal';
+import { sendCode, checkCode, register } from 'app/requests/result/result.reducer';
 
 export interface ILoginProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -28,11 +29,33 @@ export class Register extends React.Component<ILoginProps, ILoginState> {
     this.props.login(username, password, rememberMe);
   };
 
-  handleSendCode = username => {
+  handleSendCode = phone => {
     // console.log(username)
-    this.props.send(username, '1');
+    const result = this.props.sendCode(phone, '1');
+    result.then(res => {
+      alert(res.value.data.message);
+    });
+    console.log(result);
   };
-
+  handleRegister = (phone, password, code) => {
+    const respone = this.props.checkCode(phone, '1', code);
+    console.log(respone);
+    respone.then(res => {
+      if (res.value.data.code === 1) {
+        const info = this.props.register(phone, password);
+        info.then(res => {
+          if ('注册成功' === res.value.data) {
+            alert('注册成功');
+            window.location.href = 'http://192.168.1.131:8082/login';
+          } else {
+            alert('注册失败');
+          }
+        });
+      } else {
+        alert(res.value.data.message);
+      }
+    });
+  };
   handleClose = () => {
     this.setState({ showModal: false });
     this.props.history.push('/personal');
@@ -50,6 +73,7 @@ export class Register extends React.Component<ILoginProps, ILoginState> {
         showModal={showModal}
         handleLogin={this.handleLogin}
         handleSendCode={this.handleSendCode}
+        handleRegister={this.handleRegister}
         handleClose={this.handleClose}
         loginError={this.props.loginError}
       />
@@ -57,13 +81,14 @@ export class Register extends React.Component<ILoginProps, ILoginState> {
   }
 }
 
-const mapStateToProps = ({ authentication }: IRootState) => ({
+const mapStateToProps = ({ authentication, result }: IRootState) => ({
   isAuthenticated: authentication.isAuthenticated,
   loginError: authentication.loginError,
-  showModal: authentication.showModalLogin
+  showModal: authentication.showModalLogin,
+  resultEntity: result.entity
 });
 
-const mapDispatchToProps = { login, send };
+const mapDispatchToProps = { login, sendCode, checkCode, register };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
