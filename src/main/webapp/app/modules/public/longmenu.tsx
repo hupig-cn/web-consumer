@@ -15,28 +15,15 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
-import Reposition from '../public/reposition';
-import ReactDOM from 'react-dom';
 import { toast } from 'react-toastify';
 
 export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 
-export const ITEM_HEIGHT = 48;
-
 export const ReLocation = () => {
-  const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
-  let city;
-  try {
-    // @ts-ignore
-    city = window.weisen.getcity();
-  } catch (e) {
-    city = '定位失败';
-  }
-  if (null != locationp) {
-    locationp.textContent = city;
-  }
-  return city;
+  // @ts-ignore
+  return returnCitySN['cname'];
 };
+
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -59,7 +46,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginTop: '4px',
       float: 'right',
       display: 'inline-block',
-      minWidth: document.body.offsetWidth - 137 - 55 + 'px',
+      minWidth: '0px',
       '&:hover': {
         backgroundColor: fade(theme.palette.common.black, 0.25)
       },
@@ -82,19 +69,13 @@ export const useStyles = makeStyles((theme: Theme) =>
     inputInput: {
       transition: '200ms',
       color: '#fffde5',
-      width: document.body.offsetWidth - 137 - 55 - 17 + 'px',
+      width: 'calc(100vw - 220px)',
       padding: theme.spacing(1, 1, 1, 1),
       marginLeft: '28px',
       height: '12px'
     }
   })
 );
-
-export const bodyEl = document.getElementById('root');
-
-export const switchLocation = () => {
-  ReactDOM.render(<Reposition />, bodyEl);
-};
 
 export default function LongMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -130,15 +111,19 @@ export default function LongMenu() {
   }
   function onSelectFocus() {
     const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
-    const selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const inputInput = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const selects = document.getElementById('jh-longmenu-search') as HTMLDivElement;
     locationp.style.width = 0 + 'px';
-    selects.style.width = document.body.offsetWidth - 72 - 55 + 'px';
+    inputInput.style.width = 'calc(100vw - 135px)';
+    selects.style.cssFloat = 'left';
   }
   function onSelectBlur() {
     const locationp = document.getElementById('jh-locations-address') as HTMLParagraphElement;
-    const selects = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
-    selects.style.width = document.body.offsetWidth - 137 - 55 + 'px';
-    locationp.style.width = 65 + 'px';
+    const inputInput = document.getElementById('jh-longmenu-inputInput') as HTMLInputElement;
+    const selects = document.getElementById('jh-longmenu-search') as HTMLDivElement;
+    locationp.style.width = 85 + 'px';
+    inputInput.style.width = 'calc(100vw - 220px)';
+    selects.style.cssFloat = 'right';
   }
 
   return (
@@ -155,34 +140,27 @@ export default function LongMenu() {
             color: '#fffde5',
             height: '26px',
             fontSize: '0.875rem',
-            letterSpacing: '0px'
+            letterSpacing: '0px',
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
           }}
         >
-          <LocationOnRounded
-            // tslint:disable-next-line: jsx-no-lambda
-            onClick={() => {
-              {
-                ReLocation();
-              }
-            }}
-          />
+          <LocationOnRounded />
         </span>
         <p
           id="jh-locations-address"
           style={{
             fontSize: '0.9rem',
-            marginTop: '8px',
-            marginLeft: '2px',
+            margin: '5px 6px 0px 2px',
             float: 'left',
-            marginBottom: '0px',
-            marginRight: '6px',
             color: '#fffde5',
-            width: '65px',
+            width: '85px',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             textAlign: 'left',
-            transition: '200ms'
+            transition: '200ms',
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            letterSpacing: '0.01071em'
           }}
         >
           <ReLocation />
@@ -203,10 +181,10 @@ export default function LongMenu() {
           <InputBase
             id="jh-longmenu-inputInput"
             placeholder="搜索..."
-            classes={{ root: classes.inputRoot, input: classes.inputInput }}
             inputProps={{ 'aria-label': 'Search' }}
             onFocus={onSelectFocus}
             onBlur={onSelectBlur}
+            classes={{ root: classes.inputRoot, input: classes.inputInput }}
           />
         </div>
         <Menu
@@ -215,7 +193,7 @@ export default function LongMenu() {
           keepMounted
           open={open}
           onClose={handleClose}
-          PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: 148, sIndex: 1001 } }}
+          PaperProps={{ style: { maxHeight: '216px', width: 148, sIndex: 1001 } }}
         >
           {options.map(option => (
             // tslint:disable-next-line: jsx-no-lambda

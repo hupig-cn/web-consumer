@@ -49,6 +49,7 @@ export const Loadpages = key => {
       window.weisen.getscan();
       break;
     case 'pay':
+      toast.info('提示：功能正在开发中.');
       break;
     case 'income':
       break;
@@ -68,15 +69,11 @@ export default function LongMenu() {
     Loadpages(newValue);
   }
 
-  function handleUnfinishedOnClick() {
-    toast.info('提示：功能正在开发中.');
-  }
-
   return (
     <div className="jh-consumer-quickaccess">
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
-        <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} onClick={handleUnfinishedOnClick} />
+        <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />
         <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
         <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
       </BottomNavigation>

@@ -15,10 +15,11 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#ffffff',
       height: '100%',
       borderTop: '1px solid #f0f0f0',
+      display: 'inline-block',
       '& button': {
-        minWidth: '0px',
+        minWidth: '25%',
         outline: 'none',
-        color: 'rgba(0, 0, 0, 0.75)',
+        color: '#000000',
         height: '100%',
         '& img': {
           marginBottom: 5,
@@ -85,14 +86,12 @@ export default function LongMenu() {
         <BottomNavigationAction label="账号绑定" value="key2" icon={<img src="./content/images/vip2.png" />} />
         <BottomNavigationAction label="合伙人" value="key3" icon={<img src="./content/images/vip3.png" />} />
         <BottomNavigationAction label="商家" value="key4" icon={<img src="./content/images/vip4.png" />} />
-      </BottomNavigation>
-      <Link id="app-modules-personal-vipservice-BottomNavigation-BottomNavigationAction-link" to="/mydomos" />
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction label="测试按钮" value="key5" icon={<img src="./content/images/vip5.png" />} />
         <BottomNavigationAction label="积分明细" value="key6" icon={<img src="./content/images/vip6.png" />} />
         <BottomNavigationAction label="我的佣金" value="key7" icon={<img src="./content/images/vip7.png" />} />
         <BottomNavigationAction label="问题反馈" value="key8" icon={<img src="./content/images/vip8.png" />} />
       </BottomNavigation>
+      <Link id="app-modules-personal-vipservice-BottomNavigation-BottomNavigationAction-link" to="/mydomos" />
     </div>
   );
 }
