@@ -19,7 +19,6 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import Enddiv from 'app/shared/menu/enddiv';
-import PaymentCode from 'app/modules/public/paymentCode';
 
 const baseHref = document
   .querySelector('base')

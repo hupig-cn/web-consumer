@@ -146,7 +146,7 @@ export default function LongMenu(props) {
         </Link>
       )}
       <BottomNavigation
-        style={{ position: 'fixed', top: '60px', height: 'auto', zIndex: 1000 }}
+        style={{ position: 'fixed', top: '58px', height: 'auto', zIndex: 1000 }}
         showLabels
         className={classes.root}
         value={value}
