@@ -22,7 +22,7 @@ export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 // tslint:disable-next-line: ter-arrow-body-style
 export const ReLocation = () => {
   // @ts-ignore
-  return returnCitySN['cname'];
+  return lo + lc;
 };
 
 export const useStyles = makeStyles((theme: Theme) =>
