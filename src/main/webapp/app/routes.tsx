@@ -5,6 +5,9 @@ import Login from 'app/modules/login/login';
 import Register from 'app/modules/register/register';
 import Logout from 'app/modules/login/logout';
 import Consumer from 'app/modules/consumer/consumer';
+import Incomepage from 'app/modules/consumer/incomepage/incomepage';
+import Exhibitionpage from 'app/modules/consumer/incomepage/exhibitionpage';
+import Sharepage from 'app/modules/consumer/sharepage/sharepage';
 import Nearby from 'app/modules/nearby/nearby';
 import Information from 'app/modules/information/information';
 import Personal from 'app/modules/personal/personal';
@@ -22,6 +25,9 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/information" component={Information} />
       <ErrorBoundaryRoute path="/personal" component={Personal} />
       <ErrorBoundaryRoute path="/mydomos" component={Mydomos} />
+      <ErrorBoundaryRoute path="/incomepage" component={Incomepage} />
+      <ErrorBoundaryRoute path="/exhibitionpage" component={Exhibitionpage} />
+      <ErrorBoundaryRoute path="/sharepage" component={Sharepage} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>

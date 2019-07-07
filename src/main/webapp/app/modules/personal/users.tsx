@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     bigAvatar: {
-      margin: '10px 0px 0px 15px',
+      margin: '8px 0px 0px 15px',
       float: 'left',
       fill: '#fffde5',
       width: '50px',
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 'calc(100% - 70px)',
       height: '60px',
       float: 'right',
-      padding: '14px 10px 0px 0px'
+      padding: '12px 10px 0px 0px'
     },
     nameOne: {
       float: 'left',

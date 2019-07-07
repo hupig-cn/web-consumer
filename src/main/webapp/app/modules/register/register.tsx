@@ -5,7 +5,7 @@ import { Redirect, RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
 
 import RegisterModal from './register-modal';
-import { sendCode, checkCode, register } from 'app/requests/result/result.reducer';
+import { sendSms, register } from 'app/shared/reducers/authentication';
 import { toast } from 'react-toastify';
 
 export interface IRegisterProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
@@ -25,37 +25,26 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
     }
   }
   handleSendCode = phone => {
-    const result = this.props.sendCode(phone, '1');
+    const result = this.props.sendSms(phone);
     // @ts-ignore
     result.then(res => {
-      alert(res.value.data.message);
+      if (res.value.data.toString()=="发送成功"){
+        toast.success('已发送。');
+      }else{
+        toast.error('错误：'+ res.value.data.toString());
+      }
     });
   };
-  handleRegister = (phone, code, password, repassword, agreement) => {
-    toast.info('提示：接收到了' + phone);
-    toast.info('提示：接收到了' + code);
-    toast.info('提示：接收到了' + password);
-    toast.info('提示：接收到了' + repassword);
-    toast.info('提示：接收到了' + agreement);
-    // const respone = this.props.checkCode(phone, '1', code);
-    // // @ts-ignore
-    // respone.then(res => {
-    //   if (res.value.data.code === 1) {
-    //     const info = this.props.register(phone, password);
-    //     // @ts-ignore
-    //     // tslint:disable-next-line: no-shadowed-variable
-    //     info.then(res => {
-    //       if ('注册成功' === res.value.data) {
-    //         alert('注册成功');
-    //         window.location.href = 'http://192.168.1.131:8082/login';
-    //       } else {
-    //         alert('注册失败');
-    //       }
-    //     });
-    //   } else {
-    //     alert(res.value.data.message);
-    //   }
-    // });
+  handleRegister = (phone, code, password) => {
+    const result = this.props.register( phone, password, code);
+    // @ts-ignore
+    result.then(res => {
+      if (!isNaN(res.value.data)){
+        this.props.history.push('/personal');
+      }else{
+        toast.error('错误：'+ res.value.data.toString());
+      }
+    });
   };
   handleClose = () => {
     this.setState({ showModal: false });
@@ -86,7 +75,7 @@ const mapStateToProps = ({ authentication, result }: IRootState) => ({
   resultEntity: result.entity
 });
 
-const mapDispatchToProps = { sendCode, checkCode, register };
+const mapDispatchToProps = { sendSms,register };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

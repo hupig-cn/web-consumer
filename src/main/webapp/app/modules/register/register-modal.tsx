@@ -3,27 +3,29 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Row, Col } f
 import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
 
-export interface ILoginModalProps {
+export interface IRegisterModalProps {
   showModal: boolean;
   handleSendCode: Function;
   handleClose: Function;
   handleRegister: Function;
 }
 
-class RegisterModal extends React.Component<ILoginModalProps> {
-  state = { time: 60, btnDisable: false, btnContent: '发送验证码', backgroundColor: '#fe4365' };
+class RegisterModal extends React.Component<IRegisterModalProps> {
+  state = { time: 10, btnDisable: false, btnContent: '发送验证码', backgroundColor: '#fe4365' };
   handleSubmit = (event, errors, { phone, code, password, repassword, agreement }) => {
     if (!agreement) {
-      toast.error('提示：请先阅读并同意《用户协议》。');
+      toast.info('提示：请先阅读并同意《用户协议》。');
     } else if (password != repassword) {
-      toast.error('提示：两次输入的密码不一致，请检查后提交。');
+      toast.info('提示：两次输入的密码不一致，请检查后提交。');
     } else if (phone.length != 11) {
-      toast.error('提示：手机号输入有误。');
+      toast.info('提示：手机号输入有误。');
     } else if (code.length != 6) {
-      toast.error('提示：验证码输入错误。');
+      toast.info('提示：验证码输入错误。');
+    } else if (password.trim().length < 1) {
+      toast.info('提示：密码不能为空。');
     } else {
       const { handleRegister } = this.props;
-      handleRegister(phone, code, password, repassword, agreement);
+      handleRegister(phone, code, password);
     }
   };
   handleSend = phone => {
@@ -41,24 +43,24 @@ class RegisterModal extends React.Component<ILoginModalProps> {
         this.setState({ time: ti, btnContent: '（' + ti + 's）' });
       } else {
         clearInterval(timeChange);
-        this.setState({ btnDisable: false, time: 60, btnContent: '发送验证码', backgroundColor: '#fe4365' });
+        this.setState({ btnDisable: false, time: 10, btnContent: '发送验证码', backgroundColor: '#fe4365' });
       }
     };
     const sendCode = () => {
       // @ts-ignore
       const phone = document.getElementById('register-phone').value;
       if (phone.length != 11) {
-        toast.error('提示：手机号输入有误。');
+        toast.info('提示：手机号输入有误。');
       } else {
         this.handleSend(phone);
-        this.setState({ btnDisable: true, btnContent: '（60s）', backgroundColor: '#cccccc' });
+        this.setState({ btnDisable: true, btnContent: '（10s）', backgroundColor: '#cccccc' });
         timeChange = setInterval(clock, 1000);
       }
     };
     return (
-      <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>
+      <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="register-page" autoFocus={false}>
         <AvForm onSubmit={this.handleSubmit}>
-          <ModalHeader id="login-title" toggle={handleClose}>
+          <ModalHeader id="register-title" toggle={handleClose}>
             <span>注册</span>
           </ModalHeader>
           <ModalBody>
@@ -119,7 +121,7 @@ class RegisterModal extends React.Component<ILoginModalProps> {
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
-                    <AvInput type="checkbox" name="agreement" />
+                    <AvInput type="checkbox" name="agreement"/>
                     我已阅读并同意<u>《用户协议》</u>
                   </Label>
                 </AvGroup>

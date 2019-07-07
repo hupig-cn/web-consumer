@@ -14,6 +14,7 @@ import AssignmentReturnedOutlined from '@material-ui/icons/AssignmentReturnedOut
 // tslint:disable-next-line: no-submodule-imports
 import ShareOutlined from '@material-ui/icons/ShareOutlined';
 import { toast } from 'react-toastify';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,8 +53,10 @@ export const Loadpages = key => {
       toast.info('提示：功能正在开发中.');
       break;
     case 'income':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-incomepage' ).click();
       break;
     case 'share':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-sharepage' ).click();
       break;
     default:
       temp = null;
@@ -64,18 +67,18 @@ export const Loadpages = key => {
 export default function LongMenu() {
   const classes = useStyles();
   const [value] = React.useState('home');
-
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
-
   return (
     <div className="jh-consumer-quickaccess">
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
         <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />
         <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
+        <Link id="app-modules-consumer-quickaccess-button-link-incomepage" to="/incomepage" />
         <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
+        <Link id="app-modules-consumer-quickaccess-button-link-sharepage" to="/sharepage" />
       </BottomNavigation>
     </div>
   );

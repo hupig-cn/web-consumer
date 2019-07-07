@@ -110,20 +110,23 @@ export const getSession = () => async (dispatch, getState) => {
   }
 };
 
+export const sendSms = (phone) => async (dispatch) => {
+  return await dispatch({
+    payload: axios.post('services/login/api/public/send-sms', { phone })
+  });
+};
+
+export const register = (login, password, lastName) => async (dispatch) => {
+  return await dispatch({
+    payload: axios.post('services/login/api/public/phone-user', { login, password, lastName })
+  });
+};
+
 export const login = (username, password, rememberMe = false) => async (dispatch, getState) => {
   const result = await dispatch({
     type: ACTION_TYPES.LOGIN,
     payload: axios.post('auth/login', { username, password })
   });
-  await dispatch(getSession());
-};
-
-export const send = (phone, act) => async (dispatch, getState) => {
-  const result = await dispatch({
-    type: ACTION_TYPES.LOGIN,
-    payload: axios.post('services/basic/api/send-code', { phone, act })
-  });
-  // return result;
   await dispatch(getSession());
 };
 
