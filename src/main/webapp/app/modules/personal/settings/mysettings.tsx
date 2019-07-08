@@ -60,7 +60,7 @@ export class Mysettings extends React.Component {
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
           <Link to="/logout">
-            <div style={{ width: '100%', textAlign: 'center' }}>退出登陆</div>
+            <div style={{ width: '100%', textAlign: 'center', paddingRight: '10px' }}>退出登陆</div>
           </Link>
         </div>
       </div>
