@@ -87,7 +87,7 @@ export default (state: BasicState = initialState, action): BasicState => {
   }
 };
 
-const apiUrl = 'services/basic/api/test';
+const apiUrl = 'services/basic/api';
 // Actions
 export const createEntityBasic: ICrudPutAction<IMystring> = entity => async dispatch => {
   const result = await dispatch({
@@ -118,6 +118,14 @@ export const getEntityBasic: ICrudGetAction<IMystring> = id => {
     payload: axios.get<IMystring>(requestUrl)
   };
 };
+
+export const createUserByPhone = (phone:any,userid:any) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl+'/public/user/createUserByPhone', {phone ,userid })
+  });
+  return result;
+};
+
 
 export const resetBasic = () => ({
   type: ACTION_TYPES.RESET
