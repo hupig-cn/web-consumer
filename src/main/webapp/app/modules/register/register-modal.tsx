@@ -15,11 +15,11 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
   handleSubmit = (event, errors, { phone, code, password, repassword, agreement }) => {
     if (!agreement) {
       toast.info('提示：请先阅读并同意《用户协议》。');
-    } else if (password != repassword) {
+    } else if (password !== repassword) {
       toast.info('提示：两次输入的密码不一致，请检查后提交。');
-    } else if (phone.length != 11) {
+    } else if (phone.length !== 11) {
       toast.info('提示：手机号输入有误。');
-    } else if (code.length != 6) {
+    } else if (code.length !== 6) {
       toast.info('提示：验证码输入错误。');
     } else if (password.trim().length < 1) {
       toast.info('提示：密码不能为空。');
@@ -35,6 +35,7 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
 
   render() {
     const { handleClose } = this.props;
+    // tslint:disable-next-line: one-variable-per-declaration
     let timeChange,
       ti = this.state.time;
     const clock = () => {
@@ -49,7 +50,7 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
     const sendCode = () => {
       // @ts-ignore
       const phone = document.getElementById('register-phone').value;
-      if (phone.length != 11) {
+      if (phone.length !== 11) {
         toast.info('提示：手机号输入有误。');
       } else {
         this.handleSend(phone);
@@ -121,7 +122,7 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
-                    <AvInput type="checkbox" name="agreement"/>
+                    <AvInput type="checkbox" name="agreement" />
                     我已阅读并同意<u>《用户协议》</u>
                   </Label>
                 </AvGroup>

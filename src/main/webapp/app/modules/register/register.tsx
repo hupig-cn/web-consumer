@@ -28,21 +28,23 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
     const result = this.props.sendSms(phone);
     // @ts-ignore
     result.then(res => {
-      if (res.value.data.toString()=="发送成功"){
+      if (res.value.data.toString() === '发送成功') {
         toast.success('已发送。');
-      }else{
-        toast.error('错误：'+ res.value.data.toString());
+      } else {
+        // tslint:disable-next-line: no-multi-spaces
+        toast.error('错误：' + res.value.data.toString());
       }
     });
   };
   handleRegister = (phone, code, password) => {
-    const result = this.props.register( phone, password, code);
+    const result = this.props.register(phone, password, code);
     // @ts-ignore
     result.then(res => {
-      if (!isNaN(res.value.data)){
+      if (!isNaN(res.value.data)) {
         this.props.history.push('/personal');
-      }else{
-        toast.error('错误：'+ res.value.data.toString());
+      } else {
+        // tslint:disable-next-line: no-multi-spaces
+        toast.error('错误：' + res.value.data.toString());
       }
     });
   };
@@ -75,7 +77,7 @@ const mapStateToProps = ({ authentication, result }: IRootState) => ({
   resultEntity: result.entity
 });
 
-const mapDispatchToProps = { sendSms,register };
+const mapDispatchToProps = { sendSms, register };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

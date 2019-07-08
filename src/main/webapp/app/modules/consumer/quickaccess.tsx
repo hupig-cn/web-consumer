@@ -14,7 +14,7 @@ import AssignmentReturnedOutlined from '@material-ui/icons/AssignmentReturnedOut
 // tslint:disable-next-line: no-submodule-imports
 import ShareOutlined from '@material-ui/icons/ShareOutlined';
 import { toast } from 'react-toastify';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,10 +53,10 @@ export const Loadpages = key => {
       toast.info('提示：功能正在开发中.');
       break;
     case 'income':
-      document.getElementById('app-modules-consumer-quickaccess-button-link-incomepage' ).click();
+      document.getElementById('app-modules-consumer-quickaccess-button-link-incomepage').click();
       break;
     case 'share':
-      document.getElementById('app-modules-consumer-quickaccess-button-link-sharepage' ).click();
+      document.getElementById('app-modules-consumer-quickaccess-button-link-sharepage').click();
       break;
     default:
       temp = null;

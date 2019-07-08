@@ -110,14 +110,17 @@ export const getSession = () => async (dispatch, getState) => {
   }
 };
 
-export const sendSms = (phone) => async (dispatch) => {
-  return await dispatch({
+// tslint:disable-next-line: ter-arrow-body-style
+export const sendSms = (phone: any) => async (dispatch: any) => {
+  return dispatch({
     payload: axios.post('services/login/api/public/send-sms', { phone })
   });
 };
 
-export const register = (login, password, lastName) => async (dispatch) => {
-  return await dispatch({
+// tslint:disable-next-line: no-shadowed-variable
+export const register = (login: any, password: any, lastName: any) => async (dispatch: any) => {
+  // tslint:disable-next-line: ter-arrow-body-style
+  return dispatch({
     payload: axios.post('services/login/api/public/phone-user', { login, password, lastName })
   });
 };
