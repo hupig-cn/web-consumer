@@ -64,7 +64,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     name: {
       color: '#fffde5',
-      float: 'left'
+      float: 'left',
+      width: '100%'
     },
     login: {
       color: '#fffde5',
@@ -103,19 +104,16 @@ export default function LongMenu(props) {
         <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
           <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
           <div className={classes.namePlusSetting}>
-            <div className={classes.nameOne}>
-              <span className={classes.name}>{account.firstName}</span>
-              <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
-                <SettingsRounded />
-              </IconButton>
-              <IconButton
-                color="primary"
-                aria-label="setting"
-                style={{ marginRight: '10px', padding: '0px', float: 'right', outline: 'none' }}
-              >
-                <ShoppingCartRounded />
-              </IconButton>
-            </div>
+            <span className={classes.name}>
+              {account.firstName}
+              <Link style={{ float: 'right' }} to="/mysettings">
+                <SettingsRounded style={{ fill: '#fffde5' }} />
+              </Link>
+              <span style={{ float: 'right', width: '5px', height: '5px' }} />
+              <Link style={{ float: 'right' }} to="/">
+                <ShoppingCartRounded style={{ fill: '#fffde5' }} />
+              </Link>
+            </span>
             <div className={classes.login}>{account.login}</div>
           </div>
         </div>

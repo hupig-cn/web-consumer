@@ -6,6 +6,7 @@ import { IRootState } from 'app/shared/reducers';
 
 import RegisterModal from './register-modal';
 import { sendSms, register } from 'app/shared/reducers/authentication';
+import { login } from 'app/shared/reducers/authentication';
 import { toast } from 'react-toastify';
 
 export interface IRegisterProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
@@ -41,6 +42,8 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
     // @ts-ignore
     result.then(res => {
       if (!isNaN(res.value.data)) {
+        toast.success('注册成功');
+        this.props.login(phone, password, false);
         this.props.history.push('/personal');
       } else {
         // tslint:disable-next-line: no-multi-spaces
@@ -77,7 +80,7 @@ const mapStateToProps = ({ authentication, result }: IRootState) => ({
   resultEntity: result.entity
 });
 
-const mapDispatchToProps = { sendSms, register };
+const mapDispatchToProps = { sendSms, register, login };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

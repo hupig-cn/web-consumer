@@ -608,6 +608,13 @@
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha1-aQoUdbhPKohP0HzXl8APXzE1bqg=
 
+"@types/qrcode.react@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.npm.taobao.org/@types/qrcode.react/download/@types/qrcode.react-0.8.2.tgz#35f6e2e454970b6a8404a834c9e1edc2e7f1c105"
+  integrity sha1-Nfbi5FSXC2qEBKg0yeHtwufxwQU=
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@16.8.3":
   version "16.8.3"
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.8.3.tgz#6131b7b6158bc7ed1925a3374b88b7c00481f0cb"

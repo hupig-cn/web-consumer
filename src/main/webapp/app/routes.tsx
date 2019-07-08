@@ -13,6 +13,7 @@ import Information from 'app/modules/information/information';
 import Personal from 'app/modules/personal/personal';
 import Mydomos from 'app/modules/personal/mydemos';
 import PageNotFound from 'app/shared/error/page-not-found';
+import Mysettings from 'app/modules/personal/settings/mysettings';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
 const Routes = () => (
@@ -28,6 +29,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/incomepage" component={Incomepage} />
       <ErrorBoundaryRoute path="/exhibitionpage" component={Exhibitionpage} />
       <ErrorBoundaryRoute path="/sharepage" component={Sharepage} />
+      <ErrorBoundaryRoute path="/mysettings" component={Mysettings} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>

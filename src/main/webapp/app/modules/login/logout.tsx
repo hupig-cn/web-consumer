@@ -26,7 +26,7 @@ export class Logout extends React.Component<ILogoutProps> {
 
     return (
       <div className="p-5">
-        <h4>Logged out successfully!</h4>
+        <h4>您已退出登陆</h4>
       </div>
     );
   }
