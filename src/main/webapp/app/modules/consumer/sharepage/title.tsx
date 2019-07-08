@@ -12,8 +12,8 @@ export default function PrimarySearchAppBar() {
         style={{
           height: 35,
           width: '100vw',
-          color: '#fffde5',
-          backgroundColor: '#fe4365',
+          color: '#00000086',
+          backgroundColor: 'transparent',
           padding: '5px 10px 0px 10px',
           position: 'fixed',
           top: 0,
@@ -25,11 +25,11 @@ export default function PrimarySearchAppBar() {
           <ArrowBackIos
             style={{
               float: 'left',
-              fill: '#fffde5'
+              fill: '#00000086'
             }}
           />
         </Link>
-        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px' }}>园积分收款</span>
+        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px' }}><b>分享有礼</b></span>
         <MoreHoriz
           style={{
             float: 'right'
