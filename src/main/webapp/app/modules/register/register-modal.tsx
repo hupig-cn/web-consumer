@@ -2,16 +2,18 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Row, Col } from 'reactstrap';
 import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
+import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 
 export interface IRegisterModalProps {
   showModal: boolean;
   handleSendCode: Function;
   handleClose: Function;
   handleRegister: Function;
+  password: string;
 }
 
 class RegisterModal extends React.Component<IRegisterModalProps> {
-  state = { time: 10, btnDisable: false, btnContent: '发送验证码', backgroundColor: '#fe4365' };
+  state = { time: 10, btnDisable: false, btnContent: '发送验证码', backgroundColor: '#fe4365', password: '' };
   handleSubmit = (event, errors, { phone, code, password, repassword, agreement }) => {
     if (!agreement) {
       toast.info('提示：请先阅读并同意《用户协议》。');
@@ -31,6 +33,9 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
   handleSend = phone => {
     const { handleSendCode } = this.props;
     handleSendCode(phone);
+  };
+  updatePassword = event => {
+    this.setState({ password: event.target.value });
   };
 
   render() {
@@ -109,6 +114,7 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
                   placeholder={'请输入密码'}
                   required
                   errorMessage="密码不能为空!"
+                  onChange={this.updatePassword}
                   style={{ width: '70%', float: 'right' }}
                 />
                 <AvField
@@ -120,6 +126,7 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
                   errorMessage="重复密码不能为空!"
                   style={{ width: '70%', float: 'right' }}
                 />
+                <PasswordStrengthBar password={this.state.password} />
                 <AvGroup check inline>
                   <Label className="form-check-label">
                     <AvInput type="checkbox" name="agreement" />

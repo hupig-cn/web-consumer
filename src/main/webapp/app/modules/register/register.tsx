@@ -76,10 +76,9 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
   }
 }
 
-const mapStateToProps = ({ authentication, result }: IRootState) => ({
+const mapStateToProps = ({ authentication }: IRootState) => ({
   isAuthenticated: authentication.isAuthenticated,
-  showModal: authentication.showModalLogin,
-  resultEntity: result.entity
+  showModal: authentication.showModalLogin
 });
 
 const mapDispatchToProps = { sendSms, register, login ,createUserByPhone};
