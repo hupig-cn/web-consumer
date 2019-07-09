@@ -100,7 +100,7 @@ export default function LongMenu(props) {
   }
   return (
     <div>
-      {!login ? (
+      {login ? (
         <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
           <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
           <div className={classes.namePlusSetting}>
