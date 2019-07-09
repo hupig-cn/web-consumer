@@ -3,6 +3,7 @@ import Title from './title';
 import QRCode from 'qrcode.react';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 
 export interface ISharepageProp extends StateProps, DispatchProps {}
 
@@ -38,7 +39,9 @@ export class Sharepage extends React.Component<ISharepageProp> {
                 bgColor="#a7bfbf"
               />
             ) : (
-              <span style={{ width: '200px', height: '200px', color: '#ffffff' }}>请先登录</span>
+              <Link to='/login'>
+              <span style={{ width: '200px', height: '200px', color: '#ffffff' }}><u>请先登录</u></span>
+              </Link>
             )}
           </div>
           <div style={{ position: 'relative', width: '100%', top: '-250px', zIndex: -1 }}>

@@ -19,7 +19,6 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import Enddiv from 'app/shared/menu/enddiv';
-import Orderdetail from './modules/shopmall/orderDetail/orderdetail';
 
 const baseHref = document
   .querySelector('base')
@@ -36,23 +35,22 @@ export class App extends React.Component<IAppProps> {
 
   render() {
     return (
-      <Orderdetail />
-      //   <Router basename={baseHref}>
-      //     <div className="app-container">
-      //       <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-      //       <div className="container-fluid view-container" id="app-view-container">
-      //         <Card className="jh-card">
-      //           <ErrorBoundary>
-      //             <AppRoutes />
-      //           </ErrorBoundary>
-      //         </Card>
-      //         <Enddiv />
-      //       </div>
-      //       <ErrorBoundary>
-      //         <BottomNavigation />
-      //       </ErrorBoundary>
-      //     </div>
-      //   </Router>
+        <Router basename={baseHref}>
+          <div className="app-container">
+            <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+            <div className="container-fluid view-container" id="app-view-container">
+              <Card className="jh-card">
+                <ErrorBoundary>
+                  <AppRoutes />
+                </ErrorBoundary>
+              </Card>
+              <Enddiv />
+            </div>
+            <ErrorBoundary>
+              <BottomNavigation />
+            </ErrorBoundary>
+          </div>
+        </Router>
     );
   }
 }
