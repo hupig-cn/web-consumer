@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getSession } from 'app/shared/reducers/authentication';
 import OdLoopplayimg from './odloopplayimg';
-import shadows from '@material-ui/core/styles/shadows';
 
 export interface IOrderDetailProp extends StateProps, DispatchProps {}
 
