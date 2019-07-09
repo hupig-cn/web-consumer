@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getSession } from 'app/shared/reducers/authentication';
 import OdLoopplayimg from './odloopplayimg';
+import shadows from '@material-ui/core/styles/shadows';
 
 export interface IOrderDetailProp extends StateProps, DispatchProps {}
 
@@ -15,16 +16,16 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
         <div
           style={{
             width: '100%',
-            backgroundColor: 'rgba(113,113,113,0.41)'
+            backgroundColor: 'white'
           }}
         >
           <OdLoopplayimg />
-          <div style={{ height: '100px', marginTop: '8px', marginBottom: '8px' }}>
+          <div style={{ height: '100px', margin: '8px 8px 8px 8px', boxShadow: '#f8f9fa 0px 0px 0px 8px' }}>
             <p>芙妍瑜生物多肽胶原蛋白眼贴膜弹嫩紧致去眼袋眼纹去黑眼圈眼膜 5片/盒</p>
             <p style={{ float: 'left' }}>¥863.00</p>
             <p style={{ float: 'right' }}>包邮</p>
           </div>
-          <div>
+          <div style={{ margin: '8px 8px 8px 8px', boxShadow: '#f8f9fa 0px 0px 0px 8px' }}>
             <p>图文详情</p>
             <img
               style={{ width: '100%' }}
