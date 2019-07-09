@@ -20,7 +20,7 @@ import { registerLocale } from 'app/config/translation';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Enddiv from 'app/shared/menu/enddiv';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 export const bodyEl = document.getElementById('root');
 

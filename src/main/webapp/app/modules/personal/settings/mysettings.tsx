@@ -1,11 +1,12 @@
 import React from 'react';
 import Title from './title';
+// tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import { Link } from 'react-router-dom';
 
 export class Mysettings extends React.Component {
   render() {
-    let mydiv = {
+    const mydiv = {
       backgroundColor: '#ffffff',
       padding: '15px 5px 15px 15px',
       margin: '1px 0px'

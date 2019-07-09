@@ -15,22 +15,34 @@ export class Sharepage extends React.Component<ISharepageProp> {
     const { account } = this.props;
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <Title/>
-        <div style={{
-          position: "fixed", width: '100%', height: '100%', left: '0px', top: '0px', backgroundColor: '#a7bfbf',
-          zIndex: 100, textAlign: "center"
-        }}>
-
-          <img style={{ width: '100%', height: '220px' }} src="./content/images/sharepage.png"/>
+        <Title />
+        <div
+          style={{
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            left: '0px',
+            top: '0px',
+            backgroundColor: '#a7bfbf',
+            zIndex: 100,
+            textAlign: 'center'
+          }}
+        >
+          <img style={{ width: '100%', height: '220px' }} src="./content/images/sharepage.png" />
           <div style={{ paddingTop: '50px' }}>
-            {account && account.login ?(
-            <QRCode value={'http://app.yuanscore.com:8080/#id=' + account.id + '&share=' + account.login } size={200} fgColor="#00000098" bgColor="#a7bfbf"/>
-            ):(
-              <span style={{width:'200px',height:'200px',color:'#ffffff'}}>请先登录</span>
+            {account && account.login ? (
+              <QRCode
+                value={'http://app.yuanscore.com:8080/#id=' + account.id + '&share=' + account.login}
+                size={200}
+                fgColor="#00000098"
+                bgColor="#a7bfbf"
+              />
+            ) : (
+              <span style={{ width: '200px', height: '200px', color: '#ffffff' }}>请先登录</span>
             )}
           </div>
-          <div style={{ position: "relative", width: '100%', top: '-250px', zIndex: -1 }}>
-            <img style={{ width: '340px', height: '300px' }} src="./content/images/frame.png"/>
+          <div style={{ position: 'relative', width: '100%', top: '-250px', zIndex: -1 }}>
+            <img style={{ width: '340px', height: '300px' }} src="./content/images/frame.png" />
           </div>
           <div style={{ marginTop: '-220px' }}>
             <label
@@ -40,15 +52,22 @@ export class Sharepage extends React.Component<ISharepageProp> {
                 border: '1px solid #ffffff',
                 width: '100px',
                 borderRadius: '5px'
-              }}>扫码注册</label>
-            <label style={{
-              color: '#ffffff',
-              outline: 'none',
-              border: '1px solid #ffffff',
-              width: '100px',
-              margin: '0px 15px',
-              borderRadius: '5px'
-            }}>付款使用</label>
+              }}
+            >
+              扫码注册
+            </label>
+            <label
+              style={{
+                color: '#ffffff',
+                outline: 'none',
+                border: '1px solid #ffffff',
+                width: '100px',
+                margin: '0px 15px',
+                borderRadius: '5px'
+              }}
+            >
+              付款使用
+            </label>
             <label
               style={{
                 color: '#ffffff',
@@ -56,7 +75,10 @@ export class Sharepage extends React.Component<ISharepageProp> {
                 border: '1px solid #ffffff',
                 width: '100px',
                 borderRadius: '5px'
-              }}>赠送积分</label>
+              }}
+            >
+              赠送积分
+            </label>
           </div>
         </div>
       </div>

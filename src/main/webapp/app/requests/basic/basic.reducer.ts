@@ -119,13 +119,12 @@ export const getEntityBasic: ICrudGetAction<IMystring> = id => {
   };
 };
 
-export const createUserByPhone = (phone:any,userid:any) => async dispatch => {
+export const createUserByPhone = (phone: any, userid: any) => async dispatch => {
   const result = await dispatch({
-    payload: axios.post(apiUrl+'/public/user/createUserByPhone', {phone ,userid })
+    payload: axios.post(apiUrl + '/public/user/createUserByPhone', { phone, userid })
   });
   return result;
 };
-
 
 export const resetBasic = () => ({
   type: ACTION_TYPES.RESET

@@ -6,8 +6,9 @@ import { IRootState } from 'app/shared/reducers';
 
 import RegisterModal from './register-modal';
 import { sendSms, register } from 'app/shared/reducers/authentication';
+// tslint:disable-next-line: no-duplicate-imports
 import { login } from 'app/shared/reducers/authentication';
-import {createUserByPhone} from 'app/requests/basic/basic.reducer';
+import { createUserByPhone } from 'app/requests/basic/basic.reducer';
 import { toast } from 'react-toastify';
 
 export interface IRegisterProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
@@ -43,7 +44,7 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
     // @ts-ignore
     result.then(res => {
       if (!isNaN(res.value.data)) {
-        this.props.createUserByPhone(phone,res.value.data);
+        this.props.createUserByPhone(phone, res.value.data);
         toast.success('注册成功');
         this.props.login(phone, password, false);
         this.props.history.push('/personal');
@@ -71,6 +72,7 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
         handleSendCode={this.handleSendCode}
         handleRegister={this.handleRegister}
         handleClose={this.handleClose}
+        password=""
       />
     );
   }
@@ -81,7 +83,7 @@ const mapStateToProps = ({ authentication }: IRootState) => ({
   showModal: authentication.showModalLogin
 });
 
-const mapDispatchToProps = { sendSms, register, login ,createUserByPhone};
+const mapDispatchToProps = { sendSms, register, login, createUserByPhone };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
