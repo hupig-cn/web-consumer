@@ -11,7 +11,6 @@ import Sharepage from 'app/modules/consumer/sharepage/sharepage';
 import Nearby from 'app/modules/nearby/nearby';
 import Information from 'app/modules/information/information';
 import Personal from 'app/modules/personal/personal';
-import Mydomos from 'app/modules/personal/mydemos';
 import PageNotFound from 'app/shared/error/page-not-found';
 import Mysettings from 'app/modules/personal/settings/mysettings';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
@@ -25,7 +24,6 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/nearby" component={Nearby} />
       <ErrorBoundaryRoute path="/information" component={Information} />
       <ErrorBoundaryRoute path="/personal" component={Personal} />
-      <ErrorBoundaryRoute path="/mydomos" component={Mydomos} />
       <ErrorBoundaryRoute path="/incomepage" component={Incomepage} />
       <ErrorBoundaryRoute path="/exhibitionpage" component={Exhibitionpage} />
       <ErrorBoundaryRoute path="/sharepage" component={Sharepage} />

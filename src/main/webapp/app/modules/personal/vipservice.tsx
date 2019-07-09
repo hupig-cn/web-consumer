@@ -53,7 +53,7 @@ export const Loadpages = key => {
       toast.info('提示：功能正在开发中.');
       break;
     case 'key5':
-      document.getElementById('app-modules-personal-vipservice-BottomNavigation-BottomNavigationAction-link').click();
+      toast.info('提示：功能正在开发中.');
       break;
     case 'key6':
       toast.info('提示：功能正在开发中.');
@@ -86,12 +86,11 @@ export default function LongMenu() {
         <BottomNavigationAction label="账号绑定" value="key2" icon={<img src="./content/images/vip2.png" />} />
         <BottomNavigationAction label="合伙人" value="key3" icon={<img src="./content/images/vip3.png" />} />
         <BottomNavigationAction label="商家" value="key4" icon={<img src="./content/images/vip4.png" />} />
-        <BottomNavigationAction label="测试按钮" value="key5" icon={<img src="./content/images/vip5.png" />} />
+        <BottomNavigationAction label="客服中心" value="key5" icon={<img src="./content/images/vip5.png" />} />
         <BottomNavigationAction label="积分明细" value="key6" icon={<img src="./content/images/vip6.png" />} />
         <BottomNavigationAction label="我的佣金" value="key7" icon={<img src="./content/images/vip7.png" />} />
         <BottomNavigationAction label="问题反馈" value="key8" icon={<img src="./content/images/vip8.png" />} />
       </BottomNavigation>
-      <Link id="app-modules-personal-vipservice-BottomNavigation-BottomNavigationAction-link" to="/mydomos" />
     </div>
   );
 }

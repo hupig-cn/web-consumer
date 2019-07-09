@@ -93,8 +93,10 @@ export default function LongMenu() {
         toast.info('提示：功能正在开发中.');
         break;
       case '收钱':
+        document.getElementById('app-modules-consumer-quickaccess-button-link-incomepage').click();
         break;
       case '推荐好友':
+        document.getElementById('app-modules-consumer-quickaccess-button-link-sharepage').click();
         break;
       default:
         toast.error('提示：操作错误.');
