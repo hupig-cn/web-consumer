@@ -17,11 +17,10 @@ import RateReviewRounded from '@material-ui/icons/RateReviewRounded';
 import EventNoteRounded from '@material-ui/icons/EventNoteRounded';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
-import VipService from 'app/modules/personal/vipservice';
-import Order from 'app/modules/personal/orderList/order';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Enddiv from 'app/shared/menu/enddiv';
+import { toast } from "react-toastify";
 
 export const bodyEl = document.getElementById('root');
 
@@ -63,19 +62,14 @@ export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
     case 'key1':
-      temp = <Order />;
       break;
     case 'key2':
-      temp = <Order />;
       break;
     case 'key3':
-      temp = <Order />;
       break;
     case 'key4':
-      temp = <Order />;
       break;
     case 'order':
-      temp = <Order />;
       break;
     default:
       temp = null;
@@ -95,8 +89,9 @@ export default function LongMenu() {
   const [value, setValue] = React.useState('order');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
-    Loadpages(newValue);
-    setValue(newValue);
+    // Loadpages(newValue);
+    // setValue(newValue);
+    toast.info('提示：功能正在开发中.');
   }
 
   return (
