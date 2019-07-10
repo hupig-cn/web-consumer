@@ -8,6 +8,9 @@ import applicationProfile, { ApplicationProfileState } from './application-profi
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 import mystring, { BasicState } from 'app/requests/basic/basic.reducer';
+import merchant, {
+  MerchantState
+} from 'app/requests/merchant/merchant.reducer';
 
 export interface IRootState {
   readonly authentication: AuthenticationState;
@@ -15,6 +18,7 @@ export interface IRootState {
   readonly applicationProfile: ApplicationProfileState;
   readonly administration: AdministrationState;
   readonly mystring: BasicState;
+  readonly merchant: MerchantState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -25,6 +29,7 @@ const rootReducer = combineReducers<IRootState>({
   applicationProfile,
   administration,
   mystring,
+  merchant,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

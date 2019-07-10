@@ -14,7 +14,6 @@ import AssignmentReturnedOutlined from '@material-ui/icons/AssignmentReturnedOut
 // tslint:disable-next-line: no-submodule-imports
 import ShareOutlined from '@material-ui/icons/ShareOutlined';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Loadpages = key => {
+export const Loadpages = (key) => {
   // tslint:disable-next-line: no-var-keyword
   let temp: any = null;
   switch (key) {
@@ -76,9 +75,7 @@ export default function LongMenu() {
         <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
         <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />
         <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
-        <Link id="app-modules-consumer-quickaccess-button-link-incomepage" to="/incomepage" />
         <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
-        <Link id="app-modules-consumer-quickaccess-button-link-sharepage" to="/sharepage" />
       </BottomNavigation>
     </div>
   );

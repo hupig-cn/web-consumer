@@ -3,7 +3,7 @@ import { ICrudGetAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipste
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
-import { IMystring, defaultValue } from 'app/shared/model/mystring.model';
+import { IMerchant, defaultValue } from 'app/shared/model/merchant.model';
 
 export const ACTION_TYPES = {
   FETCH_MERCHANT: 'merchant/FETCH_MERCHANT',
@@ -16,7 +16,7 @@ export const ACTION_TYPES = {
 const initialState = {
   loading: false,
   errorMessage: null,
-  entities: [] as ReadonlyArray<IMystring>,
+  entities: [] as ReadonlyArray<IMerchant>,
   entity: defaultValue,
   links: { next: 0 },
   updating: false,
@@ -87,16 +87,16 @@ export default (state: MerchantState = initialState, action): MerchantState => {
   }
 };
 
-const apiUrl = 'services/merchant/api/public/test';
+const apiUrl = 'services/merchant';
 // Actions
-export const createEntityMerchant: ICrudPutAction<IMystring> = entity => async dispatch => {
+export const createEntityMerchant: ICrudPutAction<IMerchant> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_MERCHANT,
     payload: axios.post(apiUrl, cleanEntity(entity))
   });
   return result;
 };
-export const deleteEntityMerchant: ICrudDeleteAction<IMystring> = id => async dispatch => {
+export const deleteEntityMerchant: ICrudDeleteAction<IMerchant> = id => async dispatch => {
   const requestUrl = `${apiUrl}/${id}`;
   const result = await dispatch({
     type: ACTION_TYPES.DELETE_MERCHANT,
@@ -104,18 +104,34 @@ export const deleteEntityMerchant: ICrudDeleteAction<IMystring> = id => async di
   });
   return result;
 };
-export const updateEntityMerchant: ICrudPutAction<IMystring> = entity => async dispatch => {
+export const updateEntityMerchant: ICrudPutAction<IMerchant> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_MERCHANT,
     payload: axios.put(apiUrl, cleanEntity(entity))
   });
   return result;
 };
-export const getEntityMerchant: ICrudGetAction<IMystring> = id => {
+export const getEntityMerchant: ICrudGetAction<IMerchant> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {
     type: ACTION_TYPES.FETCH_MERCHANT,
-    payload: axios.get<IMystring>(requestUrl)
+    payload: axios.get<IMerchant>(requestUrl)
+  };
+};
+
+export const createMyEntityMerchant: ICrudPutAction<IMerchant> = entity => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.CREATE_MERCHANT,
+    payload: axios.post(apiUrl, cleanEntity(entity))
+  });
+  return result;
+};
+
+export const getMyEntityMerchant: ICrudGetAction<IMerchant> = userid => {
+  const requestUrl = `${apiUrl}/api/ObtainMerchantUserId/${userid}`;
+  return {
+    type: ACTION_TYPES.FETCH_MERCHANT,
+    payload: axios.get<IMerchant>(requestUrl)
   };
 };
 

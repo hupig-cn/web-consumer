@@ -16,6 +16,8 @@ import SearchIcon from '@material-ui/icons/Search';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 import { toast } from 'react-toastify';
+import { Link } from "react-router-dom";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
 
 export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 
@@ -213,6 +215,8 @@ export default function LongMenu() {
           ))}
         </Menu>
       </div>
+      <Link id="app-modules-consumer-quickaccess-button-link-incomepage" to="/incomepage" />
+      <Link id="app-modules-consumer-quickaccess-button-link-sharepage" to="/sharepage" />
     </div>
   );
 }

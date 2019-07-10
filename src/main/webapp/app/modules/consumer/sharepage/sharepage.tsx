@@ -40,7 +40,7 @@ export class Sharepage extends React.Component<ISharepageProp> {
               />
             ) : (
               <Link to='/login'>
-              <span style={{ width: '200px', height: '200px', color: '#ffffff' }}><u>请先登录</u></span>
+              <div style={{ width: '200px', height: '200px', color: '#ffffff',textAlign:"center",margin: '0 auto',lineHeight:'200px' }}><u>点击登录，生成邀请码</u></div>
               </Link>
             )}
           </div>
