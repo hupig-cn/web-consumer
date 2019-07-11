@@ -4,15 +4,13 @@ import { Button, Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
 import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { IRootState } from 'app/shared/reducers';
 import { createMyEntityMerchant } from 'app/requests/merchant/merchant.reducer';
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps } from 'react-router';
 import Title from './title';
 
-export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {
-}
+export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Upmerchant extends React.Component<IUpmerchantProps> {
-  componentDidUpdate(prevProps: IUpmerchantProps, prevState) {
-  }
+  componentDidUpdate(prevProps: IUpmerchantProps, prevState) {}
 
   handleSubmit = (event, errors, { phone, code, password, repassword, agreement }) => {
     this.props.createMyEntityMerchant();
@@ -21,7 +19,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
   render() {
     return (
       <div style={{ textAlign: 'left' }}>
-        <Title/>
+        <Title />
         <AvForm onSubmit={this.handleSubmit}>
           <div
             style={{
@@ -31,7 +29,8 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
               fontSize: '1.2rem',
               borderBottom: '1px solid #00000015',
               marginTop: '35px'
-            }}>
+            }}
+          >
             入驻申请表
           </div>
           <ModalBody>
@@ -53,9 +52,15 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                   >
                     上传门店头像
                   </button>
-                  <img src="" style={{
-                    width: '85px', height: '85px', float: "left", marginLeft: '5%'
-                  }}/>
+                  <img
+                    src=""
+                    style={{
+                      width: '85px',
+                      height: '85px',
+                      float: 'left',
+                      marginLeft: '5%'
+                    }}
+                  />
                 </div>
                 <AvField
                   name="name"
@@ -92,7 +97,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
-                    <AvInput type="checkbox" name="agreement"/>
+                    <AvInput type="checkbox" name="agreement" />
                     我已阅读并同意<u>《用户协议》</u>
                   </Label>
                 </AvGroup>

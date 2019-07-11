@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getSession } from 'app/shared/reducers/authentication';
-import OdLoopplayimg from './odloopplayimg';
+import PdLoopplayimg from './pdloopplayimg';
 import Swipeabledrawer from 'app/shared/menu/swipeabledrawer';
 
 export interface IOrderDetailProp extends StateProps, DispatchProps {}
 
-export class OrderDetail extends React.Component<IOrderDetailProp> {
+export class Productdetail extends React.Component<IOrderDetailProp> {
   componentDidMount() {
     this.props.getSession();
   }
@@ -20,7 +20,7 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
           }}
         >
           {/* 轮播图、销量、地区、价格、详情图片+说明等等 */}
-          <OdLoopplayimg />
+          <PdLoopplayimg />
           <div style={{ height: '100px', margin: '8px 8px 8px 8px', boxShadow: '#f8f9fa 0px 0px 0px 8px' }}>
             <p>芙妍瑜生物多肽胶原蛋白眼贴膜弹嫩紧致去眼袋眼纹去黑眼圈眼膜 5片/盒</p>
             <p style={{ float: 'left' }}>¥863.00</p>
@@ -68,4 +68,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OrderDetail);
+)(Productdetail);

@@ -19,6 +19,8 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import Enddiv from 'app/shared/menu/enddiv';
+// import Swipeabledrawer from 'app/shared/menu/swipeabledrawer';
+import ProductDetail from 'app/modules/shopmall/productDetail/productdetail';
 
 const baseHref = document
   .querySelector('base')
@@ -35,22 +37,23 @@ export class App extends React.Component<IAppProps> {
 
   render() {
     return (
-        <Router basename={baseHref}>
-          <div className="app-container">
-            <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-            <div className="container-fluid view-container" id="app-view-container">
-              <Card className="jh-card">
-                <ErrorBoundary>
-                  <AppRoutes />
-                </ErrorBoundary>
-              </Card>
-              <Enddiv />
-            </div>
-            <ErrorBoundary>
-              <BottomNavigation />
-            </ErrorBoundary>
-          </div>
-        </Router>
+      <ProductDetail />
+      // <Router basename={baseHref}>
+      //   <div className="app-container">
+      //     <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+      //     <div className="container-fluid view-container" id="app-view-container">
+      //       <Card className="jh-card">
+      //         <ErrorBoundary>
+      //           <AppRoutes />
+      //         </ErrorBoundary>
+      //       </Card>
+      //       <Enddiv />
+      //     </div>
+      //     <ErrorBoundary>
+      //       <BottomNavigation />
+      //     </ErrorBoundary>
+      //   </div>
+      // </Router>
     );
   }
 }

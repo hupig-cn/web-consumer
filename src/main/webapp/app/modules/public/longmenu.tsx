@@ -16,8 +16,9 @@ import SearchIcon from '@material-ui/icons/Search';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 import { toast } from 'react-toastify';
-import { Link } from "react-router-dom";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
+import { Link } from 'react-router-dom';
+// tslint:disable-next-line: no-submodule-imports
+import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
 
