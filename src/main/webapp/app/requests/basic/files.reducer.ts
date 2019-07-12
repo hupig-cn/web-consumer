@@ -151,9 +151,9 @@ export const deleteEntity: ICrudDeleteAction<IFiles> = id => async dispatch => {
   return result;
 };
 
-export const createFile = (userid,size,file,fileContentType) => async dispatch => {
+export const createFile = (userid, size, file, fileContentType) => async dispatch => {
   const result = await dispatch({
-    payload: axios.post('services/basic/api/myfilesadd', {userid,size,file,fileContentType})
+    payload: axios.post('services/basic/api/myfilesadd', { userid, size, file, fileContentType })
   });
   return result.value.data;
 };

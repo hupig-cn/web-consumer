@@ -8,7 +8,7 @@ import Orders from './orders';
 import Advertising from './advertising';
 import VipService from './vipservice';
 import Mytool from 'app/modules/personal/mytool';
-import Error from "app/modules/public/error";
+import Error from 'app/modules/public/error';
 
 export interface IPersonalProp extends StateProps, DispatchProps {}
 

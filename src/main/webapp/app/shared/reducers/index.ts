@@ -8,15 +8,9 @@ import applicationProfile, { ApplicationProfileState } from './application-profi
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 import mystring, { BasicState } from 'app/requests/basic/basic.reducer';
-import merchant, {
-  MerchantState
-} from 'app/requests/merchant/merchant.reducer';
-import business,{
-  BusinessState
-} from 'app/requests/merchant/business.reducer';
-import files, {
-  FilesState
-} from 'app/requests/basic/files.reducer';
+import merchant, { MerchantState } from 'app/requests/merchant/merchant.reducer';
+import business, { BusinessState } from 'app/requests/merchant/business.reducer';
+import files, { FilesState } from 'app/requests/basic/files.reducer';
 
 export interface IRootState {
   readonly authentication: AuthenticationState;

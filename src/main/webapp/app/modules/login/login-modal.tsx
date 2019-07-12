@@ -20,9 +20,14 @@ class LoginModal extends React.Component<ILoginModalProps> {
   render() {
     const { loginError, handleClose } = this.props;
     return (
+      // @ts-ignore
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>
         <AvForm onSubmit={this.handleSubmit}>
-          <ModalHeader id="login-title" toggle={handleClose}>
+          <ModalHeader
+            id="login-title"
+            // @ts-ignore
+            toggle={handleClose}
+          >
             <Translate contentKey="login.title">Sign in</Translate>
           </ModalHeader>
           <ModalBody>
@@ -57,7 +62,12 @@ class LoginModal extends React.Component<ILoginModalProps> {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button style={{ width: '50%' }} onClick={handleClose} tabIndex="1">
+            <Button
+              style={{ width: '50%' }}
+              // @ts-ignore
+              onClick={handleClose}
+              tabIndex="1"
+            >
               取消
             </Button>{' '}
             <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '50%' }} type="submit">

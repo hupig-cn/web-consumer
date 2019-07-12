@@ -37,7 +37,6 @@ export class App extends React.Component<IAppProps> {
 
   render() {
     return (
-      //<ProductDetail />
       <Router basename={baseHref}>
         <div className="app-container">
           <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />

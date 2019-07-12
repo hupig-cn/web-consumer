@@ -119,10 +119,34 @@ export const getEntityMerchant: ICrudGetAction<IMerchant> = id => {
   };
 };
 
-export const createMyEntityMerchant = (userid,merchantphoto,name,businessid,address,province,city,county,longitude,latitude,concession) => async dispatch => {
+export const createMyEntityMerchant = (
+  userid,
+  merchantphoto,
+  name,
+  businessid,
+  address,
+  province,
+  city,
+  county,
+  longitude,
+  latitude,
+  concession
+) => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_MERCHANT,
-    payload: axios.post('services/merchant/api/createMerchant', {userid,merchantphoto,name,businessid,address,province,city,county,longitude,latitude,concession})
+    payload: axios.post('services/merchant/api/createMerchant', {
+      userid,
+      merchantphoto,
+      name,
+      businessid,
+      address,
+      province,
+      city,
+      county,
+      longitude,
+      latitude,
+      concession
+    })
   });
   return result;
 };
