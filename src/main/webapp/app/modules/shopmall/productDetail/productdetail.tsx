@@ -3,16 +3,40 @@ import { connect } from 'react-redux';
 import { getSession } from 'app/shared/reducers/authentication';
 import PdLoopplayimg from './pdloopplayimg';
 import Swipeabledrawer from 'app/shared/menu/swipeabledrawer';
+// tslint:disable-next-line: no-submodule-imports
+import ArrowBackIos from '@material-ui/core/SvgIcon/SvgIcon';
+import { Link } from 'react-router-dom';
 
-export interface IOrderDetailProp extends StateProps, DispatchProps {}
+export interface IProductDetailProp extends StateProps, DispatchProps {}
 
-export class Productdetail extends React.Component<IOrderDetailProp> {
+export class Productdetail extends React.Component<IProductDetailProp> {
   componentDidMount() {
     this.props.getSession();
   }
   render() {
     return (
       <div style={{ width: '100%' }}>
+        <div
+          style={{
+            position: 'fixed',
+            zIndex: 1,
+            left: 0,
+            right: 0,
+            top: 0,
+            lineHeight: '44px',
+            overflow: 'visible',
+            height: '44px',
+            width: '44px'
+          }}
+        >
+          <Link to="/">
+            <ArrowBackIos
+              style={{
+                fill: '#00000086'
+              }}
+            />
+          </Link>
+        </div>
         <div
           style={{
             width: '100%',

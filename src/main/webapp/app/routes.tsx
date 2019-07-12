@@ -15,6 +15,8 @@ import PageNotFound from 'app/shared/error/page-not-found';
 import Mysettings from 'app/modules/personal/settings/mysettings';
 import Upmerchant from 'app/modules/personal/upmerchant/upmerchant';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
+import Productdetail from 'app/modules/shopmall/productDetail/productdetail';
+import ChoosePayWay from 'app/modules/shopmall/choosePayWay';
 
 const Routes = () => (
   <div className="view-routes">
@@ -30,6 +32,8 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/sharepage" component={Sharepage} />
       <ErrorBoundaryRoute path="/mysettings" component={Mysettings} />
       <ErrorBoundaryRoute path="/upmerchant" component={Upmerchant} />
+      <ErrorBoundaryRoute path="/productdetail" component={Productdetail} />
+      <ErrorBoundaryRoute path="/choosePayWay" component={ChoosePayWay} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>

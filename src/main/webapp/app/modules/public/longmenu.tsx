@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 
-export const options = ['扫一扫', '付款', '收钱', '推荐好友'];
+export const options = ['扫一扫', '付款码', '收钱', '推荐好友'];
 
 // tslint:disable-next-line: ter-arrow-body-style
 export const ReLocation = () => {
@@ -218,6 +218,8 @@ export default function LongMenu() {
       </div>
       <Link id="app-modules-consumer-quickaccess-button-link-incomepage" to="/incomepage" />
       <Link id="app-modules-consumer-quickaccess-button-link-sharepage" to="/sharepage" />
+      <Link id="app-modules-consumer-quickaccess-button-link-productdetail" to="/productdetail" />
+      <Link id="app-modules-consumer-quickaccess-button-link-choosepayway" to="/choosepayway" />
     </div>
   );
 }

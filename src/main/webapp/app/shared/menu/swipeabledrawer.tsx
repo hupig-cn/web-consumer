@@ -11,6 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
 // tslint:disable-next-line: no-submodule-imports
 import Switch from '@material-ui/core/Switch';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles({
   list: {
@@ -100,6 +101,10 @@ export default function SwipeableTemporaryDrawer() {
             marginTop: '5px',
             height: '45px',
             borderRadius: '4px'
+          }}
+          // tslint:disable-next-line: jsx-no-lambda
+          onClick={() => {
+            toast.info('提示：功能正在开发中.');
           }}
         >
           确认购买
