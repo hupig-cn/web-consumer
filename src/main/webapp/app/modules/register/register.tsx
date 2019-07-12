@@ -56,7 +56,7 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
   };
   handleClose = () => {
     this.setState({ showModal: false });
-    this.props.history.push('/personal');
+    this.props.history.push('/');
   };
 
   render() {

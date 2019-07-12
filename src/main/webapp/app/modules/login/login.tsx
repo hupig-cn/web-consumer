@@ -26,12 +26,11 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
 
   handleLogin = (username, password, rememberMe = false) => {
     this.props.login(username, password, rememberMe);
-    this.props.history.push('/personal');
   };
 
   handleClose = () => {
     this.setState({ showModal: false });
-    this.props.history.push('/personal');
+    this.props.history.push('/');
   };
 
   render() {

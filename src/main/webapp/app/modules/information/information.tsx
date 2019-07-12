@@ -5,6 +5,7 @@ import { getSession } from 'app/shared/reducers/authentication';
 import Title from './title';
 import Informationlistbox from 'app/modules/information/informationlistbox';
 import Selects from 'app/modules/information/selects';
+import Error from 'app/modules/public/error';
 
 export interface IInformationProp extends StateProps, DispatchProps {}
 
@@ -14,11 +15,18 @@ export class Information extends React.Component<IInformationProp> {
   }
 
   render() {
+    const { account } = this.props;
     return (
-      <div className="jh-information">
-        <Title />
-        <Selects />
-        <Informationlistbox />
+      <div>
+        {account && account.login ? (
+          <div className="jh-information">
+            <Title/>
+            <Selects/>
+            <Informationlistbox/>
+          </div>
+        ) : (
+          <Error />
+        )}
       </div>
     );
   }
