@@ -37,23 +37,22 @@ export class App extends React.Component<IAppProps> {
 
   render() {
     return (
-      <ProductDetail />
-      // <Router basename={baseHref}>
-      //   <div className="app-container">
-      //     <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-      //     <div className="container-fluid view-container" id="app-view-container">
-      //       <Card className="jh-card">
-      //         <ErrorBoundary>
-      //           <AppRoutes />
-      //         </ErrorBoundary>
-      //       </Card>
-      //       <Enddiv />
-      //     </div>
-      //     <ErrorBoundary>
-      //       <BottomNavigation />
-      //     </ErrorBoundary>
-      //   </div>
-      // </Router>
+      <Router basename={baseHref}>
+        <div className="app-container">
+          <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+          <div className="container-fluid view-container" id="app-view-container">
+            <Card className="jh-card">
+              <ErrorBoundary>
+                <AppRoutes />
+              </ErrorBoundary>
+            </Card>
+            <Enddiv />
+          </div>
+          <ErrorBoundary>
+            <BottomNavigation />
+          </ErrorBoundary>
+        </div>
+      </Router>
     );
   }
 }
