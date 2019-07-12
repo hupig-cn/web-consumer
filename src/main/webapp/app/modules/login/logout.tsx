@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { IRootState } from 'app/shared/reducers';
 import { logout } from 'app/shared/reducers/authentication';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export interface ILogoutProps extends StateProps, DispatchProps {
   idToken: string;
@@ -26,9 +26,9 @@ export class Logout extends React.Component<ILogoutProps> {
     }
 
     return (
-      <div className="p-5" style={{textAlign:"center"}}>
-        <h3 style={{marginBottom: '20px'}}>您已退出登陆</h3>
-        <Link to='/personal'>点击返回</Link>
+      <div className="p-5" style={{ textAlign: 'center' }}>
+        <h3 style={{ marginBottom: '20px' }}>您已退出登陆</h3>
+        <Link to="/personal">点击返回</Link>
       </div>
     );
   }

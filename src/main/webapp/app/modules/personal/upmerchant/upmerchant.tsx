@@ -13,8 +13,7 @@ import { toast } from 'react-toastify';
 import { getSession } from "app/shared/reducers/authentication";
 import Info from 'app/modules/public/info';
 
-export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {
-}
+export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 const concession = [
   {

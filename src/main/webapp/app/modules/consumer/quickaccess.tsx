@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Loadpages = (key) => {
+export const Loadpages = (key: string) => {
   // tslint:disable-next-line: no-var-keyword
   let temp: any = null;
   switch (key) {

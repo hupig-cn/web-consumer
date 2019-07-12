@@ -13,7 +13,7 @@ import { getMyEntityMerchant } from 'app/requests/merchant/merchant.reducer';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import Error from 'app/modules/public/error';
-import Info from "app/modules/public/info";
+import Info from 'app/modules/public/info';
 
 export interface IIncomepageProp extends StateProps, DispatchProps {}
 
@@ -26,24 +26,28 @@ export class Incomepage extends React.Component<IIncomepageProp> {
   render() {
     const { account, merchantEntity } = this.props;
     return (
-      <div style={{
-        backgroundColor: '#fe4365',
-        width: '100%',
-        height: '100%',
-        margin: '30px 0px 0px 0px',
-        padding: '0px'
-      }}>
-        <Title/>
-        <div style={{
+      <div
+        style={{
+          backgroundColor: '#fe4365',
           width: '100%',
           height: '100%',
-          zIndex: 100,
-          position: 'fixed',
-          left: '0px',
-          top: '30px',
-          backgroundColor: '#fe4365',
-          padding: '15px'
-        }}>
+          margin: '30px 0px 0px 0px',
+          padding: '0px'
+        }}
+      >
+        <Title />
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            zIndex: 100,
+            position: 'fixed',
+            left: '0px',
+            top: '30px',
+            backgroundColor: '#fe4365',
+            padding: '15px'
+          }}
+        >
           <div>
             {account && account.login ? (
               <div>
@@ -93,23 +97,21 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                         </div>
                       )}
                     </div>
-                  ):
+                ) : (
                   <div>
-                    <div style={{
-                      backgroundColor: '#ffffff',
-                      width: '100%',
-                      height: '100%',
-                      marginBottom: '20px',
-                      textAlign: 'center',
-                      borderRadius: '3px'
-                    }}>
-                      <div style={{ color: '#fe4365', padding: '5px', backgroundColor: '#fe436515' }}>
-                        错误
-                      </div>
-                      <div style={{ padding: '10px 10px 40px 10px' }}>
-                        获取商家收款码失败
-                      </div>
-                      <img src='./content/images/error.png' />
+                    <div
+                      style={{
+                        backgroundColor: '#ffffff',
+                        width: '100%',
+                        height: '100%',
+                        marginBottom: '20px',
+                        textAlign: 'center',
+                        borderRadius: '3px'
+                      }}
+                    >
+                      <div style={{ color: '#fe4365', padding: '5px', backgroundColor: '#fe436515' }}>错误</div>
+                      <div style={{ padding: '10px 10px 40px 10px' }}>获取商家收款码失败</div>
+                      <img src="./content/images/error.png" />
                       <div style={{ padding: '40px 30px' }}>
                         <span>你还不是商家，点击下方的<Link to='/upmerchant'><u>立即申请</u></Link>，成为商家，获取商家专属收款码。</span>
                       </div>
@@ -124,7 +126,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                       </div>
                     </div>
                   </div>
-                }
+                )}
               </div>
             ) : (
               <Error />
@@ -136,7 +138,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
   }
 }
 
-const mapStateToProps = ({authentication,merchant} : IRootState) => ({
+const mapStateToProps = ({ authentication, merchant }: IRootState) => ({
   account: authentication.account,
   isAuthenticated: authentication.isAuthenticated,
   merchantEntity: merchant.entity

@@ -95,8 +95,8 @@ export default function LongMenu() {
   const [value, setValue] = React.useState('order');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
-    Loadpages(newValue);
-    setValue(newValue);
+    // Loadpages(newValue);
+    // setValue(newValue);
     toast.info('提示：功能正在开发中.');
   }
 
