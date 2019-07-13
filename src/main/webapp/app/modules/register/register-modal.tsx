@@ -67,8 +67,9 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
       // @ts-ignore
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="register-page" autoFocus={false}>
         <AvForm onSubmit={this.handleSubmit}>
+          <ModalHeader id="register-title"
           // @ts-ignore
-          <ModalHeader id="register-title" toggle={handleClose}>
+                       toggle={handleClose}>
             <span>注册</span>
           </ModalHeader>
           <ModalBody>
@@ -139,8 +140,9 @@ class RegisterModal extends React.Component<IRegisterModalProps> {
             </Row>
           </ModalBody>
           <ModalFooter>
+            <Button style={{ width: '50%' }}
             // @ts-ignore
-            <Button style={{ width: '50%' }} onClick={handleClose} tabIndex="1">
+                    onClick={handleClose} tabIndex="1">
               取消
             </Button>{' '}
             <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '50%' }} type="submit">

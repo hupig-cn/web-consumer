@@ -92,7 +92,7 @@ export default function LongMenu() {
         // @ts-ignore
         window.weisen.getscan();
         break;
-      case '付款':
+      case '付款码':
         toast.info('提示：功能正在开发中.');
         break;
       case '收钱':

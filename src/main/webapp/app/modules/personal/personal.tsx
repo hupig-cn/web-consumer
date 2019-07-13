@@ -21,7 +21,7 @@ export class Personal extends React.Component<IPersonalProp> {
     const { account } = this.props;
     return (
       <div>
-        {account && account.login ? (
+        {!(account && account.login) ? (
           <div className="jh-personal">
             <Users account={account} />
             <Orders />

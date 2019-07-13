@@ -96,8 +96,8 @@ const tutorialSteps = [
     imgPath: './content/images/tool3.png'
   },
   {
-    label: '成为商家',
-    test: '我的收益我知道',
+    label: '邀请好友',
+    test: '分享还有好礼送',
     imgPath: './content/images/tool4.png'
   },
   {
