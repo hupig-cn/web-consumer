@@ -5,15 +5,19 @@ import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validatio
 import { IRootState } from 'app/shared/reducers';
 import { RouteComponentProps } from 'react-router';
 import Title from './title';
-import { createMyEntityMerchant, getMyEntityMerchant } from 'app/requests/merchant/merchant.reducer';
+import { resetMerchant, createMyEntityMerchant, getMyEntityMerchant } from 'app/requests/merchant/merchant.reducer';
 import { getBusinessEntities } from 'app/requests/merchant/business.reducer';
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
-import { setFileData, openFile, byteSize } from 'react-jhipster';
+import { getNextAreaPnameProvince } from 'app/requests/basic/provinces.reducer';
+import { getNextAreaPnameCity } from 'app/requests/basic/citys.reducer';
+import { getNextAreaPnameCounty } from 'app/requests/basic/countys.reducer';
+import { setFileData, byteSize } from 'react-jhipster';
 import { toast } from 'react-toastify';
 import { getSession } from 'app/shared/reducers/authentication';
 import Info from 'app/modules/public/info';
 
-export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
+export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {
+}
 
 const concession = [
   {
@@ -29,33 +33,19 @@ const concession = [
     value: 15
   }
 ];
-const testdata = [
-  {
-    key: 1,
-    value: '测试假数据1'
-  },
-  {
-    key: 2,
-    value: '测试假数据2'
-  },
-  {
-    key: 3,
-    value: '测试假数据3'
-  }
-];
 
 export class Upmerchant extends React.Component<IUpmerchantProps> {
   componentDidMount() {
     this.props.getSession();
     this.props.getBusinessEntities();
+    this.props.resetMerchant();
     this.props.getMyEntityMerchant(this.props.account.id);
+    this.props.getNextAreaPnameProvince();
   }
 
   // tslint:disable-next-line: no-shadowed-variable
-  handleSubmit = (
-    event,
-    errors,
-    { shopphoto, creditcode, name, credit, businessid, province, city, county, address, concession, agreement }
+  handleSubmit = (event, errors,
+                  { shopphoto, buslicenseimage, name, creditcode, businessid, province, city, county, address, concession, agreement }
   ) => {
     if (!agreement) {
       toast.info('提示：请先阅读并同意《用户协议》。');
@@ -63,7 +53,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
       toast.info('提示：请上传照片。');
     } else if (shopphoto.length > 8000000) {
       toast.info('提示：门店照片文件过大，请上传6M以内的文件。');
-    } else if (creditcode.length > 8000000) {
+    } else if (buslicenseimage.length > 8000000) {
       toast.info('提示：营业执照文件过大，请上传6M以内的文件。');
     } else if (name.trim().length < 1) {
       toast.info('提示：商户名不能为空。');
@@ -73,68 +63,54 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
       toast.info('提示：所在省不能为空。');
     } else if (city.length < 1) {
       toast.info('提示：所在市不能为空。');
-    } else if (county.length < 1) {
-      toast.info('提示：所在县不能为空。');
     } else if (address.trim().length < 1) {
       toast.info('提示：请填写详细地址。');
     } else if (concession.length < 1) {
       toast.info('提示：请选择让利比。');
     } else {
-      this.onApply(shopphoto, creditcode, name, credit, businessid, province, city, county, address, concession);
+      this.onApply(shopphoto, buslicenseimage, name, businessid, address, province, city, county, concession, creditcode);
     }
   };
 
-  // tslint:disable-next-line: no-shadowed-variable
-  onApply = (
-    shopphoto: { length: any },
-    creditcode: any,
-    name: any,
-    credit: any,
-    businessid: any,
-    province: any,
-    city: any,
-    county: any,
-    address: any,
-    concession: any
-  ) => {
+  onApply = (shopphoto, creditcode, name, businessid, address, province, city, county, concession, creditcodes) => {
     const fileid = this.props.createFile(this.props.account.id, shopphoto.length, shopphoto, this.props.filesEntity.fileIContentType);
     // @ts-ignore
     fileid.then((result: number) => {
       if (!isNaN(result)) {
-        // if (creditcode.length>0){
-        //   const fileidII = this.props.createFile(this.props.account.id,creditcode.length,creditcode,this.props.filesEntity.fileIIContentType);
-        //   fileidII.then(function (resultII) {
-        //     if (!isNaN(resultII)){
-        //
-        //     }else{
-        //       toast.info('提示：营业执照上传失败。');
-        //     }
-        //   })
-        // }else{
-        this.props
-          .createMyEntityMerchant(this.props.account.id, result, name, businessid, address, province, city, county, 0, 0, concession)
+        if (creditcode.length > 0) {
+          const fileidII = this.props.createFile(this.props.account.id, creditcode.length, creditcode, this.props.filesEntity.fileIIContentType);
           // @ts-ignore
-          // tslint:disable-next-line: no-shadowed-variable
-          .then((result: { value: { data: React.ReactText } }) => {
-            // @ts-ignore
-            if (!isNaN(result.value.data)) {
-              toast.success('提示：申请成功，请等待审核。');
-              this.props.history.push('/');
+          fileidII.then((resultII: number) => {
+            if (!isNaN(resultII)) {
+              this.createMerchants(result, name, businessid, address, province, city, county, concession, resultII, creditcodes);
             } else {
-              toast.error('提示：' + result.value.data);
+              toast.info('提示：营业执照上传失败。');
             }
-          });
-        // this.createMerchants(result, name, businessid, province, city, county, address, concession);
-        // }
+          })
+        } else {
+          this.createMerchants(result, name, businessid, address, province, city, county, concession, null, creditcodes);
+        }
       } else {
         toast.info('提示：店铺照片上传失败。');
       }
     });
   };
 
-  // createMerchants = (shopphoto, name, businessid, province, city, county, address, concession) => {
-  //   this.props.createMyEntityMerchant(this.props.account.id,shopphoto,name,businessid,address,province,city,county,0,0,concession);
-  // };
+  createMerchants = (shopphoto, name, businessid, address, province, city, county, concession, buslicenseimage, creditcode) => {
+    this.props
+      .createMyEntityMerchant(this.props.account.id, shopphoto, name, businessid, address, province, city, county, 0, 0, concession,
+        buslicenseimage, creditcode)
+      // @ts-ignore
+      .then((result: { value: { data: React.ReactText } }) => {
+        // @ts-ignore
+        if (!isNaN(result.value.data)) {
+          toast.success('提示：申请成功，请等待审核。');
+          this.props.history.push('/');
+        } else {
+          toast.error('提示：' + result.value.data);
+        }
+      });
+  };
 
   onBlobChange = (isAnImage, name) => event => {
     setFileData(event, (contentType, data) => this.props.setBlob(name, data, contentType), isAnImage);
@@ -147,17 +123,29 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     document.getElementById('upmerchant-upmerchant-uploadphoto-code').click();
   };
 
-  render() {
-    const { account, merchantEntity, businesss, filesEntity } = this.props;
-    const { fileI, fileIContentType, fileII, fileIIContentType } = filesEntity;
+  reCity = () => {
+    let doc = document.getElementById('country-region-province') as HTMLSelectElement;
+    // @ts-ignore
+    this.props.getNextAreaPnameCity(doc.value);
+    this.props.getNextAreaPnameCounty();
+  };
 
+  reCounty = () => {
+    let doc = document.getElementById('country-region-city') as HTMLSelectElement;
+    // @ts-ignore
+    this.props.getNextAreaPnameCounty(doc.value);
+  };
+
+  render() {
+    const { provincess, cityss, countyss, account, merchantEntity, businesss, filesEntity } = this.props;
+    const { fileI, fileIContentType, fileII, fileIIContentType } = filesEntity;
     return (
       <div>
         {merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
-          <div>{merchantEntity.state === '待审核' ? <Info /> : <div>审核通过，跳转商家页面</div>}</div>
+          <div>{merchantEntity.state === '待审核' ? <Info/> : <div>审核通过，跳转商家页面</div>}</div>
         ) : (
           <div style={{ textAlign: 'left' }}>
-            <Title />
+            <Title/>
             <AvForm onSubmit={this.handleSubmit}>
               <div
                 style={{
@@ -207,7 +195,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                             onChange={this.onBlobChange(true, 'fileI')}
                             accept="image/*"
                           />
-                          <AvInput type="hidden" name="shopphoto" value={fileI} />
+                          <AvInput type="hidden" name="shopphoto" value={fileI}/>
                           {fileI ? (
                             <div>
                               <span style={{ float: 'right', width: '50%', height: '100%' }}>
@@ -221,7 +209,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                                   <Col md="11">
                                     <span>
                                       {fileIContentType}
-                                      <br />
+                                      <br/>
                                       {byteSize(fileI)}
                                     </span>
                                   </Col>
@@ -265,7 +253,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                             onChange={this.onBlobChange(true, 'fileII')}
                             accept="image/*"
                           />
-                          <AvInput type="hidden" name="creditcode" value={fileII} />
+                          <AvInput type="hidden" name="buslicenseimage" value={fileII}/>
                           {fileII ? (
                             <div>
                               <span style={{ float: 'right', width: '50%', height: '100%' }}>
@@ -279,7 +267,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                                   <Col md="11">
                                     <span>
                                       {fileIIContentType}
-                                      <br />
+                                      <br/>
                                       {byteSize(fileII)}
                                     </span>
                                   </Col>
@@ -299,75 +287,77 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                       style={{ width: '70%', float: 'right' }}
                     />
                     <AvField
-                      name="credit"
+                      name="creditcode"
                       label={<span style={{ float: 'left', marginTop: '7px' }}>信用代码：</span>}
                       placeholder={'统一社会信用代码'}
                       style={{ width: '70%', float: 'right' }}
                     />
                     <AvGroup>
-                      <Label for="country-region">
+                      <Label for="country-region-businessid">
                         <span style={{ float: 'left', marginTop: '7px' }}>经营类型：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region" type="select" className="form-control" name="businessid">
-                          <option value="" key="0" />
+                        <AvInput id="country-region-businessid" type="select" className="form-control"
+                                 name="businessid">
+                          <option value="" key="0"/>
                           {businesss
                             ? businesss.map(otherEntity => (
-                                <option value={otherEntity.id} key={otherEntity.id}>
-                                  {otherEntity.name}
-                                </option>
-                              ))
+                              <option value={otherEntity.name} key={otherEntity.id}>
+                                {otherEntity.name}
+                              </option>
+                            ))
                             : null}
                         </AvInput>
                       </span>
                     </AvGroup>
                     <AvGroup>
-                      <Label for="country-region">
+                      <Label for="country-region-province">
                         <span style={{ float: 'left', marginTop: '7px' }}>所在省：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region" type="select" className="form-control" name="province">
-                          <option value="" key="0" />
-                          {testdata
-                            ? testdata.map(otherEntity => (
-                                <option value={otherEntity.value} key={otherEntity.value}>
-                                  {otherEntity.value}
-                                </option>
-                              ))
-                            : null}
+                        <AvInput id="country-region-province" type="select" className="form-control" name="province"
+                                 onChange={this.reCity}>
+                          <option value="" key="0"/>
+                          {provincess
+                            ? provincess.map(province => (
+                              <option value={province.name} key={province.id}>
+                                {province.name}
+                              </option>
+                            )) : null}
                         </AvInput>
                       </span>
                     </AvGroup>
                     <AvGroup>
-                      <Label for="country-region">
+                      <Label for="country-region-city">
                         <span style={{ float: 'left', marginTop: '7px' }}>所在市：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region" type="select" className="form-control" name="city">
-                          <option value="" key="0" />
-                          {testdata
-                            ? testdata.map(otherEntity => (
-                                <option value={otherEntity.value} key={otherEntity.value}>
-                                  {otherEntity.value}
-                                </option>
-                              ))
+                        <AvInput id="country-region-city" type="select" className="form-control" name="city"
+                                 onChange={this.reCounty}>
+                          <option value="" key="0"/>
+                          {cityss
+                            ? cityss.map(city => (
+                              <option value={city.name} key={city.id}>
+                                {city.name}
+                              </option>
+                            ))
                             : null}
                         </AvInput>
                       </span>
                     </AvGroup>
                     <AvGroup>
-                      <Label for="country-region">
+                      <Label for="country-region-county">
                         <span style={{ float: 'left', marginTop: '7px' }}>所在县：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region" type="select" className="form-control" name="county">
-                          <option value="" key="0" />
-                          {testdata
-                            ? testdata.map(otherEntity => (
-                                <option value={otherEntity.value} key={otherEntity.value}>
-                                  {otherEntity.value}
-                                </option>
-                              ))
+                        <AvInput id="country-region-county" type="select" className="form-control" name="county">
+                          <option value="" key="0"/>
+                          {countyss
+                            ? countyss.map(county => (
+                              <option value={county.name} key={county.id}>
+                                {county.name}
+                              </option>
+                            ))
                             : null}
                         </AvInput>
                       </span>
@@ -381,12 +371,13 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                       style={{ width: '70%', float: 'right' }}
                     />
                     <AvGroup>
-                      <Label for="country-region">
+                      <Label for="country-region-concession">
                         <span style={{ float: 'left', marginTop: '7px' }}>让利比：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput required id="country-region" type="select" className="form-control" name="concession">
-                          <option value="" key="0" />
+                        <AvInput required id="country-region-concession" type="select" className="form-control"
+                                 name="concession">
+                          <option value="" key="0"/>
                           {concession.map(otherEntity => (
                             <option value={otherEntity.value} key={otherEntity.value}>
                               {otherEntity.value}%
@@ -397,7 +388,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                     </AvGroup>
                     <AvGroup check inline>
                       <Label className="form-check-label">
-                        <AvInput type="checkbox" name="agreement" />
+                        <AvInput type="checkbox" name="agreement"/>
                         我已阅读并同意<u>《用户协议》</u>
                       </Label>
                     </AvGroup>
@@ -405,7 +396,8 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                 </Row>
               </ModalBody>
               <ModalFooter>
-                <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }} type="submit">
+                <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }}
+                        type="submit">
                   提交申请
                 </Button>
               </ModalFooter>
@@ -418,15 +410,29 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
 }
 
 // @ts-ignore
-const mapStateToProps = ({ files, business, authentication, merchant }: IRootState) => ({
+const mapStateToProps = ({ files, business, authentication, merchant, provinces, citys, countys }: IRootState) => ({
   filesEntity: files.entity,
   account: authentication.account,
   businesss: business.entities,
   isAuthenticated: authentication.isAuthenticated,
-  merchantEntity: merchant.entity
+  merchantEntity: merchant.entity,
+  provincess: provinces.entities,
+  cityss: citys.entities,
+  countyss: countys.entities
 });
 
-const mapDispatchToProps = { getSession, createMyEntityMerchant, getBusinessEntities, setBlob, getMyEntityMerchant, createFile };
+const mapDispatchToProps = {
+  getSession,
+  createMyEntityMerchant,
+  getBusinessEntities,
+  setBlob,
+  resetMerchant,
+  getMyEntityMerchant,
+  createFile,
+  getNextAreaPnameProvince,
+  getNextAreaPnameCity,
+  getNextAreaPnameCounty
+};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
