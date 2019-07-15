@@ -7,8 +7,7 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { getMyEntityMerchant, resetMerchant } from 'app/requests/merchant/merchant.reducer';
 import { connect } from 'react-redux';
 
-export interface IExhibitionpageProp extends StateProps, DispatchProps {
-}
+export interface IExhibitionpageProp extends StateProps, DispatchProps {}
 
 export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
   componentDidMount() {
@@ -21,29 +20,31 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
     const { account, merchantEntity } = this.props;
 
     function loadbgimg(name) {
-      var qrcode = document.getElementById('qrcode-canvas-key') as HTMLCanvasElement;// 二维码
-      var bgImg = document.getElementById('qrcode-image') as HTMLImageElement;
-      var qrcodeImg = new Image();
+      const qrcode = document.getElementById('qrcode-canvas-key') as HTMLCanvasElement; // 二维码
+      const bgImg = document.getElementById('qrcode-image') as HTMLImageElement;
+      const qrcodeImg = new Image();
       if (qrcode === null) return null;
-      qrcodeImg.src = qrcode.toDataURL("image/png");
-      qrcodeImg.onload = function () {
-        var canvas = document.getElementById("myCanvas") as HTMLCanvasElement;// 空画板
-        var ctx = canvas.getContext("2d");
-        var patBg = ctx.createPattern(bgImg, "repeat");
+      qrcodeImg.src = qrcode.toDataURL('image/png');
+      // tslint:disable-next-line: only-arrow-functions
+      qrcodeImg.onload = function() {
+        const canvas = document.getElementById('myCanvas') as HTMLCanvasElement; // 空画板
+        const ctx = canvas.getContext('2d');
+        const patBg = ctx.createPattern(bgImg, 'repeat');
         ctx.rect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = patBg;
         ctx.fill();
         ctx.drawImage(qrcodeImg, 90, 264, 233, 233);
-        ctx.font = "24px bold 黑体";
-        ctx.fillStyle = "#fe4365";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
+        ctx.font = '24px bold 黑体';
+        ctx.fillStyle = '#fe4365';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
         ctx.fillText(name, 200, 530);
-        var overImg = new Image();
-        overImg.src = canvas.toDataURL("image/png");
-        overImg.onload = function () {
-          var saveImage = document.getElementById('saveImage') as HTMLCanvasElement;// 显示位置
-          saveImage.innerHTML = "";
+        const overImg = new Image();
+        overImg.src = canvas.toDataURL('image/png');
+        // tslint:disable-next-line: only-arrow-functions
+        overImg.onload = function() {
+          const saveImage = document.getElementById('saveImage') as HTMLCanvasElement; // 显示位置
+          saveImage.innerHTML = '';
           saveImage.append(overImg);
         };
       };
@@ -61,7 +62,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           paddingTop: '35px'
         }}
       >
-        <Title/>
+        <Title />
         <div
           style={{
             width: '100%',
@@ -69,19 +70,30 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
             position: 'relative'
           }}
         >
-          <div style={{ display: "none" }}>
-            <
-              // @ts-ignore
-              QRCode id="qrcode-canvas-key" value={'http://app.yuanscore.com:8080/#id=' + merchantEntity.id}
-                     renderAs='canvas'
-                     size={233} fgColor="#000000" bgColor="#ffffff"/>
-            <canvas id="myCanvas" width="414" height="621"></canvas>
-            <img id="qrcode-image" src="./content/images/income.png"/>
+          <div style={{ display: 'none' }}>
+            <// @ts-ignore
+            QRCode
+              id="qrcode-canvas-key"
+              value={'http://app.yuanscore.com:8080/#id=' + merchantEntity.id}
+              renderAs="canvas"
+              size={233}
+              fgColor="#000000"
+              bgColor="#ffffff"
+            />
+            <canvas id="myCanvas" width="414" height="621">
+              不可为空
+            </canvas>
+            <img id="qrcode-image" src="./content/images/income.png" />
           </div>
-          <div id="saveImage"></div>
-          <Button variant="contained" color={"secondary"}
-                  style={{ position: "fixed", top: '90%', left: '20%', width: "60%" }}
-                  onClick={loadbgimg(merchantEntity.name)}>预览(长按图像，保存到本地)</Button>
+          <div id="saveImage">不可为空</div>
+          <Button
+            variant="contained"
+            color={'secondary'}
+            style={{ position: 'fixed', top: '90%', left: '20%', width: '60%' }}
+            onClick={loadbgimg(merchantEntity.name)}
+          >
+            预览(长按图像，保存到本地)
+          </Button>
         </div>
       </div>
     );

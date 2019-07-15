@@ -1,51 +1,51 @@
 import React from 'react';
 import Title from './title';
-import { Button, Col, Label, ModalBody, ModalFooter, Row } from "reactstrap";
-import { byteSize, setFileData } from "react-jhipster";
+import { Button, Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
+import { byteSize, setFileData } from 'react-jhipster';
 import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps } from 'react-router';
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
 import { createFeedback } from 'app/requests/basic/basic.reducer';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import { getSession } from 'app/shared/reducers/authentication';
 
-export interface IFeedbackProps extends StateProps, DispatchProps, RouteComponentProps<{}> {
-}
+export interface IFeedbackProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Feedback extends React.Component<IFeedbackProps> {
   componentDidMount() {
     this.props.getSession();
   }
   handleSubmit = (event, errors, { title, name, content, imageurl }) => {
-    if (imageurl.length < 1){
+    if (imageurl.length < 1) {
       toast.info('提示：请上传问题截图。');
-    }else if (imageurl.length> 8000000){
+    } else if (imageurl.length > 8000000) {
       toast.info('提示：问题截图过大，请上传6M以内的文件。');
-    }else if (title.trim().length < 1){
+    } else if (title.trim().length < 1) {
       toast.info('提示：标题不能为空。');
-    }else if (content.trim().length < 1){
+    } else if (content.trim().length < 1) {
       toast.info('提示：请输入反馈内容。');
-    }else{
+    } else {
       this.submitFeedback(title, name, content, imageurl);
     }
   };
   submitFeedback = (title, name, content, imageurl) => {
     const fileid = this.props.createFile(this.props.account.id, imageurl.length, imageurl, this.props.filesEntity.fileIContentType);
     // @ts-ignore
-    fileid.then((result:number) => {
+    fileid.then((result: number) => {
       if (!isNaN(result)) {
         // @ts-ignore
-        this.props.createFeedback(name,title,content,result,this.props.account.id).then((result) => {
-          if (result.value.data.code.toString() === "1"){
+        // tslint:disable-next-line: no-shadowed-variable
+        this.props.createFeedback(name, title, content, result, this.props.account.id).then((result: any) => {
+          if (result.value.data.code.toString() === '1') {
             toast.success('提示：反馈成功，请等候处理。');
             this.props.history.push('/personal');
-          }else{
+          } else {
             toast.error(result.value.data.message);
           }
         });
-      }else{
+      } else {
         toast.info('提示：店铺照片上传失败。');
       }
     });
@@ -107,9 +107,14 @@ export class Feedback extends React.Component<IFeedbackProps> {
                   <Label id="bigtextLabel" for="bigtext-bigtext">
                     反馈内容:
                   </Label>
-                  <AvInput style={{
-                    height:'120px'
-                  }} id="bigtext-bigtext" type="textarea" name="content" />
+                  <AvInput
+                    style={{
+                      height: '120px'
+                    }}
+                    id="bigtext-bigtext"
+                    type="textarea"
+                    name="content"
+                  />
                 </AvGroup>
                 <div
                   style={{
@@ -144,26 +149,26 @@ export class Feedback extends React.Component<IFeedbackProps> {
                         onChange={this.onBlobChange(true, 'fileI')}
                         accept="image/*"
                       />
-                      <AvInput type="hidden" name="imageurl" value={fileI}/>
+                      <AvInput type="hidden" name="imageurl" value={fileI} />
                       {fileI ? (
                         <div>
-                              <span style={{ float: 'right', width: '50%', height: '100%' }}>
-                                <img
-                                  src={`data:${fileIContentType};base64,${fileI}`}
-                                  style={{ maxHeight: '100%', width: '100%', minHeight: '50px' }}
-                                />
-                              </span>
+                          <span style={{ float: 'right', width: '50%', height: '100%' }}>
+                            <img
+                              src={`data:${fileIContentType};base64,${fileI}`}
+                              style={{ maxHeight: '100%', width: '100%', minHeight: '50px' }}
+                            />
+                          </span>
                           <span style={{ float: 'left' }}>
-                                <Row>
-                                  <Col md="11">
-                                    <span>
-                                      {fileIContentType}
-                                      <br/>
-                                      {byteSize(fileI)}
-                                    </span>
-                                  </Col>
-                                </Row>
-                              </span>
+                            <Row>
+                              <Col md="11">
+                                <span>
+                                  {fileIContentType}
+                                  <br />
+                                  {byteSize(fileI)}
+                                </span>
+                              </Col>
+                            </Row>
+                          </span>
                         </div>
                       ) : null}
                     </AvGroup>
@@ -173,8 +178,7 @@ export class Feedback extends React.Component<IFeedbackProps> {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }}
-                    type="submit">
+            <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }} type="submit">
               提交反馈
             </Button>
           </ModalFooter>
@@ -184,7 +188,7 @@ export class Feedback extends React.Component<IFeedbackProps> {
   }
 }
 
-const mapStateToProps = ({ authentication,files }: IRootState) => ({
+const mapStateToProps = ({ authentication, files }: IRootState) => ({
   filesEntity: files.entity,
   account: authentication.account
 });

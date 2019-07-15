@@ -5,7 +5,7 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 import { ICountys, defaultValue } from 'app/shared/model/countys.model';
 
 export const ACTION_TYPES = {
-  FETCH_COUNTYS_LIST: 'countys/FETCH_COUNTYS_LIST',
+  FETCH_COUNTYS_LIST: 'countys/FETCH_COUNTYS_LIST'
 };
 
 const initialState = {

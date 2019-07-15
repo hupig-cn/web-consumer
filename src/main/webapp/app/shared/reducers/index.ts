@@ -11,9 +11,9 @@ import mystring, { BasicState } from 'app/requests/basic/basic.reducer';
 import merchant, { MerchantState } from 'app/requests/merchant/merchant.reducer';
 import business, { BusinessState } from 'app/requests/merchant/business.reducer';
 import files, { FilesState } from 'app/requests/basic/files.reducer';
-import provinces, { ProvincesState } from "app/requests/basic/provinces.reducer";
-import citys, { CitysState } from "app/requests/basic/citys.reducer";
-import countys, { CountysState } from "app/requests/basic/countys.reducer";
+import provinces, { ProvincesState } from 'app/requests/basic/provinces.reducer';
+import citys, { CitysState } from 'app/requests/basic/citys.reducer';
+import countys, { CountysState } from 'app/requests/basic/countys.reducer';
 
 export interface IRootState {
   readonly authentication: AuthenticationState;

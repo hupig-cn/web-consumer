@@ -1,4 +1,4 @@
-export interface ICitys{
+export interface ICitys {
   id?: number;
   name?: string;
   pid?: string;

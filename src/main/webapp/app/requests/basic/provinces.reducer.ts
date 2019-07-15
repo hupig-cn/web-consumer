@@ -5,7 +5,7 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 import { IProvinces, defaultValue } from 'app/shared/model/provinces.model';
 
 export const ACTION_TYPES = {
-  FETCH_PROVINCES_LIST: 'provinces/FETCH_PROVINCES_LIST',
+  FETCH_PROVINCES_LIST: 'provinces/FETCH_PROVINCES_LIST'
 };
 
 const initialState = {
@@ -54,7 +54,7 @@ export default (state: ProvincesState = initialState, action): ProvincesState =>
 const apiUrl = 'services/basic/api';
 
 export const getNextAreaPnameProvince: ICrudGetAllAction<IProvinces> = () => {
-  const pname = "中国";
+  const pname = '中国';
   const requestUrl = `${apiUrl}/get-next-area-pname/${pname}`;
   return {
     type: ACTION_TYPES.FETCH_PROVINCES_LIST,

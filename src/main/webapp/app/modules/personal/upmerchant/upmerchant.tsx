@@ -16,8 +16,7 @@ import { toast } from 'react-toastify';
 import { getSession } from 'app/shared/reducers/authentication';
 import Info from 'app/modules/public/info';
 
-export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {
-}
+export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 const concession = [
   {
@@ -44,8 +43,11 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
   }
 
   // tslint:disable-next-line: no-shadowed-variable
-  handleSubmit = (event, errors,
-                  { shopphoto, buslicenseimage, name, creditcode, businessid, province, city, county, address, concession, agreement }
+  handleSubmit = (
+    event,
+    errors,
+    // tslint:disable-next-line: no-shadowed-variable
+    { shopphoto, buslicenseimage, name, creditcode, businessid, province, city, county, address, concession, agreement }
   ) => {
     if (!agreement) {
       toast.info('提示：请先阅读并同意《用户协议》。');
@@ -72,13 +74,19 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     }
   };
 
+  // tslint:disable-next-line: no-shadowed-variable
   onApply = (shopphoto, creditcode, name, businessid, address, province, city, county, concession, creditcodes) => {
     const fileid = this.props.createFile(this.props.account.id, shopphoto.length, shopphoto, this.props.filesEntity.fileIContentType);
     // @ts-ignore
     fileid.then((result: number) => {
       if (!isNaN(result)) {
         if (creditcode.length > 0) {
-          const fileidII = this.props.createFile(this.props.account.id, creditcode.length, creditcode, this.props.filesEntity.fileIIContentType);
+          const fileidII = this.props.createFile(
+            this.props.account.id,
+            creditcode.length,
+            creditcode,
+            this.props.filesEntity.fileIIContentType
+          );
           // @ts-ignore
           fileidII.then((resultII: number) => {
             if (!isNaN(resultII)) {
@@ -86,7 +94,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
             } else {
               toast.info('提示：营业执照上传失败。');
             }
-          })
+          });
         } else {
           this.createMerchants(result, name, businessid, address, province, city, county, concession, null, creditcodes);
         }
@@ -96,10 +104,24 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     });
   };
 
+  // tslint:disable-next-line: no-shadowed-variable
   createMerchants = (shopphoto, name, businessid, address, province, city, county, concession, buslicenseimage, creditcode) => {
     this.props
-      .createMyEntityMerchant(this.props.account.id, shopphoto, name, businessid, address, province, city, county, 0, 0, concession,
-        buslicenseimage, creditcode)
+      .createMyEntityMerchant(
+        this.props.account.id,
+        shopphoto,
+        name,
+        businessid,
+        address,
+        province,
+        city,
+        county,
+        0,
+        0,
+        concession,
+        buslicenseimage,
+        creditcode
+      )
       // @ts-ignore
       .then((result: { value: { data: React.ReactText } }) => {
         // @ts-ignore
@@ -124,14 +146,14 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
   };
 
   reCity = () => {
-    let doc = document.getElementById('country-region-province') as HTMLSelectElement;
+    const doc = document.getElementById('country-region-province') as HTMLSelectElement;
     // @ts-ignore
     this.props.getNextAreaPnameCity(doc.value);
     this.props.getNextAreaPnameCounty();
   };
 
   reCounty = () => {
-    let doc = document.getElementById('country-region-city') as HTMLSelectElement;
+    const doc = document.getElementById('country-region-city') as HTMLSelectElement;
     // @ts-ignore
     this.props.getNextAreaPnameCounty(doc.value);
   };
@@ -142,10 +164,10 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     return (
       <div>
         {merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
-          <div>{merchantEntity.state === '待审核' ? <Info/> : <div>审核通过，跳转商家页面</div>}</div>
+          <div>{merchantEntity.state === '待审核' ? <Info /> : <div>审核通过，跳转商家页面</div>}</div>
         ) : (
           <div style={{ textAlign: 'left' }}>
-            <Title/>
+            <Title />
             <AvForm onSubmit={this.handleSubmit}>
               <div
                 style={{
@@ -195,7 +217,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                             onChange={this.onBlobChange(true, 'fileI')}
                             accept="image/*"
                           />
-                          <AvInput type="hidden" name="shopphoto" value={fileI}/>
+                          <AvInput type="hidden" name="shopphoto" value={fileI} />
                           {fileI ? (
                             <div>
                               <span style={{ float: 'right', width: '50%', height: '100%' }}>
@@ -209,7 +231,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                                   <Col md="11">
                                     <span>
                                       {fileIContentType}
-                                      <br/>
+                                      <br />
                                       {byteSize(fileI)}
                                     </span>
                                   </Col>
@@ -253,7 +275,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                             onChange={this.onBlobChange(true, 'fileII')}
                             accept="image/*"
                           />
-                          <AvInput type="hidden" name="buslicenseimage" value={fileII}/>
+                          <AvInput type="hidden" name="buslicenseimage" value={fileII} />
                           {fileII ? (
                             <div>
                               <span style={{ float: 'right', width: '50%', height: '100%' }}>
@@ -267,7 +289,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                                   <Col md="11">
                                     <span>
                                       {fileIIContentType}
-                                      <br/>
+                                      <br />
                                       {byteSize(fileII)}
                                     </span>
                                   </Col>
@@ -297,15 +319,14 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                         <span style={{ float: 'left', marginTop: '7px' }}>经营类型：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region-businessid" type="select" className="form-control"
-                                 name="businessid">
-                          <option value="" key="0"/>
+                        <AvInput id="country-region-businessid" type="select" className="form-control" name="businessid">
+                          <option value="" key="0" />
                           {businesss
                             ? businesss.map(otherEntity => (
-                              <option value={otherEntity.name} key={otherEntity.id}>
-                                {otherEntity.name}
-                              </option>
-                            ))
+                                <option value={otherEntity.name} key={otherEntity.id}>
+                                  {otherEntity.name}
+                                </option>
+                              ))
                             : null}
                         </AvInput>
                       </span>
@@ -315,15 +336,15 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                         <span style={{ float: 'left', marginTop: '7px' }}>所在省：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region-province" type="select" className="form-control" name="province"
-                                 onChange={this.reCity}>
-                          <option value="" key="0"/>
+                        <AvInput id="country-region-province" type="select" className="form-control" name="province" onChange={this.reCity}>
+                          <option value="" key="0" />
                           {provincess
                             ? provincess.map(province => (
-                              <option value={province.name} key={province.id}>
-                                {province.name}
-                              </option>
-                            )) : null}
+                                <option value={province.name} key={province.id}>
+                                  {province.name}
+                                </option>
+                              ))
+                            : null}
                         </AvInput>
                       </span>
                     </AvGroup>
@@ -332,15 +353,14 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                         <span style={{ float: 'left', marginTop: '7px' }}>所在市：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region-city" type="select" className="form-control" name="city"
-                                 onChange={this.reCounty}>
-                          <option value="" key="0"/>
+                        <AvInput id="country-region-city" type="select" className="form-control" name="city" onChange={this.reCounty}>
+                          <option value="" key="0" />
                           {cityss
                             ? cityss.map(city => (
-                              <option value={city.name} key={city.id}>
-                                {city.name}
-                              </option>
-                            ))
+                                <option value={city.name} key={city.id}>
+                                  {city.name}
+                                </option>
+                              ))
                             : null}
                         </AvInput>
                       </span>
@@ -351,13 +371,13 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
                         <AvInput id="country-region-county" type="select" className="form-control" name="county">
-                          <option value="" key="0"/>
+                          <option value="" key="0" />
                           {countyss
                             ? countyss.map(county => (
-                              <option value={county.name} key={county.id}>
-                                {county.name}
-                              </option>
-                            ))
+                                <option value={county.name} key={county.id}>
+                                  {county.name}
+                                </option>
+                              ))
                             : null}
                         </AvInput>
                       </span>
@@ -375,9 +395,8 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                         <span style={{ float: 'left', marginTop: '7px' }}>让利比：</span>
                       </Label>
                       <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput required id="country-region-concession" type="select" className="form-control"
-                                 name="concession">
-                          <option value="" key="0"/>
+                        <AvInput required id="country-region-concession" type="select" className="form-control" name="concession">
+                          <option value="" key="0" />
                           {concession.map(otherEntity => (
                             <option value={otherEntity.value} key={otherEntity.value}>
                               {otherEntity.value}%
@@ -388,7 +407,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                     </AvGroup>
                     <AvGroup check inline>
                       <Label className="form-check-label">
-                        <AvInput type="checkbox" name="agreement"/>
+                        <AvInput type="checkbox" name="agreement" />
                         我已阅读并同意<u>《用户协议》</u>
                       </Label>
                     </AvGroup>
@@ -396,8 +415,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                 </Row>
               </ModalBody>
               <ModalFooter>
-                <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }}
-                        type="submit">
+                <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }} type="submit">
                   提交申请
                 </Button>
               </ModalFooter>

@@ -1,4 +1,4 @@
-export interface ICountys{
+export interface ICountys {
   id?: number;
   name?: string;
   pid?: string;
