@@ -18,7 +18,7 @@ export class ChoosePayWay extends React.Component<IChoosePayWayProp> {
       <div style={{ margin: '5px 15px 15px 15px', height: '600px' }}>
         {/*头部标题*/}
         <div>
-          <Link to="/">
+          <Link to="/productdetail">
             <div style={{ textAlign: 'center', fontSize: '1.5rem' }}>订单支付</div>
           </Link>
         </div>

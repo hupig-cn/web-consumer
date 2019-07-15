@@ -6,8 +6,6 @@ import Radio from '@material-ui/core/Radio';
 // tslint:disable-next-line: no-submodule-imports
 import RadioGroup from '@material-ui/core/RadioGroup';
 // tslint:disable-next-line: no-submodule-imports
-import FormHelperText from '@material-ui/core/FormHelperText';
-// tslint:disable-next-line: no-submodule-imports
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 // tslint:disable-next-line: no-submodule-imports
 import FormControl from '@material-ui/core/FormControl';
