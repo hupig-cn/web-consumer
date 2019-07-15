@@ -18,6 +18,7 @@ import Feedback from 'app/modules/personal/feedback/feedback';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import Productdetail from 'app/modules/shopmall/productDetail/productdetail';
 import ChoosePayWay from 'app/modules/shopmall/orderPayment/choosePayWay';
+import AddAddress from 'app/modules/shopmall/orderPayment/addAddress';
 
 const Routes = () => (
   <div className="view-routes">
@@ -36,6 +37,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/feedback" component={Feedback} />
       <ErrorBoundaryRoute path="/productdetail" component={Productdetail} />
       <ErrorBoundaryRoute path="/choosePayWay" component={ChoosePayWay} />
+      <ErrorBoundaryRoute path="/addAddress" component={AddAddress} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>

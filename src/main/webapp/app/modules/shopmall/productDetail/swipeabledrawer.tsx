@@ -81,12 +81,12 @@ export default function SwipeableTemporaryDrawer() {
           <Switch />
         </div>
       </div>
-      <div className={classes.mydiv}>
-        <span>收货地址：请选择收货地址</span>
-        <ChevronRightRounded style={{ float: 'right' }} />
-        <span style={{ float: 'right' }}>></span>
-      </div>
-      <Divider />
+      {/*<div className={classes.mydiv}>*/}
+      {/*  <span>收货地址：请选择收货地址</span>*/}
+      {/*  <ChevronRightRounded style={{ float: 'right' }} />*/}
+      {/*  <span style={{ float: 'right' }}>></span>*/}
+      {/*</div>*/}
+      {/*<Divider />*/}
       <div
         style={{
           textAlign: 'center'
@@ -98,10 +98,11 @@ export default function SwipeableTemporaryDrawer() {
             backgroundColor: '#fe4365',
             width: '80%',
             color: 'white',
-            fontSize: '20px',
-            marginTop: '5px',
-            height: '45px',
-            borderRadius: '4px'
+            margin: '5px 0px',
+            borderRadius: '20px',
+            zIndex: 1002,
+            fontSize: '1rem',
+            height: '38px'
           }}
           // tslint:disable-next-line: jsx-no-lambda
           onClick={() => choosePayWay()}
@@ -119,8 +120,35 @@ export default function SwipeableTemporaryDrawer() {
 
   return (
     <div>
-      <Button style={{ float: 'right', backgroundColor: '#fe4365' }} onClick={toggleDrawer('bottom', true)}>
+      <Button
+        style={{
+          borderRadius: '0px 20px 20px 0px',
+          float: 'right',
+          backgroundColor: '#fe4365',
+          color: '#ffffff',
+          margin: '10px 20px 5px 0px',
+          width: '100px',
+          fontSize: '0.8rem',
+          height: '30px'
+        }}
+        onClick={toggleDrawer('bottom', true)}
+      >
         立即购买
+      </Button>
+      <Button
+        style={{
+          borderRadius: '20px 0px 0px 20px',
+          float: 'right',
+          backgroundColor: '#fe9f1f',
+          color: '#ffffff',
+          margin: '10px 0px 5px 0px',
+          width: '100px',
+          fontSize: '0.8rem',
+          height: '30px'
+        }}
+        onClick={toggleDrawer('bottom', true)}
+      >
+        加入购物车
       </Button>
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', false)}>
         {fullList('bottom')}

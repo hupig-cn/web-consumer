@@ -55,7 +55,7 @@ export const Loadpages = (key: string) => {
       document.getElementById('app-modules-consumer-quickaccess-button-link-incomepage').click();
       break;
     case 'share':
-      document.getElementById('app-modules-consumer-quickaccess-button-link-productdetail').click();
+      document.getElementById('app-modules-consumer-quickaccess-button-link-sharepage').click();
       break;
     default:
       temp = null;
