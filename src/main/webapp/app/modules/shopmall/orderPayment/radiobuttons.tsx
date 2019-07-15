@@ -41,10 +41,10 @@ export default function RadioButtonsGroup() {
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">支付方式</FormLabel>
         <RadioGroup aria-label="Gender" name="gender" className={classes.group} value={value} onChange={handleChange}>
-          <FormControlLabel value="weixin" control={<Radio color="primary" />} label="微信" labelPlacement="start" />
-          <FormControlLabel value="zhifubao" control={<Radio color="primary" />} label="支付宝" labelPlacement="start" />
-          <FormControlLabel value="yue" control={<Radio color="primary" />} label="余额" labelPlacement="start" />
-          <FormControlLabel value="jifen" control={<Radio color="primary" />} label="积分" labelPlacement="start" />
+          <FormControlLabel value="weixin" control={<Radio color="primary" />} label="微信" labelPlacement="end" />
+          <FormControlLabel value="zhifubao" control={<Radio color="primary" />} label="支付宝" labelPlacement="end" />
+          <FormControlLabel value="yue" control={<Radio color="primary" />} label="余额" labelPlacement="end" />
+          <FormControlLabel value="jifen" control={<Radio color="primary" />} label="积分" labelPlacement="end" />
         </RadioGroup>
       </FormControl>
     </div>
