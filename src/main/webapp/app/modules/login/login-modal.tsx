@@ -66,6 +66,7 @@ class LoginModal extends React.Component<ILoginModalProps> {
               style={{ width: '50%' }}
               // @ts-ignore
               onClick={handleClose}
+              // @ts-ignore
               tabIndex="1"
             >
               取消

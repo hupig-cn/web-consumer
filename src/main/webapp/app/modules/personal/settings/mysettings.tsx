@@ -18,7 +18,6 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       .getMyImg(this.props.account.imageUrl)
       // @ts-ignore
       .then(photo => {
-        console.log(photo);
         this.setState({ file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
       });
   }
