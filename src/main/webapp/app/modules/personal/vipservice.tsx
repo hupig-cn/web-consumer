@@ -68,8 +68,8 @@ export default function LongMenu() {
         {/*<Link id="app-modules-personal-vipservice-navigation-link-" to="/" />*/}
         <BottomNavigationAction label="我的佣金" value="key7" icon={<img src="./content/images/vip7.png" />} />
         {/*<Link id="app-modules-personal-vipservice-navigation-link-" to="/" />*/}
-        <BottomNavigationAction label="问题反馈" value="key8" icon={<img src="./content/images/vip8.png" />} />
-        {/*<Link id="app-modules-personal-vipservice-navigation-link-" to="/" />*/}
+        <BottomNavigationAction label="问题反馈" value="feedback" icon={<img src="./content/images/vip8.png" />} />
+        <Link id="app-modules-personal-vipservice-navigation-link-feedback" to="/feedback" />
       </BottomNavigation>
     </div>
   );

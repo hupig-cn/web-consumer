@@ -2,7 +2,6 @@ import React from 'react';
 // tslint:disable-next-line: no-submodule-imports
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 // tslint:disable-next-line: no-submodule-imports
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import { Link } from 'react-router-dom';
 
 export default function PrimarySearchAppBar() {
@@ -29,12 +28,8 @@ export default function PrimarySearchAppBar() {
             }}
           />
         </Link>
-        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px' }}>商家入驻</span>
-        <MoreHoriz
-          style={{
-            float: 'right'
-          }}
-        />
+        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>问题反馈</span>
+        <span style={{ float: 'right', width: '15px', height: '5px' }} />
       </div>
     </div>
   );
