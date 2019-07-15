@@ -13,6 +13,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
   componentDidMount() {
     this.props.getSession();
   }
+
   render() {
     return (
       <div style={{ width: '100%' }}>

@@ -12,6 +12,7 @@ import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
 // tslint:disable-next-line: no-submodule-imports
 import Switch from '@material-ui/core/Switch';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   list: {
@@ -103,15 +104,18 @@ export default function SwipeableTemporaryDrawer() {
             borderRadius: '4px'
           }}
           // tslint:disable-next-line: jsx-no-lambda
-          onClick={() => {
-            toast.info('提示：功能正在开发中.');
-          }}
+          onClick={() => choosePayWay()}
         >
           确认购买
         </button>
       </div>
     </div>
   );
+
+  function choosePayWay() {
+    document.getElementById('app-modules-consumer-quickaccess-button-link-choosepayway').click();
+    return null;
+  }
 
   return (
     <div>
@@ -121,6 +125,7 @@ export default function SwipeableTemporaryDrawer() {
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', false)}>
         {fullList('bottom')}
       </SwipeableDrawer>
+      <Link id="app-modules-consumer-quickaccess-button-link-choosepayway" to="/choosepayway" />
     </div>
   );
 }

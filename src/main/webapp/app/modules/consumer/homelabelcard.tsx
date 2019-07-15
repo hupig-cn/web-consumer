@@ -9,6 +9,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 // tslint:disable-next-line: no-submodule-imports
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,26 +86,31 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const tileData = [
   {
+    id: 1,
     img: './content/images/commodity1.png',
     title: '【官网价直降1111元】Apple/苹果 iPhone XR 256G 移动联通电信4G手机双卡双待苹果XR iPhonexr',
     author: '6488.00'
   },
   {
+    id: 2,
     img: './content/images/commodity2.png',
     title: 'Dior/迪奥口红烈艳蓝金旗舰唇膏999 520 740 888 女 哑光滋润',
     author: '316.00'
   },
   {
+    id: 3,
     img: './content/images/commodity3.png',
     title: 'poryuu孕妇口红专用孕妇化妆品孕妇护肤品怀孕期彩妆唇膏哺乳',
     author: '299.99'
   },
   {
+    id: 4,
     img: './content/images/commodity4.png',
     title: '分期Apple/苹果 iPhone XS Max苹果xsmax苹果XR双卡正品手机国行8',
     author: '4008.00'
   },
   {
+    id: 5,
     img: './content/images/commodity5.png',
     title: 'Apple/苹果 iPhone 8 Plus 4G全网通 美版国行8代 无锁苹果8plus',
     author: '3980.00'
@@ -122,6 +128,10 @@ export default function TitlebarGridList() {
             key={tile.img}
             className={classes.listTitle}
             style={{ height: '100%', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: 4 }}
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={() => {
+              document.getElementById('app-modules-consumer-quickaccess-button-link-productdetail-' + tile.id).click();
+            }}
           >
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
@@ -159,6 +169,11 @@ export default function TitlebarGridList() {
                 </span>
               }
               className={classes.titlebar}
+            />
+            <Link
+              // tslint:disable-next-line: jsx-self-close
+              id={'app-modules-consumer-quickaccess-button-link-productdetail-' + tile.id}
+              to="/productdetail"
             />
           </GridListTile>
         ))}
