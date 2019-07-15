@@ -158,6 +158,13 @@ export const createFile = (userid, size, file, fileContentType) => async dispatc
   return result.value.data;
 };
 
+export const getMyImg: ICrudGetAction<IFiles> = id => {
+  const requestUrl = `services/basic/api/myfiles/${id}`;
+  return {
+    payload: axios.get<IFiles>(requestUrl)
+  };
+};
+
 export const setBlob = (name, data, contentType?) => ({
   type: ACTION_TYPES.SET_BLOB,
   payload: {
