@@ -62,8 +62,12 @@ class LoginModal extends React.Component<ILoginModalProps> {
             </Row>
           </ModalBody>
           <ModalFooter>
-            // @ts-ignore
-            <Button style={{ width: '50%' }} onClick={handleClose} tabIndex="1">
+            <Button
+              style={{ width: '50%' }}
+              // @ts-ignore
+              onClick={handleClose}
+              tabIndex="1"
+            >
               取消
             </Button>{' '}
             <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '50%' }} type="submit">
