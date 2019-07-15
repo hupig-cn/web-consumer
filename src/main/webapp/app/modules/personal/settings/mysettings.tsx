@@ -23,15 +23,11 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       });
   }
   render() {
-    const { filesEntity } = this.props;
     const mydiv = {
       backgroundColor: '#ffffff',
       padding: '15px 5px 15px 15px',
       margin: '1px 0px',
-      textAlign: 'right'
-    };
-    const nameSpan = {
-      float: 'left'
+      'text-align': 'right'
     };
     return (
       <div
@@ -54,33 +50,33 @@ export class Mysettings extends React.Component<IMysettingsProp> {
           <ChevronRightRounded style={{ marginTop: '-4px' }} />
         </div>
         <div style={mydiv}>
-          <span style={nameSpan}>昵称</span>
+          <span style={{ float: 'left' }}>昵称</span>
           <span>我的名字</span>
           <ChevronRightRounded style={{ float: 'right' }} />
         </div>
         <div style={mydiv}>
-          <span style={nameSpan}>手机号</span>
+          <span style={{ float: 'left' }}>手机号</span>
           <span>15000000000</span>
           <ChevronRightRounded style={{ float: 'right' }} />
         </div>
         <div style={mydiv}>
-          <span style={nameSpan}>实名认证</span>
+          <span style={{ float: 'left' }}>实名认证</span>
           <span>无</span>
           <ChevronRightRounded style={{ float: 'right' }} />
         </div>
         <div style={mydiv}>
-          <span style={nameSpan}>推荐人</span>
+          <span style={{ float: 'left' }}>推荐人</span>
           <span>无</span>
           <ChevronRightRounded style={{ float: 'right' }} />
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
-          <span style={nameSpan}>微信号</span>
+          <span style={{ float: 'left' }}>微信号</span>
           <span>更换</span>
           <ChevronRightRounded style={{ float: 'right' }} />
         </div>
         <div style={mydiv}>
-          <span style={nameSpan}>支付宝账号</span>
+          <span style={{ float: 'left' }}>支付宝账号</span>
           <span>更换</span>
           <ChevronRightRounded style={{ float: 'right' }} />
         </div>

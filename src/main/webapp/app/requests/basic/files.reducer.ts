@@ -158,9 +158,10 @@ export const createFile = (userid, size, file, fileContentType) => async dispatc
   return result.value.data;
 };
 
-export const getMyImg: ICrudGetAction<IFiles> = id => {
+export const getMyImg: ICrudGetAction<IFiles> = (id: string) => {
   const requestUrl = `services/basic/api/myfiles/${id}`;
   return {
+    type: ACTION_TYPES.FETCH_FILES,
     payload: axios.get<IFiles>(requestUrl)
   };
 };
