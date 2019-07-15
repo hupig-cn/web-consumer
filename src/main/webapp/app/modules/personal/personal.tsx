@@ -10,8 +10,7 @@ import VipService from './vipservice';
 import Mytool from 'app/modules/personal/mytool';
 import Error from 'app/modules/public/error';
 
-export interface IPersonalProp extends StateProps, DispatchProps {
-}
+export interface IPersonalProp extends StateProps, DispatchProps {}
 
 export class Personal extends React.Component<IPersonalProp> {
   componentDidMount() {
@@ -22,16 +21,16 @@ export class Personal extends React.Component<IPersonalProp> {
     const { account } = this.props;
     return (
       <div>
-        {account && account.login ? (
+        {!(account && account.login) ? (
           <div className="jh-personal">
-            <Users account={account}/>
-            <Orders/>
-            <Advertising/>
-            <VipService/>
-            <Mytool/>
+            <Users account={account} />
+            <Orders />
+            <Advertising />
+            <VipService />
+            <Mytool />
           </div>
         ) : (
-          <Error/>
+          <Error />
         )}
       </div>
     );

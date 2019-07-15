@@ -3,13 +3,35 @@ import Title from './title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import { Link } from 'react-router-dom';
+import { IRootState } from 'app/shared/reducers';
+import { getSession } from 'app/shared/reducers/authentication';
+import { connect } from 'react-redux';
+import { getMyImg } from 'app/requests/basic/files.reducer';
 
-export class Mysettings extends React.Component {
+export interface IMysettingsProp extends StateProps, DispatchProps {}
+
+export class Mysettings extends React.Component<IMysettingsProp> {
+  state = { file: '', fileContentType: '' };
+  componentDidMount() {
+    this.props.getSession();
+    this.props
+      .getMyImg(this.props.account.imageUrl)
+      // @ts-ignore
+      .then(photo => {
+        console.log(photo);
+        this.setState({ file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
+      });
+  }
   render() {
+    const { filesEntity } = this.props;
     const mydiv = {
       backgroundColor: '#ffffff',
       padding: '15px 5px 15px 15px',
-      margin: '1px 0px'
+      margin: '1px 0px',
+      textAlign: 'right'
+    };
+    const nameSpan = {
+      float: 'left'
     };
     return (
       <div
@@ -23,40 +45,44 @@ export class Mysettings extends React.Component {
       >
         <Title />
         <div style={mydiv}>
-          <span>头像</span>
-          <ChevronRightRounded style={{ float: 'right' }} />
-          <span style={{ float: 'right' }}>更换</span>
+          <span style={{ float: 'left', marginTop: '16px' }}>头像</span>
+          <img
+            style={{ width: '50px', height: '50px', marginRight: '10px' }}
+            src={`data:${this.state.fileContentType};base64,${this.state.file}`}
+          />
+          <span>更换</span>
+          <ChevronRightRounded style={{ marginTop: '-4px' }} />
         </div>
         <div style={mydiv}>
-          <span>昵称</span>
+          <span style={nameSpan}>昵称</span>
+          <span>我的名字</span>
           <ChevronRightRounded style={{ float: 'right' }} />
-          <span style={{ float: 'right' }}>我的名字</span>
         </div>
         <div style={mydiv}>
-          <span>手机号</span>
+          <span style={nameSpan}>手机号</span>
+          <span>15000000000</span>
           <ChevronRightRounded style={{ float: 'right' }} />
-          <span style={{ float: 'right' }}>15000000000</span>
         </div>
         <div style={mydiv}>
-          <span>真实姓名</span>
+          <span style={nameSpan}>实名认证</span>
+          <span>无</span>
           <ChevronRightRounded style={{ float: 'right' }} />
-          <span style={{ float: 'right' }}>无</span>
         </div>
         <div style={mydiv}>
-          <span>推荐人</span>
+          <span style={nameSpan}>推荐人</span>
+          <span>无</span>
           <ChevronRightRounded style={{ float: 'right' }} />
-          <span style={{ float: 'right' }}>无</span>
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
-          <span>微信号</span>
+          <span style={nameSpan}>微信号</span>
+          <span>更换</span>
           <ChevronRightRounded style={{ float: 'right' }} />
-          <span style={{ float: 'right' }}>更换</span>
         </div>
         <div style={mydiv}>
-          <span>支付宝账号</span>
+          <span style={nameSpan}>支付宝账号</span>
+          <span>更换</span>
           <ChevronRightRounded style={{ float: 'right' }} />
-          <span style={{ float: 'right' }}>更换</span>
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
@@ -68,4 +94,19 @@ export class Mysettings extends React.Component {
     );
   }
 }
-export default Mysettings;
+
+const mapStateToProps = ({ files, authentication }: IRootState) => ({
+  account: authentication.account,
+  isAuthenticated: authentication.isAuthenticated,
+  filesEntity: files.entity
+});
+
+const mapDispatchToProps = { getSession, getMyImg };
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Mysettings);
