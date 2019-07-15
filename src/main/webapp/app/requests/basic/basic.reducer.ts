@@ -126,6 +126,13 @@ export const createUserByPhone = (phone: any, userid: any) => async dispatch => 
   return result;
 };
 
+export const createFeedback = (name,title,content,imageurl,creator) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/feedback/create-feedback', { name,title,content,imageurl,creator })
+  });
+  return result;
+};
+
 export const resetBasic = () => ({
   type: ACTION_TYPES.RESET
 });
