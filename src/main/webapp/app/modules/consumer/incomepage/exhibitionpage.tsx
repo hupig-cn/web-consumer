@@ -71,8 +71,8 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           }}
         >
           <div style={{ display: 'none' }}>
-            <// @ts-ignore
-            QRCode
+            // @ts-ignore
+            <QRCode
               id="qrcode-canvas-key"
               value={'http://app.yuanscore.com:8080/#id=' + merchantEntity.id}
               renderAs="canvas"

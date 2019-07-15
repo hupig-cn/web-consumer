@@ -17,7 +17,7 @@ import Upmerchant from 'app/modules/personal/upmerchant/upmerchant';
 import Feedback from 'app/modules/personal/feedback/feedback';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import Productdetail from 'app/modules/shopmall/productDetail/productdetail';
-import ChoosePayWay from 'app/modules/shopmall/choosePayWay';
+import ChoosePayWay from 'app/modules/shopmall/orderPayment/choosePayWay';
 
 const Routes = () => (
   <div className="view-routes">

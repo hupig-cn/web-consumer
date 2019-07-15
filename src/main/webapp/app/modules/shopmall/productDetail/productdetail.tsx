@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getSession } from 'app/shared/reducers/authentication';
 import PdLoopplayimg from './pdloopplayimg';
-import Swipeabledrawer from 'app/shared/menu/swipeabledrawer';
+import Swipeabledrawer from 'app/modules/shopmall/productDetail/swipeabledrawer';
 // tslint:disable-next-line: no-submodule-imports
 import ArrowBackIos from '@material-ui/core/SvgIcon/SvgIcon';
 import { Link } from 'react-router-dom';

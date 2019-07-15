@@ -3,12 +3,8 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
-import ArrowBackIos from '@material-ui/core/SvgIcon/SvgIcon';
-// tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
-// tslint:disable-next-line: no-submodule-imports
-import Switch from '@material-ui/core/Switch';
-import { RadioGroup } from '@material-ui/core';
+import Radiobuttons from './radiobuttons';
 
 export interface IChoosePayWayProp extends StateProps, DispatchProps {}
 
@@ -61,30 +57,31 @@ export class ChoosePayWay extends React.Component<IChoosePayWayProp> {
         <div style={{ margin: '15px 0px 15px 0px' }}>图片订单编号价格等信息</div>
         <Divider />
         {/*支付方式选择*/}
-        <div style={{ margin: '15px 0px 15px 0px' }}>
-          <RadioGroup>
-            <div>
-              <span>微信支付</span>
-              <Switch style={{ right: '15px' }} />
-            </div>
-            <div>
-              <span>支付宝支付</span>
-              <Switch />
-            </div>
-            <div>
-              <span>积分支付</span>
-              <Switch />
-            </div>
-            <div>
-              <span>余额支付</span>
-              <Switch />
-            </div>
-            <div>
-              <span>优惠券支付</span>
-              <Switch />
-            </div>
-          </RadioGroup>
-        </div>
+        <Radiobuttons />
+        {/*<div style={{ margin: '15px 0px 15px 0px' }}>*/}
+        {/*  <RadioGroup>*/}
+        {/*    <div>*/}
+        {/*      <span>微信支付</span>*/}
+        {/*      <Switch style={{ right: '15px' }} />*/}
+        {/*    </div>*/}
+        {/*    <div>*/}
+        {/*      <span>支付宝支付</span>*/}
+        {/*      <Switch />*/}
+        {/*    </div>*/}
+        {/*    <div>*/}
+        {/*      <span>积分支付</span>*/}
+        {/*      <Switch />*/}
+        {/*    </div>*/}
+        {/*    <div>*/}
+        {/*      <span>余额支付</span>*/}
+        {/*      <Switch />*/}
+        {/*    </div>*/}
+        {/*    <div>*/}
+        {/*      <span>优惠券支付</span>*/}
+        {/*      <Switch />*/}
+        {/*    </div>*/}
+        {/*  </RadioGroup>*/}
+        {/*</div>*/}
         {/*底部按钮*/}
         <button
           type="button"
