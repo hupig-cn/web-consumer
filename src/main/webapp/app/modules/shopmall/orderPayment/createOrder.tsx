@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
-import Radiobuttons from './selectPayWayRadiobuttons';
-import Title from './createOrderTitle';
+import Title from 'app/modules/public/title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
 
@@ -25,7 +24,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     return (
       <div style={{ height: '100%' }}>
         {/*头部标题*/}
-        <Title />
+        <Title name='创建订单' back='/productdetail' />
         {/*地址模块*/}
         <div
           style={{

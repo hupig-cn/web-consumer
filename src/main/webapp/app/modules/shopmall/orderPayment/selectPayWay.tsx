@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
 import Radiobuttons from './selectPayWayRadiobuttons';
-import Title from './selectPayWayTitle';
+import Title from 'app/modules/public/title';
 
 export interface ISelectPayWayProp extends StateProps, DispatchProps {}
 
@@ -17,7 +17,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     return (
       <div style={{ height: '100%' }}>
         {/*头部标题*/}
-        <Title />
+        <Title name='订单支付' back='/createOrder' />
         <Divider />
         {/*图片订单编号价格等信息*/}
         <div

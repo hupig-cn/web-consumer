@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './title';
+import Title from 'app/modules/public/title';
 import QRCode from 'qrcode.react';
 // tslint:disable-next-line: no-submodule-imports
 import ReceiptRounded from '@material-ui/icons/ReceiptRounded';
@@ -37,7 +37,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
           padding: '0px'
         }}
       >
-        <Title/>
+        <Title name='园积分收款' back='/' />
         <div
           style={{
             width: '100%',

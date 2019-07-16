@@ -1,7 +1,8 @@
 import React from 'react';
-import Title from './title';
+import Title from 'app/modules/public/title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
+import DoneRounded from '@material-ui/icons/DoneRounded';
 import { Link } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
@@ -38,7 +39,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
           padding: '0px'
         }}
       >
-        <Title />
+        <Title name='设置' back='/personal' />
         <div style={mydiv}>
           <span style={{ float: 'left', marginTop: '16px' }}>头像</span>
           <img
@@ -56,7 +57,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         <div style={mydiv}>
           <span style={{ float: 'left' }}>手机号</span>
           <span>15000000000</span>
-          <ChevronRightRounded style={{ float: 'right' }} />
+          <DoneRounded style={{ float: 'right' }} />
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>实名认证</span>

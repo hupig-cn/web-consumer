@@ -1,10 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
-// tslint:disable-next-line: no-submodule-imports
-import { Link } from 'react-router-dom';
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(text) {
   return (
     <div>
       <div
@@ -20,7 +19,7 @@ export default function PrimarySearchAppBar() {
           textAlign: 'center'
         }}
       >
-        <Link to="/personal">
+        <Link to={text.back}>
           <ArrowBackIos
             style={{
               float: 'left',
@@ -28,8 +27,8 @@ export default function PrimarySearchAppBar() {
             }}
           />
         </Link>
-        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>问题反馈</span>
-        <span style={{ float: 'right', width: '15px', height: '5px' }} />
+        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px' }}>{text.name}</span>
+        <span style={{ float: 'right', width: '5%', height: '5px' }} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './selectAddressTitle';
+import Title from 'app/modules/public/title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 
@@ -20,7 +20,7 @@ export class Mysettings extends React.Component {
           padding: '0px'
         }}
       >
-        <Title />
+        <Title name='地址' back='/createOrder' />
         <div style={mydiv}>
           <div>
             <ChevronRightRounded style={{ float: 'right', height: '35px' }} />

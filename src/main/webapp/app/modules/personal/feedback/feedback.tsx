@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './title';
+import Title from 'app/modules/public/title';
 import { Button, Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
 import { byteSize, setFileData } from 'react-jhipster';
 import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
@@ -72,7 +72,7 @@ export class Feedback extends React.Component<IFeedbackProps> {
           padding: '0px'
         }}
       >
-        <Title />
+        <Title name='问题反馈' back='/personal' />
         <AvForm onSubmit={this.handleSubmit}>
           <div
             style={{

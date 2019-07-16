@@ -1,6 +1,6 @@
 import React from 'react';
 import QRCode from 'qrcode.react';
-import Title from './title';
+import Title from 'app/modules/public/title';
 import { Button } from '@material-ui/core';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
@@ -62,7 +62,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           paddingTop: '35px'
         }}
       >
-        <Title />
+        <Title name='打印收款码' back='/incomepage' />
         <div
           style={{
             width: '100%',
@@ -81,11 +81,14 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
               bgColor="#ffffff"
             />
             <canvas id="myCanvas" width="414" height="621">
-              不可为空
+              画笔
             </canvas>
             <img id="qrcode-image" src="./content/images/income.png" />
           </div>
-          <div id="saveImage">不可为空</div>
+          {merchantEntity.id>0?(
+          <div id="saveImage">预览</div>):(
+            <div style={{textAlign:'center',width:'100%',marginTop:'40%'}}>点击下方<b><u>预览</u></b>刷新收款二维码</div>
+          )}
           <Button
             variant="contained"
             color={'secondary'}

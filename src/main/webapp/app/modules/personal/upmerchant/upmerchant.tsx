@@ -4,7 +4,7 @@ import { Button, Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
 import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { IRootState } from 'app/shared/reducers';
 import { RouteComponentProps } from 'react-router';
-import Title from './title';
+import Title from 'app/modules/public/title';
 import { resetMerchant, createMyEntityMerchant, getMyEntityMerchant } from 'app/requests/merchant/merchant.reducer';
 import { getBusinessEntities } from 'app/requests/merchant/business.reducer';
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
@@ -183,7 +183,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
             }</div>
         ) : (
           <div style={{ textAlign: 'left' }}>
-            <Title />
+            <Title name='商家入驻' back='/personal' />
             <AvForm onSubmit={this.handleSubmit}>
               <div
                 style={{
