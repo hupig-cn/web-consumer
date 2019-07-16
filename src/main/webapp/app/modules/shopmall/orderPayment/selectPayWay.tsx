@@ -3,7 +3,7 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
-import Radiobuttons from './radiobuttons';
+import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from './selectPayWayTitle';
 
 export interface ICreateOrderProp extends StateProps, DispatchProps {}

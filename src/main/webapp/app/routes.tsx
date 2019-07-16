@@ -18,7 +18,7 @@ import Feedback from 'app/modules/personal/feedback/feedback';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import Productdetail from 'app/modules/shopmall/productDetail/productdetail';
 import CreateOrder from 'app/modules/shopmall/orderPayment/createOrder';
-import AddAddress from 'app/modules/shopmall/orderPayment/addAddress';
+import AddAddress from 'app/modules/shopmall/orderPayment/selectAddress';
 import SelectPayway from 'app/modules/shopmall/orderPayment/selectPayWay';
 
 const Routes = () => (

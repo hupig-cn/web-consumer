@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './addAddressTitle';
+import Title from './selectAddressTitle';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 

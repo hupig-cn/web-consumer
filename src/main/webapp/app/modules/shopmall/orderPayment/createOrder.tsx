@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
-import Radiobuttons from './radiobuttons';
+import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from './createOrderTitle';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
