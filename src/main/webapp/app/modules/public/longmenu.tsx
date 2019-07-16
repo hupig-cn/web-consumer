@@ -219,7 +219,7 @@ export default function LongMenu() {
       <Link id="app-modules-consumer-quickaccess-button-link-incomepage" to="/incomepage" />
       <Link id="app-modules-consumer-quickaccess-button-link-sharepage" to="/sharepage" />
       <Link id="app-modules-consumer-quickaccess-button-link-productdetail" to="/productdetail" />
-      <Link id="app-modules-consumer-quickaccess-button-link-choosepayway" to="/choosepayway" />
+      <Link id="app-modules-consumer-quickaccess-button-link-createOrder" to="/createOrder" />
     </div>
   );
 }

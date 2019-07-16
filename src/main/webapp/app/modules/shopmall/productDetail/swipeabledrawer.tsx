@@ -105,7 +105,7 @@ export default function SwipeableTemporaryDrawer() {
             height: '38px'
           }}
           // tslint:disable-next-line: jsx-no-lambda
-          onClick={() => choosePayWay()}
+          onClick={() => createOrder()}
         >
           确认购买
         </button>
@@ -113,8 +113,8 @@ export default function SwipeableTemporaryDrawer() {
     </div>
   );
 
-  function choosePayWay() {
-    document.getElementById('app-modules-consumer-quickaccess-button-link-choosepayway').click();
+  function createOrder() {
+    document.getElementById('app-modules-consumer-quickaccess-button-link-createOrder').click();
     return null;
   }
 
@@ -126,10 +126,10 @@ export default function SwipeableTemporaryDrawer() {
           float: 'right',
           backgroundColor: '#fe4365',
           color: '#ffffff',
-          margin: '10px 20px 5px 0px',
+          margin: '10px 10px 5px 0px',
           width: '100px',
           fontSize: '0.8rem',
-          height: '30px'
+          height: '35px'
         }}
         onClick={toggleDrawer('bottom', true)}
       >
@@ -144,7 +144,7 @@ export default function SwipeableTemporaryDrawer() {
           margin: '10px 0px 5px 0px',
           width: '100px',
           fontSize: '0.8rem',
-          height: '30px'
+          height: '35px'
         }}
         onClick={toggleDrawer('bottom', true)}
       >
@@ -153,7 +153,7 @@ export default function SwipeableTemporaryDrawer() {
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', false)}>
         {fullList('bottom')}
       </SwipeableDrawer>
-      <Link id="app-modules-consumer-quickaccess-button-link-choosepayway" to="/choosepayway" />
+      <Link id="app-modules-consumer-quickaccess-button-link-createOrder" to="/createOrder" />
     </div>
   );
 }

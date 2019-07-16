@@ -20,7 +20,7 @@ export default function PrimarySearchAppBar() {
           textAlign: 'center'
         }}
       >
-        <Link to="/choosepayway">
+        <Link to="/createOrder">
           <ArrowBackIos
             style={{
               float: 'left',
@@ -28,7 +28,7 @@ export default function PrimarySearchAppBar() {
             }}
           />
         </Link>
-        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>地址</span>
+        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>订单支付</span>
         <span style={{ float: 'right', width: '15px', height: '5px' }} />
       </div>
     </div>
