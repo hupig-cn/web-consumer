@@ -36,7 +36,7 @@ export default function RadioButtonsGroup() {
 
   return (
     <div className={classes.root}>
-      <FormControl component="fieldset" className={classes.formControl}>
+      <FormControl variant="outlined" component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">支付方式</FormLabel>
         <RadioGroup aria-label="Gender" name="gender" className={classes.group} value={value} onChange={handleChange}>
           <FormControlLabel value="weixin" control={<Radio color="primary" />} label="微信" labelPlacement="end" />
