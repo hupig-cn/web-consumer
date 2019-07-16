@@ -6,9 +6,9 @@ import Divider from '@material-ui/core/Divider';
 import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from './selectPayWayTitle';
 
-export interface ICreateOrderProp extends StateProps, DispatchProps {}
+export interface ISelectPayWayProp extends StateProps, DispatchProps {}
 
-export class CreateOrder extends React.Component<ICreateOrderProp> {
+export class SelectPayWay extends React.Component<ISelectPayWayProp> {
   componentDidMount() {
     this.props.getSession();
   }
@@ -95,4 +95,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateOrder);
+)(SelectPayWay);
