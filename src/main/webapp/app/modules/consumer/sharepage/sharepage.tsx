@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './title';
+import Title from 'app/modules/public/title';
 import QRCode from 'qrcode.react';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
@@ -16,7 +16,7 @@ export class Sharepage extends React.Component<ISharepageProp> {
     const { account } = this.props;
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <Title />
+        <Title name="分享有礼" back="/" />
         <div
           style={{
             position: 'fixed',

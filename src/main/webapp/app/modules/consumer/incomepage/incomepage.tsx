@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './title';
+import Title from 'app/modules/public/title';
 import QRCode from 'qrcode.react';
 // tslint:disable-next-line: no-submodule-imports
 import ReceiptRounded from '@material-ui/icons/ReceiptRounded';
@@ -15,8 +15,7 @@ import { IRootState } from 'app/shared/reducers';
 import Error from 'app/modules/public/error';
 import Info from 'app/modules/public/info';
 
-export interface IIncomepageProp extends StateProps, DispatchProps {
-}
+export interface IIncomepageProp extends StateProps, DispatchProps {}
 
 export class Incomepage extends React.Component<IIncomepageProp> {
   componentDidMount() {
@@ -37,7 +36,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
           padding: '0px'
         }}
       >
-        <Title/>
+        <Title name="园积分收款" back="/" />
         <div
           style={{
             width: '100%',
@@ -56,7 +55,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                 {merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
                   <div>
                     {merchantEntity.state === '待审核' ? (
-                      <Info/>
+                      <Info />
                     ) : (
                       <div>
                         <div
@@ -86,16 +85,16 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                             </Link>
                           </div>
                           <div style={{ padding: '10px', textAlign: 'left', borderTop: '1px solid #00000025' }}>
-                            <ReceiptRounded style={{ marginTop: '-5px' }}/>
+                            <ReceiptRounded style={{ marginTop: '-5px' }} />
                             收款记录
-                            <ChevronRightRounded style={{ float: 'right' }}/>
+                            <ChevronRightRounded style={{ float: 'right' }} />
                           </div>
                         </div>
                         <div style={{ backgroundColor: '#ffffff', width: '100%', height: '100%', borderRadius: '3px' }}>
                           <div style={{ padding: '20px 10px 20px 10px', textAlign: 'left' }}>
-                            <AssignmentTurnedInRounded style={{ fill: '#fe4365', marginTop: '-5px' }}/>
+                            <AssignmentTurnedInRounded style={{ fill: '#fe4365', marginTop: '-5px' }} />
                             <span style={{ color: '#fe4365' }}>收款码贴纸</span>
-                            <ChevronRightRounded style={{ float: 'right' }}/>
+                            <ChevronRightRounded style={{ float: 'right' }} />
                             <span style={{ float: 'right' }}>3折园积分收款码</span>
                           </div>
                         </div>
@@ -116,7 +115,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                     >
                       <div style={{ color: '#fe4365', padding: '5px', backgroundColor: '#fe436515' }}>错误</div>
                       <div style={{ padding: '10px 10px 40px 10px' }}>获取商家收款码失败</div>
-                      <img src="./content/images/error.png"/>
+                      <img src="./content/images/error.png" />
                       <div style={{ padding: '40px 30px' }}>
                         <span>
                           你还不是商家，点击下方的
@@ -130,7 +129,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                     <div style={{ backgroundColor: '#ffffff', width: '100%', height: '100%', borderRadius: '3px' }}>
                       <div style={{ padding: '20px 10px 20px 10px', textAlign: 'left' }}>
                         <span style={{ color: '#fe4365' }}>成为商家，获取收款码</span>
-                        <ChevronRightRounded style={{ float: 'right' }}/>
+                        <ChevronRightRounded style={{ float: 'right' }} />
                         <Link to="/upmerchant">
                           <span style={{ float: 'right' }}>立即申请</span>
                         </Link>
@@ -140,7 +139,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                 )}
               </div>
             ) : (
-              <Error/>
+              <Error />
             )}
           </div>
         </div>

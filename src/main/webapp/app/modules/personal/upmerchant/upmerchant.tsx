@@ -4,7 +4,7 @@ import { Button, Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
 import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { IRootState } from 'app/shared/reducers';
 import { RouteComponentProps } from 'react-router';
-import Title from './title';
+import Title from 'app/modules/public/title';
 import { resetMerchant, createMyEntityMerchant, getMyEntityMerchant } from 'app/requests/merchant/merchant.reducer';
 import { getBusinessEntities } from 'app/requests/merchant/business.reducer';
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
@@ -164,10 +164,22 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     return (
       <div>
         {merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
-          <div>{merchantEntity.state === '待审核' ? <Info /> : <div>审核通过，跳转商家页面</div>}</div>
+          <div>
+            {merchantEntity.state === '待审核' ? (
+              <Info />
+            ) : (
+              <div style={{ width: '100%', textAlign: 'center', marginTop: '40%' }}>
+                正在跳转到商户端，如无跳转请<a href={'http://app.yuanscore.com:8082'}>点击此处</a>。
+                <script type="text/javascript">
+                  onload = function () {<span>setTimeout(go,3000)</span>}
+                  function go(){(location.href = 'http://app.yuanscore.com:8082')}
+                </script>
+              </div>
+            )}
+          </div>
         ) : (
           <div style={{ textAlign: 'left' }}>
-            <Title />
+            <Title name="商家入驻" back="/personal" />
             <AvForm onSubmit={this.handleSubmit}>
               <div
                 style={{

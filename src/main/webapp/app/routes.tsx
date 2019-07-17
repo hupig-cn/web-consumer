@@ -13,6 +13,7 @@ import Information from 'app/modules/information/information';
 import Personal from 'app/modules/personal/personal';
 import PageNotFound from 'app/shared/error/page-not-found';
 import Mysettings from 'app/modules/personal/settings/mysettings';
+import Reimageurl from 'app/modules/personal/settings/reimageurl';
 import Upmerchant from 'app/modules/personal/upmerchant/upmerchant';
 import Feedback from 'app/modules/personal/feedback/feedback';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
@@ -35,6 +36,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/exhibitionpage" component={Exhibitionpage} />
       <ErrorBoundaryRoute path="/sharepage" component={Sharepage} />
       <ErrorBoundaryRoute path="/mysettings" component={Mysettings} />
+      <ErrorBoundaryRoute path="/reimageurl" component={Reimageurl} />
       <ErrorBoundaryRoute path="/upmerchant" component={Upmerchant} />
       <ErrorBoundaryRoute path="/feedback" component={Feedback} />
       <ErrorBoundaryRoute path="/productdetail" component={Productdetail} />

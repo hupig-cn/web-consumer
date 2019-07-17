@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { Storage } from 'react-jhipster';
+import { ICrudPutAction, Storage } from 'react-jhipster';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { setLocale } from 'app/shared/reducers/locale';
+import { IMystring } from 'app/shared/model/mystring.model';
+import { cleanEntity } from 'app/shared/util/entity-utils';
 
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',
@@ -123,6 +125,13 @@ export const register = (login: any, password: any, lastName: any) => async (dis
   return dispatch({
     payload: axios.post('services/login/api/public/phone-user', { login, password, lastName })
   });
+};
+
+export const updateMyimgurl = (id: any, imageUrl: any) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.put('services/login/api/users', { id, imageUrl })
+  });
+  return result;
 };
 
 export const login = (username, password, rememberMe = false) => async (dispatch, getState) => {
