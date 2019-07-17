@@ -2,6 +2,7 @@ import React from 'react';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
 import Radiobuttons from './selectPayWayRadiobuttons';
@@ -34,7 +35,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             overflow: 'hidden'
           }}
         >
-          <Link to="/addAddress">
+          <Link to="/selectAddress">
             <div>
               <div>
                 <div>
@@ -77,28 +78,28 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
         </div>
         <Divider />
         {/*图片订单编号价格等信息*/}
-        <div style={{ height: '150px', margin: '15px 0px 15px 15px' }}>
-          <header>
+        <div style={{ height: '180px', margin: '15px 0px 15px 15px' }}>
+          <div>
             <div style={{ float: 'left', marginBottom: '10px' }}>
               <img style={{ height: '18px', width: '15px' }} src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'} />
             </div>
             <div>博媛官方旗舰店</div>
-          </header>
+          </div>
           <div style={{ width: '100%' }}>
-            <div style={{ width: '25%', float: 'left' }}>
+            <div style={{ height: '120px', width: '100px', float: 'left' }}>
               <img
-                style={{ height: '120px', width: '100px', marginTop: '10px', marginLeft: '-10px' }}
+                style={{ height: '120px', width: '100px' }}
                 src={'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'}
               />
             </div>
-            <div style={{ width: '50%', float: 'left', padding: '8px 0px 0px 0px', height: '120px' }}>
+            <div style={{ maxWidth: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
               <span>芙妍瑜生物多肽胶原蛋白眼贴膜弹嫩紧致去眼袋眼纹去黑眼圈眼膜 5片/盒</span>
             </div>
-            <div style={{ width: '20%', float: 'left' }}>
+            <div style={{ width: '60px', float: 'left' }}>
               <p style={{ color: 'red', fontSize: '0.5rem' }}>
                 <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> 863.00
               </p>
-              <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px' }}>
+              <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
                 <span>x1</span>
               </p>
             </div>

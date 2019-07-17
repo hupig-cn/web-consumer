@@ -3,7 +3,7 @@ import Title from './selectAddressTitle';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 
-export class Mysettings extends React.Component {
+export class SelectAddress extends React.Component {
   render() {
     const mydiv = {
       backgroundColor: '#ffffff',
@@ -23,7 +23,6 @@ export class Mysettings extends React.Component {
         <Title />
         <div style={mydiv}>
           <div>
-            <ChevronRightRounded style={{ float: 'right', height: '35px' }} />
             <div style={{ float: 'left' }}>
               <div>
                 <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>陈小杨&nbsp;&nbsp;&nbsp;&nbsp;137 1048 0479</span>
@@ -55,6 +54,7 @@ export class Mysettings extends React.Component {
                 广东广州番禺东环迎宾路832号ABP总部大厦1号楼2区802 510000
               </div>
             </div>
+            <ChevronRightRounded style={{ float: 'right', height: '35px' }} />
           </div>
           <div style={{ backgroundColor: '#00000005', width: '100%' }} />
         </div>
@@ -62,4 +62,4 @@ export class Mysettings extends React.Component {
     );
   }
 }
-export default Mysettings;
+export default SelectAddress;

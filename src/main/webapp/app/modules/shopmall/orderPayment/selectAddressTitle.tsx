@@ -29,7 +29,9 @@ export default function PrimarySearchAppBar() {
           />
         </Link>
         <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>地址</span>
-        <span style={{ float: 'right' }}>新增</span>
+        <Link to="/addAddress">
+          <span style={{ fontSize: '1rem', color: '#ffffff', float: 'right' }}>新增</span>
+        </Link>
       </div>
     </div>
   );
