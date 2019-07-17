@@ -74,43 +74,41 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function LongMenu(props) {
   const classes = useStyles();
-  const { account } = props;
+  const { account, state } = props;
 
   return (
     <div>
-      <div style={{
-        backgroundColor: '#fe4365',
-        height: '60px',
-        position: 'fixed',
-        top: '0px',
-        width: '100%',
-        zIndex: 1000
-      }}>
-        <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar}/>
+      <div
+        style={{
+          backgroundColor: '#fe4365',
+          height: '60px',
+          position: 'fixed',
+          top: '0px',
+          width: '100%',
+          zIndex: 1000
+        }}
+      >
+        <Avatar alt="photo" src={`data:${state.fileContentType};base64,${state.file}`} className={classes.bigAvatar} />
         <div className={classes.namePlusSetting}>
-            <span className={classes.name}>
-              {account.firstName}
-              <Link style={{ float: 'right' }} to="/mysettings">
-                <SettingsRounded style={{ fill: '#fffde5' }}/>
-              </Link>
-              <span style={{ float: 'right', width: '5px', height: '5px' }}/>
-              <Link style={{ float: 'right' }} to="/">
-                <ShoppingCartRounded style={{ fill: '#fffde5' }}/>
-              </Link>
-            </span>
+          <span className={classes.name}>
+            {account.firstName}
+            <Link style={{ float: 'right' }} to="/mysettings">
+              <SettingsRounded style={{ fill: '#fffde5' }} />
+            </Link>
+            <span style={{ float: 'right', width: '5px', height: '5px' }} />
+            <Link style={{ float: 'right' }} to="/">
+              <ShoppingCartRounded style={{ fill: '#fffde5' }} />
+            </Link>
+          </span>
           <div className={classes.login}>{account.login}</div>
         </div>
       </div>
-      <BottomNavigation
-        style={{ position: 'fixed', top: '58px', height: 'auto', zIndex: 1000 }}
-        showLabels
-        className={classes.root}
-      >
-        <BottomNavigationAction label="积分" value="scan" icon={'0'}/>
-        <BottomNavigationAction label="余额" value="pay" icon={'0.00'}/>
-        <BottomNavigationAction label="优惠卷" value="share" icon={'0'}/>
+      <BottomNavigation style={{ position: 'fixed', top: '58px', height: 'auto', zIndex: 1000 }} showLabels className={classes.root}>
+        <BottomNavigationAction label="积分" value="scan" icon={'0'} />
+        <BottomNavigationAction label="余额" value="pay" icon={'0.00'} />
+        <BottomNavigationAction label="优惠卷" value="share" icon={'0'} />
       </BottomNavigation>
-      <div style={{ height: '130px' }}/>
+      <div style={{ height: '130px' }} />
     </div>
   );
 }

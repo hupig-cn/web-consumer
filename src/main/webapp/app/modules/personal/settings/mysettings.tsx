@@ -23,6 +23,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       });
   }
   render() {
+    const { account } = this.props;
     const mydiv = {
       backgroundColor: '#ffffff',
       padding: '15px 5px 15px 15px',
@@ -39,21 +40,21 @@ export class Mysettings extends React.Component<IMysettingsProp> {
           padding: '0px'
         }}
       >
-        <Title name='设置' back='/personal' />
+        <Title name="设置" back="/personal" />
         <div style={mydiv}>
           <span style={{ float: 'left', marginTop: '16px' }}>头像</span>
           <img
-            style={{ width: '50px', height: '50px', marginRight: '10px',borderRadius:'5px' }}
+            style={{ width: '50px', height: '50px', marginRight: '10px', borderRadius: '5px' }}
             src={`data:${this.state.fileContentType};base64,${this.state.file}`}
           />
-          <Link to='/reimageurl'>
-          <span>更换</span>
-          <ChevronRightRounded style={{ marginTop: '-4px' }} />
+          <Link to="/reimageurl">
+            <span>更换</span>
+            <ChevronRightRounded style={{ marginTop: '-4px' }} />
           </Link>
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>昵称</span>
-          <span>我的名字</span>
+          <span>{account.firstName}</span>
           <ChevronRightRounded style={{ float: 'right' }} />
         </div>
         <div style={mydiv}>

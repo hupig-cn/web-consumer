@@ -9,12 +9,20 @@ import Advertising from './advertising';
 import VipService from './vipservice';
 import Mytool from 'app/modules/personal/mytool';
 import Error from 'app/modules/public/error';
+import { getMyImg } from 'app/requests/basic/files.reducer';
 
 export interface IPersonalProp extends StateProps, DispatchProps {}
 
 export class Personal extends React.Component<IPersonalProp> {
+  state = { file: '', fileContentType: '' };
   componentDidMount() {
     this.props.getSession();
+    this.props
+      .getMyImg(this.props.account.imageUrl)
+      // @ts-ignore
+      .then(photo => {
+        this.setState({ file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
+      });
   }
 
   render() {
@@ -23,7 +31,7 @@ export class Personal extends React.Component<IPersonalProp> {
       <div>
         {account && account.login ? (
           <div className="jh-personal">
-            <Users account={account} />
+            <Users account={account} state={this.state} />
             <Orders />
             <Advertising />
             <VipService />
@@ -37,12 +45,13 @@ export class Personal extends React.Component<IPersonalProp> {
   }
 }
 
-const mapStateToProps = ({ authentication }: IRootState) => ({
+const mapStateToProps = ({ authentication, files }: IRootState) => ({
   account: authentication.account,
-  isAuthenticated: authentication.isAuthenticated
+  isAuthenticated: authentication.isAuthenticated,
+  filesEntity: files.entity
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, getMyImg };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

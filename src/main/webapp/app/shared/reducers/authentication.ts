@@ -3,8 +3,8 @@ import { ICrudPutAction, Storage } from 'react-jhipster';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { setLocale } from 'app/shared/reducers/locale';
-import { IMystring } from "app/shared/model/mystring.model";
-import { cleanEntity } from "app/shared/util/entity-utils";
+import { IMystring } from 'app/shared/model/mystring.model';
+import { cleanEntity } from 'app/shared/util/entity-utils';
 
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',
@@ -127,9 +127,9 @@ export const register = (login: any, password: any, lastName: any) => async (dis
   });
 };
 
-export const updateMyimgurl = (id:any,imageUrl:any) => async dispatch => {
+export const updateMyimgurl = (id: any, login: any, imageUrl: any) => async dispatch => {
   const result = await dispatch({
-    payload: axios.put('services/login/api/users', {id,imageUrl})
+    payload: axios.put('services/login/api/users-ImageOrName', { id, login, imageUrl })
   });
   return result;
 };
