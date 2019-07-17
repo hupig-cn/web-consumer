@@ -43,11 +43,13 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         <div style={mydiv}>
           <span style={{ float: 'left', marginTop: '16px' }}>头像</span>
           <img
-            style={{ width: '50px', height: '50px', marginRight: '10px' }}
+            style={{ width: '50px', height: '50px', marginRight: '10px',borderRadius:'5px' }}
             src={`data:${this.state.fileContentType};base64,${this.state.file}`}
           />
+          <Link to='/reimageurl'>
           <span>更换</span>
           <ChevronRightRounded style={{ marginTop: '-4px' }} />
+          </Link>
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>昵称</span>
