@@ -16,7 +16,7 @@ export class Sharepage extends React.Component<ISharepageProp> {
     const { account } = this.props;
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <Title name='分享有礼' back='/' />
+        <Title name="分享有礼" back="/" />
         <div
           style={{
             position: 'fixed',

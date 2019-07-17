@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { ICrudPutAction, Storage } from 'react-jhipster';
+import { Storage } from 'react-jhipster';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { setLocale } from 'app/shared/reducers/locale';
-import { IMystring } from 'app/shared/model/mystring.model';
-import { cleanEntity } from 'app/shared/util/entity-utils';
 
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',

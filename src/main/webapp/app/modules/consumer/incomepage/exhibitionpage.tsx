@@ -62,7 +62,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           paddingTop: '35px'
         }}
       >
-        <Title name='打印收款码' back='/incomepage' />
+        <Title name="打印收款码" back="/incomepage" />
         <div
           style={{
             width: '100%',
@@ -85,9 +85,16 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
             </canvas>
             <img id="qrcode-image" src="./content/images/income.png" />
           </div>
-          {merchantEntity.id>0?(
-          <div id="saveImage">预览</div>):(
-            <div style={{textAlign:'center',width:'100%',marginTop:'40%'}}>点击下方<b><u>预览</u></b>刷新收款二维码</div>
+          {merchantEntity.id > 0 ? (
+            <div id="saveImage">预览</div>
+          ) : (
+            <div style={{ textAlign: 'center', width: '100%', marginTop: '40%' }}>
+              点击下方
+              <b>
+                <u>预览</u>
+              </b>
+              刷新收款二维码
+            </div>
           )}
           <Button
             variant="contained"

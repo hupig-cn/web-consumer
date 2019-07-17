@@ -2,6 +2,7 @@ import React from 'react';
 import Title from 'app/modules/public/title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
+// tslint:disable-next-line: no-submodule-imports
 import DoneRounded from '@material-ui/icons/DoneRounded';
 import { Link } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';

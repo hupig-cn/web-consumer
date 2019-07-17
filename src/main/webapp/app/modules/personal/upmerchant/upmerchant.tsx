@@ -165,25 +165,21 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
       <div>
         {merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
           <div>
-            {merchantEntity.state === '待审核' ?
-              <Info /> :
-              <div style={{width:'100%',textAlign:'center',marginTop:'40%'}}>
+            {merchantEntity.state === '待审核' ? (
+              <Info />
+            ) : (
+              <div style={{ width: '100%', textAlign: 'center', marginTop: '40%' }}>
                 正在跳转到商户端，如无跳转请<a href={'http://app.yuanscore.com:8082'}>点击此处</a>。
                 <script type="text/javascript">
-                  onload = function () {
-                  <span>
-                    setTimeout(go,3000)
-                  </span>
-                }
-                  function go(){
-                  location.href="http://app.yuanscore.com:8082"
-                }
+                  onload = function () {<span>setTimeout(go,3000)</span>}
+                  function go(){(location.href = 'http://app.yuanscore.com:8082')}
                 </script>
               </div>
-            }</div>
+            )}
+          </div>
         ) : (
           <div style={{ textAlign: 'left' }}>
-            <Title name='商家入驻' back='/personal' />
+            <Title name="商家入驻" back="/personal" />
             <AvForm onSubmit={this.handleSubmit}>
               <div
                 style={{
@@ -339,10 +335,10 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                           <option value="" key="0" />
                           {businesss
                             ? businesss.map(otherEntity => (
-                              <option value={otherEntity.name} key={otherEntity.id}>
-                                {otherEntity.name}
-                              </option>
-                            ))
+                                <option value={otherEntity.name} key={otherEntity.id}>
+                                  {otherEntity.name}
+                                </option>
+                              ))
                             : null}
                         </AvInput>
                       </span>
@@ -356,10 +352,10 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                           <option value="" key="0" />
                           {provincess
                             ? provincess.map(province => (
-                              <option value={province.name} key={province.id}>
-                                {province.name}
-                              </option>
-                            ))
+                                <option value={province.name} key={province.id}>
+                                  {province.name}
+                                </option>
+                              ))
                             : null}
                         </AvInput>
                       </span>
@@ -373,10 +369,10 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                           <option value="" key="0" />
                           {cityss
                             ? cityss.map(city => (
-                              <option value={city.name} key={city.id}>
-                                {city.name}
-                              </option>
-                            ))
+                                <option value={city.name} key={city.id}>
+                                  {city.name}
+                                </option>
+                              ))
                             : null}
                         </AvInput>
                       </span>
@@ -390,10 +386,10 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                           <option value="" key="0" />
                           {countyss
                             ? countyss.map(county => (
-                              <option value={county.name} key={county.id}>
-                                {county.name}
-                              </option>
-                            ))
+                                <option value={county.name} key={county.id}>
+                                  {county.name}
+                                </option>
+                              ))
                             : null}
                         </AvInput>
                       </span>

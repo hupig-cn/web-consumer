@@ -1,13 +1,13 @@
 import React from 'react';
 import Title from 'app/modules/public/title';
-import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
 import { Button } from '@material-ui/core';
-import { Col, ModalFooter, Row } from 'reactstrap';
-import { byteSize, setFileData } from 'react-jhipster';
+import { ModalFooter } from 'reactstrap';
+import { setFileData } from 'react-jhipster';
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
 import { toast } from 'react-toastify';
 import { updateMyimgurl } from 'app/shared/reducers/authentication';

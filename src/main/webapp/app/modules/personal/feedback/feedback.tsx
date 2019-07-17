@@ -72,7 +72,7 @@ export class Feedback extends React.Component<IFeedbackProps> {
           padding: '0px'
         }}
       >
-        <Title name='问题反馈' back='/personal' />
+        <Title name="问题反馈" back="/personal" />
         <AvForm onSubmit={this.handleSubmit}>
           <div
             style={{
