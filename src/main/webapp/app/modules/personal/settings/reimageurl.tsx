@@ -8,8 +8,10 @@ import { getMyImg } from 'app/requests/basic/files.reducer';
 import { Button } from '@material-ui/core';
 import { Col, ModalFooter, Row } from 'reactstrap';
 import { byteSize, setFileData } from 'react-jhipster';
+// tslint:disable-next-line: no-duplicate-imports
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
 import { toast } from 'react-toastify';
+// tslint:disable-next-line: no-duplicate-imports
 import { updateMyimgurl } from 'app/shared/reducers/authentication';
 
 export interface IMysettingsProp extends StateProps, DispatchProps {}
@@ -28,11 +30,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         if (!isNaN(result)) {
           // @ts-ignore
           // tslint:disable-next-line: no-shadowed-variable
-          this.props.updateMyimgurl(this.props.account.id, result).then((result: any) => {
-            console.log('输出');
-            console.log(result);
-            console.log('结束');
-          });
+          this.props.updateMyimgurl(this.props.account.id, result).then((result: any) => {});
         } else {
           toast.info('提示：头像上传失败。');
         }
