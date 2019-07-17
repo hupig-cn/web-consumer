@@ -6,14 +6,14 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
 import { Button } from '@material-ui/core';
-import { Col, ModalFooter, Row } from "reactstrap";
-import { byteSize, setFileData } from "react-jhipster";
+import { Col, ModalFooter, Row } from 'reactstrap';
+import { byteSize, setFileData } from 'react-jhipster';
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import { updateMyimgurl } from 'app/shared/reducers/authentication';
+import { RouteComponentProps } from 'react-router';
 
-export interface IMysettingsProp extends StateProps, DispatchProps {
-}
+export interface IMysettingsProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
   state = { file: '', fileContentType: '' };
@@ -28,18 +28,19 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       fileid.then((result: number) => {
         if (!isNaN(result)) {
           // @ts-ignore
-          // tslint:disable-next-line: no-shadowed-variable
-          this.props.updateMyimgurl(this.props.account.id,result).then((result: any) => {
-            console.log("输出");
-           console.log(result);
-            console.log("结束");
+          this.props.updateMyimgurl(this.props.account.id, this.props.account.login, result).then((result: any) => {
+            if (result.value.data === '修改成功') {
+              toast.success('提示：修改成功。');
+              this.props.history.push('/mysettings');
+            } else {
+              toast.error(result.value.data);
+            }
           });
         } else {
-          toast.info('提示：头像上传失败。');
+          toast.error('提示：头像上传失败。');
         }
       });
     }
-
   };
 
   componentDidMount() {
@@ -56,17 +57,20 @@ export class Mysettings extends React.Component<IMysettingsProp> {
     document.getElementById('upmerchant-upmerchant-uploadphoto-shop').click();
   };
   onBlobChange = (isAnImage, name) => event => {
-    setFileData(event, (contentType, data) => {
+    setFileData(
+      event,
+      (contentType, data) => {
         this.props.setBlob(name, data, contentType);
         this.setState({ file: data, fileContentType: contentType });
-      }
-      , isAnImage)
+      },
+      isAnImage
+    );
   };
 
   render() {
     return (
       <div style={{ width: '100%', height: '100%', margin: '30px 0px 0px 0px', textAlign: 'center' }}>
-        <Title name='更换头像' back='/mysettings'/>
+        <Title name="更换头像" back="/mysettings" />
         <div>
           <AvForm onSubmit={this.handleSubmit}>
             <AvGroup>
@@ -79,7 +83,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
                     onChange={this.onBlobChange(true, 'fileI')}
                     accept="image/*"
                   />
-                  <AvInput type="hidden" name="imageurl" value={this.state.file}/>
+                  <AvInput type="hidden" name="imageurl" value={this.state.file} />
                   {this.state.file ? (
                     <div style={{ position: 'relative', paddingTop: '100%' }}>
                       <img
@@ -92,9 +96,12 @@ export class Mysettings extends React.Component<IMysettingsProp> {
               </AvGroup>
             </AvGroup>
             <ModalFooter style={{ display: 'block', borderTop: '0px' }}>
-              <Button type='button' variant="contained" color="default" style={{ margin: '10px 10px' }}
-                      onClick={this.uptitlephotoshop}>选择头像</Button>
-              <Button variant="contained" color="secondary" style={{ margin: '10px 10px' }}>保存修改</Button>
+              <Button type="button" variant="contained" color="default" style={{ margin: '10px 10px' }} onClick={this.uptitlephotoshop}>
+                选择头像
+              </Button>
+              <Button type="submit" variant="contained" color="secondary" style={{ margin: '10px 10px' }}>
+                保存修改
+              </Button>
             </ModalFooter>
           </AvForm>
         </div>
