@@ -125,6 +125,7 @@ export const register = (login: any, password: any, lastName: any) => async (dis
   });
 };
 
+// tslint:disable-next-line: no-shadowed-variable
 export const updateMyimgurl = (id: any, login: any, imageUrl: any) => async dispatch => {
   const result = await dispatch({
     payload: axios.put('services/login/api/users-ImageOrName', { id, login, imageUrl })

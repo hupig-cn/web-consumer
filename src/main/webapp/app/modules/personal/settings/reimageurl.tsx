@@ -8,8 +8,10 @@ import { getMyImg } from 'app/requests/basic/files.reducer';
 import { Button } from '@material-ui/core';
 import { ModalFooter } from 'reactstrap';
 import { setFileData } from 'react-jhipster';
+// tslint:disable-next-line: no-duplicate-imports
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
 import { toast } from 'react-toastify';
+// tslint:disable-next-line: no-duplicate-imports
 import { updateMyimgurl } from 'app/shared/reducers/authentication';
 import { RouteComponentProps } from 'react-router';
 
@@ -28,6 +30,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       fileid.then((result: number) => {
         if (!isNaN(result)) {
           // @ts-ignore
+          // tslint:disable-next-line: no-shadowed-variable
           this.props.updateMyimgurl(this.props.account.id, this.props.account.login, result).then((result: any) => {
             if (result.value.data === '修改成功') {
               toast.success('提示：修改成功。');

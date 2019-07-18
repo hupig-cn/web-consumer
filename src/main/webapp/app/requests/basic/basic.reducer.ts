@@ -136,3 +136,11 @@ export const createFeedback = (name, title, content, imageurl, creator) => async
 export const resetBasic = () => ({
   type: ACTION_TYPES.RESET
 });
+
+export const getDefaultAddress: ICrudGetAction<IMystring> = (id: string) => {
+  const requestUrl = `services/basic/api/get-default-address/${id}`;
+  return {
+    type: ACTION_TYPES.FETCH_BASIC,
+    payload: axios.get<IMystring>(requestUrl)
+  };
+};
