@@ -13,15 +13,29 @@ import { getMyImg } from 'app/requests/basic/files.reducer';
 export interface IMysettingsProp extends StateProps, DispatchProps {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { file: '', fileContentType: '' };
+  state = { imageUrl:'', file: '', fileContentType: '' };
   componentDidMount() {
     this.props.getSession();
     this.props
       .getMyImg(this.props.account.imageUrl)
       // @ts-ignore
       .then(photo => {
-        this.setState({ file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
+        this.setState({imageUrl: photo.value.data.id , file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
       });
+  }
+  componentWillReceiveProps(){
+    if(this.props.account.imageUrl.toString()!== this.state.imageUrl.toString()) {
+      this.props
+        .getMyImg(this.props.account.imageUrl)
+        // @ts-ignore
+        .then(photo => {
+          this.setState({
+            imageUrl: photo.value.data.id,
+            file: photo.value.data.file,
+            fileContentType: photo.value.data.fileContentType
+          });
+        });
+    }
   }
   render() {
     const { account } = this.props;
