@@ -2,8 +2,30 @@ import React from 'react';
 import SelectAddTitle from './selectAddressTitle';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
+import { getUserAddress } from 'app/requests/basic/basic.reducer';
+import { getSession } from 'app/shared/reducers/authentication';
+import { connect } from 'react-redux';
+import { messages } from 'app/config/constants';
 
-export class SelectAddress extends React.Component {
+export interface ISelectAddressProp extends StateProps, DispatchProps {}
+
+export class SelectAddress extends React.Component<ISelectAddressProp> {
+  state = {
+    messages: []
+  };
+
+  componentDidMount() {
+    // @ts-ignore
+    this.props.getSession().then(respone => {
+      // @ts-ignore
+      this.props.getUserAddress(respone.id).then(res => {
+        this.setState({
+          messages: res.value.data.data
+        });
+      });
+    });
+  }
+
   render() {
     const mydiv = {
       backgroundColor: '#ffffff',
@@ -11,6 +33,8 @@ export class SelectAddress extends React.Component {
       margin: '1px 0px',
       height: '100px'
     };
+    // tslint:disable-next-line: no-console
+    console.log(this.state.messages);
     return (
       <div
         style={{
@@ -22,44 +46,65 @@ export class SelectAddress extends React.Component {
       >
         <SelectAddTitle />
         <div style={mydiv}>
-          <div>
-            <div style={{ float: 'left' }}>
+          <React.Fragment>
+            {this.state.messages.map((message, index) => {
+              // tslint:disable-next-line: no-unused-expression
               <div>
-                <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>陈小杨&nbsp;&nbsp;&nbsp;&nbsp;137 1048 0479</span>
-                <span
-                  style={{
-                    margin: '0px 0px 0px 10px',
-                    display: 'inline-block',
-                    padding: '0px 0.14rem',
-                    background: 'rgb(255, 70, 70)',
-                    fontSize: '0.3rem',
-                    color: 'white',
-                    borderRadius: '20px'
-                  }}
-                >
-                  默认地址
-                </span>
-              </div>
-              <div
-                style={{
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  fontSize: '0.9rem',
-                  whiteSpace: 'nowrap',
-                  color: 'rgb(102, 102, 102)',
-                  marginTop: '0.1rem',
-                  maxWidth: '320px'
-                }}
-              >
-                广东广州番禺东环迎宾路832号ABP总部大厦1号楼2区802 510000
-              </div>
-            </div>
-            <ChevronRightRounded style={{ float: 'right', height: '35px' }} />
-          </div>
+                <div style={{ float: 'left' }}>
+                  <div>
+                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+                      66{message.consignee}&nbsp;&nbsp;&nbsp;&nbsp;{message.mobile}
+                    </span>
+                    <span
+                      style={{
+                        margin: '0px 0px 0px 10px',
+                        display: 'inline-block',
+                        padding: '0px 0.14rem',
+                        background: 'rgb(255, 70, 70)',
+                        fontSize: '0.3rem',
+                        color: 'white',
+                        borderRadius: '20px'
+                      }}
+                    >
+                      默认地址
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      fontSize: '0.9rem',
+                      whiteSpace: 'nowrap',
+                      color: 'rgb(102, 102, 102)',
+                      marginTop: '0.1rem',
+                      maxWidth: '320px'
+                    }}
+                  >
+                    {message.address}
+                  </div>
+                </div>
+                <ChevronRightRounded style={{ float: 'right', height: '35px' }} />
+              </div>;
+            })}
+          </React.Fragment>
           <div style={{ backgroundColor: '#00000005', width: '100%' }} />
         </div>
       </div>
     );
   }
 }
-export default SelectAddress;
+
+const mapStateToProps = storeState => ({
+  account: storeState.authentication.account,
+  isAuthenticated: storeState.authentication.isAuthenticated
+});
+
+const mapDispatchToProps = { getSession, getUserAddress };
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectAddress);

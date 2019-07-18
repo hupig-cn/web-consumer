@@ -145,3 +145,47 @@ export const getDefaultAddress: ICrudGetAction<IAddress> = (id: string) => {
     payload: axios.get<IAddress>(requestUrl)
   };
 };
+
+export const getUserAddress: ICrudGetAction<IAddress> = (id: string) => {
+  const requestUrl = `services/basic/api/get-user-address/${id}`;
+  return {
+    type: ACTION_TYPES.FETCH_BASIC,
+    payload: axios.get<IAddress>(requestUrl)
+  };
+};
+
+export const insertUserAddress = (
+  areaid: any,
+  userid: any,
+  address: any,
+  consignee: any,
+  isdefault: any,
+  mobile: any
+) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/insert-user-address', { areaid, userid, address, consignee, isdefault, mobile })
+  });
+  return result;
+};
+
+export const updateUserAddress = (
+  id: any,
+  areaid: any,
+  userid: any,
+  address: any,
+  consignee: any,
+  isdefault: any,
+  mobile: any
+) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/update-user-address', { id, areaid, userid, address, consignee, isdefault, mobile })
+  });
+  return result;
+};
+
+export const setDefaultAddress = (id: any) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/set-default-address', { id })
+  });
+  return result;
+};
