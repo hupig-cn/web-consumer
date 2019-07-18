@@ -108,6 +108,7 @@ export const getSession = () => async (dispatch, getState) => {
     const langKey = Storage.session.get('locale', account.langKey);
     await dispatch(setLocale(langKey));
   }
+  return account;
 };
 
 // tslint:disable-next-line: ter-arrow-body-style

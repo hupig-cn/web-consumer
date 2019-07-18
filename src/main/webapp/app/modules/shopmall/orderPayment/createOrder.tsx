@@ -2,18 +2,33 @@ import React from 'react';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
 import Title from 'app/modules/public/title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
-
+import { getDefaultAddress } from 'app/requests/basic/basic.reducer';
 export interface ICreateOrderProp extends StateProps, DispatchProps {}
 
 export class CreateOrder extends React.Component<ICreateOrderProp> {
+  state = {
+    consignee: '陈小杨',
+    mobile: '13866668888',
+    address: '广州市广州大道中988号圣丰广场国际金融中心25楼'
+  };
+
   componentDidMount() {
-    this.props.getSession();
+    // @ts-ignore
+    this.props.getSession().then(respone => {
+      // @ts-ignore
+      this.props.getDefaultAddress(respone.id).then(res => {
+        this.setState({
+          consignee: res.value.data.data[0].consignee,
+          mobile: res.value.data.data[0].mobile,
+          address: res.value.data.data[0].address
+        });
+      });
+    });
   }
 
   selectpayway() {
@@ -26,9 +41,6 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
       <div style={{ height: '100%' }}>
         {/*头部标题*/}
         <Title name="创建订单" back="/productdetail" />
-        <Link to="/addAddress">
-          <span style={{ fontSize: '1rem', color: '#ffffff', float: 'right' }}>新增</span>
-        </Link>
         {/*地址模块*/}
         <div
           style={{
@@ -42,7 +54,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               <div>
                 <div>
                   <span style={{ fontSize: '1.0rem', color: '#000000' }}>
-                    收货人: 陈小杨 &nbsp;&nbsp;&nbsp;&nbsp;手机号码: 137 1048 0479
+                    收货人: {this.state.consignee} &nbsp;&nbsp;&nbsp;&nbsp;手机号码: {this.state.mobile}
                   </span>
                 </div>
                 <div
@@ -69,7 +81,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                     marginTop: '0.1rem'
                   }}
                 >
-                  广东广州番禺东环迎宾路832号ABP总部大厦1号楼2区802
+                  {this.state.address}
                 </div>
               </div>
               {/*<div>*/}
@@ -185,7 +197,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, getDefaultAddress };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

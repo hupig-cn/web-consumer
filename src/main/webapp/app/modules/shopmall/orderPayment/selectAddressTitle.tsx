@@ -20,7 +20,7 @@ export default function PrimarySearchAppBar() {
           textAlign: 'center'
         }}
       >
-        <Link to="/selectAddress">
+        <Link to="/createOrder">
           <ArrowBackIos
             style={{
               float: 'left',
@@ -28,8 +28,10 @@ export default function PrimarySearchAppBar() {
             }}
           />
         </Link>
-        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>新增地址</span>
-        <span style={{ float: 'right', width: '15px', height: '5px' }} />
+        <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>地址</span>
+        <Link to="/addAddress">
+          <span style={{ fontSize: '1rem', color: '#ffffff', float: 'right' }}>新增</span>
+        </Link>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 // tslint:disable-next-line: no-submodule-imports
 import TextField from '@material-ui/core/TextField';
-import Title from './addAddressTitle';
+import Title from 'app/modules/public/title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
 // tslint:disable-next-line: no-submodule-imports
@@ -55,7 +55,7 @@ export default function OutlinedTextFields() {
 
   return (
     <div>
-      <Title />
+      <Title name="新增地址" back="/selectAddress" />
       <form
         style={{
           margin: '45px 0px 0px 0px'

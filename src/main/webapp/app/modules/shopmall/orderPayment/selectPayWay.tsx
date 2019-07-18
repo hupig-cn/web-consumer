@@ -42,7 +42,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
             <div style={{ width: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
               <span>芙妍瑜生物多肽胶原蛋白眼贴膜弹嫩紧致去眼袋眼纹去黑眼圈眼膜 5片/盒</span>
             </div>
-            <div style={{ width: '80px', float: 'left' }}>
+            <div style={{ width: '75px', float: 'left' }}>
               <p style={{ color: 'red', fontSize: '0.5rem' }}>
                 <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> 863.00
               </p>
