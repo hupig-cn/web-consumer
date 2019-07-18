@@ -15,7 +15,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
     this.props.resetMerchant();
     this.props.getMyEntityMerchant(this.props.account.id);
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     if (this.props.merchantEntity.id > 0) {
       const qrcode = document.getElementById('qrcode-canvas-key') as HTMLCanvasElement; // 二维码
       const bgImg = document.getElementById('qrcode-image') as HTMLImageElement;
@@ -71,7 +71,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           }}
         >
           <div style={{ display: 'none' }}>
-            {merchantEntity.id>0?(
+            {merchantEntity.id > 0 ? (
               // @ts-ignore
               <QRCode
                 id="qrcode-canvas-key"
@@ -81,23 +81,16 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
                 fgColor="#000000"
                 bgColor="#ffffff"
               />
-            ):(
+            ) : (
               // @ts-ignore
-              <QRCode
-                id="qrcode-canvas-key"
-                value={'error'}
-                renderAs="canvas"
-                size={233}
-                fgColor="#ffffff"
-                bgColor="#ffffff"
-              />
+              <QRCode id="qrcode-canvas-key" value={'error'} renderAs="canvas" size={233} fgColor="#ffffff" bgColor="#ffffff" />
             )}
             <canvas id="myCanvas" width="414" height="621">
               {' '}
             </canvas>
             <img id="qrcode-image" src="./content/images/income.png" />
           </div>
-            <div id="saveImage">{' '}</div>
+          <div id="saveImage"> </div>
           <Button
             variant="contained"
             color={'secondary'}

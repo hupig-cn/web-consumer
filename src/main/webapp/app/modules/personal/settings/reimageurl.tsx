@@ -24,9 +24,9 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       toast.info('提示：请上传头像。');
     } else if (imageurl.length > 8000000) {
       toast.info('提示：头像图片过大，请上传6M以内的文件。');
-    } else if(this.props.filesEntity.fileIContentType===undefined) {
+    } else if (this.props.filesEntity.fileIContentType === undefined) {
       toast.info('提示：请上传新的头像文件');
-    }else{
+    } else {
       const fileid = this.props.createFile(this.props.account.id, imageurl.length, imageurl, this.props.filesEntity.fileIContentType);
       // @ts-ignore
       fileid.then((result: number) => {

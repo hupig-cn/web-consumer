@@ -4,6 +4,7 @@ import { ICrudGetAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipste
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { IMystring, defaultValue } from 'app/shared/model/mystring.model';
+import { IAddress } from 'app/shared/model/address.model';
 
 export const ACTION_TYPES = {
   FETCH_BASIC: 'basic/FETCH_BASIC',
@@ -137,10 +138,54 @@ export const resetBasic = () => ({
   type: ACTION_TYPES.RESET
 });
 
-export const getDefaultAddress: ICrudGetAction<IMystring> = (id: string) => {
+export const getDefaultAddress: ICrudGetAction<IAddress> = (id: string) => {
   const requestUrl = `services/basic/api/get-default-address/${id}`;
   return {
     type: ACTION_TYPES.FETCH_BASIC,
-    payload: axios.get<IMystring>(requestUrl)
+    payload: axios.get<IAddress>(requestUrl)
   };
+};
+
+export const getUserAddress: ICrudGetAction<IAddress> = (id: string) => {
+  const requestUrl = `services/basic/api/get-user-address/${id}`;
+  return {
+    type: ACTION_TYPES.FETCH_BASIC,
+    payload: axios.get<IAddress>(requestUrl)
+  };
+};
+
+export const insertUserAddress = (
+  areaid: any,
+  userid: any,
+  address: any,
+  consignee: any,
+  isdefault: any,
+  mobile: any
+) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/insert-user-address', { areaid, userid, address, consignee, isdefault, mobile })
+  });
+  return result;
+};
+
+export const updateUserAddress = (
+  id: any,
+  areaid: any,
+  userid: any,
+  address: any,
+  consignee: any,
+  isdefault: any,
+  mobile: any
+) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/update-user-address', { id, areaid, userid, address, consignee, isdefault, mobile })
+  });
+  return result;
+};
+
+export const setDefaultAddress = (id: any) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/set-default-address', { id })
+  });
+  return result;
 };
