@@ -9,19 +9,21 @@ import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
+import { updateMyName } from 'app/shared/reducers/authentication';
+import { toast } from "react-toastify";
 
 export interface IMysettingsProp extends StateProps, DispatchProps {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { imageUrl: '', file: '', fileContentType: '' };
+  state = { imageUrl: '', file: '', fileContentType: '',open:false };
   componentDidMount() {
     this.props.getSession();
-    this.props
-      .getMyImg(this.props.account.imageUrl)
-      // @ts-ignore
-      .then(photo => {
-        this.setState({ imageUrl: photo.value.data.id, file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
-      });
   }
   componentWillReceiveProps() {
     if (this.props.account.imageUrl.toString() !== this.state.imageUrl.toString()) {
@@ -37,6 +39,29 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         });
     }
   }
+  handleClickOpen = () => {
+    this.setState({open:true});
+  };
+
+  handleClose = () => {
+    this.setState({open:false});
+  };
+  handleOk = () => {
+    var name = document.getElementById('mysetting-remove-name')as HTMLInputElement;
+    if (name.value.trim().length>0){
+      // @ts-ignore
+      this.props.updateMyName(this.props.account.id, this.props.account.login,name.value.trim()).then((result: any) => {
+        if (result.value.data === '修改成功') {
+          this.props.getSession();
+          toast.success('提示：修改成功。');
+        } else {
+          toast.error(result.value.data);
+        }
+      });
+    }
+    this.setState({open:false});
+  };
+
   render() {
     const { account } = this.props;
     const mydiv = {
@@ -69,8 +94,10 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>昵称</span>
+          <div style={{overflow:"auto"}} onClick={this.handleClickOpen}>
           <span>{account.firstName}</span>
           <ChevronRightRounded style={{ float: 'right' }} />
+          </div>
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>手机号</span>
@@ -104,6 +131,27 @@ export class Mysettings extends React.Component<IMysettingsProp> {
             <div style={{ width: '100%', textAlign: 'center', paddingRight: '10px' }}>退出登陆</div>
           </Link>
         </div>
+        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">修改昵称</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="mysetting-remove-name"
+              label="新的昵称"
+              type="name"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              取消
+            </Button>
+            <Button onClick={this.handleOk} color="secondary">
+              确认
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
@@ -115,7 +163,7 @@ const mapStateToProps = ({ files, authentication }: IRootState) => ({
   filesEntity: files.entity
 });
 
-const mapDispatchToProps = { getSession, getMyImg };
+const mapDispatchToProps = { getSession, getMyImg, updateMyName};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

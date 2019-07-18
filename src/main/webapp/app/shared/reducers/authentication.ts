@@ -134,6 +134,14 @@ export const updateMyimgurl = (id: any, login: any, imageUrl: any) => async disp
   return result;
 };
 
+// tslint:disable-next-line: no-shadowed-variable
+export const updateMyName = (id: any, login: any, firstName: any) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.put('services/login/api/users-ImageOrName', { id, login, firstName })
+  });
+  return result;
+};
+
 export const login = (username, password, rememberMe = false) => async (dispatch, getState) => {
   const result = await dispatch({
     type: ACTION_TYPES.LOGIN,

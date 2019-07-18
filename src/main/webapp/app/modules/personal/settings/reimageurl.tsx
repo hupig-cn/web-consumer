@@ -32,7 +32,6 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       fileid.then((result: number) => {
         if (!isNaN(result)) {
           // @ts-ignore
-          // tslint:disable-next-line: no-shadowed-variable
           this.props.updateMyimgurl(this.props.account.id, this.props.account.login, result).then((result: any) => {
             if (result.value.data === '修改成功') {
               toast.success('提示：修改成功。');

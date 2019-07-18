@@ -60,25 +60,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Loadpages = key => {
-  let temp: any = null;
-  switch (key) {
-    case 'key1':
-      break;
-    case 'key2':
-      break;
-    case 'key3':
-      break;
-    case 'key4':
-      break;
-    case 'key5':
-      break;
-    default:
-      temp = null;
-      break;
-  }
-};
-
 const tutorialSteps = [
   {
     label: '个人信息',
@@ -114,19 +95,14 @@ const tutorialSteps = [
 
 export default function LongMenu() {
   const classes = useStyles();
-  const [value] = React.useState('home');
 
-  function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
-    Loadpages(newValue);
-  }
-  function handleUnfinishedOnClick() {
+  function handleChange() {
     toast.info('提示：功能正在开发中.');
   }
+
   return (
-    <div
-      style={{ paddingTop: '12px', backgroundColor: 'white', borderBottom: '1px solid #f0f0f0', marginTop: '10px' }}
-      onClick={handleUnfinishedOnClick}
-    >
+    <div style={{ paddingTop: '12px', backgroundColor: 'white', borderBottom: '1px solid #f0f0f0', marginTop: '10px' }}
+    onClick={handleChange}>
       <div className={classes.divTitleName}>
         <span style={{ float: 'left' }}>我的工具</span>
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部工具 ></span>
