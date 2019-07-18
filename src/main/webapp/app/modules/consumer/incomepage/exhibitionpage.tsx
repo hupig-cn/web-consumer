@@ -15,45 +15,42 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
     this.props.resetMerchant();
     this.props.getMyEntityMerchant(this.props.account.id);
   }
+  componentDidUpdate(){
+    if (this.props.merchantEntity.id > 0) {
+      const qrcode = document.getElementById('qrcode-canvas-key') as HTMLCanvasElement; // 二维码
+      const bgImg = document.getElementById('qrcode-image') as HTMLImageElement;
+      const qrcodeImg = new Image();
+      if (qrcode !== null) {
+        qrcodeImg.src = qrcode.toDataURL('image/png');
+        // tslint:disable-next-line: only-arrow-functions
+        qrcodeImg.onload = () => {
+          const canvas = document.getElementById('myCanvas') as HTMLCanvasElement; // 空画板
+          const ctx = canvas.getContext('2d');
+          const patBg = ctx.createPattern(bgImg, 'repeat');
+          ctx.rect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = patBg;
+          ctx.fill();
+          ctx.drawImage(qrcodeImg, 90, 264, 233, 233);
+          ctx.font = '24px bold 黑体';
+          ctx.fillStyle = '#fe4365';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(this.props.merchantEntity.name, 200, 530);
+          const overImg = new Image();
+          overImg.src = canvas.toDataURL('image/png');
+          // tslint:disable-next-line: only-arrow-functions
+          overImg.onload = () => {
+            const saveImage = document.getElementById('saveImage') as HTMLCanvasElement; // 显示位置
+            saveImage.innerHTML = '';
+            saveImage.append(overImg);
+          };
+        };
+      }
+    }
+  }
 
   render() {
     const { merchantEntity } = this.props;
-
-    function loadbgimg(name) {
-      if (merchantEntity.id > 0) {
-        const qrcode = document.getElementById('qrcode-canvas-key') as HTMLCanvasElement; // 二维码
-          const bgImg = document.getElementById('qrcode-image') as HTMLImageElement;
-          const qrcodeImg = new Image();
-          if (qrcode !== null) {
-            qrcodeImg.src = qrcode.toDataURL('image/png');
-            // tslint:disable-next-line: only-arrow-functions
-            qrcodeImg.onload = function () {
-              const canvas = document.getElementById('myCanvas') as HTMLCanvasElement; // 空画板
-              const ctx = canvas.getContext('2d');
-              const patBg = ctx.createPattern(bgImg, 'repeat');
-              ctx.rect(0, 0, canvas.width, canvas.height);
-              ctx.fillStyle = patBg;
-              ctx.fill();
-              ctx.drawImage(qrcodeImg, 90, 264, 233, 233);
-              ctx.font = '24px bold 黑体';
-              ctx.fillStyle = '#fe4365';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              ctx.fillText(name, 200, 530);
-              const overImg = new Image();
-              overImg.src = canvas.toDataURL('image/png');
-              // tslint:disable-next-line: only-arrow-functions
-              overImg.onload = function () {
-                const saveImage = document.getElementById('saveImage') as HTMLCanvasElement; // 显示位置
-                saveImage.innerHTML = '';
-                saveImage.append(overImg);
-              };
-            };
-          };
-      };
-      return null;
-    }
-
     return (
       <div
         style={{
@@ -105,9 +102,9 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
             variant="contained"
             color={'secondary'}
             style={{ position: 'fixed', top: '90%', left: '20%', width: '60%' }}
-            onClick={loadbgimg(merchantEntity.name)}
+            // onClick={loadbgimg(merchantEntity.name)}
           >
-            如生成失败，返回重新加载
+            长按图像可保存到手机
           </Button>
         </div>
       </div>
