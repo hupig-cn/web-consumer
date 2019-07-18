@@ -172,7 +172,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                 正在跳转到商户端，如无跳转请<a href={'http://app.yuanscore.com:8082'}>点击此处</a>。
                 <script type="text/javascript">
                   onload = function () {<span>setTimeout(go,3000)</span>}
-                  function go(){(location.href = 'http://app.yuanscore.com:8082')}
+                  function go(){(location.replace('http://app.yuanscore.com:8082'))}
                 </script>
               </div>
             )}
