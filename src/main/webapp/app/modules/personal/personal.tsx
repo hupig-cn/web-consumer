@@ -14,12 +14,12 @@ import { getMyImg } from 'app/requests/basic/files.reducer';
 export interface IPersonalProp extends StateProps, DispatchProps {}
 
 export class Personal extends React.Component<IPersonalProp> {
-  state = { imageUrl:'',file: '', fileContentType: '' };
+  state = { imageUrl: '', file: '', fileContentType: '' };
   componentDidMount() {
     this.props.getSession();
   }
-  componentWillReceiveProps(){
-    if(this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString()!== this.state.imageUrl.toString()) {
+  componentWillReceiveProps() {
+    if (this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString() !== this.state.imageUrl.toString()) {
       this.props
         .getMyImg(this.props.account.imageUrl)
         // @ts-ignore

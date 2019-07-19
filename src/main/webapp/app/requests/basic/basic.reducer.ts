@@ -150,7 +150,7 @@ export const getMyRecommendName = (userid: string) => {
   const requestUrl = `services/basic/api/getMyRecommendName/${userid}`;
   return {
     payload: axios.get(requestUrl)
-  }
+  };
 };
 
 export const getUserAddress: ICrudGetAction<IAddress> = (id: string) => {

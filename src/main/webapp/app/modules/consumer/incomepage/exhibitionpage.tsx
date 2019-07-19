@@ -90,7 +90,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
             </canvas>
             <img id="qrcode-image" src="./content/images/income.png" />
           </div>
-          <div id="saveImage"> </div>
+          <div id="saveImage">&nbsp;</div>
           <Button
             variant="contained"
             color={'secondary'}

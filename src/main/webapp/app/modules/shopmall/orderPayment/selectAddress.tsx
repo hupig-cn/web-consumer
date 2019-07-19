@@ -5,7 +5,6 @@ import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import { getUserAddress } from 'app/requests/basic/basic.reducer';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
-import { messages } from 'app/config/constants';
 
 export interface ISelectAddressProp extends StateProps, DispatchProps {}
 
@@ -31,8 +30,10 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
       backgroundColor: '#ffffff',
       padding: '30px 5px 15px 20px',
       margin: '1px 0px',
-      height: '100px'
+      height: '800px'
     };
+    // tslint:disable-next-line: no-console
+    console.log(this.state.messages);
     // tslint:disable-next-line: no-console
     console.log(this.state.messages);
     return (
@@ -40,20 +41,20 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
         style={{
           width: '100%',
           height: '100%',
-          margin: '30px 0px 0px 0px',
+          margin: '0px 0px 0px 0px',
           padding: '0px'
         }}
       >
         <SelectAddTitle />
         <div style={mydiv}>
           <React.Fragment>
-            {this.state.messages.map((message, index) => {
+            {this.state.messages.map(({ address, consignee, mobile }) => (
               // tslint:disable-next-line: no-unused-expression
               <div>
                 <div style={{ float: 'left' }}>
                   <div>
                     <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-                      66{message.consignee}&nbsp;&nbsp;&nbsp;&nbsp;{message.mobile}
+                      {consignee}&nbsp;&nbsp;&nbsp;&nbsp;{mobile}
                     </span>
                     <span
                       style={{
@@ -80,12 +81,12 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                       maxWidth: '320px'
                     }}
                   >
-                    {message.address}
+                    {address}
                   </div>
                 </div>
                 <ChevronRightRounded style={{ float: 'right', height: '35px' }} />
-              </div>;
-            })}
+              </div>
+            ))}
           </React.Fragment>
           <div style={{ backgroundColor: '#00000005', width: '100%' }} />
         </div>

@@ -160,10 +160,10 @@ export const getlinkusers: ICrudGetAction<ILinkuser> = userid => {
   };
 };
 
-export const authentication = (userid,name,idcard) => async dispatch => {
+export const authentication = (userid, name, idcard) => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_LINKUSER,
-    payload: axios.put('services/basic/api/authentication', {userid,name,idcard})
+    payload: axios.put('services/basic/api/authentication', { userid, name, idcard })
   });
   return result;
 };

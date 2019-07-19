@@ -12,21 +12,23 @@ import { getlinkusers, authentication } from 'app/requests/basic/linkuser.reduce
 
 export interface IMysettingsProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
-const validateIdCard = (idcard) =>{
+const validateIdCard = idcard => {
   idcard = typeof idcard === 'string' ? idcard : String(idcard);
-  let regx = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+  const regx = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
   if (regx.test(idcard)) {
-    let sevenTeenIndex = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-    let front_seventeen = idcard.slice(0, 17);
+    const sevenTeenIndex = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+    const front_seventeen = idcard.slice(0, 17);
     let eighteen = idcard.slice(17, 18);
+    // tslint:disable-next-line: radix
     eighteen = isNaN(parseInt(eighteen)) ? eighteen.toLowerCase() : parseInt(eighteen);
     let remainder = 0;
     for (let i = 0; i < 17; i++) {
+      // tslint:disable-next-line: radix
       remainder = (remainder += parseInt(front_seventeen.charAt(i)) * sevenTeenIndex[i]) % 11;
     }
-    let remainderKeyArr = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
+    const remainderKeyArr = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
     // @ts-ignore
-    let remainderKey = remainderKeyArr[remainder] === 'X' ? remainderKeyArr[remainder].toLowerCase() : remainderKeyArr[remainder];
+    const remainderKey = remainderKeyArr[remainder] === 'X' ? remainderKeyArr[remainder].toLowerCase() : remainderKeyArr[remainder];
     if (eighteen === remainderKey) {
       return true;
     }
@@ -35,28 +37,30 @@ const validateIdCard = (idcard) =>{
 };
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { imageUrl:'',file: '', fileContentType: '' };
-  handleSubmit = (event, errors, { name,idcard }) => {
+  state = { imageUrl: '', file: '', fileContentType: '' };
+  handleSubmit = (event, errors, { name, idcard }) => {
     const regname = /^[\u4e00-\u9fa5]+$/;
     name = name.trim();
     idcard = idcard.trim();
-    if (!(regname.test(name)&&name.length>1&&name.length<5)) {
+    if (!(regname.test(name) && name.length > 1 && name.length < 5)) {
       toast.info('提示：请输入正确的姓名。');
-    }else if (idcard.length!==18){
+    } else if (idcard.length !== 18) {
       toast.info('提示：请输入18位身份证号码');
-    }else if (!validateIdCard(idcard)){
+    } else if (!validateIdCard(idcard)) {
       toast.info('提示：请输入正确的身份证号码');
-    }else{
-      this.props.authentication(this.props.account.id,name,idcard)
-      // @ts-ignore
-        .then((name)=>{
-          if (name.value.data==="认证成功"){
+    } else {
+      this.props
+        .authentication(this.props.account.id, name, idcard)
+        // @ts-ignore
+        // tslint:disable-next-line: no-shadowed-variable
+        .then(name => {
+          if (name.value.data === '认证成功') {
             toast.success('提示：认证成功');
             this.props.history.push('/mysettings');
-          }else{
-            toast.error('提示：'+name.value.data);
+          } else {
+            toast.error('提示：' + name.value.data);
           }
-        })
+        });
     }
   };
 
@@ -85,7 +89,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
             </div>
             <ModalBody>
               <Row>
-                <Col md="12" style={{textAlign:"left",padding:'0px 20px'}}>
+                <Col md="12" style={{ textAlign: 'left', padding: '0px 20px' }}>
                   <AvField
                     name="name"
                     label={<span style={{ float: 'left', marginTop: '7px' }}>姓名：</span>}
@@ -96,13 +100,13 @@ export class Mysettings extends React.Component<IMysettingsProp> {
                   />
                   <AvField
                     name="idcard"
-                    label={<span style={{float:"left",width:'100%'}}>身份证号：</span>}
+                    label={<span style={{ float: 'left', width: '100%' }}>身份证号：</span>}
                     placeholder={'请输入18位身份证号码'}
                     required
                     errorMessage="身份证号不能为空!"
                     style={{ width: '100%', float: 'right' }}
                   />
-                  <ModalFooter style={{ display: 'block', borderTop: '0px', textAlign:"center",marginTop:'50px'}}>
+                  <ModalFooter style={{ display: 'block', borderTop: '0px', textAlign: 'center', marginTop: '50px' }}>
                     <Button type="submit" variant="contained" color="secondary" style={{ margin: '10px', width: '80%' }}>
                       申请认证
                     </Button>
@@ -117,13 +121,14 @@ export class Mysettings extends React.Component<IMysettingsProp> {
   }
 }
 
-const mapStateToProps = ({ authentication,linkuser }: IRootState) => ({
+// tslint:disable-next-line: no-shadowed-variable
+const mapStateToProps = ({ authentication, linkuser }: IRootState) => ({
   account: authentication.account,
   isAuthenticated: authentication.isAuthenticated,
   linkuserEntity: linkuser.entity
 });
 
-const mapDispatchToProps = { getSession,getlinkusers, authentication };
+const mapDispatchToProps = { getSession, getlinkusers, authentication };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

@@ -18,7 +18,7 @@ import { RouteComponentProps } from 'react-router';
 export interface IMysettingsProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { imageUrl:'',file: '', fileContentType: '' };
+  state = { imageUrl: '', file: '', fileContentType: '' };
   handleSubmit = (event, errors, { imageurl }) => {
     if (imageurl.length < 1) {
       toast.info('提示：请上传头像。');
@@ -32,6 +32,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       fileid.then((result: number) => {
         if (!isNaN(result)) {
           // @ts-ignore
+          // tslint:disable-next-line: no-shadowed-variable
           this.props.updateMyimgurl(this.props.account.id, this.props.account.login, result).then((result: any) => {
             if (result.value.data === '修改成功') {
               toast.success('提示：修改成功。');
@@ -50,8 +51,8 @@ export class Mysettings extends React.Component<IMysettingsProp> {
   componentDidMount() {
     this.props.getSession();
   }
-  componentWillReceiveProps(){
-    if(this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString()!== this.state.imageUrl.toString()) {
+  componentWillReceiveProps() {
+    if (this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString() !== this.state.imageUrl.toString()) {
       this.props
         .getMyImg(this.props.account.imageUrl)
         // @ts-ignore
