@@ -10,14 +10,21 @@ import { getSession,getSessionRE } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
 import { getMyRecommendName } from 'app/requests/basic/basic.reducer';
+// tslint:disable-next-line: no-submodule-imports
 import Dialog from '@material-ui/core/Dialog';
+// tslint:disable-next-line: no-submodule-imports
 import DialogTitle from '@material-ui/core/DialogTitle';
+// tslint:disable-next-line: no-submodule-imports
 import DialogContent from '@material-ui/core/DialogContent';
+// tslint:disable-next-line: no-submodule-imports
 import TextField from '@material-ui/core/TextField';
+// tslint:disable-next-line: no-submodule-imports
 import DialogActions from '@material-ui/core/DialogActions';
+// tslint:disable-next-line: no-submodule-imports
 import Button from '@material-ui/core/Button';
+// tslint:disable-next-line: no-duplicate-imports
 import { updateMyName } from 'app/shared/reducers/authentication';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import { getlinkusers } from 'app/requests/basic/linkuser.reducer';
 
 export interface IMysettingsProp extends StateProps, DispatchProps {}
@@ -43,24 +50,25 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         })
       });
     this.props.getlinkusers(this.props.account.id);
-    this.props.getMyRecommendName(this.props.account.id)
-    // @ts-ignore
-      .then((name)=>{
-        this.setState({name:name.value.data})
-      })
+    this.props
+      .getMyRecommendName(this.props.account.id)
+      // @ts-ignore
+      .then(name => {
+        this.setState({ name: name.value.data });
+      });
   }
   handleClickOpen = () => {
-    this.setState({open:true});
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({open:false});
+    this.setState({ open: false });
   };
   handleOk = () => {
-    var name = document.getElementById('mysetting-remove-name')as HTMLInputElement;
-    if (name.value.trim().length>0){
+    const name = document.getElementById('mysetting-remove-name') as HTMLInputElement;
+    if (name.value.trim().length > 0) {
       // @ts-ignore
-      this.props.updateMyName(this.props.account.id, this.props.account.login,name.value.trim()).then((result: any) => {
+      this.props.updateMyName(this.props.account.id, this.props.account.login, name.value.trim()).then((result: any) => {
         if (result.value.data === '修改成功') {
           this.props.getSession();
           toast.success('提示：修改成功。');
@@ -69,11 +77,11 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         }
       });
     }
-    this.setState({open:false});
+    this.setState({ open: false });
   };
 
   render() {
-    const { account,linkuserEntity } = this.props;
+    const { account, linkuserEntity } = this.props;
     const mydiv = {
       backgroundColor: '#ffffff',
       padding: '15px 5px 15px 15px',
@@ -104,9 +112,9 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>昵称</span>
-          <div style={{overflow:"auto"}} onClick={this.handleClickOpen}>
-          <span>{account.firstName}</span>
-          <ChevronRightRounded style={{ float: 'right' }} />
+          <div style={{ overflow: 'auto' }} onClick={this.handleClickOpen}>
+            <span>{account.firstName}</span>
+            <ChevronRightRounded style={{ float: 'right' }} />
           </div>
         </div>
         <div style={mydiv}>
@@ -116,12 +124,12 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>实名认证</span>
-          {linkuserEntity.idcard ?(
+          {linkuserEntity.idcard ? (
             <div>
               <span>{linkuserEntity.name}</span>
               <RemoveRounded style={{ float: 'right' }} />
             </div>
-          ):(
+          ) : (
             <Link to="/authentication">
               <span>未认证</span>
               <ChevronRightRounded style={{ float: 'right' }} />
@@ -153,14 +161,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">修改昵称</DialogTitle>
           <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="mysetting-remove-name"
-              label="新的昵称"
-              type="name"
-              fullWidth
-            />
+            <TextField autoFocus margin="dense" id="mysetting-remove-name" label="新的昵称" type="name" fullWidth />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -176,11 +177,11 @@ export class Mysettings extends React.Component<IMysettingsProp> {
   }
 }
 
-const mapStateToProps = ({ files, authentication,linkuser }: IRootState) => ({
+const mapStateToProps = ({ files, authentication, linkuser }: IRootState) => ({
   account: authentication.account,
   isAuthenticated: authentication.isAuthenticated,
   filesEntity: files.entity,
-  linkuserEntity: linkuser.entity,
+  linkuserEntity: linkuser.entity
 });
 
 const mapDispatchToProps = { getSession, getMyImg, updateMyName,getlinkusers,getMyRecommendName,getSessionRE};
