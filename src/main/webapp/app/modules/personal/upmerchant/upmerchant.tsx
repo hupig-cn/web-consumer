@@ -40,6 +40,8 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     this.props.resetMerchant();
     this.props.getMyEntityMerchant(this.props.account.id);
     this.props.getNextAreaPnameProvince();
+    this.props.setBlob('fileI',undefined,undefined);
+    this.props.setBlob('fileII',undefined,undefined);
   }
 
   // tslint:disable-next-line: no-shadowed-variable

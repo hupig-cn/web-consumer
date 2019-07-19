@@ -26,6 +26,7 @@ import Button from '@material-ui/core/Button';
 import { updateMyName } from 'app/shared/reducers/authentication';
 import { toast } from 'react-toastify';
 import { getlinkusers } from 'app/requests/basic/linkuser.reducer';
+import Avatar from "@material-ui/core/Avatar";
 
 export interface IMysettingsProp extends StateProps, DispatchProps {}
 
@@ -88,7 +89,8 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       backgroundColor: '#ffffff',
       padding: '15px 5px 15px 15px',
       margin: '1px 0px',
-      'text-align': 'right'
+      'text-align': 'right',
+      overflow: 'auto'
     };
     return (
       <div
@@ -103,14 +105,12 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         <Title name="设置" back="/personal" />
         <div style={mydiv}>
           <span style={{ float: 'left', marginTop: '16px' }}>头像</span>
-          <img
-            style={{ width: '50px', height: '50px', marginRight: '10px', borderRadius: '5px' }}
-            src={`data:${this.state.fileContentType};base64,${this.state.file}`}
-          />
-          <Link to="/reimageurl">
+          <Link to="/reimageurl" style={{float:"right",padding: 'inherit'}}>
             <span>更换</span>
             <ChevronRightRounded style={{ marginTop: '-4px' }} />
           </Link>
+          <Avatar alt="photo" src={this.state.fileContentType? `data:${this.state.fileContentType};base64,${this.state.file}`: ``}
+                  style={{width: '50px', height: '50px',float:"right" }} />
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>昵称</span>
