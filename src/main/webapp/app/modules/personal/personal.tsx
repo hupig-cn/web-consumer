@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
-import { getSession,getSessionRE } from 'app/shared/reducers/authentication';
+import { getSession, getSessionRE } from 'app/shared/reducers/authentication';
 
 import Users from './users';
 import Orders from './orders';
@@ -17,13 +17,15 @@ export class Personal extends React.Component<IPersonalProp> {
   state = { file: '', fileContentType: '' };
   componentDidMount() {
     this.props.getSession();
-    this.props.getSessionRE()
-    // @ts-ignore
-      .then((valueI)=>{
-        valueI.payload.then((valueII)=>{
-          if (valueII.data.imageUrl > 0){
-            this.props.getMyImg(valueII.data.imageUrl)
-            // @ts-ignore
+    this.props
+      .getSessionRE()
+      // @ts-ignore
+      .then(valueI => {
+        valueI.payload.then(valueII => {
+          if (valueII.data.imageUrl > 0) {
+            this.props
+              .getMyImg(valueII.data.imageUrl)
+              // @ts-ignore
               .then(photo => {
                 this.setState({
                   file: photo.value.data.file,
@@ -31,8 +33,8 @@ export class Personal extends React.Component<IPersonalProp> {
                 });
               });
           }
-        })
-      })
+        });
+      });
   }
 
   render() {
@@ -61,7 +63,7 @@ const mapStateToProps = ({ authentication, files }: IRootState) => ({
   filesEntity: files.entity
 });
 
-const mapDispatchToProps = { getSession, getMyImg,getSessionRE };
+const mapDispatchToProps = { getSession, getMyImg, getSessionRE };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

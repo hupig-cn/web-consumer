@@ -50,13 +50,15 @@ export class Mysettings extends React.Component<IMysettingsProp> {
 
   componentDidMount() {
     this.props.getSession();
-    this.props.getSessionRE()
-    // @ts-ignore
-      .then((valueI)=>{
-        valueI.payload.then((valueII)=>{
-          if (valueII.data.imageUrl > 0){
-            this.props.getMyImg(valueII.data.imageUrl)
-            // @ts-ignore
+    this.props
+      .getSessionRE()
+      // @ts-ignore
+      .then(valueI => {
+        valueI.payload.then(valueII => {
+          if (valueII.data.imageUrl > 0) {
+            this.props
+              .getMyImg(valueII.data.imageUrl)
+              // @ts-ignore
               .then(photo => {
                 this.setState({
                   file: photo.value.data.file,
@@ -64,8 +66,8 @@ export class Mysettings extends React.Component<IMysettingsProp> {
                 });
               });
           }
-        })
-      })
+        });
+      });
   }
   uptitlephotoshop = () => {
     document.getElementById('upmerchant-upmerchant-uploadphoto-shop').click();

@@ -5,6 +5,22 @@ import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import { getUserAddress } from 'app/requests/basic/basic.reducer';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
+// tslint:disable-next-line: no-submodule-imports
+import CssBaseline from '@material-ui/core/CssBaseline';
+// tslint:disable-next-line: no-submodule-imports
+import Typography from '@material-ui/core/Typography';
+// tslint:disable-next-line: no-submodule-imports
+import Paper from '@material-ui/core/Paper';
+// tslint:disable-next-line: no-submodule-imports
+import List from '@material-ui/core/List';
+// tslint:disable-next-line: no-submodule-imports
+import ListItem from '@material-ui/core/ListItem';
+// tslint:disable-next-line: no-submodule-imports
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+// tslint:disable-next-line: no-submodule-imports
+import ListItemText from '@material-ui/core/ListItemText';
+// tslint:disable-next-line: no-submodule-imports
+import Avatar from '@material-ui/core/Avatar';
 
 export interface ISelectAddressProp extends StateProps, DispatchProps {}
 
@@ -26,71 +42,79 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
   }
 
   render() {
-    const mydiv = {
-      backgroundColor: '#ffffff',
-      padding: '30px 5px 15px 20px',
-      margin: '1px 0px',
-      height: '800px'
+    const list = {
+      fontFamily: '黑体',
+      padding: 0
     };
-    // tslint:disable-next-line: no-console
-    console.log(this.state.messages);
-    // tslint:disable-next-line: no-console
-    console.log(this.state.messages);
+    const paper = {
+      paddingBottom: 0,
+      boxShadow: 'none',
+      marginTop: 36
+    };
     return (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          margin: '0px 0px 0px 0px',
-          padding: '0px'
-        }}
-      >
+      <React.Fragment>
         <SelectAddTitle />
-        <div style={mydiv}>
-          <React.Fragment>
-            {this.state.messages.map(({ address, consignee, mobile }) => (
-              // tslint:disable-next-line: no-unused-expression
-              <div>
-                <div style={{ float: 'left' }}>
-                  <div>
-                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-                      {consignee}&nbsp;&nbsp;&nbsp;&nbsp;{mobile}
-                    </span>
-                    <span
+        <CssBaseline />
+        <Paper square style={paper}>
+          <List style={list}>
+            {this.state.messages.map(({ id, address, consignee, mobile }) => (
+              <React.Fragment key={id}>
+                <ListItem button style={{ height: '80px', borderBottom: '1px solid #f0f0f0', position: 'relative' }}>
+                  <ListItemAvatar>
+                    <Avatar
+                      alt="默认收货地址"
+                      src={'./content/images/sys4.png'}
                       style={{
-                        margin: '0px 0px 0px 10px',
-                        display: 'inline-block',
-                        padding: '0px 0.14rem',
-                        background: 'rgb(255, 70, 70)',
-                        fontSize: '0.3rem',
-                        color: 'white',
-                        borderRadius: '20px'
+                        borderRadius: 0,
+                        width: '44px',
+                        height: '44px',
+                        marginRight: 10
                       }}
-                    >
-                      默认地址
-                    </span>
-                  </div>
-                  <div
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
                     style={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      fontSize: '0.9rem',
-                      whiteSpace: 'nowrap',
-                      color: 'rgb(102, 102, 102)',
-                      marginTop: '0.1rem',
-                      maxWidth: '320px'
+                      margin: '0 auto',
+                      height: '100%'
+                    }}
+                    primary={'收货人：' + consignee}
+                    secondary={
+                      <React.Fragment>
+                        <Typography component="span" variant="body2" style={{ width: '100%' }} color="textPrimary">
+                          <p
+                            style={{
+                              marginTop: '10px',
+                              width: '100%',
+                              whiteSpace: 'nowrap',
+                              textOverflow: 'ellipsis',
+                              overflow: 'hidden',
+                              marginBottom: 0
+                            }}
+                          >
+                            {address}
+                          </p>
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '8px',
+                      fontSize: '0.875rem',
+                      right: '32px',
+                      width: 'auto',
+                      color: '#00000095'
                     }}
                   >
-                    {address}
-                  </div>
-                </div>
-                <ChevronRightRounded style={{ float: 'right', height: '35px' }} />
-              </div>
+                    手机号码：{mobile}
+                  </span>
+                </ListItem>
+              </React.Fragment>
             ))}
-          </React.Fragment>
-          <div style={{ backgroundColor: '#00000005', width: '100%' }} />
-        </div>
-      </div>
+          </List>
+        </Paper>
+      </React.Fragment>
     );
   }
 }

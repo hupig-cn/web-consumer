@@ -6,7 +6,7 @@ import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import RemoveRounded from '@material-ui/icons/RemoveRounded';
 import { Link } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
-import { getSession,getSessionRE } from 'app/shared/reducers/authentication';
+import { getSession, getSessionRE } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
 import { getMyRecommendName } from 'app/requests/basic/basic.reducer';
@@ -30,16 +30,18 @@ import { getlinkusers } from 'app/requests/basic/linkuser.reducer';
 export interface IMysettingsProp extends StateProps, DispatchProps {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { file: '', fileContentType: '',open:false ,name: '无'};
+  state = { file: '', fileContentType: '', open: false, name: '无' };
   componentDidMount() {
     this.props.getSession();
-    this.props.getSessionRE()
-    // @ts-ignore
-      .then((valueI)=>{
-        valueI.payload.then((valueII)=>{
-          if (valueII.data.imageUrl > 0){
-            this.props.getMyImg(valueII.data.imageUrl)
-            // @ts-ignore
+    this.props
+      .getSessionRE()
+      // @ts-ignore
+      .then(valueI => {
+        valueI.payload.then(valueII => {
+          if (valueII.data.imageUrl > 0) {
+            this.props
+              .getMyImg(valueII.data.imageUrl)
+              // @ts-ignore
               .then(photo => {
                 this.setState({
                   file: photo.value.data.file,
@@ -47,7 +49,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
                 });
               });
           }
-        })
+        });
       });
     this.props.getlinkusers(this.props.account.id);
     this.props
@@ -184,7 +186,7 @@ const mapStateToProps = ({ files, authentication, linkuser }: IRootState) => ({
   linkuserEntity: linkuser.entity
 });
 
-const mapDispatchToProps = { getSession, getMyImg, updateMyName,getlinkusers,getMyRecommendName,getSessionRE};
+const mapDispatchToProps = { getSession, getMyImg, updateMyName, getlinkusers, getMyRecommendName, getSessionRE };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
