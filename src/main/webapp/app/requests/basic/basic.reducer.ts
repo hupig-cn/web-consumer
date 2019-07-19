@@ -146,6 +146,13 @@ export const getDefaultAddress: ICrudGetAction<IAddress> = (id: string) => {
   };
 };
 
+export const getMyRecommendName = (userid: string) => {
+  const requestUrl = `services/basic/api/getMyRecommendName/${userid}`;
+  return {
+    payload: axios.get(requestUrl)
+  }
+};
+
 export const getUserAddress: ICrudGetAction<IAddress> = (id: string) => {
   const requestUrl = `services/basic/api/get-user-address/${id}`;
   return {

@@ -18,7 +18,7 @@ import { RouteComponentProps } from 'react-router';
 export interface IMysettingsProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { file: '', fileContentType: '' };
+  state = { imageUrl:'',file: '', fileContentType: '' };
   handleSubmit = (event, errors, { imageurl }) => {
     if (imageurl.length < 1) {
       toast.info('提示：请上传头像。');
@@ -49,14 +49,21 @@ export class Mysettings extends React.Component<IMysettingsProp> {
 
   componentDidMount() {
     this.props.getSession();
-    this.props
-      .getMyImg(this.props.account.imageUrl)
-      // @ts-ignore
-      .then(photo => {
-        this.setState({ file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
-      });
   }
-
+  componentWillReceiveProps(){
+    if(this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString()!== this.state.imageUrl.toString()) {
+      this.props
+        .getMyImg(this.props.account.imageUrl)
+        // @ts-ignore
+        .then(photo => {
+          this.setState({
+            imageUrl: photo.value.data.id,
+            file: photo.value.data.file,
+            fileContentType: photo.value.data.fileContentType
+          });
+        });
+    }
+  }
   uptitlephotoshop = () => {
     document.getElementById('upmerchant-upmerchant-uploadphoto-shop').click();
   };

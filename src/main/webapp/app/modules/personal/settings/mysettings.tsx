@@ -3,12 +3,13 @@ import Title from 'app/modules/public/title';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 // tslint:disable-next-line: no-submodule-imports
-import DoneRounded from '@material-ui/icons/DoneRounded';
+import RemoveRounded from '@material-ui/icons/RemoveRounded';
 import { Link } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
+import { getMyRecommendName } from 'app/requests/basic/basic.reducer';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -17,16 +18,23 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import { updateMyName } from 'app/shared/reducers/authentication';
 import { toast } from "react-toastify";
+import { getlinkusers } from 'app/requests/basic/linkuser.reducer';
 
 export interface IMysettingsProp extends StateProps, DispatchProps {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { imageUrl: '', file: '', fileContentType: '',open:false };
+  state = { imageUrl: '', file: '', fileContentType: '',open:false ,name: '无'};
   componentDidMount() {
     this.props.getSession();
+    this.props.getlinkusers(this.props.account.id);
+    this.props.getMyRecommendName(this.props.account.id)
+    // @ts-ignore
+      .then((name)=>{
+        this.setState({name:name.value.data})
+      })
   }
   componentWillReceiveProps() {
-    if (this.props.account.imageUrl.toString() !== this.state.imageUrl.toString()) {
+    if (this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString() !== this.state.imageUrl.toString()) {
       this.props
         .getMyImg(this.props.account.imageUrl)
         // @ts-ignore
@@ -63,7 +71,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
   };
 
   render() {
-    const { account } = this.props;
+    const { account,linkuserEntity } = this.props;
     const mydiv = {
       backgroundColor: '#ffffff',
       padding: '15px 5px 15px 15px',
@@ -101,18 +109,27 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>手机号</span>
-          <span>15000000000</span>
-          <DoneRounded style={{ float: 'right' }} />
+          <span>{linkuserEntity.phone}</span>
+          <RemoveRounded style={{ float: 'right' }} />
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>实名认证</span>
-          <span>无</span>
-          <ChevronRightRounded style={{ float: 'right' }} />
+          {linkuserEntity.idcard ?(
+            <div>
+              <span>{linkuserEntity.name}</span>
+              <RemoveRounded style={{ float: 'right' }} />
+            </div>
+          ):(
+            <Link to="/authentication">
+              <span>未认证</span>
+              <ChevronRightRounded style={{ float: 'right' }} />
+            </Link>
+          )}
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>推荐人</span>
-          <span>无</span>
-          <ChevronRightRounded style={{ float: 'right' }} />
+          <span>{this.state.name}</span>
+          <RemoveRounded style={{ float: 'right' }} />
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
@@ -157,13 +174,14 @@ export class Mysettings extends React.Component<IMysettingsProp> {
   }
 }
 
-const mapStateToProps = ({ files, authentication }: IRootState) => ({
+const mapStateToProps = ({ files, authentication,linkuser }: IRootState) => ({
   account: authentication.account,
   isAuthenticated: authentication.isAuthenticated,
-  filesEntity: files.entity
+  filesEntity: files.entity,
+  linkuserEntity: linkuser.entity,
 });
 
-const mapDispatchToProps = { getSession, getMyImg, updateMyName};
+const mapDispatchToProps = { getSession, getMyImg, updateMyName,getlinkusers,getMyRecommendName};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
