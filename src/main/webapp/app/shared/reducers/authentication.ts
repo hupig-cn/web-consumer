@@ -111,6 +111,12 @@ export const getSession = () => async (dispatch, getState) => {
   return account;
 };
 
+export const getSessionRE = () => async (dispatch, getState) => {
+  return {
+    payload: axios.get('services/login/api/account')
+  }
+};
+
 // tslint:disable-next-line: ter-arrow-body-style
 export const sendSms = (phone: any) => async (dispatch: any) => {
   return dispatch({

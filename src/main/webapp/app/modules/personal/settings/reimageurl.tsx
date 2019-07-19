@@ -2,7 +2,7 @@ import React from 'react';
 import Title from 'app/modules/public/title';
 import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession, getSessionRE } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
 import { Button } from '@material-ui/core';
@@ -18,7 +18,7 @@ import { RouteComponentProps } from 'react-router';
 export interface IMysettingsProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { imageUrl:'',file: '', fileContentType: '' };
+  state = { file: '', fileContentType: '' };
   handleSubmit = (event, errors, { imageurl }) => {
     if (imageurl.length < 1) {
       toast.info('提示：请上传头像。');
@@ -49,21 +49,24 @@ export class Mysettings extends React.Component<IMysettingsProp> {
 
   componentDidMount() {
     this.props.getSession();
+    this.props.getSessionRE()
+    // @ts-ignore
+      .then((valueI)=>{
+        valueI.payload.then((valueII)=>{
+          if (valueII.data.imageUrl > 0){
+            this.props.getMyImg(valueII.data.imageUrl)
+            // @ts-ignore
+              .then(photo => {
+                this.setState({
+                  file: photo.value.data.file,
+                  fileContentType: photo.value.data.fileContentType
+                });
+              });
+          }
+        })
+      })
   }
-  componentWillReceiveProps(){
-    if(this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString()!== this.state.imageUrl.toString()) {
-      this.props
-        .getMyImg(this.props.account.imageUrl)
-        // @ts-ignore
-        .then(photo => {
-          this.setState({
-            imageUrl: photo.value.data.id,
-            file: photo.value.data.file,
-            fileContentType: photo.value.data.fileContentType
-          });
-        });
-    }
-  }
+
   uptitlephotoshop = () => {
     document.getElementById('upmerchant-upmerchant-uploadphoto-shop').click();
   };
@@ -127,7 +130,7 @@ const mapStateToProps = ({ files, authentication }: IRootState) => ({
   filesEntity: files.entity
 });
 
-const mapDispatchToProps = { getSession, getMyImg, setBlob, createFile, updateMyimgurl };
+const mapDispatchToProps = { getSession, getMyImg, setBlob, createFile, updateMyimgurl, getSessionRE };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

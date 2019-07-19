@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession,getSessionRE } from 'app/shared/reducers/authentication';
 
 import Users from './users';
 import Orders from './orders';
@@ -14,23 +14,25 @@ import { getMyImg } from 'app/requests/basic/files.reducer';
 export interface IPersonalProp extends StateProps, DispatchProps {}
 
 export class Personal extends React.Component<IPersonalProp> {
-  state = { imageUrl:'',file: '', fileContentType: '' };
+  state = { file: '', fileContentType: '' };
   componentDidMount() {
     this.props.getSession();
-  }
-  componentWillReceiveProps(){
-    if(this.props.account.imageUrl > 0 && this.props.account.imageUrl.toString()!== this.state.imageUrl.toString()) {
-      this.props
-        .getMyImg(this.props.account.imageUrl)
-        // @ts-ignore
-        .then(photo => {
-          this.setState({
-            imageUrl: photo.value.data.id,
-            file: photo.value.data.file,
-            fileContentType: photo.value.data.fileContentType
-          });
-        });
-    }
+    this.props.getSessionRE()
+    // @ts-ignore
+      .then((valueI)=>{
+        valueI.payload.then((valueII)=>{
+          if (valueII.data.imageUrl > 0){
+            this.props.getMyImg(valueII.data.imageUrl)
+            // @ts-ignore
+              .then(photo => {
+                this.setState({
+                  file: photo.value.data.file,
+                  fileContentType: photo.value.data.fileContentType
+                });
+              });
+          }
+        })
+      })
   }
 
   render() {
@@ -59,7 +61,7 @@ const mapStateToProps = ({ authentication, files }: IRootState) => ({
   filesEntity: files.entity
 });
 
-const mapDispatchToProps = { getSession, getMyImg };
+const mapDispatchToProps = { getSession, getMyImg,getSessionRE };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
