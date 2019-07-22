@@ -83,6 +83,19 @@ export class Mysettings extends React.Component<IMysettingsProp> {
     this.setState({ open: false });
   };
 
+  bindingWeChat = () => {
+    toast.success('提示：用来绑定微信。');
+  };
+  bindingAlipay = () => {
+    window.open("alipays://platformapi/startapp?" +
+      "appId=20000067&" +
+      "url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3F" +
+      "app_id%3D2019062565651444%26" +
+      "scope%3Dauth_base%26" +
+      "redirect_uri%3Dhttp%3A%2F%2Fapp.yuanscore.com%3A8000%26" +
+      "state%3D123456789");
+  };
+
   render() {
     const { account, linkuserEntity } = this.props;
     const mydiv = {
@@ -145,14 +158,18 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
-          <span style={{ float: 'left' }}>微信号</span>
-          <span>更换</span>
+          <span style={{ float: 'left' }}>微信账号</span>
+          <div style={{ overflow: 'auto' }} onClick={this.bindingWeChat}>
+          <span>绑定</span>
           <ChevronRightRounded style={{ float: 'right' }} />
+          </div>
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>支付宝账号</span>
-          <span>更换</span>
+          <div style={{ overflow: 'auto' }} onClick={this.bindingAlipay}>
+          <span>绑定</span>
           <ChevronRightRounded style={{ float: 'right' }} />
+          </div>
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>

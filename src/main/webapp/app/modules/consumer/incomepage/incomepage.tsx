@@ -72,7 +72,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                           <div style={{ padding: '10px 10px 40px 10px' }}>手机扫一扫，向我付款</div>
                           <div>{merchantEntity.name}</div>
                           <QRCode
-                            value={'http://app.yuanscore.com:8080/#id=' + merchantEntity.id}
+                            value={'http://app.yuanscore.com:8080/?id=' + merchantEntity.id}
                             size={200}
                             fgColor="#000000"
                             bgColor="#ffffff"
