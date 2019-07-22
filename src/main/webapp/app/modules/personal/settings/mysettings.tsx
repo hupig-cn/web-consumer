@@ -101,7 +101,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         'url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3F' +
         'app_id%3D2019062565651444%26' +
         'scope%3Dauth_base%26' +
-        'redirect_uri%3Dhttp%3A%2F%2Fapp.yuanscore.com%3A8000%26' +
+        'redirect_uri%3Dhttp%3A%2F%2Fapp.yuanscore.com%3A8080%26' +
         'state%3D' +
         this.props.account.id
     );
