@@ -88,7 +88,7 @@ export default function LongMenu() {
     switch (keys) {
       case '扫一扫':
         // @ts-ignore
-        window.weisen.getscan();
+        typeof window.weisen === 'object' && window.weisen.getscan();
         break;
       case '付款码':
         toast.info('提示：功能正在开发中.');
@@ -131,12 +131,13 @@ export default function LongMenu() {
   }
 
   return (
-    <div style={{ height: '35px' }}>
+    <div ws-container-id="nav-search-group" style={{ height: '35px' }}>
       <div
         className="jh-longmenu"
         style={{ zIndex: 1000, height: '36px', lineHeight: '24px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}
       >
         <span
+          ws-container-id="nav-locate-icon"
           style={{
             float: 'left',
             marginTop: '6px',
@@ -150,7 +151,9 @@ export default function LongMenu() {
         >
           <LocationOnRounded />
         </span>
+        {/* 定位地址 */}
         <p
+          ws-container-id="nav-locate-address"
           id="jh-locations-address"
           style={{
             fontSize: '0.9rem',
@@ -169,20 +172,27 @@ export default function LongMenu() {
         >
           <ReLocation />
         </p>
+        {/* 更多 */}
         <IconButton
+          ws-container-id="nav-more"
           aria-label="More"
           aria-controls="long-menu"
           aria-haspopup="true"
           onClick={handleClick}
           style={{ outline: 'none', float: 'right', color: '#fffde5', padding: '0px', margin: '6px 6px 0px 6px' }}
         >
-          <MoreVertIcon />
+          <img src="/content/theme/zihong/images/more_icon.png" />
+          {/* <MoreVertIcon /> */}
         </IconButton>
-        <div className={classes.search} id="jh-longmenu-search">
-          <div className={classes.searchIcon}>
-            <SearchIcon style={{ fill: '#fffde5' }} />
+
+        {/* 搜索 */}
+        <div ws-container-id="nav-search" className={classes.search} id="jh-longmenu-search">
+          <div ws-container-id="nav-search-icon" className={classes.searchIcon}>
+            {/* <SearchIcon style={{ fill: '#fffde5' }} /> */}
+            <img src="./content/theme/zihong/images/search_icon.png" />
           </div>
           <InputBase
+            ws-container-id="nav-search-input"
             id="jh-longmenu-inputInput"
             placeholder="搜索..."
             inputProps={{ 'aria-label': 'Search' }}
@@ -191,13 +201,15 @@ export default function LongMenu() {
             classes={{ root: classes.inputRoot, input: classes.inputInput }}
           />
         </div>
+        {/* 更多二级视图 */}
         <Menu
           style={{ backgroundColor: '#00000060' }}
+          ws-container-id="nav-more-submenu"
           anchorEl={anchorEl}
           keepMounted
           open={open}
           onClose={handleClose}
-          PaperProps={{ style: { maxHeight: '216px', width: 148, sIndex: 1001 } }}
+          PaperProps={{ style: { maxHeight: '216px', width: 148, zIndex: 1001 } }}
         >
           {options.map(option => (
             // tslint:disable-next-line: jsx-no-lambda

@@ -46,7 +46,7 @@ export const Loadpages = (key: string) => {
   switch (key) {
     case 'scan':
       // @ts-ignore
-      window.weisen.getscan();
+      typeof window.weisen === 'object' && window.weisen.getscan();
       break;
     case 'pay':
       toast.info('提示：功能正在开发中.');
@@ -70,12 +70,18 @@ export default function LongMenu() {
     Loadpages(newValue);
   }
   return (
-    <div className="jh-consumer-quickaccess">
+    <div ws-container-id="nav-quick-tools" className="jh-consumer-quickaccess">
+      {/* <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
+          <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
+          <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />
+          <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
+          <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
+        </BottomNavigation> */}
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
-        <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />
-        <BottomNavigationAction label="收钱" value="income" icon={<AssignmentReturnedOutlined />} />
-        <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
+        <BottomNavigationAction label="扫一扫" value="scan" icon={<img src="./content/theme/zihong/images/tools_scan.png" />} />
+        <BottomNavigationAction label="付款码" value="pay" icon={<img src="./content/theme/zihong/images/tools_pay.png" />} />
+        <BottomNavigationAction label="收 &nbsp; 钱" value="income" icon={<img src="./content/theme/zihong/images/tools_income.png" />} />
+        <BottomNavigationAction label="推荐好友" value="share" icon={<img src="./content/theme/zihong/images/tools_share.png" />} />
       </BottomNavigation>
     </div>
   );

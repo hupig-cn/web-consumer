@@ -1,0 +1,5 @@
+div[ws-container-id='nearby-main'] {
+  & > header[ws-container-id='nearby-header'] {
+    top: 45px !important;
+  }
+}

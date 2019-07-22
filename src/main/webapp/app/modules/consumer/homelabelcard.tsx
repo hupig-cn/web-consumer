@@ -121,13 +121,13 @@ export default function TitlebarGridList() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div ws-container-id="lable-card" className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList} style={{ margin: -0, width: '97%' }}>
         {tileData.map(tile => (
           <GridListTile
             key={tile.img}
             className={classes.listTitle}
-            style={{ height: '100%', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: 4 }}
+            style={{ height: '100%', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: 5 }}
             // tslint:disable-next-line: jsx-no-lambda
             onClick={() => {
               document.getElementById('app-modules-consumer-quickaccess-button-link-productdetail-' + tile.id).click();
@@ -140,9 +140,11 @@ export default function TitlebarGridList() {
                   style={{
                     wordBreak: 'break-all',
                     whiteSpace: 'pre-wrap',
-                    wordWrapL: 'break-word',
+                    wordWrap: 'break-word',
                     overflow: 'hidden',
                     display: '-webkit-box',
+                    '-webkit-box-orient': 'vertical',
+                    '-webkit-line-clamp': '2',
                     lineHeight: '19px',
                     height: '2.4rem',
                     fontSize: '0.8rem',
@@ -156,7 +158,7 @@ export default function TitlebarGridList() {
               subtitle={
                 <span style={{ float: 'left', width: '100%' }}>
                   <span style={{ float: 'left' }}>
-                    <span style={{ fontSize: '0.65rem' }}>￥:</span>
+                    <span style={{ fontSize: '0.65rem' }}>￥</span>
                     {tile.author}
                   </span>
                   <IconButton

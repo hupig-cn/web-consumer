@@ -1,0 +1,103 @@
+/* @import 'node_modules/bootstrap/scss/bootstrap'; */
+/* 通用 */
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #f00;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #f00;
+  opacity: 1;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #f00;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #f00;
+}
+
+// 通用文字换行显示
+a,
+b,
+i,
+em,
+span,
+p,
+h2,
+h3,
+h4,
+h5,
+td,
+div,
+sub {
+  &[ws-container-id='break-word'] {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 19px;
+    font-size: 0.85rem;
+    // color: #000
+  }
+}
+// 顶部搜索定位栏
+div[ws-container-id='nav-search-group'] {
+  height: 45px !important; // 顶部导航高度控制
+  font-size: 0.875rem !important;
+  & > div {
+    height: 45px !important; // 顶部导航高度控制
+    line-height: 28px !important;
+
+    & > [ws-container-id='nav-locate-icon'],
+    & > [ws-container-id='nav-locate-address'] {
+      margin-top: 10px !important;
+      margin-left: 6px !important;
+    }
+
+    & > div[ws-container-id='nav-search'] {
+      border-radius: 20px !important;
+      margin-top: 10px !important;
+      // width: 60vw;
+
+      & > div[ws-container-id='nav-search-icon'] img {
+        width: 18px;
+      }
+      & > div[ws-container-id='nav-search-input'] {
+        & > input {
+          font-size: 0.8rem;
+          color: #fff !important;
+        }
+      }
+    }
+    & > button[ws-container-id='nav-more'] {
+      margin-top: 10px !important;
+      width: 10px;
+      height: 28px;
+      overflow: hidden;
+      & img {
+        height: 20px;
+        width: 5px;
+        border: 0;
+      }
+    }
+  }
+}
+// 底部菜单栏
+div[ws-container-id='bottom-navigation'] {
+  & > button {
+    padding-top: 0 !important;
+    & > span {
+      padding-top: 5px !important;
+      & > img {
+        height: 24px;
+      }
+    }
+  }
+}
