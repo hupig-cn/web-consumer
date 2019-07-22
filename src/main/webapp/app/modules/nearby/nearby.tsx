@@ -6,6 +6,10 @@ import { getSession } from 'app/shared/reducers/authentication';
 import LongMenu from '../public/longmenu';
 import Nearbytabs from './nearbytabs';
 
+/* vipkwd */
+import '../../../static/css/common.scss';
+import '../../../static/css/nearby.scss';
+
 export interface INearbyProp extends StateProps, DispatchProps {}
 
 export class Nearby extends React.Component<INearbyProp> {
@@ -15,7 +19,7 @@ export class Nearby extends React.Component<INearbyProp> {
 
   render() {
     return (
-      <div>
+      <div ws-container-id="nearby">
         <LongMenu />
         <Nearbytabs />
       </div>

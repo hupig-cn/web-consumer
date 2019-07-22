@@ -73,7 +73,7 @@ function SwipeableTextMobileStepper() {
     setActiveStep(step);
   }
   return (
-    <div className={classes.root}>
+    <div ws-container-id="slidebox" className={classes.root}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}

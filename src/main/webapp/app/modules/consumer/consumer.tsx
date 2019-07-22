@@ -6,6 +6,7 @@ import Quickaccess from './quickaccess';
 import Homequickaccessdown from './homequickaccessdown';
 import Loopplayimg from './loopplayimg';
 import Homelabelcard from './homelabelcard';
+import '../../../static/css/home.scss';
 
 export interface IConsumerProp extends StateProps, DispatchProps {}
 
@@ -18,8 +19,8 @@ export class Consumer extends React.Component<IConsumerProp> {
       <div>
         <LongMenu />
         <Quickaccess />
-        <Homequickaccessdown />
         <Loopplayimg />
+        <Homequickaccessdown />
         <Homelabelcard />
       </div>
     );

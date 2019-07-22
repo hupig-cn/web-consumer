@@ -104,15 +104,15 @@ export default function SimpleTabs() {
     setValue(newValue);
   }
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appbar}>
-        <Tabs value={value} onChange={handleChange}>
+    <div ws-container-id="nearby-main" className={classes.root}>
+      <AppBar ws-container-id="nearby-header" position="static" className={classes.appbar}>
+        <Tabs ws-container-id="nearby-header-btn" value={value} onChange={handleChange}>
           <Tab label="附近热门" style={{ width: '33%', maxWidth: '100%' }} />
           <Tab label="距离最近" style={{ width: '34%', maxWidth: '100%' }} />
           <Tab label="积分最高" style={{ width: '33%', maxWidth: '100%' }} />
         </Tabs>
       </AppBar>
-      <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
+      <SwipeableViews ws-container-id="nearby-item" axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
         <TabContainer dir={theme.direction}>0</TabContainer>
         <TabContainer dir={theme.direction}>1</TabContainer>
         <TabContainer dir={theme.direction}>2</TabContainer>

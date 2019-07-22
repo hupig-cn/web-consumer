@@ -4,12 +4,12 @@ import Title from 'app/modules/public/title';
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 // tslint:disable-next-line: no-submodule-imports
 import RemoveRounded from '@material-ui/icons/RemoveRounded';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
 import { getSession, getSessionRE } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
-import { getMyRecommendName } from 'app/requests/basic/basic.reducer';
+import { getMyRecommendName, queryAlipay } from 'app/requests/basic/basic.reducer';
 // tslint:disable-next-line: no-submodule-imports
 import Dialog from '@material-ui/core/Dialog';
 // tslint:disable-next-line: no-submodule-imports
@@ -29,10 +29,10 @@ import { getlinkusers } from 'app/requests/basic/linkuser.reducer';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
 
-export interface IMysettingsProp extends StateProps, DispatchProps {}
+export interface IMysettingsProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { file: '', fileContentType: '', open: false, name: '无' };
+  state = { alipay: '未绑定', file: '', fileContentType: '', open: false, name: '无' };
   componentDidMount() {
     this.props.getSession();
     this.props
@@ -41,6 +41,12 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       .then(valueI => {
         valueI.payload.then(valueII => {
           if (valueII.data.imageUrl > 0) {
+            this.props
+              .queryAlipay(valueII.data.id)
+              // @ts-ignore
+              .then(mess => {
+                this.setState({ alipay: mess.value.data });
+              });
             this.props
               .getMyImg(valueII.data.imageUrl)
               // @ts-ignore
@@ -88,6 +94,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
     toast.success('提示：用来绑定微信。');
   };
   bindingAlipay = () => {
+    this.props.history.push('/personal');
     window.open(
       'alipays://platformapi/startapp?' +
         'appId=20000067&' +
@@ -95,7 +102,8 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         'app_id%3D2019062565651444%26' +
         'scope%3Dauth_base%26' +
         'redirect_uri%3Dhttp%3A%2F%2Fapp.yuanscore.com%3A8000%26' +
-        'state%3D123456789'
+        'state%3D' +
+        this.props.account.id
     );
   };
 
@@ -171,11 +179,21 @@ export class Mysettings extends React.Component<IMysettingsProp> {
           </div>
         </div>
         <div style={mydiv}>
-          <span style={{ float: 'left' }}>支付宝账号</span>
-          <div style={{ overflow: 'auto' }} onClick={this.bindingAlipay}>
-            <span>绑定</span>
-            <ChevronRightRounded style={{ float: 'right' }} />
-          </div>
+          {this.state.alipay === '未绑定' ? (
+            <div>
+              <span style={{ float: 'left' }}>支付宝账号(未绑定)</span>
+              <div style={{ overflow: 'auto' }} onClick={this.bindingAlipay}>
+                <span>立即绑定</span>
+                <ChevronRightRounded style={{ float: 'right' }} />
+              </div>
+            </div>
+          ) : (
+            <div>
+              <span style={{ float: 'left' }}>支付宝账号</span>
+              <span>已绑定</span>
+              <RemoveRounded style={{ float: 'right' }} />
+            </div>
+          )}
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
@@ -209,7 +227,7 @@ const mapStateToProps = ({ files, authentication, linkuser }: IRootState) => ({
   linkuserEntity: linkuser.entity
 });
 
-const mapDispatchToProps = { getSession, getMyImg, updateMyName, getlinkusers, getMyRecommendName, getSessionRE };
+const mapDispatchToProps = { getSession, getMyImg, updateMyName, getlinkusers, getMyRecommendName, getSessionRE, queryAlipay };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

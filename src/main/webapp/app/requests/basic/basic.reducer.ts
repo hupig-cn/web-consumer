@@ -189,6 +189,13 @@ export const updateUserAddress = (id, areaid, userid, address, consignee, isdefa
   return result;
 };
 
+export const queryAlipay = (userid: string) => {
+  const requestUrl = `services/basic/api/public/queryAlipay/?userid=${userid}`;
+  return {
+    payload: axios.get(requestUrl)
+  };
+};
+
 export const setDefaultAddress = (id: any) => async dispatch => {
   const result = await dispatch({
     payload: axios.post(apiUrl + '/set-default-address', { id })

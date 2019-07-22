@@ -65,16 +65,16 @@ export default function LongMenu() {
   }
 
   return (
-    <div style={{ paddingTop: '12px', backgroundColor: 'white' }}>
+    <div ws-container-id="normal-service-link" style={{ paddingTop: '12px', backgroundColor: 'white' }}>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="积分精选" value="key1" icon={<img src="./content/images/icon1.png" />} />
-        <BottomNavigationAction label="热门促销" value="key2" icon={<img src="./content/images/icon2.png" />} />
-        <BottomNavigationAction label="团购" value="key3" icon={<img src="./content/images/icon3.png" />} />
-        <BottomNavigationAction label="出行" value="key4" icon={<img src="./content/images/icon4.png" />} />
-        <BottomNavigationAction label="充值" value="key5" icon={<img src="./content/images/icon5.png" />} />
-        <BottomNavigationAction label="积分夺宝" value="key6" icon={<img src="./content/images/icon6.png" />} />
-        <BottomNavigationAction label="签到" value="key7" icon={<img src="./content/images/icon7.png" />} />
-        <BottomNavigationAction label="更多服务" value="key8" icon={<img src="./content/images/icon8.png" />} />
+        <BottomNavigationAction label="积分精选" value="key1" icon={<img src="./content/theme/zihong/images/icon1.png" />} />
+        <BottomNavigationAction label="热门促销" value="key2" icon={<img src="./content/theme/zihong/images/icon2.png" />} />
+        <BottomNavigationAction label="团购" value="key3" icon={<img src="./content/theme/zihong/images/icon3.png" />} />
+        <BottomNavigationAction label="出行" value="key4" icon={<img src="./content/theme/zihong/images/icon4.png" />} />
+        <BottomNavigationAction label="充值" value="key5" icon={<img src="./content/theme/zihong/images/icon5.png" />} />
+        <BottomNavigationAction label="积分夺宝" value="key6" icon={<img src="./content/theme/zihong/images/icon6.png" />} />
+        <BottomNavigationAction label="签到" value="key7" icon={<img src="./content/theme/zihong/images/icon7.png" />} />
+        <BottomNavigationAction label="更多服务" value="key8" icon={<img src="./content/theme/zihong/images/icon8.png" />} />
       </BottomNavigation>
     </div>
   );
