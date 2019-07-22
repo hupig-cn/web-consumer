@@ -19,8 +19,8 @@ export class Consumer extends React.Component<IConsumerProp> {
       <div>
         <LongMenu />
         <Quickaccess />
-        <Loopplayimg />
         <Homequickaccessdown />
+        <Loopplayimg />
         <Homelabelcard />
       </div>
     );

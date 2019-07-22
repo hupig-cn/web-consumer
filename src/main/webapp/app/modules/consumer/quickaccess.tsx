@@ -69,6 +69,10 @@ export default function LongMenu() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
+  let bottomimg = {
+    width: '32px',
+    margin: '5px 0px'
+  };
   return (
     <div ws-container-id="nav-quick-tools" className="jh-consumer-quickaccess">
       {/* <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
@@ -78,10 +82,26 @@ export default function LongMenu() {
           <BottomNavigationAction label="推荐好友" value="share" icon={<ShareOutlined />} />
         </BottomNavigation> */}
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="扫一扫" value="scan" icon={<img src="./content/theme/zihong/images/tools_scan.png" />} />
-        <BottomNavigationAction label="付款码" value="pay" icon={<img src="./content/theme/zihong/images/tools_pay.png" />} />
-        <BottomNavigationAction label="收 &nbsp; 钱" value="income" icon={<img src="./content/theme/zihong/images/tools_income.png" />} />
-        <BottomNavigationAction label="推荐好友" value="share" icon={<img src="./content/theme/zihong/images/tools_share.png" />} />
+        <BottomNavigationAction
+          label="扫一扫"
+          value="scan"
+          icon={<img style={bottomimg} src="./content/theme/zihong/images/tools_scan.png" />}
+        />
+        <BottomNavigationAction
+          label="付款码"
+          value="pay"
+          icon={<img style={bottomimg} src="./content/theme/zihong/images/tools_pay.png" />}
+        />
+        <BottomNavigationAction
+          label="收 &nbsp; 钱"
+          value="income"
+          icon={<img style={bottomimg} src="./content/theme/zihong/images/tools_income.png" />}
+        />
+        <BottomNavigationAction
+          label="推荐好友"
+          value="share"
+          icon={<img style={bottomimg} src="./content/theme/zihong/images/tools_share.png" />}
+        />
       </BottomNavigation>
     </div>
   );

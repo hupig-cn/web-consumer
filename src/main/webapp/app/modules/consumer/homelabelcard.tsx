@@ -122,12 +122,12 @@ export default function TitlebarGridList() {
 
   return (
     <div ws-container-id="lable-card" className={classes.root}>
-      <GridList cellHeight={180} className={classes.gridList} style={{ margin: -0, width: '97%' }}>
+      <GridList cellHeight={180} className={classes.gridList} style={{ margin: -0, width: '100%' }}>
         {tileData.map(tile => (
           <GridListTile
             key={tile.img}
             className={classes.listTitle}
-            style={{ height: '100%', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: 5 }}
+            style={{ height: '100%', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: '3px' }}
             // tslint:disable-next-line: jsx-no-lambda
             onClick={() => {
               document.getElementById('app-modules-consumer-quickaccess-button-link-productdetail-' + tile.id).click();

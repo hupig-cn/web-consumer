@@ -179,7 +179,7 @@ export default function LongMenu() {
           aria-controls="long-menu"
           aria-haspopup="true"
           onClick={handleClick}
-          style={{ outline: 'none', float: 'right', color: '#fffde5', padding: '0px', margin: '6px 6px 0px 6px' }}
+          style={{ outline: 'none', float: 'right', color: '#fffde5', padding: '0px', margin: '10px 12px 0px 12px' }}
         >
           <img src="/content/theme/zihong/images/more_icon.png" />
           {/* <MoreVertIcon /> */}

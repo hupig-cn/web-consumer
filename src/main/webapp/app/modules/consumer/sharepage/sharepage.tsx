@@ -9,12 +9,14 @@ export interface ISharepageProp extends StateProps, DispatchProps {}
 
 export class Sharepage extends React.Component<ISharepageProp> {
   state = { id: '', login: '' };
-  componentDidMount() {
+  componentWillMount() {
     this.props
       .getSessionRE()
       // @ts-ignore
       .then(val => {
-        this.setState({ id: val.value.data.id, login: val.value.data.login });
+        val.payload.then(key => {
+          this.setState({ id: key.data.id, login: key.data.login });
+        });
       });
   }
 
