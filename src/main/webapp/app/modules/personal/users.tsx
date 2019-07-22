@@ -88,7 +88,11 @@ export default function LongMenu(props) {
           zIndex: 1000
         }}
       >
-        <Avatar alt="photo" src={state.fileContentType? `data:${state.fileContentType};base64,${state.file}`: ``} className={classes.bigAvatar} />
+        <Avatar
+          alt="photo"
+          src={state.fileContentType ? `data:${state.fileContentType};base64,${state.file}` : ``}
+          className={classes.bigAvatar}
+        />
         <div className={classes.namePlusSetting}>
           <span className={classes.name}>
             {account.firstName}
