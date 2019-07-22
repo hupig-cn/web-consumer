@@ -16,7 +16,7 @@ export interface IFeedbackProps extends StateProps, DispatchProps, RouteComponen
 export class Feedback extends React.Component<IFeedbackProps> {
   componentDidMount() {
     this.props.getSession();
-    this.props.setBlob('fileI',undefined,undefined);
+    this.props.setBlob('fileI', undefined, undefined);
   }
   handleSubmit = (event, errors, { title, name, content, imageurl }) => {
     if (imageurl.length < 1) {

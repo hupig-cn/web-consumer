@@ -26,7 +26,8 @@ import Button from '@material-ui/core/Button';
 import { updateMyName } from 'app/shared/reducers/authentication';
 import { toast } from 'react-toastify';
 import { getlinkusers } from 'app/requests/basic/linkuser.reducer';
-import Avatar from "@material-ui/core/Avatar";
+// tslint:disable-next-line: no-submodule-imports
+import Avatar from '@material-ui/core/Avatar';
 
 export interface IMysettingsProp extends StateProps, DispatchProps {}
 
@@ -87,13 +88,15 @@ export class Mysettings extends React.Component<IMysettingsProp> {
     toast.success('提示：用来绑定微信。');
   };
   bindingAlipay = () => {
-    window.open("alipays://platformapi/startapp?" +
-      "appId=20000067&" +
-      "url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3F" +
-      "app_id%3D2019062565651444%26" +
-      "scope%3Dauth_base%26" +
-      "redirect_uri%3Dhttp%3A%2F%2Fapp.yuanscore.com%3A8000%26" +
-      "state%3D123456789");
+    window.open(
+      'alipays://platformapi/startapp?' +
+        'appId=20000067&' +
+        'url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3F' +
+        'app_id%3D2019062565651444%26' +
+        'scope%3Dauth_base%26' +
+        'redirect_uri%3Dhttp%3A%2F%2Fapp.yuanscore.com%3A8000%26' +
+        'state%3D123456789'
+    );
   };
 
   render() {
@@ -118,12 +121,15 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         <Title name="设置" back="/personal" />
         <div style={mydiv}>
           <span style={{ float: 'left', marginTop: '16px' }}>头像</span>
-          <Link to="/reimageurl" style={{float:"right",padding: 'inherit'}}>
+          <Link to="/reimageurl" style={{ float: 'right', padding: 'inherit' }}>
             <span>更换</span>
             <ChevronRightRounded style={{ marginTop: '-4px' }} />
           </Link>
-          <Avatar alt="photo" src={this.state.fileContentType? `data:${this.state.fileContentType};base64,${this.state.file}`: ``}
-                  style={{width: '50px', height: '50px',float:"right" }} />
+          <Avatar
+            alt="photo"
+            src={this.state.fileContentType ? `data:${this.state.fileContentType};base64,${this.state.file}` : ``}
+            style={{ width: '50px', height: '50px', float: 'right' }}
+          />
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>昵称</span>
@@ -160,15 +166,15 @@ export class Mysettings extends React.Component<IMysettingsProp> {
         <div style={mydiv}>
           <span style={{ float: 'left' }}>微信账号</span>
           <div style={{ overflow: 'auto' }} onClick={this.bindingWeChat}>
-          <span>绑定</span>
-          <ChevronRightRounded style={{ float: 'right' }} />
+            <span>绑定</span>
+            <ChevronRightRounded style={{ float: 'right' }} />
           </div>
         </div>
         <div style={mydiv}>
           <span style={{ float: 'left' }}>支付宝账号</span>
           <div style={{ overflow: 'auto' }} onClick={this.bindingAlipay}>
-          <span>绑定</span>
-          <ChevronRightRounded style={{ float: 'right' }} />
+            <span>绑定</span>
+            <ChevronRightRounded style={{ float: 'right' }} />
           </div>
         </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />

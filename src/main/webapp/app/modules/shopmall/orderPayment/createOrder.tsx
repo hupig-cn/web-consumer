@@ -134,7 +134,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 margin: '1px 0px',
                 borderTop: '1px solid #B1B1B1',
                 borderBottom: '1px solid #B1B1B1',
-                'text-align': 'right'
+                textAlign: 'right'
               }}
             >
               <span style={{ float: 'left' }}>配送方式</span>
@@ -147,7 +147,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
                 borderBottom: '1px solid #B1B1B1',
-                'text-align': 'right'
+                textAlign: 'right'
               }}
             >
               <span style={{ float: 'left' }}>发票</span>
@@ -160,7 +160,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
                 borderBottom: '1px solid #B1B1B1',
-                'text-align': 'right'
+                textAlign: 'right'
               }}
             >
               <span style={{ float: 'left' }}>运费险</span>
