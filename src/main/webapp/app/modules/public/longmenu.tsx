@@ -131,7 +131,7 @@ export default function LongMenu() {
   }
 
   return (
-    <div ws-container-id="nav-search-group" style={{ height: '35px' }}>
+    <div ws-container-id="nav-search-group" style={{ height: '35px', marginTop: '-5px' }}>
       <div
         className="jh-longmenu"
         style={{ zIndex: 1000, height: '36px', lineHeight: '24px', backgroundColor: '#fe4365', position: 'fixed', width: '100%' }}

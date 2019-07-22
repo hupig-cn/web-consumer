@@ -74,7 +74,7 @@ export default function LongMenu() {
     margin: '5px 0px'
   };
   return (
-    <div ws-container-id="nav-quick-tools" className="jh-consumer-quickaccess">
+    <div ws-container-id="nav-quick-tools" className="jh-consumer-quickaccess" style={{ marginTop: '-5px' }}>
       {/* <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
           <BottomNavigationAction label="扫一扫" value="scan" icon={<CropFreeRounded />} />
           <BottomNavigationAction label="付款码" value="pay" icon={<MonetizationOnOutlined />} />

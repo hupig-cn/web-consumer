@@ -8,7 +8,6 @@ import Nearbytabs from './nearbytabs';
 
 /* vipkwd */
 import '../../../static/css/common.scss';
-import '../../../static/css/nearby.scss';
 
 export interface INearbyProp extends StateProps, DispatchProps {}
 
