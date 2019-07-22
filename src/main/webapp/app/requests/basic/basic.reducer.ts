@@ -161,6 +161,13 @@ export const getUserAddress: ICrudGetAction<IAddress> = (id: string) => {
   };
 };
 
+export const getAddressDetail = (id: any, userid: any) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post(apiUrl + '/get-address-detail', { id, userid })
+  });
+  return result;
+};
+
 export const insertUserAddress = (
   areaid: any,
   userid: any,
@@ -175,15 +182,7 @@ export const insertUserAddress = (
   return result;
 };
 
-export const updateUserAddress = (
-  id: any,
-  areaid: any,
-  userid: any,
-  address: any,
-  consignee: any,
-  isdefault: any,
-  mobile: any
-) => async dispatch => {
+export const updateUserAddress = (id, areaid, userid, address, consignee, isdefault, mobile) => async dispatch => {
   const result = await dispatch({
     payload: axios.post(apiUrl + '/update-user-address', { id, areaid, userid, address, consignee, isdefault, mobile })
   });

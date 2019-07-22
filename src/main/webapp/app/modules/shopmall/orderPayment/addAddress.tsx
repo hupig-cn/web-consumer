@@ -1,138 +1,113 @@
 import React from 'react';
-// tslint:disable-next-line: no-submodule-imports
-import TextField from '@material-ui/core/TextField';
 import Title from 'app/modules/public/title';
-// tslint:disable-next-line: no-submodule-imports
-import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
-// tslint:disable-next-line: no-submodule-imports
-import Switch from '@material-ui/core/Switch';
-// tslint:disable-next-line: no-submodule-imports
-import Button from '@material-ui/core/Button';
-import { getSession } from 'app/shared/reducers/authentication';
-import { getUserAddress } from 'app/requests/basic/basic.reducer';
+import { Button, Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
+import { setFileData } from 'react-jhipster';
+import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { connect } from 'react-redux';
+import { IRootState } from 'app/shared/reducers';
+import { getSession } from 'app/shared/reducers/authentication';
+import { getAddressDetail, updateUserAddress } from 'app/requests/basic/basic.reducer';
 
 export interface IAddAddressProp extends StateProps, DispatchProps {}
 
 export class AddAddress extends React.Component<IAddAddressProp> {
   state = {
-    messages: []
+    messages: [],
+    userid: ''
   };
-
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     // @ts-ignore
     this.props.getSession().then(respone => {
       // @ts-ignore
-      this.props.getUserAddress(respone.id).then(res => {
+      this.props.getAddressDetail(this.props.location.id, respone.id).then(res => {
         this.setState({
-          messages: res.value.data.data
+          messages: res.value.data.data,
+          userid: respone.id
         });
       });
     });
   }
+  handleSubmit = (id, areaid, userid, address, consignee, isdefault, mobile) => {
+    this.props.updateUserAddress(id, areaid, userid, address, consignee, isdefault, mobile);
+  };
 
   render() {
     return (
-      <div>
+      <div
+        style={{
+          backgroundColor: '#00000010',
+          width: '100%',
+          height: '100%',
+          margin: '30px 0px 0px 0px',
+          padding: '0px'
+        }}
+      >
         <Title name="新增地址" back="/selectAddress" />
-        <form
-          style={{
-            margin: '45px 0px 0px 0px',
-            display: 'flex',
-            flexWrap: 'wrap'
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="name"
-            label="收货人"
-            style={{ margin: 8 }}
-            placeholder="请填写收货人"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            id="phoneNumber"
-            label="手机号码"
-            style={{ margin: 8 }}
-            placeholder="请填写手机号码"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            id="location"
-            label="所在地区"
-            style={{ margin: 8 }}
-            placeholder="请填写所在地区"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            id="address"
-            label="详细地址"
-            style={{ margin: 8 }}
-            placeholder="街道、楼牌号等"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <div style={{ height: '56px', width: '100%', margin: '15px 0px 0px 15px', position: 'relative' }}>
-            <span>设置默认地址</span>
-            <ChevronRightRounded style={{ float: 'right' }} />
-            <div style={{ position: 'relative', float: 'right', bottom: '7px', left: '25px' }}>
-              <Switch />
-            </div>
-          </div>
-        </form>
-        <div
-          style={{
-            position: 'fixed',
-            bottom: '0px',
-            zIndex: 1000,
-            width: '100%',
-            backgroundColor: '#ffffff',
-            height: '50px'
-          }}
-        >
-          <Button
+        <AvForm onSubmit={this.handleSubmit}>
+          <div
             style={{
-              backgroundColor: '#fe4365',
-              color: '#ffffff',
               width: '100%',
-              fontSize: '1rem',
-              height: '100%'
+              textAlign: 'center',
+              padding: '10px',
+              fontSize: '1.2rem',
+              borderBottom: '1px solid #00000015',
+              marginTop: '35px'
             }}
           >
-            保存地址
-          </Button>
-        </div>
+            填写地址信息
+          </div>
+          <ModalBody>
+            <Row>
+              <Col md="12">
+                <AvField
+                  name="title"
+                  label={<span style={{ float: 'left', marginTop: '7px' }}>收货人：</span>}
+                  placeholder={'请填写收货人'}
+                  required
+                  errorMessage="收货人不能为空!"
+                  style={{ width: '70%', float: 'right' }}
+                />
+                <AvField
+                  name="name"
+                  label={<span style={{ float: 'left', marginTop: '7px' }}>手机号码：</span>}
+                  placeholder={'请填写手机号码'}
+                  style={{ width: '70%', float: 'right' }}
+                />
+                <AvField
+                  name="name"
+                  label={<span style={{ float: 'left', marginTop: '7px' }}>所在地区：</span>}
+                  placeholder={'请填写所在地区'}
+                  style={{ width: '70%', float: 'right' }}
+                />
+                <AvField
+                  name="name"
+                  label={<span style={{ float: 'left', marginTop: '7px' }}>详细地址：</span>}
+                  placeholder={'街道、楼牌号等'}
+                  style={{ width: '70%', float: 'right' }}
+                />
+              </Col>
+            </Row>
+          </ModalBody>
+          <ModalFooter>
+            <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }} type="submit">
+              提交反馈
+            </Button>
+          </ModalFooter>
+        </AvForm>
       </div>
     );
   }
 }
 
-const mapStateToProps = storeState => ({
-  account: storeState.authentication.account,
-  isAuthenticated: storeState.authentication.isAuthenticated
+const mapStateToProps = ({ authentication, files }: IRootState) => ({
+  filesEntity: files.entity,
+  account: authentication.account
 });
 
-const mapDispatchToProps = { getSession, getUserAddress };
+const mapDispatchToProps = { getSession, getAddressDetail, updateUserAddress };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

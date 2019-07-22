@@ -21,6 +21,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'react-router-dom';
 
 export interface ISelectAddressProp extends StateProps, DispatchProps {}
 
@@ -57,9 +58,21 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
         <CssBaseline />
         <Paper square style={paper}>
           <List style={list}>
-            {this.state.messages.map(({ id, address, consignee, mobile }) => (
+            {this.state.messages.map(({ id, address, consignee, mobile, isdefault }) => (
               <React.Fragment key={id}>
-                <ListItem button style={{ height: '80px', borderBottom: '1px solid #f0f0f0', position: 'relative' }}>
+                <Link
+                  // tslint:disable-next-line: jsx-self-close
+                  id={'app-modules-consumer-quickaccess-button-link-addAddress-' + id}
+                  to={{ pathname: '/addAddress', id, address, consignee, mobile, isdefault }}
+                />
+                <ListItem
+                  button
+                  style={{ height: '80px', borderBottom: '1px solid #f0f0f0', position: 'relative' }}
+                  // tslint:disable-next-line: jsx-no-lambda
+                  onClick={() => {
+                    document.getElementById('app-modules-consumer-quickaccess-button-link-addAddress-' + id).click();
+                  }}
+                >
                   <ListItemAvatar>
                     <Avatar
                       alt="默认收货地址"

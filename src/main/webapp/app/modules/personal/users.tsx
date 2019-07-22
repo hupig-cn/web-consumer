@@ -107,7 +107,7 @@ export default function LongMenu(props) {
           <div className={classes.login}>{account.login}</div>
         </div>
       </div>
-      <BottomNavigation style={{ position: 'fixed', top: '58px', height: 'auto', zIndex: 1000 }} showLabels className={classes.root}>
+      <BottomNavigation showLabels style={{ position: 'fixed', top: '58px', height: 'auto', zIndex: 1000 }} className={classes.root}>
         <BottomNavigationAction label="积分" value="scan" icon={'0'} />
         <BottomNavigationAction label="余额" value="pay" icon={'0.00'} />
         <BottomNavigationAction label="优惠卷" value="share" icon={'0'} />
