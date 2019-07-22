@@ -1,15 +1,21 @@
 import React from 'react';
 import Title from 'app/modules/public/title';
 import QRCode from 'qrcode.react';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSessionRE } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export interface ISharepageProp extends StateProps, DispatchProps {}
 
 export class Sharepage extends React.Component<ISharepageProp> {
+  state = { id: '', login: '' };
   componentDidMount() {
-    this.props.getSession();
+    this.props
+      .getSessionRE()
+      // @ts-ignore
+      .then(val => {
+        this.setState({ id: val.value.data.id, login: val.value.data.login });
+      });
   }
 
   render() {
@@ -33,7 +39,7 @@ export class Sharepage extends React.Component<ISharepageProp> {
           <div style={{ paddingTop: '50px' }}>
             {account && account.login ? (
               <QRCode
-                value={'http://app.yuanscore.com:8080/?id=' + account.id + '&share=' + account.login}
+                value={'http://app.yuanscore.com:8080/?id=' + this.state.id + '&share=' + this.state.login}
                 size={200}
                 fgColor="#00000098"
                 bgColor="#a7bfbf"
@@ -98,7 +104,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSessionRE };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
