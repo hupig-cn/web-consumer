@@ -38,8 +38,8 @@ export class Sharepage extends React.Component<ISharepageProp> {
           }}
         >
           <img style={{ width: '100%', height: '220px' }} src="./content/images/sharepage.png" />
-          <div style={{ paddingTop: '50px' }}>
-            {account && account.login ? (
+          <div style={{ paddingTop: '50px', position: 'relative', zIndex: 1000 }}>
+            {!(account && account.login) ? (
               <QRCode
                 value={'http://app.yuanscore.com:8080/?id=' + this.state.id + '&share=' + this.state.login}
                 size={200}
@@ -56,7 +56,7 @@ export class Sharepage extends React.Component<ISharepageProp> {
               </Link>
             )}
           </div>
-          <div style={{ position: 'relative', width: '100%', top: '-250px', zIndex: -1 }}>
+          <div style={{ position: 'relative', width: '100%', top: '-250px', zIndex: 100 }}>
             <img style={{ width: '340px', height: '300px' }} src="./content/images/frame.png" />
           </div>
           <div style={{ marginTop: '-220px' }}>
