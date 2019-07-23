@@ -47,6 +47,8 @@ export const Loadpages = (key: string) => {
     case 'scan':
       // @ts-ignore
       typeof window.weisen === 'object' && window.weisen.getscan();
+      // @ts-ignore
+      window.webkit.messageHandlers.scannings.postMessage('');
       break;
     case 'pay':
       toast.info('提示：功能正在开发中.');
