@@ -89,6 +89,8 @@ export default function LongMenu() {
       case '扫一扫':
         // @ts-ignore
         typeof window.weisen === 'object' && window.weisen.getscan();
+        // @ts-ignore
+        window.webkit.messageHandlers.scannings.postMessage('');
         break;
       case '付款码':
         toast.info('提示：功能正在开发中.');
