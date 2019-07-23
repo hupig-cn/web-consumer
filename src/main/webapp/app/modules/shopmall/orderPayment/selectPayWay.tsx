@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
 import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from 'app/modules/public/title';
+import { Link } from 'react-router-dom';
 
 export interface ISelectPayWayProp extends StateProps, DispatchProps {}
 
@@ -74,10 +75,15 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
               left: '10%',
               position: 'absolute'
             }}
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={() => {
+              document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+            }}
           >
             确认支付
           </button>
         </div>
+        <Link id="app-modules-consumer-quickaccess-button-link-payment" to="/payment" />
       </div>
     );
   }

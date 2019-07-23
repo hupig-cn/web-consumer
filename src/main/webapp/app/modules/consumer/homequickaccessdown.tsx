@@ -6,7 +6,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,7 +62,7 @@ export default function LongMenu() {
     Loadpages(newValue);
     toast.info('提示：功能正在开发中.');
   }
-  let bottomhomeimg = {
+  const bottomhomeimg = {
     width: '26px',
     height: '26px',
     marginTop: '5px'

@@ -71,7 +71,7 @@ export default function LongMenu() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
-  let bottomimg = {
+  const bottomimg = {
     width: '32px',
     margin: '5px 0px'
   };
