@@ -44,7 +44,7 @@ export class Sharepage extends React.Component<ISharepageProp> {
                 value={'http://app.yuanscore.com:8080/?id=' + this.state.id + '&share=' + this.state.login}
                 size={200}
                 fgColor="#000000"
-                bgColor="#ffffff"
+                bgColor="#a7bfbf"
               />
             ) : (
               <Link to="/login">
