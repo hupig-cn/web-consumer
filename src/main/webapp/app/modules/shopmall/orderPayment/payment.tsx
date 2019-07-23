@@ -2,8 +2,6 @@ import './keyboard.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import Title from 'app/modules/public/title';
-// tslint:disable-next-line: no-submodule-imports
-import 'react-input-groups/lib/css/styles.css';
 import { getSession } from 'app/shared/reducers/authentication';
 import { Link } from 'react-router-dom';
 

@@ -58,12 +58,12 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
         <CssBaseline />
         <Paper square style={paper}>
           <List style={list}>
-            {this.state.messages.map(({ id, address, consignee, mobile, isdefault }) => (
+            {this.state.messages.map(({ id, address, consignee, mobile, isdefault, areaid, areaName }) => (
               <React.Fragment key={id}>
                 <Link
                   // tslint:disable-next-line: jsx-self-close
                   id={'app-modules-consumer-quickaccess-button-link-addAddress-' + id}
-                  to={{ pathname: '/addAddress', id, address, consignee, mobile, isdefault }}
+                  to={{ pathname: '/addAddress', id, address, consignee, mobile, isdefault, areaid, areaName }}
                 />
                 <ListItem
                   button

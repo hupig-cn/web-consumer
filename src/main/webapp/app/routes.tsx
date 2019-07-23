@@ -51,7 +51,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/payment" component={Payment} />
       <ErrorBoundaryRoute path="/complete" component={Complete} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
-      <ErrorBoundaryRoute component={PageNotFound} />C
+      <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>
   </div>
 );

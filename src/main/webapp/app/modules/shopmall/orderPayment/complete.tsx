@@ -4,6 +4,7 @@ import { registerLocale } from 'app/config/translation';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Title from 'app/modules/public/title';
 
 export default function complete() {
   const store = initStore();
@@ -19,28 +20,7 @@ export default function complete() {
 
   return (
     <div>
-      <div
-        style={{
-          backgroundColor: '#fe4365',
-          height: '40px',
-          textAlign: 'center',
-          padding: '7px',
-          width: '100%',
-          position: 'fixed',
-          top: '0px',
-          zIndex: 1000
-        }}
-      >
-        <h5
-          style={{
-            color: '#fffde5',
-            marginTop: '3px',
-            fontSize: '1.05rem'
-          }}
-        >
-          支付成功
-        </h5>
-      </div>
+      <Title name="支付成功" back="/payment" />
       <div
         style={{
           backgroundColor: 'rgba(255,253,229,0)',
