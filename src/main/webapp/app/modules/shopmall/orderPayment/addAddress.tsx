@@ -1,7 +1,6 @@
 import React from 'react';
 import Title from 'app/modules/public/title';
 import { Button, Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
-import { setFileData } from 'react-jhipster';
 import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
@@ -30,8 +29,15 @@ export class AddAddress extends React.Component<IAddAddressProp> {
       });
     });
   }
-  handleSubmit = (id, areaid, userid, address, consignee, isdefault, mobile) => {
-    this.props.updateUserAddress(id, areaid, userid, address, consignee, isdefault, mobile);
+
+  handleSubmit = (event, errors, { areaid, address, consignee, isdefault, mobile }) => {
+    alert(areaid);
+    alert(address);
+    alert(consignee);
+    alert(isdefault);
+    alert(mobile);
+    // @ts-ignore
+    this.props.updateUserAddress(this.props.location.id, areaid, this.state.userid, address, consignee, isdefault, mobile);
   };
 
   render() {
@@ -63,7 +69,9 @@ export class AddAddress extends React.Component<IAddAddressProp> {
             <Row>
               <Col md="12">
                 <AvField
-                  name="title"
+                  name="consignee"
+                  // @ts-ignore
+                  defaultValue={this.props.location.consignee}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>收货人：</span>}
                   placeholder={'请填写收货人'}
                   required
@@ -71,23 +79,40 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                   style={{ width: '70%', float: 'right' }}
                 />
                 <AvField
-                  name="name"
+                  name="mobile"
+                  // @ts-ignore
+                  defaultValue={this.props.location.mobile}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>手机号码：</span>}
                   placeholder={'请填写手机号码'}
                   style={{ width: '70%', float: 'right' }}
                 />
                 <AvField
-                  name="name"
+                  name="areaName"
+                  // @ts-ignore
+                  defaultValue={this.props.location.areaName}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>所在地区：</span>}
                   placeholder={'请填写所在地区'}
                   style={{ width: '70%', float: 'right' }}
                 />
                 <AvField
-                  name="name"
+                  name="address"
+                  // @ts-ignore
+                  defaultValue={this.props.location.address}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>详细地址：</span>}
                   placeholder={'街道、楼牌号等'}
                   style={{ width: '70%', float: 'right' }}
                 />
+                <AvGroup check inline>
+                  <Label>
+                    <AvInput
+                      type="checkbox"
+                      name="isdefault"
+                      // @ts-ignore
+                      defaultValue={this.props.location.isdefault}
+                    />
+                    设置为默认地址
+                  </Label>
+                </AvGroup>
               </Col>
             </Row>
           </ModalBody>
