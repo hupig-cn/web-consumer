@@ -43,8 +43,8 @@ export class Sharepage extends React.Component<ISharepageProp> {
               <QRCode
                 value={'http://app.yuanscore.com:8080/?id=' + this.state.id + '&share=' + this.state.login}
                 size={200}
-                fgColor="#00000098"
-                bgColor="#a7bfbf"
+                fgColor="#000000"
+                bgColor="#ffffff"
               />
             ) : (
               <Link to="/login">
