@@ -23,6 +23,8 @@ import CreateOrder from 'app/modules/shopmall/orderPayment/createOrder';
 import SelectAddress from 'app/modules/shopmall/orderPayment/selectAddress';
 import AddAddress from 'app/modules/shopmall/orderPayment/addAddress';
 import SelectPayway from 'app/modules/shopmall/orderPayment/selectPayWay';
+import Payment from 'app/modules/shopmall/orderPayment/payment';
+import Complete from 'app/modules/shopmall/orderPayment/complete';
 
 const Routes = () => (
   <div className="view-routes">
@@ -46,8 +48,10 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/addAddress" component={AddAddress} />
       <ErrorBoundaryRoute path="/selectAddress" component={SelectAddress} />
       <ErrorBoundaryRoute path="/selectpayway" component={SelectPayway} />
+      <ErrorBoundaryRoute path="/payment" component={Payment} />
+      <ErrorBoundaryRoute path="/complete" component={Complete} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
-      <ErrorBoundaryRoute component={PageNotFound} />
+      <ErrorBoundaryRoute component={PageNotFound} />C
     </Switch>
   </div>
 );
