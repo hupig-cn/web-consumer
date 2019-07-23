@@ -95,7 +95,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
   };
   bindingAlipay = () => {
     this.props.history.push('/personal');
-    window.open(
+    window.location.replace(
       'alipays://platformapi/startapp?' +
         'appId=20000067&' +
         'url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3F' +
