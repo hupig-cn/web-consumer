@@ -160,6 +160,14 @@ export const getlinkusers: ICrudGetAction<ILinkuser> = userid => {
   };
 };
 
+export const queryRealName: ICrudGetAction<ILinkuser> = userid => {
+  const requestUrl = `services/basic/api/queryRealName/${userid}`;
+  return {
+    type: ACTION_TYPES.FETCH_LINKUSER,
+    payload: axios.get<ILinkuser>(requestUrl)
+  };
+};
+
 export const authentication = (userid, name, idcard) => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_LINKUSER,

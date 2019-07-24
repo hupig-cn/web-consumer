@@ -15,6 +15,7 @@ import { setFileData, byteSize } from 'react-jhipster';
 import { toast } from 'react-toastify';
 import { getSession } from 'app/shared/reducers/authentication';
 import Info from 'app/modules/public/info';
+import { queryRealName } from 'app/requests/basic/linkuser.reducer';
 
 export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -34,8 +35,15 @@ const concession = [
 ];
 
 export class Upmerchant extends React.Component<IUpmerchantProps> {
+  state = { realname: '' };
   componentDidMount() {
     this.props.getSession();
+    this.props
+      .queryRealName(this.props.account.id)
+      // @ts-ignore
+      .then(val => {
+        this.setState({ realname: val.value.data });
+      });
     this.props.getBusinessEntities();
     this.props.resetMerchant();
     this.props.getMyEntityMerchant(this.props.account.id);
@@ -463,7 +471,8 @@ const mapDispatchToProps = {
   createFile,
   getNextAreaPnameProvince,
   getNextAreaPnameCity,
-  getNextAreaPnameCounty
+  getNextAreaPnameCounty,
+  queryRealName
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
