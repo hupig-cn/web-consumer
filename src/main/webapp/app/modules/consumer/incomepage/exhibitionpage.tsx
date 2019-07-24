@@ -75,7 +75,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
               // @ts-ignore
               <QRCode
                 id="qrcode-canvas-key"
-                value={'http://app.yuanscore.com:8080/?id=' + merchantEntity.id}
+                value={'http://app.yuanscore.com/?id=' + merchantEntity.id}
                 renderAs="canvas"
                 size={233}
                 fgColor="#000000"

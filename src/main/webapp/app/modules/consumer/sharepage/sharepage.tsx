@@ -41,7 +41,7 @@ export class Sharepage extends React.Component<ISharepageProp> {
           <div style={{ paddingTop: '50px', position: 'relative', zIndex: 1000 }}>
             {account && account.login ? (
               <QRCode
-                value={'http://app.yuanscore.com:8080/?id=' + this.state.id + '&share=' + this.state.login}
+                value={'http://app.yuanscore.com/?id=' + this.state.id + '&share=' + this.state.login}
                 size={200}
                 fgColor="#000000"
                 bgColor="#a7bfbf"
