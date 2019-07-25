@@ -32,41 +32,64 @@ export class Sharepage extends React.Component<ISharepageProp> {
             height: '100%',
             left: '0px',
             top: '0px',
-            backgroundColor: '#a7bfbf',
+            backgroundColor: '#fa6044',
             zIndex: 100,
             textAlign: 'center'
           }}
         >
-          <img style={{ width: '100%', height: '220px' }} src="./content/images/sharepage.png" />
-          <div style={{ paddingTop: '50px', position: 'relative', zIndex: 1000 }}>
+          <img style={{ width: '100%', height: '150px', objectFit: 'cover' }} src="./content/images/sharepage.jpg" />
+          <img
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              top: '0px',
+              left: '0px'
+            }}
+            src="./content/images/sharebackgroud.png"
+          />
+          <img
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              top: '0px',
+              left: '0px'
+            }}
+            src="./content/images/down.png"
+          />
+          <div style={{ paddingTop: '80px', position: 'relative', zIndex: 1000 }}>
             {account && account.login ? (
               <QRCode
                 value={'http://app.yuanscore.com/?id=' + this.state.id + '&share=' + this.state.login}
                 size={200}
                 fgColor="#000000"
-                bgColor="#a7bfbf"
+                bgColor="#ffffff"
               />
             ) : (
               <Link to="/login">
                 <div
-                  style={{ width: '200px', height: '200px', color: '#ffffff', textAlign: 'center', margin: '0 auto', lineHeight: '200px' }}
+                  style={{ width: '200px', height: '200px', color: '#000000', textAlign: 'center', margin: '0 auto', lineHeight: '200px' }}
                 >
                   <u>点击登录，生成邀请码</u>
                 </div>
               </Link>
             )}
           </div>
-          <div style={{ position: 'relative', width: '100%', top: '-250px', zIndex: 100 }}>
-            <img style={{ width: '340px', height: '300px' }} src="./content/images/frame.png" />
+          <div style={{ position: 'relative', width: '100%', top: '-344px', zIndex: 100 }}>
+            <img style={{ width: '300px', height: '466px' }} src="./content/images/frame.png" />
           </div>
-          <div style={{ marginTop: '-220px' }}>
+          <div style={{ marginTop: '-390px' }}>
             <label
               style={{
                 color: '#ffffff',
+                backgroundColor: '#6740402e',
                 outline: 'none',
-                border: '1px solid #ffffff',
-                width: '100px',
-                borderRadius: '5px'
+                width: '115px',
+                borderRadius: '20px',
+                height: '36px',
+                padding: '5px 0px',
+                margin: '0 5px'
               }}
             >
               扫码注册
@@ -74,11 +97,13 @@ export class Sharepage extends React.Component<ISharepageProp> {
             <label
               style={{
                 color: '#ffffff',
+                backgroundColor: '#6740402e',
                 outline: 'none',
-                border: '1px solid #ffffff',
-                width: '100px',
-                margin: '0px 15px',
-                borderRadius: '5px'
+                width: '115px',
+                borderRadius: '20px',
+                height: '36px',
+                padding: '5px 0px',
+                margin: '0 5px'
               }}
             >
               付款使用
@@ -86,10 +111,13 @@ export class Sharepage extends React.Component<ISharepageProp> {
             <label
               style={{
                 color: '#ffffff',
+                backgroundColor: '#6740402e',
                 outline: 'none',
-                border: '1px solid #ffffff',
-                width: '100px',
-                borderRadius: '5px'
+                width: '115px',
+                borderRadius: '20px',
+                height: '36px',
+                padding: '5px 0px',
+                margin: '0 5px'
               }}
             >
               赠送积分
