@@ -186,7 +186,7 @@ export const updateUserAddress = (id, areaid, userid, address, consignee, isdefa
   const result = await dispatch({
     payload: axios.post(apiUrl + '/update-user-address', { id, areaid, userid, address, consignee, isdefault, mobile })
   });
-  return result.value.data;
+  return result;
 };
 
 export const queryAlipay = (userid: string) => {

@@ -16,7 +16,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
   state = {
     consignee: '收货人',
     mobile: '13866668888',
-    address: '广州市天河区天河路383号太古汇太古汇太古汇太古汇太古汇太古汇'
+    address: '广州市天河区天河路383号太古汇太古汇太古汇太古汇太古汇太古汇',
+    havaDefault: false
   };
 
   componentDidMount() {
@@ -24,11 +25,14 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     this.props.getSession().then(respone => {
       // @ts-ignore
       this.props.getDefaultAddress(respone.id).then(res => {
-        this.setState({
-          consignee: res.value.data.data[0].consignee,
-          mobile: res.value.data.data[0].mobile,
-          address: res.value.data.data[0].address
-        });
+        if (res.value.data.code === 1) {
+          this.setState({
+            consignee: res.value.data.data[0].consignee,
+            mobile: res.value.data.data[0].mobile,
+            address: res.value.data.data[0].address,
+            havaDefault: true
+          });
+        }
       });
     });
   }
@@ -55,44 +59,47 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               }}
             >
               <Link to="/selectAddress">
-                <div>
+                {this.state.havaDefault === true ? (
                   <div>
                     <div>
-                      <span style={{ fontSize: '1.0rem', color: '#000000' }}>
-                        收货人: {this.state.consignee} &nbsp;&nbsp;&nbsp;&nbsp;手机号码: {this.state.mobile}
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        float: 'left',
-                        width: '25%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        fontSize: '0.9rem',
-                        color: '#666666',
-                        marginTop: '0.1rem'
-                      }}
-                    >
-                      收货地址：
-                    </div>
-                    <div
-                      style={{
-                        float: 'left',
-                        width: '65%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        fontSize: '0.9rem',
-                        color: '#666666',
-                        marginTop: '0.1rem'
-                      }}
-                    >
-                      {this.state.address}
+                      <div>
+                        <span style={{ fontSize: '1.0rem', color: '#000000' }}>
+                          收货人: {this.state.consignee} &nbsp;&nbsp;&nbsp;&nbsp;手机号码: {this.state.mobile}
+                        </span>
+                      </div>
+                      <div
+                        style={{
+                          float: 'left',
+                          width: '25%',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          fontSize: '0.9rem',
+                          color: '#666666',
+                          marginTop: '0.1rem'
+                        }}
+                      >
+                        收货地址：
+                      </div>
+                      <div
+                        style={{
+                          float: 'left',
+                          width: '65%',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          fontSize: '0.9rem',
+                          color: '#666666',
+                          marginTop: '0.1rem'
+                        }}
+                      >
+                        {this.state.address}
+                      </div>
                     </div>
                   </div>
-                  {/*<div>*/}
-                  {/*  <div style={{ color: '#c6c5c5' }}>请先选择地址或新增地址</div>*/}
-                  {/*</div>*/}
-                </div>
+                ) : (
+                  <div>
+                    <div style={{ color: '#c6c5c5' }}>请先选择地址或新增地址</div>
+                  </div>
+                )}
               </Link>
             </div>
             <Divider />

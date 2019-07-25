@@ -5,14 +5,17 @@ import { AvField, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validatio
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
-import { getAddressDetail, updateUserAddress } from 'app/requests/basic/basic.reducer';
+import { getAddressDetail, insertUserAddress, updateUserAddress } from 'app/requests/basic/basic.reducer';
+import { toast } from 'react-toastify';
+import { RouteComponentProps } from 'react-router';
 
-export interface IAddAddressProp extends StateProps, DispatchProps {}
+export interface IAddAddressProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class AddAddress extends React.Component<IAddAddressProp> {
   state = {
     messages: [],
-    userid: ''
+    userid: '',
+    addressid: ''
   };
   constructor(props) {
     super(props);
@@ -23,21 +26,41 @@ export class AddAddress extends React.Component<IAddAddressProp> {
       // @ts-ignore
       this.props.getAddressDetail(this.props.location.id, respone.id).then(res => {
         this.setState({
-          messages: res.value.data.data,
           userid: respone.id
         });
+        if (res.value.data.code === 1) {
+          this.setState({
+            messages: res.value.data.data,
+            // @ts-ignore
+            addressid: this.props.location.id
+          });
+        }
       });
     });
   }
 
   handleSubmit = (event, errors, { areaid, address, consignee, isdefault, mobile }) => {
-    alert(areaid);
-    alert(address);
-    alert(consignee);
-    alert(isdefault);
-    alert(mobile);
-    // @ts-ignore
-    this.props.updateUserAddress(this.props.location.id, areaid, this.state.userid, address, consignee, isdefault, mobile);
+    if (this.state.addressid !== '') {
+      // @ts-ignore
+      this.props.updateUserAddress(this.props.location.id, areaid, this.state.userid, address, consignee, isdefault, mobile).then(res => {
+        if (res.value.data.code === 1) {
+          toast.success('修改成功');
+          this.props.history.push('/selectAddress');
+        } else {
+          toast.error(res.value.data.message);
+        }
+      });
+    } else {
+      // @ts-ignore
+      this.props.insertUserAddress(areaid, this.state.userid, address, consignee, isdefault, mobile).then(res => {
+        if (res.value.data.code === 1) {
+          toast.success('新增成功');
+          this.props.history.push('/selectAddress');
+        } else {
+          toast.error(res.value.data.message);
+        }
+      });
+    }
   };
 
   render() {
@@ -51,7 +74,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
           padding: '0px'
         }}
       >
-        <Title name="新增地址" back="/selectAddress" />
+        <Title name="地址信息" back="/selectAddress" />
         <AvForm onSubmit={this.handleSubmit}>
           <div
             style={{
@@ -87,9 +110,9 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                   style={{ width: '70%', float: 'right' }}
                 />
                 <AvField
-                  name="areaName"
+                  name="areaid"
                   // @ts-ignore
-                  defaultValue={this.props.location.areaName}
+                  defaultValue={this.props.location.areaid}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>所在地区：</span>}
                   placeholder={'请填写所在地区'}
                   style={{ width: '70%', float: 'right' }}
@@ -104,13 +127,13 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                 />
                 <AvGroup check inline>
                   <Label>
+                    默认地址：
                     <AvInput
                       type="checkbox"
                       name="isdefault"
                       // @ts-ignore
                       defaultValue={this.props.location.isdefault}
                     />
-                    设置为默认地址
                   </Label>
                 </AvGroup>
               </Col>
@@ -132,7 +155,7 @@ const mapStateToProps = ({ authentication, files }: IRootState) => ({
   account: authentication.account
 });
 
-const mapDispatchToProps = { getSession, getAddressDetail, updateUserAddress };
+const mapDispatchToProps = { getSession, getAddressDetail, insertUserAddress, updateUserAddress };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
