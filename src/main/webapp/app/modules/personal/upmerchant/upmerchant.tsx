@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { getSession } from 'app/shared/reducers/authentication';
 import Info from 'app/modules/public/info';
 import { queryRealName } from 'app/requests/basic/linkuser.reducer';
+import Error from './info';
 
 export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -173,276 +174,286 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     const { fileI, fileIContentType, fileII, fileIIContentType } = filesEntity;
     return (
       <div>
-        {merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
-          <div>
-            {merchantEntity.state === '待审核' ? (
-              <Info />
-            ) : (
-              <div style={{ width: '100%', textAlign: 'center', marginTop: '40%' }}>
-                正在跳转到商户端，如无跳转请<a href={'http://app.yuanscore.com:8082'}>点击此处</a>。
-                <script type="text/javascript">
-                  onload = function () {<span>setTimeout(go,3000)</span>}
-                  function go(){location.replace('http://app.yuanscore.com:8082')}
-                </script>
-              </div>
-            )}
-          </div>
+        {this.state.realname !== '已认证' ? (
+          merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
+            <div>
+              {merchantEntity.state === '待审核' ? (
+                <Info />
+              ) : (
+                <div style={{ width: '100%', textAlign: 'center', marginTop: '40%' }}>
+                  正在跳转到商户端，如无跳转请<a href={'http://app.yuanscore.com:8082'}>点击此处</a>。
+                  <script type="text/javascript">
+                    onload = function () {<span>setTimeout(go,3000)</span>}
+                    function go(){location.replace('http://app.yuanscore.com:8082')}
+                  </script>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div style={{ textAlign: 'left' }}>
+              <Title name="商家入驻" back="/personal" />
+              <AvForm onSubmit={this.handleSubmit}>
+                <div
+                  style={{
+                    width: '100%',
+                    textAlign: 'center',
+                    padding: '10px',
+                    fontSize: '1.2rem',
+                    borderBottom: '1px solid #00000015',
+                    marginTop: '35px'
+                  }}
+                >
+                  入驻申请表
+                </div>
+                <ModalBody>
+                  <Row>
+                    <Col md="12">
+                      <div
+                        style={{
+                          width: '100%',
+                          height: 'auto',
+                          overflow: 'hidden',
+                          marginBottom: '10px'
+                        }}
+                      >
+                        <AvGroup>
+                          <AvGroup>
+                            <button
+                              style={{
+                                float: 'left',
+                                backgroundColor: '#fe4365',
+                                color: '#fffde5',
+                                borderRadius: '0.25rem',
+                                border: '0px',
+                                width: '45%',
+                                height: '40px',
+                                margin: '0px 0px 10px 0px'
+                              }}
+                              type="button"
+                              onClick={this.uptitlephotoshop}
+                            >
+                              上传门店照片
+                            </button>
+                            <input
+                              style={{ display: 'none' }}
+                              id="upmerchant-upmerchant-uploadphoto-shop"
+                              type="file"
+                              onChange={this.onBlobChange(true, 'fileI')}
+                              accept="image/*"
+                            />
+                            <AvInput type="hidden" name="shopphoto" value={fileI} />
+                            {fileI ? (
+                              <div>
+                                <span style={{ float: 'right', width: '50%', height: '100%' }}>
+                                  <img
+                                    src={`data:${fileIContentType};base64,${fileI}`}
+                                    style={{ maxHeight: '100%', width: '100%', minHeight: '50px' }}
+                                  />
+                                </span>
+                                <span style={{ float: 'left' }}>
+                                  <Row>
+                                    <Col md="11">
+                                      <span>
+                                        {fileIContentType}
+                                        <br />
+                                        {byteSize(fileI)}
+                                      </span>
+                                    </Col>
+                                  </Row>
+                                </span>
+                              </div>
+                            ) : null}
+                          </AvGroup>
+                        </AvGroup>
+                      </div>
+                      <div
+                        style={{
+                          width: '100%',
+                          height: 'auto',
+                          overflow: 'hidden',
+                          marginBottom: '10px'
+                        }}
+                      >
+                        <AvGroup>
+                          <AvGroup>
+                            <button
+                              style={{
+                                float: 'left',
+                                backgroundColor: '#fe4365',
+                                color: '#fffde5',
+                                borderRadius: '0.25rem',
+                                border: '0px',
+                                width: '45%',
+                                height: '40px',
+                                margin: '0px 0px 10px 0px'
+                              }}
+                              type="button"
+                              onClick={this.uptitlephotocode}
+                            >
+                              上传营业执照
+                            </button>
+                            <input
+                              style={{ display: 'none' }}
+                              id="upmerchant-upmerchant-uploadphoto-code"
+                              type="file"
+                              onChange={this.onBlobChange(true, 'fileII')}
+                              accept="image/*"
+                            />
+                            <AvInput type="hidden" name="buslicenseimage" value={fileII} />
+                            {fileII ? (
+                              <div>
+                                <span style={{ float: 'right', width: '50%', height: '100%' }}>
+                                  <img
+                                    src={`data:${fileIIContentType};base64,${fileII}`}
+                                    style={{ maxHeight: '100%', width: '100%', minHeight: '50px' }}
+                                  />
+                                </span>
+                                <span style={{ float: 'left' }}>
+                                  <Row>
+                                    <Col md="11">
+                                      <span>
+                                        {fileIIContentType}
+                                        <br />
+                                        {byteSize(fileII)}
+                                      </span>
+                                    </Col>
+                                  </Row>
+                                </span>
+                              </div>
+                            ) : null}
+                          </AvGroup>
+                        </AvGroup>
+                      </div>
+                      <AvField
+                        name="name"
+                        label={<span style={{ float: 'left', marginTop: '7px' }}>商户名称：</span>}
+                        placeholder={'请输入店名'}
+                        required
+                        errorMessage="店铺名称不能为空!"
+                        style={{ width: '70%', float: 'right' }}
+                      />
+                      <AvField
+                        name="creditcode"
+                        label={<span style={{ float: 'left', marginTop: '7px' }}>信用代码：</span>}
+                        placeholder={'统一社会信用代码'}
+                        style={{ width: '70%', float: 'right' }}
+                      />
+                      <AvGroup>
+                        <Label for="country-region-businessid">
+                          <span style={{ float: 'left', marginTop: '7px' }}>经营类型：</span>
+                        </Label>
+                        <span style={{ width: '70%', float: 'right' }}>
+                          <AvInput id="country-region-businessid" type="select" className="form-control" name="businessid">
+                            <option value="" key="0" />
+                            {businesss
+                              ? businesss.map(otherEntity => (
+                                  <option value={otherEntity.name} key={otherEntity.id}>
+                                    {otherEntity.name}
+                                  </option>
+                                ))
+                              : null}
+                          </AvInput>
+                        </span>
+                      </AvGroup>
+                      <AvGroup>
+                        <Label for="country-region-province">
+                          <span style={{ float: 'left', marginTop: '7px' }}>所在省：</span>
+                        </Label>
+                        <span style={{ width: '70%', float: 'right' }}>
+                          <AvInput
+                            id="country-region-province"
+                            type="select"
+                            className="form-control"
+                            name="province"
+                            onChange={this.reCity}
+                          >
+                            <option value="" key="0" />
+                            {provincess
+                              ? provincess.map(province => (
+                                  <option value={province.name} key={province.id}>
+                                    {province.name}
+                                  </option>
+                                ))
+                              : null}
+                          </AvInput>
+                        </span>
+                      </AvGroup>
+                      <AvGroup>
+                        <Label for="country-region-city">
+                          <span style={{ float: 'left', marginTop: '7px' }}>所在市：</span>
+                        </Label>
+                        <span style={{ width: '70%', float: 'right' }}>
+                          <AvInput id="country-region-city" type="select" className="form-control" name="city" onChange={this.reCounty}>
+                            <option value="" key="0" />
+                            {cityss
+                              ? cityss.map(city => (
+                                  <option value={city.name} key={city.id}>
+                                    {city.name}
+                                  </option>
+                                ))
+                              : null}
+                          </AvInput>
+                        </span>
+                      </AvGroup>
+                      <AvGroup>
+                        <Label for="country-region-county">
+                          <span style={{ float: 'left', marginTop: '7px' }}>所在县：</span>
+                        </Label>
+                        <span style={{ width: '70%', float: 'right' }}>
+                          <AvInput id="country-region-county" type="select" className="form-control" name="county">
+                            <option value="" key="0" />
+                            {countyss
+                              ? countyss.map(county => (
+                                  <option value={county.name} key={county.id}>
+                                    {county.name}
+                                  </option>
+                                ))
+                              : null}
+                          </AvInput>
+                        </span>
+                      </AvGroup>
+                      <AvField
+                        name="address"
+                        label={<span style={{ float: 'left', marginTop: '7px' }}>详细地址：</span>}
+                        placeholder={'请输入店铺地址'}
+                        required
+                        errorMessage="店铺地址不能为空!"
+                        style={{ width: '70%', float: 'right' }}
+                      />
+                      <AvGroup>
+                        <Label for="country-region-concession">
+                          <span style={{ float: 'left', marginTop: '7px' }}>让利比：</span>
+                        </Label>
+                        <span style={{ width: '70%', float: 'right' }}>
+                          <AvInput required id="country-region-concession" type="select" className="form-control" name="concession">
+                            <option value="" key="0" />
+                            {concession.map(otherEntity => (
+                              <option value={otherEntity.value} key={otherEntity.value}>
+                                {otherEntity.value}%
+                              </option>
+                            ))}
+                          </AvInput>
+                        </span>
+                      </AvGroup>
+                      <AvGroup check inline>
+                        <Label className="form-check-label">
+                          <AvInput type="checkbox" name="agreement" />
+                          我已阅读并同意<u>《用户协议》</u>
+                        </Label>
+                      </AvGroup>
+                    </Col>
+                  </Row>
+                </ModalBody>
+                <ModalFooter>
+                  <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }} type="submit">
+                    提交申请
+                  </Button>
+                </ModalFooter>
+              </AvForm>
+            </div>
+          )
         ) : (
-          <div style={{ textAlign: 'left' }}>
-            <Title name="商家入驻" back="/personal" />
-            <AvForm onSubmit={this.handleSubmit}>
-              <div
-                style={{
-                  width: '100%',
-                  textAlign: 'center',
-                  padding: '10px',
-                  fontSize: '1.2rem',
-                  borderBottom: '1px solid #00000015',
-                  marginTop: '35px'
-                }}
-              >
-                入驻申请表
-              </div>
-              <ModalBody>
-                <Row>
-                  <Col md="12">
-                    <div
-                      style={{
-                        width: '100%',
-                        height: 'auto',
-                        overflow: 'hidden',
-                        marginBottom: '10px'
-                      }}
-                    >
-                      <AvGroup>
-                        <AvGroup>
-                          <button
-                            style={{
-                              float: 'left',
-                              backgroundColor: '#fe4365',
-                              color: '#fffde5',
-                              borderRadius: '0.25rem',
-                              border: '0px',
-                              width: '45%',
-                              height: '40px',
-                              margin: '0px 0px 10px 0px'
-                            }}
-                            type="button"
-                            onClick={this.uptitlephotoshop}
-                          >
-                            上传门店照片
-                          </button>
-                          <input
-                            style={{ display: 'none' }}
-                            id="upmerchant-upmerchant-uploadphoto-shop"
-                            type="file"
-                            onChange={this.onBlobChange(true, 'fileI')}
-                            accept="image/*"
-                          />
-                          <AvInput type="hidden" name="shopphoto" value={fileI} />
-                          {fileI ? (
-                            <div>
-                              <span style={{ float: 'right', width: '50%', height: '100%' }}>
-                                <img
-                                  src={`data:${fileIContentType};base64,${fileI}`}
-                                  style={{ maxHeight: '100%', width: '100%', minHeight: '50px' }}
-                                />
-                              </span>
-                              <span style={{ float: 'left' }}>
-                                <Row>
-                                  <Col md="11">
-                                    <span>
-                                      {fileIContentType}
-                                      <br />
-                                      {byteSize(fileI)}
-                                    </span>
-                                  </Col>
-                                </Row>
-                              </span>
-                            </div>
-                          ) : null}
-                        </AvGroup>
-                      </AvGroup>
-                    </div>
-                    <div
-                      style={{
-                        width: '100%',
-                        height: 'auto',
-                        overflow: 'hidden',
-                        marginBottom: '10px'
-                      }}
-                    >
-                      <AvGroup>
-                        <AvGroup>
-                          <button
-                            style={{
-                              float: 'left',
-                              backgroundColor: '#fe4365',
-                              color: '#fffde5',
-                              borderRadius: '0.25rem',
-                              border: '0px',
-                              width: '45%',
-                              height: '40px',
-                              margin: '0px 0px 10px 0px'
-                            }}
-                            type="button"
-                            onClick={this.uptitlephotocode}
-                          >
-                            上传营业执照
-                          </button>
-                          <input
-                            style={{ display: 'none' }}
-                            id="upmerchant-upmerchant-uploadphoto-code"
-                            type="file"
-                            onChange={this.onBlobChange(true, 'fileII')}
-                            accept="image/*"
-                          />
-                          <AvInput type="hidden" name="buslicenseimage" value={fileII} />
-                          {fileII ? (
-                            <div>
-                              <span style={{ float: 'right', width: '50%', height: '100%' }}>
-                                <img
-                                  src={`data:${fileIIContentType};base64,${fileII}`}
-                                  style={{ maxHeight: '100%', width: '100%', minHeight: '50px' }}
-                                />
-                              </span>
-                              <span style={{ float: 'left' }}>
-                                <Row>
-                                  <Col md="11">
-                                    <span>
-                                      {fileIIContentType}
-                                      <br />
-                                      {byteSize(fileII)}
-                                    </span>
-                                  </Col>
-                                </Row>
-                              </span>
-                            </div>
-                          ) : null}
-                        </AvGroup>
-                      </AvGroup>
-                    </div>
-                    <AvField
-                      name="name"
-                      label={<span style={{ float: 'left', marginTop: '7px' }}>商户名称：</span>}
-                      placeholder={'请输入店名'}
-                      required
-                      errorMessage="店铺名称不能为空!"
-                      style={{ width: '70%', float: 'right' }}
-                    />
-                    <AvField
-                      name="creditcode"
-                      label={<span style={{ float: 'left', marginTop: '7px' }}>信用代码：</span>}
-                      placeholder={'统一社会信用代码'}
-                      style={{ width: '70%', float: 'right' }}
-                    />
-                    <AvGroup>
-                      <Label for="country-region-businessid">
-                        <span style={{ float: 'left', marginTop: '7px' }}>经营类型：</span>
-                      </Label>
-                      <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region-businessid" type="select" className="form-control" name="businessid">
-                          <option value="" key="0" />
-                          {businesss
-                            ? businesss.map(otherEntity => (
-                                <option value={otherEntity.name} key={otherEntity.id}>
-                                  {otherEntity.name}
-                                </option>
-                              ))
-                            : null}
-                        </AvInput>
-                      </span>
-                    </AvGroup>
-                    <AvGroup>
-                      <Label for="country-region-province">
-                        <span style={{ float: 'left', marginTop: '7px' }}>所在省：</span>
-                      </Label>
-                      <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region-province" type="select" className="form-control" name="province" onChange={this.reCity}>
-                          <option value="" key="0" />
-                          {provincess
-                            ? provincess.map(province => (
-                                <option value={province.name} key={province.id}>
-                                  {province.name}
-                                </option>
-                              ))
-                            : null}
-                        </AvInput>
-                      </span>
-                    </AvGroup>
-                    <AvGroup>
-                      <Label for="country-region-city">
-                        <span style={{ float: 'left', marginTop: '7px' }}>所在市：</span>
-                      </Label>
-                      <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region-city" type="select" className="form-control" name="city" onChange={this.reCounty}>
-                          <option value="" key="0" />
-                          {cityss
-                            ? cityss.map(city => (
-                                <option value={city.name} key={city.id}>
-                                  {city.name}
-                                </option>
-                              ))
-                            : null}
-                        </AvInput>
-                      </span>
-                    </AvGroup>
-                    <AvGroup>
-                      <Label for="country-region-county">
-                        <span style={{ float: 'left', marginTop: '7px' }}>所在县：</span>
-                      </Label>
-                      <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput id="country-region-county" type="select" className="form-control" name="county">
-                          <option value="" key="0" />
-                          {countyss
-                            ? countyss.map(county => (
-                                <option value={county.name} key={county.id}>
-                                  {county.name}
-                                </option>
-                              ))
-                            : null}
-                        </AvInput>
-                      </span>
-                    </AvGroup>
-                    <AvField
-                      name="address"
-                      label={<span style={{ float: 'left', marginTop: '7px' }}>详细地址：</span>}
-                      placeholder={'请输入店铺地址'}
-                      required
-                      errorMessage="店铺地址不能为空!"
-                      style={{ width: '70%', float: 'right' }}
-                    />
-                    <AvGroup>
-                      <Label for="country-region-concession">
-                        <span style={{ float: 'left', marginTop: '7px' }}>让利比：</span>
-                      </Label>
-                      <span style={{ width: '70%', float: 'right' }}>
-                        <AvInput required id="country-region-concession" type="select" className="form-control" name="concession">
-                          <option value="" key="0" />
-                          {concession.map(otherEntity => (
-                            <option value={otherEntity.value} key={otherEntity.value}>
-                              {otherEntity.value}%
-                            </option>
-                          ))}
-                        </AvInput>
-                      </span>
-                    </AvGroup>
-                    <AvGroup check inline>
-                      <Label className="form-check-label">
-                        <AvInput type="checkbox" name="agreement" />
-                        我已阅读并同意<u>《用户协议》</u>
-                      </Label>
-                    </AvGroup>
-                  </Col>
-                </Row>
-              </ModalBody>
-              <ModalFooter>
-                <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }} type="submit">
-                  提交申请
-                </Button>
-              </ModalFooter>
-            </AvForm>
-          </div>
+          <Error />
         )}
       </div>
     );
