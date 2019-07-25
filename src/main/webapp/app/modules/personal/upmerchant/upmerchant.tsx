@@ -174,7 +174,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     const { fileI, fileIContentType, fileII, fileIIContentType } = filesEntity;
     return (
       <div>
-        {this.state.realname !== '已认证' ? (
+        {this.state.realname === '已认证' ? (
           merchantEntity.id > 0 && account.id.toString() === merchantEntity.userid ? (
             <div>
               {merchantEntity.state === '待审核' ? (
