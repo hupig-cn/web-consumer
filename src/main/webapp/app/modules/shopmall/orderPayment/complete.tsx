@@ -62,14 +62,14 @@ export default function complete() {
           }}
           // tslint:disable-next-line: jsx-no-lambda
           onClick={() => {
-            document.getElementById('app-modules-consumer-quickaccess-button-link-createOrder').click();
+            document.getElementById('app-modules-consumer-quickaccess-button-link-shopCar').click();
           }}
         >
           查看订单详情
         </button>
       </div>
       <div style={{ height: '40px' }} />
-      <Link id="app-modules-consumer-quickaccess-button-link-createOrder" to="/createOrder" />
+      <Link id="app-modules-consumer-quickaccess-button-link-shopCar" to="/shopCar" />
     </div>
   );
 }
