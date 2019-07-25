@@ -85,11 +85,11 @@ export class Sharepage extends React.Component<ISharepageProp> {
                 color: '#ffffff',
                 backgroundColor: '#6740402e',
                 outline: 'none',
-                width: '115px',
+                width: '105px',
                 borderRadius: '20px',
                 height: '36px',
                 padding: '5px 0px',
-                margin: '0 5px'
+                margin: '0px 2px'
               }}
             >
               扫码注册
@@ -99,11 +99,11 @@ export class Sharepage extends React.Component<ISharepageProp> {
                 color: '#ffffff',
                 backgroundColor: '#6740402e',
                 outline: 'none',
-                width: '115px',
+                width: '105px',
                 borderRadius: '20px',
                 height: '36px',
                 padding: '5px 0px',
-                margin: '0 5px'
+                margin: '0px 2px'
               }}
             >
               付款使用
@@ -113,11 +113,11 @@ export class Sharepage extends React.Component<ISharepageProp> {
                 color: '#ffffff',
                 backgroundColor: '#6740402e',
                 outline: 'none',
-                width: '115px',
+                width: '105px',
                 borderRadius: '20px',
                 height: '36px',
                 padding: '5px 0px',
-                margin: '0 5px'
+                margin: '0px 2px'
               }}
             >
               赠送积分
