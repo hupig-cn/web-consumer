@@ -2,21 +2,12 @@ import React from 'react';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Title from 'app/modules/public/title';
 
 export default function complete() {
   const store = initStore();
   registerLocale(store);
-
-  const rootEl = document.getElementById('root');
-
-  const render = Component => ReactDOM.render(<Component />, rootEl);
-
-  function goBack() {
-    history.go(0);
-  }
 
   return (
     <div>
