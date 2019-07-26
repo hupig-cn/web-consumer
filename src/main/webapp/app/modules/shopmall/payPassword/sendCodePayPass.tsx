@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Title from 'app/modules/public/title';
-import { getSession, sendPayPasswordCode } from 'app/shared/reducers/authentication';
+import { getSession, sendPayPasswordCode, validateCode } from 'app/shared/reducers/authentication';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
@@ -12,19 +12,19 @@ export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentP
 export class Payment extends React.Component<IPaymentProp> {
   state = { time: 10, btnDisable: false, btnContent: '发送验证码', backgroundColor: '#fe4365', password: '' };
   handleSubmit = (event, errors, { code }) => {
-    const result = this.props.sendPayPasswordCode(code);
+    const { account } = this.props;
+    const result = this.props.validateCode(account.login, code);
     // @ts-ignore
     result.then(res => {
-      if (res.value.data.toString() === '发送成功') {
-        toast.success('已发送。');
+      if (res.value.data.toString() === '操作成功') {
+        // tslint:disable-next-line: no-console
+        console.log('密码' + code);
+        this.props.history.push('/payPassSetting');
       } else {
         // tslint:disable-next-line: no-multi-spaces
         toast.error('错误：' + res.value.data.toString());
       }
     });
-    // tslint:disable-next-line: no-console
-    console.log('密码' + code);
-    this.props.history.push('/payPassSetting');
   };
 
   handleSend = phone => {
@@ -57,7 +57,7 @@ export class Payment extends React.Component<IPaymentProp> {
       // @ts-ignore
       const { account } = this.props;
       if (account.login.length !== 11) {
-        toast.info('提示：手机号输入有误。');
+        toast.info('提示：当前账号手机号有误。');
       } else {
         this.handleSend(account.login);
         this.setState({ btnDisable: true, btnContent: '（10s）', backgroundColor: '#cccccc' });
@@ -146,7 +146,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession, sendPayPasswordCode };
+const mapDispatchToProps = { getSession, sendPayPasswordCode, validateCode };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
