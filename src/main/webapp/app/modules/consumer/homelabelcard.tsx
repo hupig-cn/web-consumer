@@ -88,6 +88,7 @@ export const useStyles = makeStyles((theme: Theme) =>
 );
 
 class TitlebarGridList extends React.Component {
+  state = { products: [], files: [] };
   constructor(props) {
     super(props);
     this.state = {

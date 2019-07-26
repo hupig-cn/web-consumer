@@ -16,6 +16,7 @@ import { getProdcutImg } from 'app/requests/basic/result.reducer';
 export interface IProductDetailProp extends StateProps, DispatchProps {}
 
 export class Productdetail extends React.Component<IProductDetailProp> {
+  state = { carouselimg: [], introduceimg: [] };
   constructor(props) {
     super(props);
     this.state = {
@@ -183,7 +184,11 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 // @ts-ignore
                 this.props.location.name
               }{' '}
-              {this.props.location.model} {this.props.location.json}
+              {
+                // @ts-ignore
+                this.props.location.model
+              }{' '}
+              {this.props.location.json}
             </p>
           </div>
           <div style={{ position: 'fixed', bottom: '0px', zIndex: 1000, width: '100%', backgroundColor: '#ffffff', height: '50px' }}>

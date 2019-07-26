@@ -85,21 +85,6 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
         }
       });
     });
-    // 展示收货地址
-    // 提交用户id和金额创建大订单
-    // 将主订单号提交到商城服务创建小订单
-    // 记录主订单号,支付的时候将主订单号传送过去,完成支付
-    // @ts-ignore
-    this.props.getSession().then(respone => {
-      // @ts-ignore
-      this.props.getDefaultAddress(respone.id).then(res => {
-        this.setState({
-          consignee: res.value.data.data[0].consignee,
-          mobile: res.value.data.data[0].mobile,
-          address: res.value.data.data[0].address
-        });
-      });
-    });
   }
 
   selectpayway() {

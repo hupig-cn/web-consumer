@@ -6,7 +6,6 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
-import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 
 export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -57,7 +56,6 @@ export class Payment extends React.Component<IPaymentProp> {
     const sendCode = () => {
       // @ts-ignore
       const { account } = this.props;
-      console.log(account.login);
       if (account.login.length !== 11) {
         toast.info('提示：手机号输入有误。');
       } else {

@@ -52,7 +52,11 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       const data = this.props.AliPay(bigorder);
       // @ts-ignore
       data.then(res => {
-        window.location.href = res.value.data.data[0];
+        // window.location.href = res.value.data.data[0];
+        // @ts-ignore
+        const a = document.createElement('a', { href: res.value.data.data[0] });
+        a.setAttribute('href', res.value.data.data[0]);
+        a.click();
         // const newWindow = window.open();
         // newWindow.document.write(res.value.data.data[0]);
       });
