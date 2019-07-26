@@ -132,6 +132,13 @@ export const sendPayPasswordCode = (phone: any) => async (dispatch: any) => {
   });
 };
 
+// tslint:disable-next-line: ter-arrow-body-style
+export const validateCode = (phone: any, vertifyCode: any) => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.post('services/login/api/public/validate-code', { phone, vertifyCode })
+  });
+};
+
 // tslint:disable-next-line: no-shadowed-variable
 export const register = (login: any, password: any, lastName: any) => async (dispatch: any) => {
   // tslint:disable-next-line: ter-arrow-body-style

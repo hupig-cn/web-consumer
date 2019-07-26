@@ -54,9 +54,10 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       data.then(res => {
         // window.location.href = res.value.data.data[0];
         // @ts-ignore
-        const a = document.createElement('a', { href: res.value.data.data[0] });
-        a.setAttribute('href', res.value.data.data[0]);
-        a.click();
+        // const a = document.createElement('a', { href: res.value.data.data[0] });
+        // a.setAttribute('href', res.value.data.data[0]);
+        // a.click();
+        window.location.href = res.value.data.data[0];
         // const newWindow = window.open();
         // newWindow.document.write(res.value.data.data[0]);
       });
