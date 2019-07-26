@@ -23,11 +23,11 @@ export class AddAddress extends React.Component<IAddAddressProp> {
   componentDidMount() {
     // @ts-ignore
     this.props.getSession().then(respone => {
+      this.setState({
+        userid: respone.id
+      });
       // @ts-ignore
       this.props.getAddressDetail(this.props.location.id, respone.id).then(res => {
-        this.setState({
-          userid: respone.id
-        });
         if (res.value.data.code === 1) {
           this.setState({
             messages: res.value.data.data,
@@ -141,7 +141,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
           </ModalBody>
           <ModalFooter>
             <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '100%' }} type="submit">
-              提交反馈
+              保存地址
             </Button>
           </ModalFooter>
         </AvForm>

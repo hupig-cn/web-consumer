@@ -10,8 +10,11 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 // tslint:disable-next-line: no-submodule-imports
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
-
-const useStyles = makeStyles((theme: Theme) =>
+import { IRootState } from 'app/shared/reducers';
+import { connect } from 'react-redux';
+import { getProducts } from 'app/requests/basic/result.reducer';
+import { getMyImgs } from 'app/requests/basic/files.reducer';
+export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: '100%',
@@ -84,102 +87,152 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const tileData = [
-  {
-    id: 1,
-    img: './content/images/commodity1.png',
-    title: '【官网价直降1111元】Apple/苹果 iPhone XR 256G 移动联通电信4G手机双卡双待苹果XR iPhonexr',
-    author: '6488.00'
-  },
-  {
-    id: 2,
-    img: './content/images/commodity2.png',
-    title: 'Dior/迪奥口红烈艳蓝金旗舰唇膏999 520 740 888 女 哑光滋润',
-    author: '316.00'
-  },
-  {
-    id: 3,
-    img: './content/images/commodity3.png',
-    title: 'poryuu孕妇口红专用孕妇化妆品孕妇护肤品怀孕期彩妆唇膏哺乳',
-    author: '299.99'
-  },
-  {
-    id: 4,
-    img: './content/images/commodity4.png',
-    title: '分期Apple/苹果 iPhone XS Max苹果xsmax苹果XR双卡正品手机国行8',
-    author: '4008.00'
-  },
-  {
-    id: 5,
-    img: './content/images/commodity5.png',
-    title: 'Apple/苹果 iPhone 8 Plus 4G全网通 美版国行8代 无锁苹果8plus',
-    author: '3980.00'
+class TitlebarGridList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      files: []
+    };
   }
-];
-
-export default function TitlebarGridList() {
-  const classes = useStyles();
-
-  return (
-    <div ws-container-id="lable-card" className={classes.root}>
-      <GridList cellHeight={180} className={classes.gridList} style={{ margin: -0, width: '100%' }}>
-        {tileData.map(tile => (
-          <GridListTile
-            key={tile.img}
-            className={classes.listTitle}
-            style={{ height: '100%', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: '3px' }}
-            // tslint:disable-next-line: jsx-no-lambda
-            onClick={() => {
-              document.getElementById('app-modules-consumer-quickaccess-button-link-productdetail-' + tile.id).click();
-            }}
-          >
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={
-                <p
-                  style={{
-                    wordBreak: 'break-all',
-                    whiteSpace: 'pre-wrap',
-                    wordWrap: 'break-word',
-                    overflow: 'hidden',
-                    display: '-webkit-box',
-                    '-webkit-box-orient': 'vertical',
-                    '-webkit-line-clamp': '2',
-                    lineHeight: '19px',
-                    height: '2.4rem',
-                    fontSize: '0.8rem',
-                    position: 'relative',
-                    margin: '0px'
-                  }}
-                >
-                  {tile.title}
-                </p>
-              }
-              subtitle={
-                <span style={{ float: 'left', width: '100%' }}>
-                  <span style={{ float: 'left' }}>
-                    <span style={{ fontSize: '0.65rem' }}>￥</span>
-                    {tile.author}
-                  </span>
-                  <IconButton
-                    aria-label={`info about ${tile.title}`}
-                    className={classes.icon}
-                    style={{ height: '100%', outline: 'none', padding: 0, float: 'right', bottom: '5px' }}
+  componentDidMount() {
+    // @ts-ignore
+    const product = this.props.getProducts(0, 10);
+    product.then(res => {
+      this.setState({
+        products: res.value.data.data
+      });
+      const arr = [];
+      res.value.data.data.map(elment => elment.specificationsDTO.map(spe => arr.push(spe.fileid)));
+      // @ts-ignore
+      const files = this.props.getMyImgs(arr);
+      // tslint:disable-next-line: no-shadowed-variable
+      files.then((res: { value: { data: any } }) => {
+        this.setState({
+          files: res.value.data
+        });
+      });
+    });
+    this.forceUpdate();
+  }
+  render() {
+    const classes = useStyles;
+    return (
+      // @ts-ignore
+      <div className={classes.root}>
+        <GridList
+          cellHeight={180}
+          // @ts-ignore
+          className={classes.gridList}
+          style={{ margin: -0, width: '97%' }}
+        >
+          {// @ts-ignore
+          this.state.products
+            ? // @ts-ignore
+              this.state.products.map(tile =>
+                tile.specificationsDTO.map((specifications, index) => (
+                  <Link
+                    to={{
+                      pathname: '/Productdetail',
+                      id: specifications.id,
+                      postage: tile.postage,
+                      price: specifications.price,
+                      name: tile.name,
+                      json: specifications.specifications,
+                      model: specifications.model,
+                      num: specifications.num,
+                      // @ts-ignore
+                      img:
+                        this.state.files.length !== 0
+                          ? `data:${this.state.files[index].fileContentType};base64,${this.state.files[index].file}`
+                          : '',
+                      integral: specifications.integral
+                    }}
                   >
-                    …
-                  </IconButton>
-                </span>
-              }
-              className={classes.titlebar}
-            />
-            <Link
-              // tslint:disable-next-line: jsx-self-close
-              id={'app-modules-consumer-quickaccess-button-link-productdetail-' + tile.id}
-              to="/productdetail"
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
-  );
+                    <GridListTile
+                      key={specifications.titleimage}
+                      // @ts-ignore
+                      className={classes.listTitle}
+                      style={{ height: '200px', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: 4 }}
+                    >
+                      {// @ts-ignore
+                      this.state.files.length !== 0 ? (
+                        <img
+                          style={{ height: '200px', width: '200px' }}
+                          // @ts-ignore
+                          src={`data:${this.state.files[index].fileContentType};base64,${this.state.files[index].file}`}
+                          alt={tile.name}
+                        />
+                      ) : (
+                        <img src="" />
+                      )}
+                      <GridListTileBar
+                        title={
+                          <p
+                            style={{
+                              wordBreak: 'break-all',
+                              whiteSpace: 'pre-wrap',
+                              wordWrapL: 'break-word',
+                              overflow: 'hidden',
+                              display: '-webkit-box',
+                              lineHeight: '19px',
+                              height: '2.4rem',
+                              fontSize: '0.8rem',
+                              position: 'relative',
+                              margin: '0px'
+                            }}
+                          >
+                            {tile.name} + {specifications.specifications}
+                          </p>
+                        }
+                        subtitle={
+                          <span style={{ float: 'left', width: '100%' }}>
+                            <span style={{ float: 'left' }}>
+                              <span style={{ fontSize: '0.65rem' }}>￥:</span>
+                              {specifications.price}
+                            </span>
+                            <IconButton
+                              aria-label={`info about ${tile.name}`}
+                              // @ts-ignore
+                              className={classes.icon}
+                              style={{ height: '100%', outline: 'none', padding: 0, float: 'right', bottom: '5px' }}
+                            >
+                              …
+                            </IconButton>
+                          </span>
+                        }
+                        className={
+                          // @ts-ignore
+                          classes.titlebar
+                        }
+                      />
+                    </GridListTile>
+                  </Link>
+                ))
+              )
+            : '网络繁忙'}
+        </GridList>
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = ({ authentication, files, result }: IRootState) => ({
+  filesEntity: files.entity,
+  filesEntitys: files.entities,
+  account: authentication.account,
+  resultEntity: result.entity
+});
+
+const mapDispatchToProps = {
+  getProducts,
+  getMyImgs
+};
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TitlebarGridList);

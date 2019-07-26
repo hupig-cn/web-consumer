@@ -5,6 +5,7 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
+import { toast } from 'react-toastify';
 
 export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -12,13 +13,14 @@ export class Payment extends React.Component<IPaymentProp> {
   handleSubmit = (event, errors, { password, consignee }) => {
     // tslint:disable-next-line: no-console
     console.log('密码' + password);
-    this.props.history.push('/complete');
+    this.props.history.push('/payPassSeted');
+    toast.success('提示：修改成功。');
   };
 
   render() {
     return (
       <div>
-        <Title name="支付页面" back="/selectPayWay" />
+        <Title name="忘记支付密码" back="/sendCodePayPass" />
         <div
           style={{
             height: '60px',
@@ -27,8 +29,8 @@ export class Payment extends React.Component<IPaymentProp> {
             margin: '80px 0px 20px 0px'
           }}
         >
-          <span style={{ fontSize: '1.8rem' }}>支付密码</span>
-          <p style={{ fontSize: '1.2rem' }}>请输入支付密码，以验证身份</p>
+          <span style={{ fontSize: '1.8rem' }}>设置支付密码</span>
+          <p style={{ fontSize: '1.2rem' }}>请输入支付密码，用于支付验证</p>
         </div>
         <AvForm onSubmit={this.handleSubmit}>
           <ModalBody>
@@ -65,7 +67,7 @@ export class Payment extends React.Component<IPaymentProp> {
                   position: 'absolute'
                 }}
               >
-                确认支付
+                确认修改
               </button>
             </div>
           </ModalFooter>

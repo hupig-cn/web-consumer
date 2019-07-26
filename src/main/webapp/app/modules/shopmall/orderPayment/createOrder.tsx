@@ -5,21 +5,27 @@ import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
 import Title from 'app/modules/public/title';
+import { getOrderInfo, PaySum, createUserOrder, createShopOrder } from 'app/requests/basic/result.reducer';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
 import { getDefaultAddress } from 'app/requests/basic/basic.reducer';
 import Error from 'app/modules/public/error';
-
+import { toast } from 'react-toastify';
+import { IRootState } from 'app/shared/reducers';
+import { IResult } from 'app/shared/model/result.model';
+import { number } from 'app/modules/shopmall/productDetail/swipeabledrawer';
 export interface ICreateOrderProp extends StateProps, DispatchProps {}
-
+export let bigorder = '';
 export class CreateOrder extends React.Component<ICreateOrderProp> {
   state = {
+    price: '',
     consignee: '收货人',
     mobile: '13866668888',
     address: '广州市天河区天河路383号太古汇太古汇太古汇太古汇太古汇太古汇',
+    products: [],
+    totalAmout: '',
     havaDefault: false
   };
-
   componentDidMount() {
     // @ts-ignore
     this.props.getSession().then(respone => {
@@ -35,14 +41,88 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
         }
       });
     });
+    const { account } = this.props;
+    // 根据商品id获取商品信息
+    // @ts-ignore
+    if (this.props.cars) {
+      // @ts-ignore
+      const product = this.props.getOrderInfo(account.id, this.props.location.id, null, number);
+      // @ts-ignore
+      product.then(res => {
+        this.setState({
+          // @ts-ignore
+          products: product,
+          totalAmout: res.value.data.data[0].totalAmout
+        });
+      });
+    } else {
+      // @ts-ignore
+      const product = this.props.getOrderInfo(account.id, this.props.location.id, null, number);
+      // @ts-ignore
+      product.then(res => {
+        const add = [];
+        add.push(res.value.data.data[0].orderInfo);
+        this.setState({
+          products: add,
+          totalAmout: res.value.data.data[0].totalAmout
+        });
+      });
+    }
+    // 获取到商品信息然后渲染到页面
+    // 提交订单前先提交数据到后台获取到订单价格
+    // @ts-ignore
+    // tslint:disable-next-line: radix
+    const price = this.props.PaySum(this.props.location.id, parseInt(number));
+    // @ts-ignore
+    price.then(res => {
+      const result = this.props.createUserOrder(account.id, res.value.data.data[0]);
+      // @ts-ignore
+      result.then(respone => {
+        if (respone.value.data.code === 1) {
+          bigorder = respone.value.data.data[0];
+        } else {
+          toast.error('错误：' + respone.value.data.message);
+        }
+      });
+    });
+    // 展示收货地址
+    // 提交用户id和金额创建大订单
+    // 将主订单号提交到商城服务创建小订单
+    // 记录主订单号,支付的时候将主订单号传送过去,完成支付
+    // @ts-ignore
+    this.props.getSession().then(respone => {
+      // @ts-ignore
+      this.props.getDefaultAddress(respone.id).then(res => {
+        this.setState({
+          consignee: res.value.data.data[0].consignee,
+          mobile: res.value.data.data[0].mobile,
+          address: res.value.data.data[0].address
+        });
+      });
+    });
   }
 
   selectpayway() {
-    document.getElementById('app-modules-consumer-quickaccess-button-link-selectpayway').click();
-    return null;
+    const { account } = this.props;
+    const address = document.getElementById('address').innerText;
+    const mobile = document.getElementById('mobile').innerText;
+    const consignee = document.getElementById('consignee').innerText;
+    // @ts-ignore
+    const data = this.props.createShopOrder(account.id, null, this.props.location.id, number, bigorder, consignee, mobile, address);
+    // @ts-ignore
+    data.then(res => {
+      if (res.value.data.code === 1) {
+        toast.success(res.value.data.message);
+        const info = document.getElementById('app-modules-consumer-quickaccess-button-link-selectpayway');
+        info.click();
+      } else {
+        toast.error('错误：' + res.value.data.message);
+      }
+    });
   }
 
   render() {
+    const { resultEntity } = this.props;
     const { account } = this.props;
     return (
       <div>
@@ -63,9 +143,10 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                   <div>
                     <div>
                       <div>
-                        <span style={{ fontSize: '1.0rem', color: '#000000' }}>
-                          收货人: {this.state.consignee} &nbsp;&nbsp;&nbsp;&nbsp;手机号码: {this.state.mobile}
-                        </span>
+                        <span>收货人:</span>
+                        <span id="consignee">{this.state.consignee}</span>
+                        <span style={{ marginLeft: '20px' }}>手机号码:</span>
+                        <span id="mobile">{this.state.mobile}</span>
                       </div>
                       <div
                         style={{
@@ -90,6 +171,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                           color: '#666666',
                           marginTop: '0.1rem'
                         }}
+                        id="address"
                       >
                         {this.state.address}
                       </div>
@@ -104,36 +186,48 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             </div>
             <Divider />
             {/*图片订单编号价格等信息*/}
-            <div style={{ height: '180px', margin: '15px 0px 15px 15px' }}>
-              <div>
-                <div style={{ float: 'left', marginBottom: '10px' }}>
-                  <img
-                    style={{ height: '18px', width: '15px' }}
-                    src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}
-                  />
+            {// @ts-ignore
+            this.state.products ? (
+              this.state.products.map(product => (
+                // tslint:disable-next-line: jsx-key
+                <div style={{ height: '180px', margin: '15px 0px 15px 15px' }}>
+                  <div>
+                    <div style={{ float: 'left', marginBottom: '10px' }}>
+                      <img
+                        style={{ height: '18px', width: '15px' }}
+                        src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}
+                      />
+                    </div>
+                    <div>博媛官方旗舰店</div>
+                  </div>
+                  <div style={{ width: '100%' }}>
+                    <div style={{ height: '120px', width: '100px', float: 'left' }}>
+                      <img
+                        style={{ height: '120px', width: '100px' }}
+                        src={'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'}
+                      />
+                    </div>
+                    <div style={{ maxWidth: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
+                      <span>
+                        {' '}
+                        {product.name} {product.attr}{' '}
+                      </span>
+                    </div>
+                    <div style={{ width: '60px', float: 'left' }}>
+                      <p style={{ color: 'red', fontSize: '0.5rem' }}>
+                        <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> {product.price}
+                      </p>
+                      <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
+                        <span>x {product.number} </span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div>博媛官方旗舰店</div>
-              </div>
-              <div style={{ width: '100%' }}>
-                <div style={{ height: '120px', width: '100px', float: 'left' }}>
-                  <img
-                    style={{ height: '120px', width: '100px' }}
-                    src={'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'}
-                  />
-                </div>
-                <div style={{ maxWidth: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
-                  <span>芙妍瑜生物多肽胶原蛋白眼贴膜弹嫩紧致去眼袋眼纹去黑眼圈眼膜 5片/盒</span>
-                </div>
-                <div style={{ width: '60px', float: 'left' }}>
-                  <p style={{ color: 'red', fontSize: '0.5rem' }}>
-                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> 863.00
-                  </p>
-                  <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
-                    <span>x1</span>
-                  </p>
-                </div>
-              </div>
-            </div>
+              ))
+            ) : (
+              <div>加载中</div>
+            )}
+
             <div
               style={{
                 backgroundColor: '#ffffff',
@@ -201,7 +295,11 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 提交订单
               </button>
             </div>
-            <Link id="app-modules-consumer-quickaccess-button-link-selectpayway" to="/selectpayway" />
+            <Link
+              id="app-modules-consumer-quickaccess-button-link-selectpayway"
+              // @ts-ignore
+              to={{ pathname: '/selectpayway', orderId: this.state.bigorder, integral: this.props.location.integral }}
+            />
           </div>
         ) : (
           <Error />
@@ -213,10 +311,11 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
 
 const mapStateToProps = storeState => ({
   account: storeState.authentication.account,
-  isAuthenticated: storeState.authentication.isAuthenticated
+  isAuthenticated: storeState.authentication.isAuthenticated,
+  resultEntity: storeState.result.entity
 });
 
-const mapDispatchToProps = { getSession, getDefaultAddress };
+const mapDispatchToProps = { getSession, getOrderInfo, PaySum, createUserOrder, createShopOrder, getDefaultAddress };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

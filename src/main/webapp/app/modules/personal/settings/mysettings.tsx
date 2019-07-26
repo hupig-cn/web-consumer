@@ -170,6 +170,13 @@ export class Mysettings extends React.Component<IMysettingsProp> {
           <span>{this.state.name}</span>
           <RemoveRounded style={{ float: 'right' }} />
         </div>
+        <div style={mydiv}>
+          <span style={{ float: 'left' }}>支付密码</span>
+          <Link to="/payPassSeted">
+            <span>前往设置</span>
+            <ChevronRightRounded style={{ float: 'right' }} />
+          </Link>
+        </div>
         <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
         <div style={mydiv}>
           <span style={{ float: 'left' }}>微信账号</span>

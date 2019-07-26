@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
 import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from 'app/modules/public/title';
+import { toast } from 'react-toastify';
+import { AliPay, yuePay, integralPay } from 'app/requests/basic/result.reducer';
+import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { Link } from 'react-router-dom';
 
 export interface ISelectPayWayProp extends StateProps, DispatchProps {}
@@ -13,7 +16,52 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
   componentDidMount() {
     this.props.getSession();
   }
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      payWay: ''
+    };
+  }
+  handleChoosePayWay = value => {
+    // 传入值判断当前支付方式
+    if (value !== null && value !== '' && value !== 'yue' && value !== 'jifen' && value !== 'zhifubao' && value !== 'weixin') {
+      toast.error('支付方式异常,请重新选择');
+    } else {
+      this.setState({
+        payWay: value
+      });
+    }
+  };
+  handlePay = () => {
+    // 余额支付传入支付密码和订单id
+    // 积分支付传入所需积分和订单id,支付密码
+    // 支付宝支付传入订单号
+    // @ts-ignore
+    const value = this.state.payWay;
+    if (value === 'yue') {
+      // 余额支付
+      // 订单号,支付密码
+      const { account } = this.props;
+      this.props.yuePay(bigorder, '123456', null, 50);
+    } else if (value === 'jifen') {
+      // 积分支付
+      // @ts-ignore
+      this.props.integralPay(bigorder, '', this.props.location.integral);
+    } else if (value === 'zhifubao') {
+      // 支付宝支付
+      const data = this.props.AliPay(bigorder);
+      // @ts-ignore
+      data.then(res => {
+        window.location.href = res.value.data.data[0];
+        // const newWindow = window.open();
+        // newWindow.document.write(res.value.data.data[0]);
+      });
+    } else if (value === 'weixin') {
+      // 微信支付
+    } else {
+      toast.error('支付方式异常,请重新选择');
+    }
+  };
   render() {
     return (
       <div style={{ height: '100%' }}>
@@ -55,10 +103,11 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         </div>
         <Divider />
         {/*支付方式选择*/}
-        <Radiobuttons />
+        <Radiobuttons handlepay={this.handleChoosePayWay} />
         {/*确认支付按钮*/}
         <div style={{ minHeight: '80px' }}>
           <button
+            onClick={this.handlePay}
             type="button"
             style={{
               backgroundColor: '#fe4365',
@@ -76,9 +125,6 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
               position: 'absolute'
             }}
             // tslint:disable-next-line: jsx-no-lambda
-            onClick={() => {
-              document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
-            }}
           >
             确认支付
           </button>
@@ -89,12 +135,12 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
   }
 }
 
-const mapStateToProps = storeState => ({
+const mapStateToProps = (storeState: { authentication: { account: any; isAuthenticated: any } }) => ({
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

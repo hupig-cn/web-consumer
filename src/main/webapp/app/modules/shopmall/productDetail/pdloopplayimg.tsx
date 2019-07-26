@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function SwipeableTextMobileStepper() {
+function SwipeableTextMobileStepper(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -83,11 +83,22 @@ function SwipeableTextMobileStepper() {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {tutorialSteps.map((step, index) => (
-          <div className={classes.loopplaying} key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? <img className={classes.img} src={step.imgPath} alt={step.label} /> : null}
-          </div>
-        ))}
+        {/*{tutorialSteps.map((step, index) => (*/}
+        {/*<div className={classes.loopplaying} key={step.label}>*/}
+        {/*{Math.abs(activeStep - index) <= 2 ? <img className={classes.img} src={step.imgPath} alt={step.label} /> : null}*/}
+        {/*</div>*/}
+        {/*))}*/}
+        {props.img.length !== 0 ? (
+          props.img.map((step, index) => (
+            <div className={classes.loopplaying} key={step.label}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <img className={classes.img} src={`data:${step.fileContentType};base64,${step.file}`} />
+              ) : null}
+            </div>
+          ))
+        ) : (
+          <img src="https://img.alicdn.com/bao/uploaded/O1CN01Ks0Xie1DJoA7zcatH_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp" />
+        )}
       </AutoPlaySwipeableViews>
       <MobileStepper
         variant="dots"

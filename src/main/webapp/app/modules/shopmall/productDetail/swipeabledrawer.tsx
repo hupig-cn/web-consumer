@@ -13,6 +13,7 @@ import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
 import Switch from '@material-ui/core/Switch';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { Pathname } from 'history';
 
 const useStyles = makeStyles({
   list: {
@@ -28,13 +29,14 @@ const useStyles = makeStyles({
     position: 'relative'
   }
 });
+export let number = '';
 
-export default function SwipeableTemporaryDrawer() {
+export default function SwipeableTemporaryDrawer(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    bottom: false
+    bottom: false,
+    number: ''
   });
-
   type DrawerSide = 'bottom';
   const toggleDrawer = (side: DrawerSide, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -44,42 +46,51 @@ export default function SwipeableTemporaryDrawer() {
     ) {
       return;
     }
-
     setState({ ...state, [side]: open });
   };
-
   const fullList = (side: DrawerSide) => (
     <div className={classes.fullList} role="presentation" onClick={toggleDrawer(side, true)} onKeyDown={toggleDrawer(side, false)}>
       <div className={classes.mydiv}>
-        <img style={{ height: '120px', width: '100px' }} src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'} />
+        <img style={{ height: '120px', width: '100px' }} src={props.img} />
         <ChevronRightRounded style={{ float: 'right' }} />
-        <p style={{ float: 'right' }}>¥863.00</p>
-        <p style={{ right: '30px', bottom: '0px', position: 'absolute' }}>库存：666件</p>
+        <p style={{ float: 'right', fontSize: '2rem' }}>¥{props.price}</p>
+        <p style={{ right: '30px', bottom: '0px', position: 'absolute' }}>库存：{props.num}件</p>
       </div>
       <div>
         <p style={{ paddingLeft: '15px' }}>
           商品规格：
-          <span style={{ paddingLeft: '15px' }}>1.5m×1.8m</span>
-          <span style={{ paddingLeft: '15px' }}>1.2m×1.5m</span>
-          <span style={{ paddingLeft: '15px' }}>1.5m×2m</span>
+          <span style={{ paddingLeft: '15px' }}>{props.json}</span>
         </p>
         <p style={{ paddingLeft: '15px' }}>
           商品型号：
-          <span style={{ paddingLeft: '15px' }}>单床</span>
-          <span style={{ paddingLeft: '15px' }}>单床 + 乳胶垫</span>
+          <span style={{ paddingLeft: '15px' }}>{props.model}</span>
         </p>
         <p style={{ paddingLeft: '15px' }}>
           换购数量：
-          <span style={{ paddingLeft: '15px' }}>- 10 +</span>
+          <button
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={() => downValue()}
+          >
+            -
+          </button>
+          <span id="inputNumber" style={{ paddingLeft: '15px' }}>
+            1
+          </span>
+          <button
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={() => upValue()}
+          >
+            +
+          </button>
         </p>
       </div>
       <Divider />
       <div className={classes.mydiv}>
-        <span>460 积分兑换</span>
+        <span style={{ textAlign: 'center', display: 'block' }}>{props.integral} 积分兑换</span>
         <ChevronRightRounded style={{ float: 'right' }} />
-        <div style={{ right: '15px', bottom: '10px', position: 'absolute' }}>
-          <Switch />
-        </div>
+        {/*<div style={{ right: '15px', bottom: '10px', position: 'absolute' }}>*/}
+        {/*<Switch />*/}
+        {/*</div>*/}
       </div>
       {/*<div className={classes.mydiv}>*/}
       {/*  <span>收货地址：请选择收货地址</span>*/}
@@ -112,12 +123,32 @@ export default function SwipeableTemporaryDrawer() {
       </div>
     </div>
   );
-
   function createOrder() {
+    number = document.getElementById('inputNumber').innerText;
     document.getElementById('app-modules-consumer-quickaccess-button-link-createOrder').click();
-    return null;
   }
-
+  function downValue() {
+    const value = document.getElementById('inputNumber').innerText;
+    // tslint:disable-next-line: radix
+    if (parseInt(value) !== 1) {
+      // @ts-ignore
+      document.getElementById('inputNumber').innerText = value - 1;
+      // @ts-ignore
+      setState({
+        number: document.getElementById('inputNumber').innerText
+      });
+    }
+  }
+  function upValue() {
+    const value = document.getElementById('inputNumber').innerText;
+    // @ts-ignore
+    // tslint:disable-next-line: radix
+    document.getElementById('inputNumber').innerText = parseInt(value) + 1;
+    // @ts-ignore
+    setState({
+      number: document.getElementById('inputNumber').innerText
+    });
+  }
   return (
     <div>
       <Button
@@ -153,7 +184,10 @@ export default function SwipeableTemporaryDrawer() {
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', false)}>
         {fullList('bottom')}
       </SwipeableDrawer>
-      <Link id="app-modules-consumer-quickaccess-button-link-createOrder" to="/createOrder" />
+      <Link
+        id="app-modules-consumer-quickaccess-button-link-createOrder"
+        to={{ pathname: '/createOrder', integral: props.integral, img: props.img, id: props.id }}
+      />
     </div>
   );
 }

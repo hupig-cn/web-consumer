@@ -9,16 +9,16 @@ import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
 export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Payment extends React.Component<IPaymentProp> {
-  handleSubmit = (event, errors, { password, consignee }) => {
+  handleSubmit = (event, errors, { password }) => {
     // tslint:disable-next-line: no-console
     console.log('密码' + password);
-    this.props.history.push('/complete');
+    this.props.history.push('/setNewPayPass');
   };
 
   render() {
     return (
       <div>
-        <Title name="支付页面" back="/selectPayWay" />
+        <Title name="修改支付密码" back="/payPassSeted" />
         <div
           style={{
             height: '60px',
@@ -27,8 +27,8 @@ export class Payment extends React.Component<IPaymentProp> {
             margin: '80px 0px 20px 0px'
           }}
         >
-          <span style={{ fontSize: '1.8rem' }}>支付密码</span>
-          <p style={{ fontSize: '1.2rem' }}>请输入支付密码，以验证身份</p>
+          <span style={{ fontSize: '1.8rem' }}>验证旧密码</span>
+          <p style={{ fontSize: '1.2rem' }}>请输入旧支付密码，以验证身份</p>
         </div>
         <AvForm onSubmit={this.handleSubmit}>
           <ModalBody>
@@ -65,12 +65,11 @@ export class Payment extends React.Component<IPaymentProp> {
                   position: 'absolute'
                 }}
               >
-                确认支付
+                下一步
               </button>
             </div>
           </ModalFooter>
         </AvForm>
-        <Link id="app-modules-consumer-quickaccess-button-link-complete" to="/complete" />
       </div>
     );
   }

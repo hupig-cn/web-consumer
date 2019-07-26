@@ -164,6 +164,13 @@ export const getMyImg: ICrudGetAction<IFiles> = (id: string) => {
     payload: axios.get<IFiles>(requestUrl)
   };
 };
+export const getMyImgs: ICrudGetAction<IFiles> = (ids: any) => {
+  const requestUrl = `services/basic/api/public/myfiles-list`;
+  return {
+    type: ACTION_TYPES.FETCH_FILES_LIST,
+    payload: axios.post<IFiles>(requestUrl, { ids })
+  };
+};
 
 export const setBlob = (name, data, contentType?) => ({
   type: ACTION_TYPES.SET_BLOB,
