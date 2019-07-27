@@ -1,7 +1,6 @@
 import React from 'react';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
-import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import Title from 'app/modules/public/title';
 
@@ -53,14 +52,13 @@ export default function complete() {
           }}
           // tslint:disable-next-line: jsx-no-lambda
           onClick={() => {
-            document.getElementById('app-modules-consumer-quickaccess-button-link-shopCar').click();
+            document.getElementById('app-modules-consumer-quickaccess-button-link-personal').click();
           }}
         >
           查看订单详情
         </button>
       </div>
       <div style={{ height: '40px' }} />
-      <Link id="app-modules-consumer-quickaccess-button-link-shopCar" to="/shopCar" />
     </div>
   );
 }

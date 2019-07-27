@@ -1,22 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Title from 'app/modules/public/title';
-import { getSession, modifyNewPassword } from 'app/shared/reducers/authentication';
-import { RouteComponentProps } from 'react-router-dom';
+import { getSession, updatePassword } from 'app/shared/reducers/authentication';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
 
-export interface ISetNewPayPassProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
+export interface IFirstSetPayPassProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
-export class SetNewPayPass extends React.Component<ISetNewPayPassProp> {
-  handleSubmit = (event, errors, { password }) => {
-    const result = this.props.modifyNewPassword(this.props.location.state.password, password);
+export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
+  handleSubmit = (event, errors, { payPassword }) => {
+    const result = this.props.updatePassword(payPassword);
     // @ts-ignore
     result.then(res => {
       if (res.value.data.code === 1) {
         this.props.history.push('/payPassSeted');
-        toast.success('提示：修改成功。');
+        toast.success('提示：设置成功。');
       } else {
         // tslint:disable-next-line: no-multi-spaces
         toast.error('错误：' + res.value.data.message.toString());
@@ -27,7 +27,7 @@ export class SetNewPayPass extends React.Component<ISetNewPayPassProp> {
   render() {
     return (
       <div>
-        <Title name="修改支付密码" back="/updatePayPass" />
+        <Title name="初次设置支付密码" back="/mysettings" />
         <div
           style={{
             height: '60px',
@@ -51,7 +51,7 @@ export class SetNewPayPass extends React.Component<ISetNewPayPassProp> {
                 display: 'flex'
               }}
             >
-              <AvField name="password" type="password" placeholder={'请输入密码'} required errorMessage="密码不能为空!" />
+              <AvField name="payPassword" type="password" placeholder={'请输入密码'} required errorMessage="密码不能为空!" />
             </div>
           </ModalBody>
           <ModalFooter>
@@ -74,7 +74,7 @@ export class SetNewPayPass extends React.Component<ISetNewPayPassProp> {
                   position: 'absolute'
                 }}
               >
-                确认修改
+                保存
               </button>
             </div>
           </ModalFooter>
@@ -89,7 +89,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession, modifyNewPassword };
+const mapDispatchToProps = { getSession, updatePassword };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
@@ -97,4 +97,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SetNewPayPass);
+)(FirstSetPayPass);

@@ -125,20 +125,6 @@ export const sendSms = (phone: any) => async (dispatch: any) => {
   });
 };
 
-// tslint:disable-next-line: ter-arrow-body-style
-export const sendPayPasswordCode = (phone: any) => async (dispatch: any) => {
-  return dispatch({
-    payload: axios.post('services/login/api/public/send-pay-password-code', { phone })
-  });
-};
-
-// tslint:disable-next-line: ter-arrow-body-style
-export const validateCode = (phone: any, vertifyCode: any) => async (dispatch: any) => {
-  return dispatch({
-    payload: axios.post('services/login/api/public/validate-code', { phone, vertifyCode })
-  });
-};
-
 // tslint:disable-next-line: no-shadowed-variable
 export const register = (login: any, password: any, lastName: any) => async (dispatch: any) => {
   // tslint:disable-next-line: ter-arrow-body-style
@@ -185,5 +171,47 @@ export const clearAuthentication = messageKey => (dispatch, getState) => {
   dispatch(displayAuthError(messageKey));
   dispatch({
     type: ACTION_TYPES.CLEAR_AUTH
+  });
+};
+
+// tslint:disable-next-line: ter-arrow-body-style
+export const sendPayPasswordCode = (phone: any) => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.post('services/login/api/public/send-pay-password-code', { phone })
+  });
+};
+
+// tslint:disable-next-line: ter-arrow-body-style
+export const validateCode = (phone: any, vertifyCode: any) => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.post('services/login/api/public/validate-code', { phone, vertifyCode })
+  });
+};
+
+// tslint:disable-next-line: ter-arrow-body-style
+export const passwordCheck = () => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.get('services/basic/api/payment/check')
+  });
+};
+
+// tslint:disable-next-line: ter-arrow-body-style
+export const updatePassword = (payPassword: any) => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.post('services/basic/api/payment/update-password', { payPassword })
+  });
+};
+
+// tslint:disable-next-line: ter-arrow-body-style
+export const checkOldPassword = (payPassword: any) => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.post('services/basic/api/payment/check-old-password', { payPassword })
+  });
+};
+
+// tslint:disable-next-line: ter-arrow-body-style
+export const modifyNewPassword = (oldPayPassword: any, newPayPassword: any) => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.post('services/basic/api/payment/modify-new-password', { oldPayPassword, newPayPassword })
   });
 };

@@ -54,7 +54,6 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       // 订单号,支付密码
       this.props.yuePay(bigorder, '123456', null, 50);
     } else if (value === 'jifen') {
-      // 积分支付
       // @ts-ignore
       this.props.integralPay(bigorder, '', this.props.location.integral);
     } else if (value === 'zhifubao') {
@@ -66,6 +65,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       });
     } else if (value === 'weixin') {
       // 微信支付
+      toast.error('微信支付努力开发中');
     } else {
       toast.error('支付方式异常,请重新选择');
     }

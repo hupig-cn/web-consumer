@@ -16,12 +16,15 @@ import { getProdcutImg } from 'app/requests/basic/result.reducer';
 export interface IProductDetailProp extends StateProps, DispatchProps {}
 
 export class Productdetail extends React.Component<IProductDetailProp> {
-  state = { carouselimg: [], introduceimg: [] };
+  // @ts-ignore
+  state = { carouselimg: [], introduceimg: [], postage: this.props.location.postage };
   constructor(props) {
     super(props);
     this.state = {
       carouselimg: [],
-      introduceimg: []
+      introduceimg: [],
+      // @ts-ignore
+      postage: this.props.location.postage
     };
   }
   componentDidMount() {
@@ -218,10 +221,8 @@ export class Productdetail extends React.Component<IProductDetailProp> {
               <span style={{ color: '#000000', margin: '0px 20px' }}>广东广州</span>
               <span style={{ color: '#000000', margin: '0px 20px' }}>
                 快递：
-                {// @ts-ignore
-                this.props.location.postage === '0' ? '免运费' : this.props.location.postage}
-                {// @ts-ignore
-                this.props.location.postage === '0' ? '' : '元'}
+                {this.state.postage === '0' ? '免运费' : this.state.postage}
+                {this.state.postage === '0' ? '' : '元'}
               </span>
             </p>
           </div>
