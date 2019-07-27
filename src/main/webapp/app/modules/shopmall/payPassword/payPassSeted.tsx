@@ -17,7 +17,7 @@ export class PayPassSeted extends React.Component<IPayPassSetedProp> {
     // @ts-ignore
     result.then(res => {
       if (res.value.data.code === 0) {
-        this.props.history.push('/payPassSetting');
+        this.props.history.push('/firstSetPayPass');
       }
     });
   }
