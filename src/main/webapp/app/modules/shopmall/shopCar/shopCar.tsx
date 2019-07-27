@@ -1,3 +1,5 @@
+import './shopCar.scss';
+
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { IRootState } from 'app/shared/reducers';
@@ -7,47 +9,9 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
-
-function TotalBlock(props) {
-  return (
-    <div className="totalBlock">
-      <div className="totalBlock-word">
-        <span>总计</span>
-      </div>
-      <div className="totalBlock-price">
-        <span>{props.totalPrice}</span>
-      </div>
-    </div>
-  );
-}
-
-function ShopRow(props) {
-  return (
-    <tr className="listItem">
-      <td>
-        <Avatar
-          src={props.img}
-          style={{
-            borderRadius: 0,
-            width: '44px',
-            height: '44px',
-            marginRight: 10
-          }}
-        />
-        <div className="listItem-img bg-img" style={{ backgroundImage: `url(${props.img})` }} />
-        <span className="listItem-name">{props.name}</span>
-      </td>
-      <td style={{ width: '20px' }}>
-        <input className="listItem-count" type="number" value={props.count} onChange={props.handleCountChange} />
-      </td>
-      <td className="listItem-price">{props.price}</td>
-      <td className="listItem-totalPrice">{props.totalPrice}</td>
-      <td>
-        <input className="checkBox" type="checkbox" checked={props.isChecked} onChange={props.handleCheck} />
-      </td>
-    </tr>
-  );
-}
+import Title from 'app/modules/public/title';
+// tslint:disable-next-line: no-submodule-imports
+import Button from '@material-ui/core/Button';
 
 export interface IShopCarProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -190,60 +154,136 @@ export class ShopCar extends React.Component<IShopCarProps> {
 
   render() {
     return (
-      <div id="shopCar-outWrap" className="container">
-        <h1 id="shopCar-title">购物车</h1>
-        <div id="shopCar-container" className="container">
-          <table className="shopCar-table">
-            <thead>
-              <tr>
-                <th>商品</th>
-                <th>数量</th>
-                <th>单价</th>
-                <th>总价</th>
-                <th>
-                  <input className="selectAll checkBox" type="checkbox" checked={this.state.isCheckedAll} onChange={this.handleCheckAll} />
-                  全选
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {// tslint:disable-next-line: ter-arrow-body-style
-              this.state.shopCarList.map((item, index) => {
-                return (
-                  <ShopRow
-                    key={index}
-                    img={item.img}
-                    name={item.name}
-                    price={item.price}
-                    count={item.count}
-                    totalPrice={item.totalPrice}
-                    isChecked={item.isChecked}
-                    // tslint:disable-next-line: jsx-no-lambda
-                    handleCheck={(e: any) => {
-                      this.handleCheck(e, index);
-                    }}
-                    // tslint:disable-next-line: jsx-no-lambda
-                    handleCountChange={(e: any) => {
-                      this.handleCountChange(e, index);
-                    }}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-          <div>
-            <TotalBlock totalPrice={this.state.totalPrice} />
-            <button id="shopCar-buyBtn" className="btn primary-btn" onClick={this.handleBuy}>
-              购买
-            </button>
-            <button id="shopCar-removeBtn" className="btn remove-btn" onClick={this.handleRemove}>
-              删除
-            </button>
+      <div>
+        <Title name="购物车" back="/" />
+        <div id="shopCar-outWrap" className="container">
+          <h3 id="shopCar-title">购物车</h3>
+          <div id="shopCar-container" className="container">
+            <table className="shopCar-table">
+              <thead>
+                <tr>
+                  <th>商品&nbsp;</th>
+                  <th>数量&nbsp;</th>
+                  <th>单价&nbsp;</th>
+                  <th>总价&nbsp;</th>
+                  <th>
+                    全选&nbsp;
+                    <input
+                      className="selectAll checkBox"
+                      type="checkbox"
+                      checked={this.state.isCheckedAll}
+                      onChange={this.handleCheckAll}
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {// tslint:disable-next-line: ter-arrow-body-style
+                this.state.shopCarList.map((item, index) => {
+                  return (
+                    <ShopRow
+                      key={index}
+                      img={item.img}
+                      name={item.name}
+                      price={item.price}
+                      count={item.count}
+                      totalPrice={item.totalPrice}
+                      isChecked={item.isChecked}
+                      // tslint:disable-next-line: jsx-no-lambda
+                      handleCheck={(e: any) => {
+                        this.handleCheck(e, index);
+                      }}
+                      // tslint:disable-next-line: jsx-no-lambda
+                      handleCountChange={(e: any) => {
+                        this.handleCountChange(e, index);
+                      }}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+            <div style={{ float: 'right' }}>
+              <TotalBlock totalPrice={this.state.totalPrice} />
+            </div>
           </div>
+        </div>
+        <div style={{ position: 'fixed', bottom: '0px', zIndex: 1000, width: '100%', backgroundColor: '#ffffff', height: '50px' }}>
+          <Button
+            style={{
+              borderRadius: '0px 20px 20px 0px',
+              float: 'right',
+              backgroundColor: '#fe4365',
+              color: '#ffffff',
+              margin: '10px 10px 5px 0px',
+              width: '100px',
+              fontSize: '0.8rem',
+              height: '35px'
+            }}
+            onClick={this.handleBuy}
+          >
+            立即购买
+          </Button>
+          <Button
+            style={{
+              borderRadius: '20px 0px 0px 20px',
+              float: 'right',
+              backgroundColor: '#fe9f1f',
+              color: '#ffffff',
+              margin: '10px 0px 5px 0px',
+              width: '100px',
+              fontSize: '0.8rem',
+              height: '35px'
+            }}
+            onClick={this.handleRemove}
+          >
+            清空购物车
+          </Button>
         </div>
       </div>
     );
   }
+}
+
+function TotalBlock(props) {
+  return (
+    <div className="totalBlock">
+      <div className="totalBlock-word">
+        <span>总计</span>
+      </div>
+      <div className="totalBlock-price">
+        <span>{props.totalPrice}</span>
+      </div>
+    </div>
+  );
+}
+
+function ShopRow(props) {
+  return (
+    <tr className="listItem">
+      <td>
+        <Avatar
+          src={props.img}
+          style={{
+            borderRadius: 0,
+            width: '44px',
+            height: '44px',
+            marginRight: 10
+          }}
+        />
+        <div className="listItem-img bg-img" style={{ backgroundImage: `url(${props.img})` }} />
+        <span className="listItem-name">{props.name}</span>
+      </td>
+      <td style={{ width: '20%' }}>
+        <input style={{ width: '100%' }} className="listItem-count" type="number" value={props.count} onChange={props.handleCountChange} />
+      </td>
+      <td className="listItem-price">{props.price}</td>
+      <td className="listItem-totalPrice">{props.totalPrice}</td>
+      <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input className="checkBox" type="checkbox" checked={props.isChecked} onChange={props.handleCheck} />
+      </td>
+    </tr>
+  );
 }
 
 const mapStateToProps = ({ authentication, files }: IRootState) => ({

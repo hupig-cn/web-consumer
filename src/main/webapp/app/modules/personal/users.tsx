@@ -100,7 +100,7 @@ export default function LongMenu(props) {
               <SettingsRounded style={{ fill: '#fffde5' }} />
             </Link>
             <span style={{ float: 'right', width: '5px', height: '5px' }} />
-            <Link style={{ float: 'right' }} to="/">
+            <Link style={{ float: 'right' }} to="/shopCar">
               <ShoppingCartRounded style={{ fill: '#fffde5' }} />
             </Link>
           </span>
