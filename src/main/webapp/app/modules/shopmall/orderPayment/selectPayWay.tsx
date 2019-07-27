@@ -41,10 +41,8 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     if (value === 'yue') {
       // 余额支付
       // 订单号,支付密码
-      const { account } = this.props;
       this.props.yuePay(bigorder, '123456', null, 50);
     } else if (value === 'jifen') {
-      // 积分支付
       // @ts-ignore
       this.props.integralPay(bigorder, '', this.props.location.integral);
     } else if (value === 'zhifubao') {
@@ -57,7 +55,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         // const a = document.createElement('a', { href: res.value.data.data[0] });
         // a.setAttribute('href', res.value.data.data[0]);
         // a.click();
-        window.location.href = res.value.data.data[0];
+        window.location.replace('alipays://platformapi/startapp?appId=20000067&url=' + res.value.data.data[0]);
         // const newWindow = window.open();
         // newWindow.document.write(res.value.data.data[0]);
       });

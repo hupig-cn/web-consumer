@@ -294,7 +294,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
   }
 }
 
-const mapStateToProps = storeState => ({
+const mapStateToProps = (storeState: { authentication: { account: any; isAuthenticated: any }; result: { entity: any } }) => ({
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated,
   resultEntity: storeState.result.entity

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Title from 'app/modules/public/title';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession, updatePassword } from 'app/shared/reducers/authentication';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
@@ -10,11 +10,18 @@ import { toast } from 'react-toastify';
 export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Payment extends React.Component<IPaymentProp> {
-  handleSubmit = (event, errors, { password, consignee }) => {
-    // tslint:disable-next-line: no-console
-    console.log('密码' + password);
-    this.props.history.push('/payPassSeted');
-    toast.success('提示：修改成功。');
+  handleSubmit = (event, errors, { payPassword }) => {
+    const result = this.props.updatePassword(payPassword);
+    // @ts-ignore
+    result.then(res => {
+      if (res.value.data.code === 1) {
+        this.props.history.push('/payPassSeted');
+        toast.success('提示：修改成功。');
+      } else {
+        // tslint:disable-next-line: no-multi-spaces
+        toast.error('错误：' + res.value.data.message.toString());
+      }
+    });
   };
 
   render() {
@@ -83,7 +90,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, updatePassword };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

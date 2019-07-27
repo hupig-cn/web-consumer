@@ -18,7 +18,7 @@ export class Payment extends React.Component<IPaymentProp> {
     result.then(res => {
       if (res.value.data.toString() === '操作成功') {
         // tslint:disable-next-line: no-console
-        console.log('密码' + code);
+        console.log('验证码' + code);
         this.props.history.push('/payPassSetting');
       } else {
         // tslint:disable-next-line: no-multi-spaces
