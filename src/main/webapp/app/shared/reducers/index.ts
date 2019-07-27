@@ -16,6 +16,7 @@ import citys, { CitysState } from 'app/requests/basic/citys.reducer';
 import countys, { CountysState } from 'app/requests/basic/countys.reducer';
 import result, { ResultState } from 'app/requests/basic/result.reducer';
 import linkuser, { LinkuserState } from 'app/requests/basic/linkuser.reducer';
+import userassets, { UserassetsState } from 'app/requests/basic/userassets.reducer';
 
 export interface IRootState {
   readonly authentication: AuthenticationState;
@@ -31,6 +32,7 @@ export interface IRootState {
   readonly countys: CountysState;
   readonly result: ResultState;
   readonly linkuser: LinkuserState;
+  readonly userassets: UserassetsState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -49,6 +51,7 @@ const rootReducer = combineReducers<IRootState>({
   countys,
   result,
   linkuser,
+  userassets,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });
