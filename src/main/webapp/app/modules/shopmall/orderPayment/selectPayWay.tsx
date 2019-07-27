@@ -50,17 +50,11 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       const data = this.props.AliPay(bigorder);
       // @ts-ignore
       data.then(res => {
-        // window.location.href = res.value.data.data[0];
-        // @ts-ignore
-        // const a = document.createElement('a', { href: res.value.data.data[0] });
-        // a.setAttribute('href', res.value.data.data[0]);
-        // a.click();
         window.location.replace('alipays://platformapi/startapp?appId=20000067&url=' + res.value.data.data[0]);
-        // const newWindow = window.open();
-        // newWindow.document.write(res.value.data.data[0]);
       });
     } else if (value === 'weixin') {
       // 微信支付
+      toast.error('微信支付努力开发中');
     } else {
       toast.error('支付方式异常,请重新选择');
     }
