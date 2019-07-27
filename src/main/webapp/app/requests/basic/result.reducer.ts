@@ -226,10 +226,17 @@ export const getProdcutImg = (id: string) => async dispatch => {
   return result;
 };
 
-export const getDefaultAddress: ICrudGetAction<IResult> = (id: string) => {
+export const getPayMethod = (os: string, online: boolean) => {
+  const requestUrl = `services/basic/api/get-paymethods`;
+  return {
+    type: ACTION_TYPES.FETCH_RESULT,
+    payload: axios.post(requestUrl, { os, online })
+  };
+};
+export const getDefaultAddress = (id: string) => {
   const requestUrl = `services/basic/api/get-default-address/${id}`;
   return {
     type: ACTION_TYPES.FETCH_RESULT,
-    payload: axios.get<IResult>(requestUrl)
+    payload: axios.get(requestUrl)
   };
 };

@@ -6,25 +6,36 @@ import Divider from '@material-ui/core/Divider';
 import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from 'app/modules/public/title';
 import { toast } from 'react-toastify';
-import { AliPay, yuePay, integralPay } from 'app/requests/basic/result.reducer';
+import { AliPay, yuePay, integralPay, getPayMethod } from 'app/requests/basic/result.reducer';
 import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { Link } from 'react-router-dom';
 
 export interface ISelectPayWayProp extends StateProps, DispatchProps {}
 
 export class SelectPayWay extends React.Component<ISelectPayWayProp> {
+  state = {
+    payWay: '',
+    payMethod: []
+  };
   componentDidMount() {
+    let userAgent = navigator.userAgent.toLowerCase();
+    userAgent.match('android') ? (userAgent = 'android') : (userAgent = 'ios');
     this.props.getSession();
+    const paymethod = this.props.getPayMethod(userAgent, true);
+    paymethod.then(res => {
+      if (res.value.data.code === 1) {
+        this.setState({
+          payMethod: res.value.data.data
+        });
+      }
+    });
   }
   constructor(props) {
     super(props);
-    this.state = {
-      payWay: ''
-    };
   }
   handleChoosePayWay = value => {
     // 传入值判断当前支付方式
-    if (value !== null && value !== '' && value !== 'yue' && value !== 'jifen' && value !== 'zhifubao' && value !== 'weixin') {
+    if (value === null || value === '' || (value !== 'yue' && value !== 'jifen' && value !== 'zhifubao' && value !== 'weixin')) {
       toast.error('支付方式异常,请重新选择');
     } else {
       this.setState({
@@ -41,7 +52,6 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     if (value === 'yue') {
       // 余额支付
       // 订单号,支付密码
-      const { account } = this.props;
       this.props.yuePay(bigorder, '123456', null, 50);
     } else if (value === 'jifen') {
       // 积分支付
@@ -101,7 +111,12 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         </div>
         <Divider />
         {/*支付方式选择*/}
-        <Radiobuttons handlepay={this.handleChoosePayWay} />
+        {this.state.payMethod.length !== 0 ? (
+          <Radiobuttons handlepay={this.handleChoosePayWay} paymethod={this.state.payMethod} />
+        ) : (
+          <div>加载支付方式中</div>
+        )}
+        {/*<Radiobuttons handlepay={this.handleChoosePayWay} />*/}
         {/*确认支付按钮*/}
         <div style={{ minHeight: '80px' }}>
           <button
@@ -137,8 +152,7 @@ const mapStateToProps = (storeState: { authentication: { account: any; isAuthent
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated
 });
-
-const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay };
+const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay, getPayMethod };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

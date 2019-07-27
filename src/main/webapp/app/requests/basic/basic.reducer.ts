@@ -138,14 +138,6 @@ export const resetBasic = () => ({
   type: ACTION_TYPES.RESET
 });
 
-export const getDefaultAddress: ICrudGetAction<IAddress> = (id: string) => {
-  const requestUrl = `services/basic/api/get-default-address/${id}`;
-  return {
-    type: ACTION_TYPES.FETCH_BASIC,
-    payload: axios.get<IAddress>(requestUrl)
-  };
-};
-
 export const getMyRecommendName = (userid: string) => {
   const requestUrl = `services/basic/api/getMyRecommendName/${userid}`;
   return {

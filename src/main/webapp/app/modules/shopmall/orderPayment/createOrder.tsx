@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
 import Title from 'app/modules/public/title';
-import { getOrderInfo, PaySum, createUserOrder, createShopOrder } from 'app/requests/basic/result.reducer';
+import { getOrderInfo, PaySum, createUserOrder, createShopOrder, getDefaultAddress } from 'app/requests/basic/result.reducer';
 // tslint:disable-next-line: no-submodule-imports
 import ChevronRightRounded from '@material-ui/core/SvgIcon/SvgIcon';
-import { getDefaultAddress } from 'app/requests/basic/basic.reducer';
 import Error from 'app/modules/public/error';
 import { toast } from 'react-toastify';
 import { IRootState } from 'app/shared/reducers';
@@ -27,21 +26,19 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     havaDefault: false
   };
   componentDidMount() {
-    // @ts-ignore
-    this.props.getSession().then(respone => {
-      // @ts-ignore
-      this.props.getDefaultAddress(respone.id).then(res => {
-        if (res.value.data.code === 1) {
-          this.setState({
-            consignee: res.value.data.data[0].consignee,
-            mobile: res.value.data.data[0].mobile,
-            address: res.value.data.data[0].address,
-            havaDefault: true
-          });
-        }
-      });
-    });
+    this.props.getSession();
     const { account } = this.props;
+    // @ts-ignore
+    this.props.getDefaultAddress(account.id).then(res => {
+      if (res.value.data.code === 1) {
+        this.setState({
+          consignee: res.value.data.data[0].consignee,
+          mobile: res.value.data.data[0].mobile,
+          address: res.value.data.data[0].address,
+          havaDefault: true
+        });
+      }
+    });
     // 根据商品id获取商品信息
     // @ts-ignore
     if (this.props.cars) {

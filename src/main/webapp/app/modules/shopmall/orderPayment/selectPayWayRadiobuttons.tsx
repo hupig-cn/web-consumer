@@ -29,10 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function RadioButtonsGroup(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState('female');
-
+  console.log(props.paymethod);
   function handleChange(event: React.ChangeEvent<unknown>) {
+    props.handlepay((event.target as HTMLInputElement).value);
     setValue((event.target as HTMLInputElement).value);
-    props.handlepay(value);
   }
 
   return (
@@ -40,10 +40,13 @@ export default function RadioButtonsGroup(props) {
       <FormControl variant="outlined" component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">支付方式</FormLabel>
         <RadioGroup aria-label="Gender" name="gender" className={classes.group} value={value} onChange={handleChange}>
-          <FormControlLabel value="weixin" control={<Radio color="primary" />} label="微信" labelPlacement="end" />
-          <FormControlLabel value="zhifubao" control={<Radio color="primary" />} label="支付宝" labelPlacement="end" />
-          <FormControlLabel value="yue" control={<Radio color="primary" />} label="余额" labelPlacement="end" />
-          <FormControlLabel value="jifen" control={<Radio color="primary" />} label="积分" labelPlacement="end" />
+          {props.paymethod.map(method => (
+            <FormControlLabel value={method.payname} control={<Radio color="primary" />} label={method.other} labelPlacement="end" />
+          ))}
+          {/*<FormControlLabel value="weixin" control={<Radio color="primary" />} label="微信" labelPlacement="end" />*/}
+          {/*<FormControlLabel value="zhifubao" control={<Radio color="primary" />} label="支付宝" labelPlacement="end" />*/}
+          {/*<FormControlLabel value="yue" control={<Radio color="primary" />} label="余额" labelPlacement="end" />*/}
+          {/*<FormControlLabel value="jifen" control={<Radio color="primary" />} label="积分" labelPlacement="end" />*/}
         </RadioGroup>
       </FormControl>
     </div>
