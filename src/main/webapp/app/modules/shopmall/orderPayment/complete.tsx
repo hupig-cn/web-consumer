@@ -1,7 +1,6 @@
 import React from 'react';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
-import { Link } from 'react-router-dom';
 import Title from 'app/modules/public/title';
 
 export default function complete() {

@@ -53,7 +53,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     if (value === 'yue') {
       // 余额支付
       // 订单号,支付密码
-      this.props.yuePay(bigorder, '123456', null, 50);
+      document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
     } else if (value === 'jifen') {
       // @ts-ignore
       this.props.integralPay(bigorder, '', this.props.location.integral);
@@ -143,7 +143,6 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
               left: '10%',
               position: 'absolute'
             }}
-            // tslint:disable-next-line: jsx-no-lambda
           >
             确认支付
           </button>
