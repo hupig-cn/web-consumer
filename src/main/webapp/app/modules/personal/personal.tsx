@@ -23,8 +23,8 @@ export class Personal extends React.Component<IPersonalProp> {
       // @ts-ignore
       .then(valueI => {
         valueI.payload.then(valueII => {
+          this.props.queryBalance(valueII.data.id);
           if (valueII.data.imageUrl > 0) {
-            this.props.queryBalance(valueII.data.id);
             this.props
               .getMyImg(valueII.data.imageUrl)
               // @ts-ignore
