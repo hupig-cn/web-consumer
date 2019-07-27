@@ -4,14 +4,22 @@ import Title from 'app/modules/public/title';
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
-import { getSession, getSessionRE } from 'app/shared/reducers/authentication';
+import { getSession, passwordCheck } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 export interface IPayPasswordProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class PayPassword extends React.Component<IPayPasswordProp> {
   componentDidMount() {
     this.props.getSession();
+    const result = this.props.passwordCheck();
+    // @ts-ignore
+    result.then(res => {
+      if (res.value.data.code === 0) {
+        this.props.history.push('/payPassSetting');
+      }
+    });
   }
 
   render() {
@@ -56,7 +64,7 @@ const mapStateToProps = ({ authentication }: IRootState) => ({
   account: authentication.account
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, passwordCheck };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
