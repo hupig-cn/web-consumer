@@ -287,8 +287,11 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               // @ts-ignore
               to={{
                 pathname: '/selectpayway',
+                // @ts-ignore
                 orderId: this.state.bigorder,
+                // @ts-ignore
                 integral: this.props.location.integral,
+                // @ts-ignore
                 productid: this.props.location.productid
               }}
             />

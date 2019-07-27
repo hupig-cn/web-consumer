@@ -8,20 +8,10 @@ import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
 import { yuePay } from 'app/requests/basic/result.reducer';
 import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { toast } from 'react-toastify';
+
 export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Payment extends React.Component<IPaymentProp> {
-  componentDidMount() {
-    this.props.getSession();
-    const result = this.props.passwordCheck();
-    // @ts-ignore
-    result.then(res => {
-      if (res.value.data.code === 0) {
-        this.props.history.push('/firstSetPayPass');
-      }
-    });
-  }
-
   handleSubmit = (event, errors, { password }) => {
     const result = this.props.yuePay(bigorder, password, null, 50);
     // @ts-ignore

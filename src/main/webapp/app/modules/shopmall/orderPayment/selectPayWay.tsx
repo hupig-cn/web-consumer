@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession, passwordCheck } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { AliPay, yuePay, integralPay, getPayMethod } from 'app/requests/basic/result.reducer';
 import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { Link } from 'react-router-dom';
+import FirstSetPayPass from 'app/modules/shopmall/payPassword/firstSetPayPass';
 
 export interface ISelectPayWayProp extends StateProps, DispatchProps {}
 
@@ -53,7 +54,15 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     if (value === 'yue') {
       // 余额支付
       // 订单号,支付密码
-      document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+      const result = this.props.passwordCheck();
+      // @ts-ignore
+      result.then(res => {
+        if (res.value.data.code === 0) {
+          document.getElementById('bottomdiv').style.height = '80%';
+        } else {
+          document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+        }
+      });
     } else if (value === 'jifen') {
       // @ts-ignore
       this.props.integralPay(bigorder, '', this.props.location.integral);
@@ -148,6 +157,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           </button>
         </div>
         <Link id="app-modules-consumer-quickaccess-button-link-payment" to="/payment" />
+        <FirstSetPayPass />
       </div>
     );
   }
@@ -157,7 +167,7 @@ const mapStateToProps = (storeState: { authentication: { account: any; isAuthent
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated
 });
-const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay, getPayMethod };
+const mapDispatchToProps = { getSession, passwordCheck, AliPay, yuePay, integralPay, getPayMethod };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

@@ -7,7 +7,7 @@ import { ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
 
-export interface IFirstSetPayPassProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
+export interface IFirstSetPayPassProp extends StateProps, DispatchProps {}
 
 export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
   handleSubmit = (event, errors, { payPassword }) => {
@@ -15,8 +15,8 @@ export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
     // @ts-ignore
     result.then(res => {
       if (res.value.data.code === 1) {
-        this.props.history.push('/');
         toast.success('提示：设置成功。');
+        document.getElementById('bottomdiv').style.height = '0%';
       } else {
         // tslint:disable-next-line: no-multi-spaces
         toast.error('错误：' + res.value.data.message.toString());
@@ -25,25 +25,46 @@ export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
   };
 
   render() {
+    function bottomdivheight() {
+      document.getElementById('bottomdiv').style.height = '0%';
+    }
+
     return (
-      <div>
-        <Title name="初次设置支付密码" back="/mysettings" />
-        <div
-          style={{
-            height: '60px',
-            width: '100%',
-            textAlign: 'center',
-            margin: '80px 0px 20px 0px'
-          }}
-        >
-          <span style={{ fontSize: '1.8rem' }}>设置支付密码</span>
-          <p style={{ fontSize: '1.2rem' }}>请输入支付密码，用于支付验证</p>
+      <div
+        id="bottomdiv"
+        style={{
+          backgroundColor: '#fbfbfb',
+          width: '100%',
+          position: 'fixed',
+          bottom: '0px',
+          textAlign: 'left',
+          height: '0%',
+          transition: 'height 500ms'
+        }}
+      >
+        <div style={{ padding: '10px 20px 15px 20px  ', borderTop: '1px solid #cccccc' }}>
+          初次设置支付密码：
+          <span style={{ float: 'right' }} onClick={bottomdivheight}>
+            ㄨ
+          </span>
         </div>
-        <AvForm onSubmit={this.handleSubmit}>
-          <ModalBody>
+        <div>
+          {/*<Title name="初次设置支付密码" back="/mysettings" />*/}
+          <div
+            style={{
+              height: '60px',
+              width: '100%',
+              textAlign: 'center',
+              margin: '20px 0px 20px 0px'
+            }}
+          >
+            <span style={{ fontSize: '1.8rem' }}>设置支付密码</span>
+            <p style={{ fontSize: '1.2rem' }}>请输入支付密码，用于支付验证</p>
+          </div>
+          <AvForm onSubmit={this.handleSubmit}>
             <div
               style={{
-                height: '200px',
+                height: '100px',
                 width: '50%',
                 margin: '0 auto',
                 marginTop: '0.5rem',
@@ -53,8 +74,6 @@ export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
             >
               <AvField name="payPassword" type="password" placeholder={'请输入密码'} required errorMessage="密码不能为空!" />
             </div>
-          </ModalBody>
-          <ModalFooter>
             <div style={{ minHeight: '50px' }}>
               <button
                 type="submit"
@@ -69,7 +88,7 @@ export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
                   marginTop: '5px',
                   height: '45px',
                   borderRadius: '4px',
-                  bottom: '2%',
+                  bottom: '20%',
                   left: '10%',
                   position: 'absolute'
                 }}
@@ -77,8 +96,8 @@ export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
                 保存
               </button>
             </div>
-          </ModalFooter>
-        </AvForm>
+          </AvForm>
+        </div>
       </div>
     );
   }
