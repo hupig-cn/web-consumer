@@ -4,24 +4,14 @@ import Title from 'app/modules/public/title';
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
-import { getSession, passwordCheck, updatePassword } from 'app/shared/reducers/authentication';
+import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
-import FirstSetPayPass from 'app/modules/shopmall/payPassword/firstSetPayPass';
 
 export interface IPayPassSetedProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class PayPassSeted extends React.Component<IPayPassSetedProp> {
   componentDidMount() {
     this.props.getSession();
-    const result = this.props.passwordCheck();
-    // @ts-ignore
-    result.then(res => {
-      if (res.value.data.code === 0) {
-        document.getElementById('bottomdiv').style.height = '80%';
-        // this.props.history.push('/firstSetPayPass', { showModal: true });
-      }
-    });
   }
 
   render() {
@@ -32,10 +22,6 @@ export class PayPassSeted extends React.Component<IPayPassSetedProp> {
       'text-align': 'right',
       overflow: 'auto'
     };
-
-    function bottomdivheight() {
-      document.getElementById('bottomdiv').style.height = '0%';
-    }
 
     return (
       <div>
@@ -64,7 +50,6 @@ export class PayPassSeted extends React.Component<IPayPassSetedProp> {
             </Link>
           </div>
         </div>
-        <FirstSetPayPass />
       </div>
     );
   }
@@ -74,7 +59,7 @@ const mapStateToProps = ({ authentication }: IRootState) => ({
   account: authentication.account
 });
 
-const mapDispatchToProps = { getSession, passwordCheck, updatePassword };
+const mapDispatchToProps = { getSession };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
