@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function RadioButtonsGroup(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState('female');
-  console.log(props.paymethod);
   function handleChange(event: React.ChangeEvent<unknown>) {
     props.handlepay((event.target as HTMLInputElement).value);
     setValue((event.target as HTMLInputElement).value);

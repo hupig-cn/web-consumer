@@ -15,7 +15,7 @@ export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
     // @ts-ignore
     result.then(res => {
       if (res.value.data.code === 1) {
-        this.props.history.push('/payPassSeted');
+        this.props.history.push('/');
         toast.success('提示：设置成功。');
       } else {
         // tslint:disable-next-line: no-multi-spaces
