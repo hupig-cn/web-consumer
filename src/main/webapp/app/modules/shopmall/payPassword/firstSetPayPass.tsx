@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Title from 'app/modules/public/title';
 import { getSession, updatePassword } from 'app/shared/reducers/authentication';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { ModalBody, ModalFooter } from 'reactstrap';
-import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
 
 export interface IFirstSetPayPassProp extends StateProps, DispatchProps {}
@@ -49,7 +46,6 @@ export class FirstSetPayPass extends React.Component<IFirstSetPayPassProp> {
           </span>
         </div>
         <div>
-          {/*<Title name="初次设置支付密码" back="/mysettings" />*/}
           <div
             style={{
               height: '60px',
