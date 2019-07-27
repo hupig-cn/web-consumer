@@ -43,7 +43,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     // @ts-ignore
     if (this.props.cars) {
       // @ts-ignore
-      const product = this.props.getOrderInfo(account.id, this.props.location.id, null, number);
+      const product = this.props.getOrderInfo(account.id, this.props.location.productid, null, number);
       // @ts-ignore
       product.then(res => {
         this.setState({
@@ -54,7 +54,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
       });
     } else {
       // @ts-ignore
-      const product = this.props.getOrderInfo(account.id, this.props.location.id, null, number);
+      const product = this.props.getOrderInfo(account.id, this.props.location.productid, null, number);
       // @ts-ignore
       product.then(res => {
         const add = [];
@@ -69,7 +69,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     // 提交订单前先提交数据到后台获取到订单价格
     // @ts-ignore
     // tslint:disable-next-line: radix
-    const price = this.props.PaySum(this.props.location.id, parseInt(number));
+    const price = this.props.PaySum(this.props.location.productid, parseInt(number));
     // @ts-ignore
     price.then(res => {
       const result = this.props.createUserOrder(account.id, res.value.data.data[0]);
@@ -90,7 +90,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     const mobile = document.getElementById('mobile').innerText;
     const consignee = document.getElementById('consignee').innerText;
     // @ts-ignore
-    const data = this.props.createShopOrder(account.id, null, this.props.location.id, number, bigorder, consignee, mobile, address);
+    const data = this.props.createShopOrder(account.id, null, this.props.location.productid, number, bigorder, consignee, mobile, address);
     // @ts-ignore
     data.then(res => {
       if (res.value.data.code === 1) {
@@ -111,7 +111,12 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
         {account && account.login ? (
           <div style={{ height: '100%' }}>
             {/*头部标题*/}
-            <Title name="创建订单" back="/productdetail" />
+            <Title
+              name="创建订单"
+              back="/productdetail"
+              // @ts-ignore
+              productid={this.props.location.productid}
+            />
             {/*地址模块*/}
             <div
               style={{
@@ -280,7 +285,12 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             <Link
               id="app-modules-consumer-quickaccess-button-link-selectpayway"
               // @ts-ignore
-              to={{ pathname: '/selectpayway', orderId: this.state.bigorder, integral: this.props.location.integral }}
+              to={{
+                pathname: '/selectpayway',
+                orderId: this.state.bigorder,
+                integral: this.props.location.integral,
+                productid: this.props.location.productid
+              }}
             />
           </div>
         ) : (

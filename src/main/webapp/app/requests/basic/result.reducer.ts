@@ -233,6 +233,14 @@ export const getPayMethod = (os: string, online: boolean) => {
     payload: axios.post(requestUrl, { os, online })
   };
 };
+export const getProductDetail = (id: string) => {
+  const requestUrl = `services/shopmall/api/weisen/commodity/findCommodityInfo/${id}`;
+  return {
+    type: ACTION_TYPES.FETCH_RESULT,
+    payload: axios.get(requestUrl)
+  };
+};
+
 export const getDefaultAddress = (id: string) => {
   const requestUrl = `services/basic/api/get-default-address/${id}`;
   return {

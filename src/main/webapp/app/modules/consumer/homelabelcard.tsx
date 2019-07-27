@@ -54,7 +54,7 @@ class TitlebarGridList extends React.Component {
                 <Link
                   to={{
                     pathname: '/Productdetail',
-                    id: specifications.id,
+                    productid: specifications.id,
                     postage: tile.postage,
                     price: specifications.price,
                     name: tile.name,

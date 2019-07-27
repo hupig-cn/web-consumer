@@ -22,6 +22,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     userAgent.match('android') ? (userAgent = 'android') : (userAgent = 'ios');
     this.props.getSession();
     const paymethod = this.props.getPayMethod(userAgent, true);
+    // @ts-ignore
     paymethod.then(res => {
       if (res.value.data.code === 1) {
         this.setState({
@@ -74,7 +75,12 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     return (
       <div style={{ height: '100%' }}>
         {/*头部标题*/}
-        <Title name="订单支付" back="/createOrder" />
+        <Title
+          name="订单支付"
+          back="/createOrder"
+          // @ts-ignore
+          productid={this.props.location.productid}
+        />
         <Divider />
         {/*图片订单编号价格等信息*/}
         <div

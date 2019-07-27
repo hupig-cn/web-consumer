@@ -11,26 +11,53 @@ import ShoppingCartOutlined from '@material-ui/icons/ShoppingCartOutlined';
 import MoreHorizRounded from '@material-ui/icons/MoreHorizRounded';
 import { Link } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
-import { getMyImgs } from 'app/requests/basic/files.reducer';
-import { getProdcutImg } from 'app/requests/basic/result.reducer';
+import { getMyImgs, getMyImg } from 'app/requests/basic/files.reducer';
+import { getProdcutImg, getProductDetail } from 'app/requests/basic/result.reducer';
+import { toast } from 'react-toastify';
 export interface IProductDetailProp extends StateProps, DispatchProps {}
 
 export class Productdetail extends React.Component<IProductDetailProp> {
   // @ts-ignore
-  state = { carouselimg: [], introduceimg: [], postage: this.props.location.postage };
+  state = {
+    carouselimg: [],
+    introduceimg: [],
+    postage: '',
+    price: '',
+    num: 0,
+    json: '',
+    integral: '',
+    img: ''
+  };
   constructor(props) {
     super(props);
-    this.state = {
-      carouselimg: [],
-      introduceimg: [],
-      // @ts-ignore
-      postage: this.props.location.postage
-    };
   }
   componentDidMount() {
     this.props.getSession();
     // @ts-ignore
-    const data = this.props.getProdcutImg(this.props.location.id);
+    const productdetail = this.props.getProductDetail(this.props.location.productid);
+    // @ts-ignore
+    productdetail.then(res => {
+      if (res.value.data.code === 1) {
+        this.setState({
+          integral: res.value.data.data[0].integral,
+          price: res.value.data.data[0].price,
+          postage: res.value.data.data[0].postage,
+          json: res.value.data.data[0].json,
+          num: res.value.data.data[0].num
+        });
+        const filesEntity = this.props.getMyImg(res.value.data.data[0].fileid);
+        // @ts-ignore
+        filesEntity.then(respone => {
+          this.setState({
+            img: `data:${respone.value.data.fileContentType};base64,${respone.value.data.file}`
+          });
+        });
+      } else {
+        toast.error('获取图片失败');
+      }
+    });
+    // @ts-ignore
+    const data = this.props.getProdcutImg(this.props.location.productid);
     const carouselIds = [];
     const introduceIds = [];
     // @ts-ignore
@@ -153,7 +180,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
               <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span>{' '}
               {
                 // @ts-ignore
-                this.props.location.price
+                this.state.price
               }
               <span style={mySpanStyle}>超值优惠</span>
               <span style={mySpanStyle}>积分精选区</span>
@@ -165,7 +192,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
               >
                 {
                   // @ts-ignore
-                  this.props.location.integral
+                  this.state.integral
                 }
                 积分兑换
               </span>
@@ -178,41 +205,41 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 库存:
                 {
                   // @ts-ignore
-                  this.props.location.num
+                  this.state.num
                 }
               </span>
             </p>
             <p>
               {
                 // @ts-ignore
-                this.props.location.name
+                this.state.name
               }{' '}
               {
                 // @ts-ignore
-                this.props.location.model
+                this.state.model
               }{' '}
               {
                 // @ts-ignore
-                this.props.location.json
+                this.state.json
               }
             </p>
           </div>
           <div style={{ position: 'fixed', bottom: '0px', zIndex: 1000, width: '100%', backgroundColor: '#ffffff', height: '50px' }}>
             <Swipeabledrawer
               // @ts-ignore
-              id={this.props.location.id}
+              productid={this.props.location.productid}
               // @ts-ignore
-              num={this.props.location.num}
+              num={this.state.num}
               // @ts-ignore
-              json={this.props.location.json}
+              json={this.state.json}
               // @ts-ignore
-              model={this.props.location.model}
+              model={this.state.model}
               // @ts-ignore
-              price={this.props.location.price}
+              price={this.state.price}
               // @ts-ignore
-              img={this.props.location.img}
+              img={this.state.img}
               // @ts-ignore
-              integral={this.props.location.integral}
+              integral={this.state.integral}
             />
           </div>
           <div style={{ backgroundColor: '#ffffff', margin: '5px 0px', width: '100%', padding: '5px 10px' }}>
@@ -269,10 +296,11 @@ export class Productdetail extends React.Component<IProductDetailProp> {
   }
 }
 const mapStateToProps = ({ files }: IRootState, storeState) => ({
-  filesEntitys: files.entities
+  filesEntitys: files.entities,
+  filesEntity: files.entity
 });
 
-const mapDispatchToProps = { getSession, getProdcutImg, getMyImgs };
+const mapDispatchToProps = { getSession, getProdcutImg, getMyImgs, getProductDetail, getMyImg };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
