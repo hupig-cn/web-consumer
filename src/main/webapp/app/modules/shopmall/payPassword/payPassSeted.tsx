@@ -8,9 +8,9 @@ import { getSession, passwordCheck } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
-export interface IPayPasswordProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
+export interface IPayPassSetedProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
-export class PayPassword extends React.Component<IPayPasswordProp> {
+export class PayPassSeted extends React.Component<IPayPassSetedProp> {
   componentDidMount() {
     this.props.getSession();
     const result = this.props.passwordCheck();
@@ -72,4 +72,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PayPassword);
+)(PayPassSeted);

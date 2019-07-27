@@ -189,10 +189,10 @@ export const validateCode = (phone: any, vertifyCode: any) => async (dispatch: a
 };
 
 // tslint:disable-next-line: ter-arrow-body-style
-export const passwordCheck = () => async () => {
-  return {
+export const passwordCheck = () => async (dispatch: any) => {
+  return dispatch({
     payload: axios.get('services/basic/api/payment/check')
-  };
+  });
 };
 
 // tslint:disable-next-line: ter-arrow-body-style

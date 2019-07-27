@@ -7,9 +7,9 @@ import { Col, Label, ModalBody, ModalFooter, Row } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
 
-export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
+export interface ISendCodePayPassProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
-export class Payment extends React.Component<IPaymentProp> {
+export class SendCodePayPass extends React.Component<ISendCodePayPassProp> {
   state = { time: 10, btnDisable: false, btnContent: '发送验证码', backgroundColor: '#fe4365', password: '' };
   handleSubmit = (event, errors, { code }) => {
     const { account } = this.props;
@@ -154,4 +154,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Payment);
+)(SendCodePayPass);

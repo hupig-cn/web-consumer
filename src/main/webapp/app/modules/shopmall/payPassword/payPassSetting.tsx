@@ -7,9 +7,9 @@ import { ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
 import { toast } from 'react-toastify';
 
-export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
+export interface IPayPassSettingProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
-export class Payment extends React.Component<IPaymentProp> {
+export class PayPassSetting extends React.Component<IPayPassSettingProp> {
   handleSubmit = (event, errors, { payPassword }) => {
     const result = this.props.updatePassword(payPassword);
     // @ts-ignore
@@ -51,7 +51,7 @@ export class Payment extends React.Component<IPaymentProp> {
                 display: 'flex'
               }}
             >
-              <AvField name="password" type="password" placeholder={'请输入密码'} required errorMessage="密码不能为空!" />
+              <AvField name="payPassword" type="password" placeholder={'请输入密码'} required errorMessage="密码不能为空!" />
             </div>
           </ModalBody>
           <ModalFooter>
@@ -79,7 +79,6 @@ export class Payment extends React.Component<IPaymentProp> {
             </div>
           </ModalFooter>
         </AvForm>
-        <Link id="app-modules-consumer-quickaccess-button-link-complete" to="/complete" />
       </div>
     );
   }
@@ -98,4 +97,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Payment);
+)(PayPassSetting);
