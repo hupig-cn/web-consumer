@@ -5,10 +5,14 @@ import './scroll.scss';
 import ReactPullLoad, { STATS } from 'react-pullload';
 import Axios from 'axios';
 import { IRootState } from 'app/shared/reducers';
+// tslint:disable-next-line: no-submodule-imports
 import GridList from '@material-ui/core/GridList';
 import { Link } from 'react-router-dom';
+// tslint:disable-next-line: no-submodule-imports
 import GridListTile from '@material-ui/core/GridListTile';
+// tslint:disable-next-line: no-submodule-imports
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+// tslint:disable-next-line: no-submodule-imports
 import IconButton from '@material-ui/core/IconButton';
 import { getProducts } from 'app/requests/basic/result.reducer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
@@ -86,7 +90,7 @@ export class Product extends React.Component {
       this.handLoadMore();
     } else {
       // default
-      this.setState({ action: action });
+      this.setState({ action });
     }
   };
   // 刷新
@@ -98,8 +102,8 @@ export class Product extends React.Component {
 
     // this.setState({ pageNum: 1 });
 
-    // @ts-ignore
     if (this.state.syncLoadData) {
+      // @ts-ignore
       this.syncLoadResource();
     } else {
       setTimeout(() => {
@@ -226,6 +230,7 @@ export class Product extends React.Component {
           this.setState({
             data: [...this.state.data, staticData[0], staticData[0]],
             action: STATS.reset,
+            // @ts-ignore
             index: this.state.index - 1
           });
         }
@@ -257,14 +262,7 @@ export class Product extends React.Component {
     return (
       <div ws-container-id="scroll">
         {/*<div style={fixHeaderStyle}> fixed header </div>*/}
-        <ReactPullLoad
-          downEnough={150}
-          action={this.state.action}
-          handleAction={this.handleAction}
-          hasMore={hasMore}
-          style={{ paddingTop: 10 }}
-          distanceBottom={1000}
-        >
+        <ReactPullLoad downEnough={150} action={this.state.action} handleAction={this.handleAction} hasMore={hasMore} distanceBottom={1000}>
           <GridList cellHeight={180} style={{ margin: -0, width: '97%' }}>
             {// @ts-ignore
             this.state.data ? (

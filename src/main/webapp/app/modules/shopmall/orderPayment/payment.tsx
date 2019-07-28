@@ -4,9 +4,8 @@ import Title from 'app/modules/public/title';
 import { getSession, passwordCheck } from 'app/shared/reducers/authentication';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { ModalBody, ModalFooter } from 'reactstrap';
-import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { yuePay, integralPay, couponPay } from 'app/requests/basic/result.reducer';
-import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { toast } from 'react-toastify';
 
 export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
@@ -16,6 +15,7 @@ export class Payment extends React.Component<IPaymentProp> {
     // @ts-ignore
     const paymethod = this.props.location.paymethod;
     if (paymethod === 'yue') {
+      // @ts-ignore
       const result = this.props.yuePay(this.props.location.bigorder, password, null, 50);
       // @ts-ignore
       result.then(res => {
@@ -30,6 +30,7 @@ export class Payment extends React.Component<IPaymentProp> {
         }
       });
     } else if (paymethod === 'jifen') {
+      // @ts-ignore
       const result = this.props.integralPay(this.props.location.bigorder, password, null);
       // @ts-ignore
       result.then(res => {
@@ -44,6 +45,7 @@ export class Payment extends React.Component<IPaymentProp> {
         }
       });
     } else if (paymethod === 'coupon') {
+      // @ts-ignore
       const result = this.props.couponPay(this.props.location.bigorder, password, null);
       // @ts-ignore
       result.then(res => {

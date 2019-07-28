@@ -115,6 +115,13 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function BottomAppBar(props) {
   const classes = useStyles();
 
+  function getOrderInfoByOrderId() {
+    // tslint:disable-next-line: no-shadowed-variable
+    const { getOrderInfoByOrderId } = props;
+    // tslint:disable-next-line: no-console
+    console.log(getOrderInfoByOrderId);
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -122,7 +129,7 @@ export default function BottomAppBar(props) {
         <List className={classes.list}>
           {messages.map(({ id, primary, star, sale, distance, consumption, person }) => (
             <React.Fragment key={id}>
-              <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }}>
+              <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }} onClick={getOrderInfoByOrderId}>
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"

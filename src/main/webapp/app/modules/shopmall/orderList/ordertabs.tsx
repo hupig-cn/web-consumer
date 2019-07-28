@@ -20,19 +20,20 @@ import Title from 'app/modules/public/title';
 interface TabContainerProps {
   children?: React.ReactNode;
   dir?: string;
+  deliver?: [];
 }
 
-export const Setlistbox = keys => {
+export const Setlistbox = (keys, deliver) => {
   let temp: any = null;
   switch (keys) {
     case '0':
-      temp = <Orderlistbox getOrderInfoByOrderId={this.getOrderInfoByOrderId} getAllOrder={this.getAllOrder} />;
+      temp = <Orderlistbox getAllOrder={deliver.getAllOrder} />;
       break;
     case '1':
-      temp = <Orderlistbox />;
+      temp = <Orderlistbox getUnpaidOrder={deliver.getUnpaidOrder} />;
       break;
     case '2':
-      temp = <Orderlistbox />;
+      temp = <Orderlistbox getPaidOrder={deliver.getPaidOrder} />;
       break;
     // case '3':
     //   temp = <Orderlistbox />;
@@ -41,7 +42,7 @@ export const Setlistbox = keys => {
     //   temp = <Orderlistbox />;
     //   break;
     case '5':
-      temp = <Orderlistbox />;
+      temp = <Orderlistbox getRefundOrder={deliver.getRefundOrder} />;
       break;
     default:
       temp = <p>Error</p>;
@@ -50,10 +51,10 @@ export const Setlistbox = keys => {
   return temp;
 };
 
-function TabContainer({ children, dir }: TabContainerProps) {
+function TabContainer({ children, dir, deliver }: TabContainerProps) {
   return (
     <Typography component="div" dir={dir} style={{ padding: 0, marginTop: 30 }}>
-      {Setlistbox(children)}
+      {Setlistbox(children, deliver)}
     </Typography>
   );
 }
@@ -88,21 +89,29 @@ export default function SimpleTabs(props) {
       <div className={classes.root}>
         <AppBar position="static" id="jh-appbar">
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="全部" style={{ width: '20%' }} />
-            <Tab label="待付款" style={{ width: '20%' }} />
-            <Tab label="待发货" style={{ width: '20%' }} />
+            <Tab label="全部" style={{ width: '25%' }} />
+            <Tab label="待付款" style={{ width: '25%' }} />
+            <Tab label="待发货" style={{ width: '25%' }} />
             {/*<Tab label="待收货" style={{ width: '20%' }} />*/}
             {/*<Tab label="待评价" style={{ width: '20%' }} />*/}
-            <Tab label="已退款" style={{ width: '20%' }} />
+            <Tab label="已退款" style={{ width: '25%' }} />
           </Tabs>
         </AppBar>
         <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
-          <TabContainer dir={theme.direction}>0</TabContainer>
-          <TabContainer dir={theme.direction}>1</TabContainer>
-          <TabContainer dir={theme.direction}>2</TabContainer>
+          <TabContainer dir={theme.direction} deliver={props}>
+            0
+          </TabContainer>
+          <TabContainer dir={theme.direction} deliver={props}>
+            1
+          </TabContainer>
+          <TabContainer dir={theme.direction} deliver={props}>
+            2
+          </TabContainer>
           {/*<TabContainer dir={theme.direction}>3</TabContainer>*/}
           {/*<TabContainer dir={theme.direction}>4</TabContainer>*/}
-          <TabContainer dir={theme.direction}>5</TabContainer>
+          <TabContainer dir={theme.direction} deliver={props}>
+            5
+          </TabContainer>
         </SwipeableViews>
       </div>
     </div>

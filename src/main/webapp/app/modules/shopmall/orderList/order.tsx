@@ -10,6 +10,8 @@ export interface IOrderProp extends StateProps, DispatchProps {}
 
 export class Order extends React.Component<IOrderProp> {
   componentDidMount() {
+    // @ts-ignore
+    alert(this.props.location.status);
     this.props.getSession();
   }
 
@@ -82,6 +84,8 @@ export class Order extends React.Component<IOrderProp> {
     return (
       <div>
         <Ordertabs
+          // @ts-ignore
+          status={this.props.location.status}
           getOrderInfoByOrderId={this.getOrderInfoByOrderId}
           getAllOrder={this.getAllOrder}
           getUnpaidOrder={this.getUnpaidOrder}

@@ -76,6 +76,7 @@ export default function LongMenu(props) {
   const classes = useStyles();
   const { account, state, userassets, merchant } = props;
 
+  // tslint:disable-next-line: no-shadowed-variable
   function names(partner: boolean, merchant: boolean) {
     let name: string = account.firstName;
     if (name.length > 4) {
