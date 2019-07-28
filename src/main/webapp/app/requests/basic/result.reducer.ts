@@ -166,10 +166,18 @@ export const yuePay = (orderid: any, password: any, concession: any, rebate: any
   return result;
 };
 // 积分支付
-export const integralPay = (orderId: any, passWord: any, integral: any) => async dispatch => {
+export const integralPay = (orderid: any, password: any, integral: any) => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.FETCH_RESULT,
-    payload: axios.post('services/basic/api/pay/IntegralPayment', { orderId, passWord, integral })
+    payload: axios.post('services/basic/api/pay/IntegralPayment', { orderid, password, integral })
+  });
+  return result;
+};
+// 积分支付
+export const couponPay = (orderid: any, password: any, integral: any) => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.FETCH_RESULT,
+    payload: axios.post('services/basic/api/pay/couponPayment', { orderid, password, integral })
   });
   return result;
 };
@@ -235,6 +243,13 @@ export const getPayMethod = (os: string, online: boolean) => {
 };
 export const getProductDetail = (id: string) => {
   const requestUrl = `services/shopmall/api/weisen/commodity/findCommodityInfo/${id}`;
+  return {
+    type: ACTION_TYPES.FETCH_RESULT,
+    payload: axios.get(requestUrl)
+  };
+};
+export const getOrderInfoByOrderId = (id: string) => {
+  const requestUrl = `services/shopmall/api/weisen/commodity/get-order-info-byorderId/${id}`;
   return {
     type: ACTION_TYPES.FETCH_RESULT,
     payload: axios.get(requestUrl)

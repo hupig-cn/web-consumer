@@ -4,7 +4,7 @@ import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 // tslint:disable-next-line: no-submodule-imports
 import { Link } from 'react-router-dom';
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props) {
   return (
     <div>
       <div
@@ -20,7 +20,13 @@ export default function PrimarySearchAppBar() {
           textAlign: 'center'
         }}
       >
-        <Link to="/createOrder">
+        <Link
+          to={{
+            pathname: '/createOrder',
+            productid: props.productid !== null ? props.productid : null,
+            cards: props.cards !== null ? props.cards : null
+          }}
+        >
           <ArrowBackIos
             style={{
               float: 'left',
@@ -29,7 +35,13 @@ export default function PrimarySearchAppBar() {
           />
         </Link>
         <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px', color: '#fffde5' }}>地址</span>
-        <Link to="/addAddress">
+        <Link
+          to={{
+            pathname: '/addAddress',
+            productid: props.productid !== null ? props.productid : null,
+            cards: props.cards !== null ? props.cards : null
+          }}
+        >
           <span style={{ fontSize: '1rem', color: '#ffffff', float: 'right' }}>新增</span>
         </Link>
       </div>

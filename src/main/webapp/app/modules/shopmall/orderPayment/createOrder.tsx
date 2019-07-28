@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import { IRootState } from 'app/shared/reducers';
 import { IResult } from 'app/shared/model/result.model';
 import { number } from 'app/modules/shopmall/productDetail/swipeabledrawer';
+import { getMyImgs } from 'app/requests/basic/files.reducer';
 export interface ICreateOrderProp extends StateProps, DispatchProps {}
 export let bigorder = '';
 export class CreateOrder extends React.Component<ICreateOrderProp> {
@@ -23,7 +24,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     address: '广州市天河区天河路383号太古汇太古汇太古汇太古汇太古汇太古汇',
     products: [],
     totalAmout: '',
-    havaDefault: false
+    havaDefault: false,
+    imgs: []
   };
   componentDidMount() {
     this.props.getSession();
@@ -41,22 +43,45 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     });
     // 根据商品id获取商品信息
     // @ts-ignore
-    if (this.props.cars) {
+    if (this.props.location.cards) {
       // @ts-ignore
-      const product = this.props.getOrderInfo(account.id, this.props.location.productid, null, number);
+      const product = this.props.getOrderInfo(account.id, null, this.props.location.cards, number);
       // @ts-ignore
       product.then(res => {
+        const imgsarr = [];
+        res.value.data.data[0].orderInfo.map(info => {
+          imgsarr.push(info.fileid);
+        });
+        const files = this.props.getMyImgs(imgsarr);
+        // tslint:disable-next-line: no-shadowed-variable
+        files.then((res: { value: { data: any } }) => {
+          this.setState({
+            imgs: res.value.data
+          });
+        });
         this.setState({
           // @ts-ignore
-          products: product,
+          products: res.value.data.data[0].orderInfo,
           totalAmout: res.value.data.data[0].totalAmout
         });
       });
     } else {
       // @ts-ignore
       const product = this.props.getOrderInfo(account.id, this.props.location.productid, null, number);
+      console.log(product);
+      let imgs = '';
       // @ts-ignore
       product.then(res => {
+        const imgsarr = [];
+        console.log(res);
+        imgsarr.push(res.value.data.data[0].orderInfo.fileid);
+        const files = this.props.getMyImgs(imgsarr);
+        // tslint:disable-next-line: no-shadowed-variable
+        files.then((res: { value: { data: any } }) => {
+          this.setState({
+            imgs: res.value.data
+          });
+        });
         const add = [];
         add.push(res.value.data.data[0].orderInfo);
         this.setState({
@@ -115,7 +140,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               name="创建订单"
               back="/productdetail"
               // @ts-ignore
-              productid={this.props.location.productid}
+              productid={this.props.location.productid !== null ? this.props.location.productid : null}
+              cards={this.props.location.cards !== null ? this.props.location.cards : null}
             />
             {/*地址模块*/}
             <div
@@ -125,7 +151,13 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 overflow: 'hidden'
               }}
             >
-              <Link to="/selectAddress">
+              <Link
+                to={{
+                  pathname: '/selectAddress',
+                  productid: this.props.location.productid !== null ? this.props.location.productid : null,
+                  cards: this.props.location.cards !== null ? this.props.location.cards : null
+                }}
+              >
                 {this.state.havaDefault === true ? (
                   <div>
                     <div>
@@ -175,24 +207,28 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             {/*图片订单编号价格等信息*/}
             {// @ts-ignore
             this.state.products ? (
-              this.state.products.map(product => (
+              this.state.products.map((product, index) => (
                 // tslint:disable-next-line: jsx-key
                 <div style={{ height: '180px', margin: '15px 0px 15px 15px' }}>
                   <div>
                     <div style={{ float: 'left', marginBottom: '10px' }}>
-                      <img
-                        style={{ height: '18px', width: '15px' }}
-                        src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}
-                      />
+                      {/*<img*/}
+                      {/*  style={{ height: '18px', width: '15px' }}*/}
+                      {/*  src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}*/}
+                      {/*/>*/}
                     </div>
                     <div>博媛官方旗舰店</div>
                   </div>
                   <div style={{ width: '100%' }}>
                     <div style={{ height: '120px', width: '100px', float: 'left' }}>
-                      <img
-                        style={{ height: '120px', width: '100px' }}
-                        src={'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'}
-                      />
+                      {this.state.imgs.length !== 0 ? (
+                        <img
+                          style={{ height: '120px', width: '100px' }}
+                          src={`data:${this.state.imgs[index].fileContentType};base64,${this.state.imgs[index].file}`}
+                        />
+                      ) : (
+                        <img style={{ height: '120px', width: '100px' }} src={this.props.location.img} />
+                      )}
                     </div>
                     <div style={{ maxWidth: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
                       <span>
@@ -289,7 +325,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 pathname: '/selectpayway',
                 orderId: this.state.bigorder,
                 integral: this.props.location.integral,
-                productid: this.props.location.productid
+                productid: this.props.location.productid,
+                cars: this.props.cars
               }}
             />
           </div>
@@ -307,7 +344,7 @@ const mapStateToProps = (storeState: { authentication: { account: any; isAuthent
   resultEntity: storeState.result.entity
 });
 
-const mapDispatchToProps = { getSession, getOrderInfo, PaySum, createUserOrder, createShopOrder, getDefaultAddress };
+const mapDispatchToProps = { getSession, getOrderInfo, PaySum, createUserOrder, createShopOrder, getDefaultAddress, getMyImgs };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

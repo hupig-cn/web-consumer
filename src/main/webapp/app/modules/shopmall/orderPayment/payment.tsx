@@ -5,7 +5,7 @@ import { getSession, passwordCheck } from 'app/shared/reducers/authentication';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField, AvInput } from 'availity-reactstrap-validation';
-import { yuePay } from 'app/requests/basic/result.reducer';
+import { yuePay, integralPay, couponPay } from 'app/requests/basic/result.reducer';
 import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { toast } from 'react-toastify';
 export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
@@ -23,19 +23,52 @@ export class Payment extends React.Component<IPaymentProp> {
   }
 
   handleSubmit = (event, errors, { password }) => {
-    const result = this.props.yuePay(bigorder, password, null, 50);
-    // @ts-ignore
-    result.then(res => {
-      // tslint:disable-next-line: no-console
-      console.log(res);
-      // tslint:disable-next-line: no-console
-      console.log(res.value.data);
-      if (res.value.data.code === 1) {
-        this.props.history.push('/complete');
-      } else {
-        toast.error('错误：' + res.value.data.message.toString());
-      }
-    });
+    const paymethod = this.props.location.paymethod;
+    if (paymethod === 'yue') {
+      const result = this.props.yuePay(bigorder, password, null, 50);
+      // @ts-ignore
+      result.then(res => {
+        // tslint:disable-next-line: no-console
+        console.log(res);
+        // tslint:disable-next-line: no-console
+        console.log(res.value.data);
+        if (res.value.data.code === 1) {
+          this.props.history.push('/complete');
+        } else {
+          toast.error('错误：' + res.value.data.message.toString());
+        }
+      });
+    } else if (paymethod === 'jifen') {
+      const result = this.props.integralPay(bigorder, password, null);
+      // @ts-ignore
+      result.then(res => {
+        // tslint:disable-next-line: no-console
+        console.log(res);
+        // tslint:disable-next-line: no-console
+        console.log(res.value.data);
+        if (res.value.data.code === 1) {
+          this.props.history.push('/complete');
+        } else {
+          toast.error('错误：' + res.value.data.message.toString());
+        }
+      });
+    } else if (paymethod === 'coupon') {
+      const result = this.props.couponPay(bigorder, password, null);
+      // @ts-ignore
+      result.then(res => {
+        // tslint:disable-next-line: no-console
+        console.log(res);
+        // tslint:disable-next-line: no-console
+        console.log(res.value.data);
+        if (res.value.data.code === 1) {
+          this.props.history.push('/complete');
+        } else {
+          toast.error('错误：' + res.value.data.message.toString());
+        }
+      });
+    } else {
+      toast.error('错误：支付方式异常');
+    }
   };
 
   render() {
@@ -104,7 +137,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession, yuePay, passwordCheck };
+const mapDispatchToProps = { getSession, yuePay, passwordCheck, integralPay, couponPay };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

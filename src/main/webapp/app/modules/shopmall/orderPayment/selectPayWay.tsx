@@ -6,16 +6,23 @@ import Divider from '@material-ui/core/Divider';
 import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from 'app/modules/public/title';
 import { toast } from 'react-toastify';
-import { AliPay, yuePay, integralPay, getPayMethod } from 'app/requests/basic/result.reducer';
+import { AliPay, yuePay, integralPay, getPayMethod, getOrderInfoByOrderId } from 'app/requests/basic/result.reducer';
 import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { Link } from 'react-router-dom';
+import { number } from 'app/modules/shopmall/productDetail/swipeabledrawer';
+import { getMyImgs } from 'app/requests/basic/files.reducer';
+import { PropTypes } from '@material-ui/core';
+import Margin = PropTypes.Margin;
 
 export interface ISelectPayWayProp extends StateProps, DispatchProps {}
 
 export class SelectPayWay extends React.Component<ISelectPayWayProp> {
   state = {
     payWay: '',
-    payMethod: []
+    payMethod: [],
+    imgs: [],
+    products: [],
+    totalAmout: []
   };
   componentDidMount() {
     let userAgent = navigator.userAgent.toLowerCase();
@@ -30,13 +37,40 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         });
       }
     });
+    // 根据订单号查询订单信息,商品信息获取到名称和邮费
+    // 商品规格表获取到价格
+    // 订单上面获取到数量
+    // 根据商品价格和数量 计算出总价
+    // 查询出价格 名称 规格 , 邮费 ,计算出总价
+    const OrderInfos = this.props.getOrderInfoByOrderId(bigorder);
+    OrderInfos.then(res => {
+      const imgarr = [];
+      this.setState({
+        products: res.value.data.data[0].orderInfo,
+        totalAmout: res.value.data.data[0].totalAmout
+      });
+      res.value.data.data[0].orderInfo.map(elem => {
+        imgarr.push(elem.fileid);
+        const img = this.props.getMyImgs(imgarr);
+        img.then(respone => {
+          console.log(respone);
+          this.setState({
+            imgs: respone.value.data
+          });
+        });
+      });
+    });
   }
   constructor(props) {
     super(props);
   }
   handleChoosePayWay = value => {
     // 传入值判断当前支付方式
-    if (value === null || value === '' || (value !== 'yue' && value !== 'jifen' && value !== 'zhifubao' && value !== 'weixin')) {
+    if (
+      value === null ||
+      value === '' ||
+      (value !== 'yue' && value !== 'jifen' && value !== 'zhifubao' && value !== 'weixin' && value !== 'coupon')
+    ) {
       toast.error('支付方式异常,请重新选择');
     } else {
       this.setState({
@@ -56,7 +90,8 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
     } else if (value === 'jifen') {
       // @ts-ignore
-      this.props.integralPay(bigorder, '', this.props.location.integral);
+      document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+      // this.props.integralPay(bigorder, '', this.props.location.price);
     } else if (value === 'zhifubao') {
       // 支付宝支付
       const data = this.props.AliPay(bigorder);
@@ -67,6 +102,8 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     } else if (value === 'weixin') {
       // 微信支付
       toast.error('微信支付努力开发中');
+    } else if (value === 'coupon') {
+      document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
     } else {
       toast.error('支付方式异常,请重新选择');
     }
@@ -79,7 +116,8 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           name="订单支付"
           back="/createOrder"
           // @ts-ignore
-          productid={this.props.location.productid}
+          productid={this.props.location.productid ? this.props.location.productid : null}
+          cards={this.props.location.cards ? this.props.location.cards : null}
         />
         <Divider />
         {/*图片订单编号价格等信息*/}
@@ -90,32 +128,50 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           }}
         >
           <div>
-            <div style={{ float: 'left', marginBottom: '10px' }}>
-              <img style={{ height: '18px', width: '15px' }} src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'} />
-            </div>
+            {/*<div style={{ float: 'left', marginBottom: '10px' }}>*/}
+            {/*  <img style={{ height: '18px', width: '15px' }} src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'} />*/}
+            {/*</div>*/}
             <div>博媛官方旗舰店</div>
           </div>
-          <div style={{ width: '100%' }}>
-            <div style={{ height: '120px', width: '100px', float: 'left' }}>
-              <img
-                style={{ height: '120px', width: '100px' }}
-                src={'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'}
-              />
-            </div>
-            <div style={{ width: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
-              <span>芙妍瑜生物多肽胶原蛋白眼贴膜弹嫩紧致去眼袋眼纹去黑眼圈眼膜 5片/盒</span>
-            </div>
-            <div style={{ width: '75px', float: 'left' }}>
-              <p style={{ color: 'red', fontSize: '0.5rem' }}>
-                <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> 863.00
-              </p>
-              <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
-                <span>x1</span>
-              </p>
-            </div>
-          </div>
+          {this.state.products.length !== 0 ? (
+            this.state.products.map((product, index) => (
+              // tslint:disable-next-line:jsx-key
+              <div style={{ width: '100%' }}>
+                <div style={{ height: '120px', width: '100px', float: 'left' }}>
+                  {this.state.imgs.length !== 0 ? (
+                    <img
+                      style={{ height: '120px', width: '100px' }}
+                      src={`data:${this.state.imgs[index].fileContentType};base64,${this.state.imgs[index].file}`}
+                    />
+                  ) : (
+                    <img
+                      style={{ height: '120px', width: '100px' }}
+                      src={'https://img.alicdn.com/bao/uploaded/O1CN01Zt1WHw1DJoAOObYak_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp'}
+                    />
+                  )}
+                </div>
+                <div style={{ width: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
+                  <span>
+                    {product.name}
+                    {product.json}
+                  </span>
+                </div>
+                <div style={{ width: '75px', float: 'left' }}>
+                  <p style={{ color: 'red', fontSize: '0.5rem' }}>
+                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> {product.price}
+                  </p>
+                  <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
+                    <span>x1</span>
+                  </p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div>加载订单信息中</div>
+          )}
         </div>
         <Divider />
+        <div style={{ textAlign: 'center' }}>总价:{this.state.totalAmout}元</div>
         {/*支付方式选择*/}
         {this.state.payMethod.length !== 0 ? (
           <Radiobuttons handlepay={this.handleChoosePayWay} paymethod={this.state.payMethod} />
@@ -147,7 +203,10 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
             确认支付
           </button>
         </div>
-        <Link id="app-modules-consumer-quickaccess-button-link-payment" to="/payment" />
+        <Link
+          id="app-modules-consumer-quickaccess-button-link-payment"
+          to={{ pathname: '/payment', paymethod: this.state.payWay !== null ? this.state.payWay : null }}
+        />
       </div>
     );
   }
@@ -157,8 +216,8 @@ const mapStateToProps = (storeState: { authentication: { account: any; isAuthent
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated
 });
-const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay, getPayMethod };
 
+const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay, getPayMethod, getOrderInfoByOrderId, getMyImgs };
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 

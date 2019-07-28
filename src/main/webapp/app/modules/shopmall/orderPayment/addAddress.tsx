@@ -74,7 +74,12 @@ export class AddAddress extends React.Component<IAddAddressProp> {
           padding: '0px'
         }}
       >
-        <Title name="地址信息" back="/selectAddress" />
+        <Title
+          name="地址信息"
+          back="/selectAddress"
+          productid={this.props.location.productid !== null ? this.props.location.productid : null}
+          cards={this.props.location.cards !== null ? this.props.location.cards : null}
+        />
         <AvForm onSubmit={this.handleSubmit}>
           <div
             style={{

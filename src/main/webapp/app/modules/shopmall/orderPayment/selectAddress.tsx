@@ -22,6 +22,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
 import { Link, RouteComponentProps } from 'react-router-dom';
+import Title from 'app/modules/public/title';
 
 export interface ISelectAddressProp extends StateProps, DispatchProps {}
 
@@ -58,7 +59,10 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
     };
     return (
       <React.Fragment>
-        <SelectAddTitle />
+        <SelectAddTitle
+          productid={this.props.location.productid !== null ? this.props.location.productid : null}
+          cards={this.props.location.cards !== null ? this.props.location.cards : null}
+        />
         <CssBaseline />
         <Paper square style={paper}>
           {this.state.getMessage === true ? (

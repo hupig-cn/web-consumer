@@ -25,7 +25,6 @@ export class Productdetail extends React.Component<IProductDetailProp> {
     price: '',
     num: 0,
     json: '',
-    integral: '',
     img: ''
   };
   constructor(props) {
@@ -39,7 +38,6 @@ export class Productdetail extends React.Component<IProductDetailProp> {
     productdetail.then(res => {
       if (res.value.data.code === 1) {
         this.setState({
-          integral: res.value.data.data[0].integral,
           price: res.value.data.data[0].price,
           postage: res.value.data.data[0].postage,
           json: res.value.data.data[0].json,
@@ -192,7 +190,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
               >
                 {
                   // @ts-ignore
-                  this.state.integral
+                  this.state.price
                 }
                 积分兑换
               </span>
@@ -238,8 +236,6 @@ export class Productdetail extends React.Component<IProductDetailProp> {
               price={this.state.price}
               // @ts-ignore
               img={this.state.img}
-              // @ts-ignore
-              integral={this.state.integral}
             />
           </div>
           <div style={{ backgroundColor: '#ffffff', margin: '5px 0px', width: '100%', padding: '5px 10px' }}>

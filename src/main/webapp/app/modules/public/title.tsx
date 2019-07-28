@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // tslint:disable-next-line: no-submodule-imports
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 
-export default function PrimarySearchAppBar(text, props) {
+export default function PrimarySearchAppBar(text) {
   return (
     <div>
       <div
@@ -19,7 +19,13 @@ export default function PrimarySearchAppBar(text, props) {
           textAlign: 'center'
         }}
       >
-        <Link to={{ pathname: `${text.back}`, productid: text.productid }}>
+        <Link
+          to={{
+            pathname: `${text.back}`,
+            productid: text.productid !== null ? text.productid : null,
+            cards: text.cards !== null ? text.cards : null
+          }}
+        >
           <ArrowBackIos
             style={{
               float: 'left',
