@@ -87,7 +87,7 @@ export default (state: ShopmallState = initialState, action): ShopmallState => {
   }
 };
 
-const apiUrl = 'services/shopmall/api/test';
+const apiUrl = 'services/shopmall/api/weisen';
 // Actions
 export const createEntityShopmall: ICrudPutAction<IMystring> = entity => async dispatch => {
   const result = await dispatch({
@@ -122,3 +122,38 @@ export const getEntityShopmall: ICrudGetAction<IMystring> = id => {
 export const resetShopmall = () => ({
   type: ACTION_TYPES.RESET
 });
+
+// 添加商品到购物车
+export const createUserShopping = (goodsId: any, number: any, userId: any) => async dispatch => {
+  const result = await dispatch({
+    payload: axios.post('services/shopmall/api/weisen/shopping/createUserShopping', { goodsId, number, userId })
+  });
+  return result;
+};
+
+// 单个删除购物车中的商品
+export const deleteShopping = (shoppingid: any) => async dispatch => {
+  const requestUrl = `${apiUrl}/shopping/deleteShopping/${shoppingid}`;
+  const result = await dispatch({
+    payload: axios.delete(requestUrl)
+  });
+  return result;
+};
+
+// 批量删除购物车中的商品
+export const deleteShoppingList = (shoppingid: any) => async dispatch => {
+  const requestUrl = `${apiUrl}/shopping/deleteShoppingList/${shoppingid}`;
+  const result = await dispatch({
+    payload: axios.delete(requestUrl)
+  });
+  return result;
+};
+
+// 获取购物车列表
+export const getAllShoppingByUser = (userid: any) => async dispatch => {
+  const requestUrl = `${apiUrl}/shopping/getAllShoppingByUser/${userid}`;
+  const result = await dispatch({
+    payload: axios.get(requestUrl)
+  });
+  return result;
+};

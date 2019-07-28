@@ -4,6 +4,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
+import { createUserShopping, deleteShopping, deleteShoppingList, getAllShoppingByUser } from 'app/requests/shopmall/shopmall.reducer';
 import { connect } from 'react-redux';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
@@ -62,6 +63,20 @@ export class ShopCar extends React.Component<IShopCarProps> {
     isCheckedAll: false,
     totalPrice: 0
   };
+
+  componentDidMount() {
+    // @ts-ignore
+    this.props.getSession().then(respone => {
+      // @ts-ignore
+      this.props.getAllShoppingByUser(respone.id).then(res => {
+        if (res.value.data.data) {
+          this.setState({
+            shopCarList: res.value.data.data
+          });
+        }
+      });
+    });
+  }
 
   handleCheckAll = () => {
     this.setState({
@@ -289,7 +304,7 @@ const mapStateToProps = ({ authentication, files }: IRootState) => ({
   account: authentication.account
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, createUserShopping, deleteShopping, deleteShoppingList, getAllShoppingByUser };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
