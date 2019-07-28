@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession, passwordCheck } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 // tslint:disable-next-line: no-submodule-imports
 import Divider from '@material-ui/core/Divider';
@@ -13,6 +13,7 @@ import { number } from 'app/modules/shopmall/productDetail/swipeabledrawer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
 import { PropTypes } from '@material-ui/core';
 import Margin = PropTypes.Margin;
+import FirstSetPayPass from 'app/modules/shopmall/payPassword/firstSetPayPass';
 
 export interface ISelectPayWayProp extends StateProps, DispatchProps {}
 
@@ -43,6 +44,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     // 根据商品价格和数量 计算出总价
     // 查询出价格 名称 规格 , 邮费 ,计算出总价
     const OrderInfos = this.props.getOrderInfoByOrderId(bigorder);
+    // @ts-ignore
     OrderInfos.then(res => {
       const imgarr = [];
       this.setState({
@@ -51,9 +53,10 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       });
       res.value.data.data[0].orderInfo.map(elem => {
         imgarr.push(elem.fileid);
+        // @ts-ignore
         const img = this.props.getMyImgs(imgarr);
+        // @ts-ignore
         img.then(respone => {
-          console.log(respone);
           this.setState({
             imgs: respone.value.data
           });
@@ -87,7 +90,15 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     if (value === 'yue') {
       // 余额支付
       // 订单号,支付密码
-      document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+      const result = this.props.passwordCheck();
+      // @ts-ignore
+      result.then(res => {
+        if (res.value.data.code === 0) {
+          document.getElementById('bottomdiv').style.height = '80%';
+        } else {
+          document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+        }
+      });
     } else if (value === 'jifen') {
       // @ts-ignore
       document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
@@ -117,6 +128,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           back="/createOrder"
           // @ts-ignore
           productid={this.props.location.productid ? this.props.location.productid : null}
+          // @ts-ignore
           cards={this.props.location.cards ? this.props.location.cards : null}
         />
         <Divider />
@@ -203,6 +215,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
             确认支付
           </button>
         </div>
+        <FirstSetPayPass />
         <Link
           id="app-modules-consumer-quickaccess-button-link-payment"
           to={{ pathname: '/payment', paymethod: this.state.payWay !== null ? this.state.payWay : null }}
@@ -217,7 +230,7 @@ const mapStateToProps = (storeState: { authentication: { account: any; isAuthent
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay, getPayMethod, getOrderInfoByOrderId, getMyImgs };
+const mapDispatchToProps = { getSession, AliPay, yuePay, integralPay, getPayMethod, getOrderInfoByOrderId, getMyImgs, passwordCheck };
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 

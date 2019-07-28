@@ -52,11 +52,13 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
         res.value.data.data[0].orderInfo.map(info => {
           imgsarr.push(info.fileid);
         });
+        // @ts-ignore
         const files = this.props.getMyImgs(imgsarr);
         // tslint:disable-next-line: no-shadowed-variable
-        files.then((res: { value: { data: any } }) => {
+        // @ts-ignore
+        files.then((respone: { value: { data: any } }) => {
           this.setState({
-            imgs: res.value.data
+            imgs: respone.value.data
           });
         });
         this.setState({
@@ -68,18 +70,17 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     } else {
       // @ts-ignore
       const product = this.props.getOrderInfo(account.id, this.props.location.productid, null, number);
-      console.log(product);
-      let imgs = '';
       // @ts-ignore
       product.then(res => {
         const imgsarr = [];
-        console.log(res);
         imgsarr.push(res.value.data.data[0].orderInfo.fileid);
+        // @ts-ignore
         const files = this.props.getMyImgs(imgsarr);
         // tslint:disable-next-line: no-shadowed-variable
-        files.then((res: { value: { data: any } }) => {
+        // @ts-ignore
+        files.then((respone: { value: { data: any } }) => {
           this.setState({
-            imgs: res.value.data
+            imgs: respone.value.data
           });
         });
         const add = [];
@@ -141,6 +142,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               back="/productdetail"
               // @ts-ignore
               productid={this.props.location.productid !== null ? this.props.location.productid : null}
+              // @ts-ignore
               cards={this.props.location.cards !== null ? this.props.location.cards : null}
             />
             {/*地址模块*/}
@@ -154,7 +156,9 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               <Link
                 to={{
                   pathname: '/selectAddress',
+                  // @ts-ignore
                   productid: this.props.location.productid !== null ? this.props.location.productid : null,
+                  // @ts-ignore
                   cards: this.props.location.cards !== null ? this.props.location.cards : null
                 }}
               >
@@ -227,7 +231,13 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                           src={`data:${this.state.imgs[index].fileContentType};base64,${this.state.imgs[index].file}`}
                         />
                       ) : (
-                        <img style={{ height: '120px', width: '100px' }} src={this.props.location.img} />
+                        <img
+                          style={{ height: '120px', width: '100px' }}
+                          src={
+                            // @ts-ignore
+                            this.props.location.img
+                          }
+                        />
                       )}
                     </div>
                     <div style={{ maxWidth: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
@@ -323,9 +333,13 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               // @ts-ignore
               to={{
                 pathname: '/selectpayway',
+                // @ts-ignore
                 orderId: this.state.bigorder,
+                // @ts-ignore
                 integral: this.props.location.integral,
+                // @ts-ignore
                 productid: this.props.location.productid,
+                // @ts-ignore
                 cars: this.props.cars
               }}
             />

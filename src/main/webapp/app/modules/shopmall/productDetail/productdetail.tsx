@@ -132,7 +132,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 <ArrowBackIosRounded style={{ fill: '#ffffff', margin: '-16px 0px 0px 2px' }} />
               </div>
             </Link>
-            <Link to="/">
+            <Link to="/shopCar">
               <div
                 style={{
                   width: '30px',
@@ -146,7 +146,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 <MoreHorizRounded style={{ fill: '#ffffff', margin: '-16px 0px 0px 3px' }} />
               </div>
             </Link>
-            <Link to="/">
+            <Link to="/shopCar">
               <div
                 style={{
                   width: '30px',

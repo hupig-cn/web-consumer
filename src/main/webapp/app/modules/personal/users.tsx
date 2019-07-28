@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function LongMenu(props) {
   const classes = useStyles();
-  const { account, state } = props;
+  const { account, state, userassets } = props;
 
   return (
     <div>
@@ -100,7 +100,7 @@ export default function LongMenu(props) {
               <SettingsRounded style={{ fill: '#fffde5' }} />
             </Link>
             <span style={{ float: 'right', width: '5px', height: '5px' }} />
-            <Link style={{ float: 'right' }} to="/">
+            <Link style={{ float: 'right' }} to="/shopCar">
               <ShoppingCartRounded style={{ fill: '#fffde5' }} />
             </Link>
           </span>
@@ -108,9 +108,9 @@ export default function LongMenu(props) {
         </div>
       </div>
       <BottomNavigation showLabels style={{ position: 'fixed', top: '58px', height: 'auto', zIndex: 1000 }} className={classes.root}>
-        <BottomNavigationAction label="积分" value="scan" icon={'0'} />
-        <BottomNavigationAction label="余额" value="pay" icon={'0.00'} />
-        <BottomNavigationAction label="优惠卷" value="share" icon={'0'} />
+        <BottomNavigationAction label="积分" value="scan" icon={userassets.integral} />
+        <BottomNavigationAction label="余额" value="pay" icon={userassets.balance} />
+        <BottomNavigationAction label="优惠卷" value="share" icon={userassets.couponsum} />
       </BottomNavigation>
       <div style={{ height: '130px' }} />
     </div>
