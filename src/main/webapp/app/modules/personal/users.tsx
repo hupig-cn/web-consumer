@@ -77,15 +77,15 @@ export default function LongMenu(props) {
   const { account, state, userassets, merchant } = props;
 
   function names(partner: boolean, merchant: boolean) {
-    let name: any = account.firstName;
+    let name: string = account.firstName;
     if (name.length > 4) {
       name = name.substr(0, 4) + '...';
     }
     if (merchant) {
-      name = name + ' ' + <span style={{ color: '#ffbe04' }}>商户</span>;
+      name = name + '（商户）';
     }
     if (partner) {
-      name = name + ' ' + <span style={{ color: '#ff4220' }}>圆帅</span>;
+      name = name + '（圆帅）';
     }
     return name;
   }
