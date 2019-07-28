@@ -52,12 +52,17 @@ export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
     case 'key1':
+      // tslint:disable-next-line: no-unused-expression
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'key2':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'key3':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'key4':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'order':
       document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
@@ -70,10 +75,13 @@ export const Loadpages = key => {
 
 export default function orderLongMenu() {
   const classes = useStyles();
-  const [value] = React.useState('personal');
+  const [value, setValue] = React.useState('order');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
-    Loadpages(newValue);
+    status = newValue;
+    setValue(newValue);
+    document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
+    // Loadpages(newValue);
   }
 
   return (
@@ -97,7 +105,12 @@ export default function orderLongMenu() {
           icon={<EventNoteRounded />}
         />
       </BottomNavigation>
-      <Link id="app-modules-consumer-quickaccess-button-link-orderlist" to="/order" />
+      <Link
+        id="app-modules-consumer-quickaccess-button-link-orderlist"
+        // tslint:disable-next-line: no-invalid-this
+        to={{ pathname: '/order', status }}
+      />
+      ;
     </div>
   );
 }

@@ -63,6 +63,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     //       });
     //     });
     //   });
+    // @ts-ignore
     const OrderInfos = this.props.getOrderInfoByOrderId(this.props.location.bigorder);
     // @ts-ignore
     OrderInfos.then(res => {
@@ -131,6 +132,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       });
     } else if (value === 'zhifubao') {
       // 支付宝支付
+      // @ts-ignore
       const data = this.props.AliPay(this.props.location.bigorder);
       // @ts-ignore
       data.then(res => {
@@ -255,6 +257,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           to={{
             pathname: '/payment',
             paymethod: this.state.payWay !== null ? this.state.payWay : null,
+            // @ts-ignore
             bigorder: this.props.location.bigorder
           }}
         />

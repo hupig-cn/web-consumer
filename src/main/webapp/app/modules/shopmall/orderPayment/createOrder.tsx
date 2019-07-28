@@ -121,6 +121,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     const data = this.props.createShopOrder(
       account.id,
       null,
+      // @ts-ignore
       this.props.location.productid,
       number,
       this.state.bigorder,
