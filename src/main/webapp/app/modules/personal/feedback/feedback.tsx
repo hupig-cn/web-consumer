@@ -47,7 +47,7 @@ export class Feedback extends React.Component<IFeedbackProps> {
           }
         });
       } else {
-        toast.info('提示：店铺照片上传失败。');
+        toast.info('提示：照片上传失败。');
       }
     });
   };

@@ -15,7 +15,6 @@ import { IResult } from 'app/shared/model/result.model';
 import { number } from 'app/modules/shopmall/productDetail/swipeabledrawer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
 export interface ICreateOrderProp extends StateProps, DispatchProps {}
-export let bigorder = '';
 export class CreateOrder extends React.Component<ICreateOrderProp> {
   state = {
     price: '',
@@ -25,7 +24,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     products: [],
     totalAmout: '',
     havaDefault: false,
-    imgs: []
+    imgs: [],
+    bigorder: ''
   };
   componentDidMount() {
     this.props.getSession();
@@ -102,7 +102,9 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
       // @ts-ignore
       result.then(respone => {
         if (respone.value.data.code === 1) {
-          bigorder = respone.value.data.data[0];
+          this.setState({
+            bigorder: respone.value.data.data[0]
+          });
         } else {
           toast.error('错误：' + respone.value.data.message);
         }
@@ -116,7 +118,16 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     const mobile = document.getElementById('mobile').innerText;
     const consignee = document.getElementById('consignee').innerText;
     // @ts-ignore
-    const data = this.props.createShopOrder(account.id, null, this.props.location.productid, number, bigorder, consignee, mobile, address);
+    const data = this.props.createShopOrder(
+      account.id,
+      null,
+      this.props.location.productid,
+      number,
+      this.state.bigorder,
+      consignee,
+      mobile,
+      address
+    );
     // @ts-ignore
     data.then(res => {
       if (res.value.data.code === 1) {
@@ -334,7 +345,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               to={{
                 pathname: '/selectpayway',
                 // @ts-ignore
-                orderId: this.state.bigorder,
+                bigorder: this.state.bigorder,
                 // @ts-ignore
                 integral: this.props.location.integral,
                 // @ts-ignore
