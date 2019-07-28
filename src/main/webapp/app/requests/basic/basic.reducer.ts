@@ -187,10 +187,3 @@ export const queryAlipay = (userid: string) => {
     payload: axios.get(requestUrl)
   };
 };
-
-export const setDefaultAddress = (id: any) => async dispatch => {
-  const result = await dispatch({
-    payload: axios.post(apiUrl + '/set-default-address', { id })
-  });
-  return result;
-};

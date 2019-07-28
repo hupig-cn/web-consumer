@@ -7,7 +7,6 @@ import Radiobuttons from './selectPayWayRadiobuttons';
 import Title from 'app/modules/public/title';
 import { toast } from 'react-toastify';
 import { AliPay, yuePay, integralPay, getPayMethod, getOrderInfoByOrderId } from 'app/requests/basic/result.reducer';
-import { bigorder } from 'app/modules/shopmall/orderPayment/createOrder';
 import { Link } from 'react-router-dom';
 import { number } from 'app/modules/shopmall/productDetail/swipeabledrawer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
@@ -43,7 +42,28 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     // 订单上面获取到数量
     // 根据商品价格和数量 计算出总价
     // 查询出价格 名称 规格 , 邮费 ,计算出总价
-    const OrderInfos = this.props.getOrderInfoByOrderId(bigorder);
+    // if (this.props.location.bigorder === null) {
+    //   const OrderInfos = this.props.getOrderInfoByOrderId(bigorder);
+    //   // @ts-ignore
+    //   OrderInfos.then(res => {
+    //     const imgarr = [];
+    //     this.setState({
+    //       products: res.value.data.data[0].orderInfo,
+    //       totalAmout: res.value.data.data[0].totalAmout
+    //     });
+    //     res.value.data.data[0].orderInfo.map(elem => {
+    //       imgarr.push(elem.fileid);
+    //       // @ts-ignore
+    //       const img = this.props.getMyImgs(imgarr);
+    //       // @ts-ignore
+    //       img.then(respone => {
+    //         this.setState({
+    //           imgs: respone.value.data
+    //         });
+    //       });
+    //     });
+    //   });
+    const OrderInfos = this.props.getOrderInfoByOrderId(this.props.location.bigorder);
     // @ts-ignore
     OrderInfos.then(res => {
       const imgarr = [];
@@ -111,7 +131,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       });
     } else if (value === 'zhifubao') {
       // 支付宝支付
-      const data = this.props.AliPay(bigorder);
+      const data = this.props.AliPay(this.props.location.bigorder);
       // @ts-ignore
       data.then(res => {
         window.location.replace('alipays://platformapi/startapp?appId=20000067&url=' + res.value.data.data[0]);
@@ -232,7 +252,11 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         <FirstSetPayPass />
         <Link
           id="app-modules-consumer-quickaccess-button-link-payment"
-          to={{ pathname: '/payment', paymethod: this.state.payWay !== null ? this.state.payWay : null }}
+          to={{
+            pathname: '/payment',
+            paymethod: this.state.payWay !== null ? this.state.payWay : null,
+            bigorder: this.props.location.bigorder
+          }}
         />
       </div>
     );

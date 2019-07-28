@@ -7,6 +7,7 @@ import Homequickaccessdown from './homequickaccessdown';
 import Loopplayimg from './loopplayimg';
 import Homelabelcard from './homelabelcard';
 import '../../../static/css/home.scss';
+import { Product } from 'app/modules/consumer/scroll';
 
 export interface IConsumerProp extends StateProps, DispatchProps {}
 
@@ -21,7 +22,8 @@ export class Consumer extends React.Component<IConsumerProp> {
         <Quickaccess />
         <Homequickaccessdown />
         <Loopplayimg />
-        <Homelabelcard />
+        {/*<Homelabelcard />*/}
+        <Product />
       </div>
     );
   }

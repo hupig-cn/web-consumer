@@ -19,16 +19,60 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 
 const messages = [
-  // {
-  //   id: 1,
-  //   primary: '【官网价直降1111元】Apple/苹果 iPhone XR 256G 移动联通电信4G手机双卡双待苹果XR iPhonexr',
-  //   star: '4.9',
-  //   sale: '90',
-  //   distance: '38分钟 4.0km',
-  //   consumption: '人均 ￥69 积分 50%',
-  //   person: './content/images/commodity1.jpg',
-  //   price: '6488.00'
-  // }
+  {
+    id: 1,
+    primary: '探虾迹小龙虾（蟹·烧烤·市桥店）',
+    star: '4.9',
+    sale: '90',
+    distance: '38分钟 4.0km',
+    consumption: '人均 ￥69 积分 50%',
+    person: './content/images/shop1.png'
+  },
+  {
+    id: 2,
+    primary: '德州汉堡（市桥黄编店）',
+    star: '4.4',
+    sale: '826',
+    distance: '36分钟 3.5km',
+    consumption: '人均 ￥23 积分 30%',
+    person: './content/images/shop2.png'
+  },
+  {
+    id: 3,
+    primary: '华莱士炸鸡汉堡（市桥店）',
+    star: '4.0',
+    sale: '2394',
+    distance: '38分钟 4.5km',
+    consumption: '人均 ￥23 积分 50%',
+    person: './content/images/shop3.png'
+  },
+  {
+    id: 4,
+    primary: '菠萝油港澳餐厅',
+    star: '4.3',
+    sale: '796',
+    distance: '41分钟 4.6km',
+    consumption: '人均 ￥21 积分 50%',
+    person: './content/images/shop4.png'
+  },
+  {
+    id: 5,
+    primary: '广州麦当劳光明北得来速餐厅',
+    star: '4.5',
+    sale: '2634',
+    distance: '30分钟 2.5km',
+    consumption: '人均 ￥37 积分 15%',
+    person: './content/images/shop5.png'
+  },
+  {
+    id: 6,
+    primary: '开心花甲粉（市桥店）',
+    star: '3.5',
+    sale: '7981',
+    distance: '35分钟 3.5km',
+    consumption: '人均 ￥17 积分 50%',
+    person: './content/images/shop6.png'
+  }
 ];
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,7 +81,8 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2, 2, 0)
     },
     paper: {
-      paddingBottom: 0
+      paddingBottom: 0,
+      marginTop: '66px'
     },
     list: {
       fontFamily: '黑体',
@@ -67,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function BottomAppBar() {
+export default function BottomAppBar(props) {
   const classes = useStyles();
 
   return (
@@ -75,7 +120,7 @@ export default function BottomAppBar() {
       <CssBaseline />
       <Paper square className={classes.paper}>
         <List className={classes.list}>
-          {messages.map(({ id, primary, star, sale, distance, consumption, person, price }) => (
+          {messages.map(({ id, primary, star, sale, distance, consumption, person }) => (
             <React.Fragment key={id}>
               <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }}>
                 <ListItemAvatar>
@@ -83,7 +128,7 @@ export default function BottomAppBar() {
                     alt="Profile Picture"
                     src={person}
                     style={{
-                      borderRadius: 0,
+                      borderRadius: 20,
                       width: 75,
                       height: 100,
                       marginRight: 10
@@ -91,24 +136,15 @@ export default function BottomAppBar() {
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  style={{
-                    margin: '0 auto',
-                    height: '100px',
-                    position: 'relative'
-                  }}
+                  style={{ margin: '0 auto', height: '100px', position: 'relative' }}
                   primary={primary}
                   secondary={
                     <React.Fragment>
-                      <span
-                        style={{
-                          float: 'right',
-                          position: 'absolute',
-                          bottom: 0,
-                          left: '80%'
-                        }}
-                      >
-                        ¥{price}
-                      </span>
+                      <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
+                        <span style={{ color: '#fe4365' }}>★{star}</span> （月销售：{sale}）
+                      </Typography>
+                      <span style={{ float: 'right' }}>{distance}</span>
+                      <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>{consumption}</span>
                     </React.Fragment>
                   }
                 />
