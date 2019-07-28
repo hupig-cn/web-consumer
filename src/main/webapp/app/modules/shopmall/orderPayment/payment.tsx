@@ -15,7 +15,7 @@ export class Payment extends React.Component<IPaymentProp> {
   handleSubmit = (event, errors, { password }) => {
     const paymethod = this.props.location.paymethod;
     if (paymethod === 'yue') {
-      const result = this.props.yuePay(bigorder, password, null, 50);
+      const result = this.props.yuePay(this.props.location.bigorder, password, null, 50);
       // @ts-ignore
       result.then(res => {
         // tslint:disable-next-line: no-console
@@ -29,7 +29,7 @@ export class Payment extends React.Component<IPaymentProp> {
         }
       });
     } else if (paymethod === 'jifen') {
-      const result = this.props.integralPay(bigorder, password, null);
+      const result = this.props.integralPay(this.props.location.bigorder, password, null);
       // @ts-ignore
       result.then(res => {
         // tslint:disable-next-line: no-console
@@ -43,7 +43,7 @@ export class Payment extends React.Component<IPaymentProp> {
         }
       });
     } else if (paymethod === 'coupon') {
-      const result = this.props.couponPay(bigorder, password, null);
+      const result = this.props.couponPay(this.props.location.bigorder, password, null);
       // @ts-ignore
       result.then(res => {
         // tslint:disable-next-line: no-console
