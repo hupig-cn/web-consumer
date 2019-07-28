@@ -100,9 +100,15 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         }
       });
     } else if (value === 'jifen') {
+      const result = this.props.passwordCheck();
       // @ts-ignore
-      document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
-      // this.props.integralPay(bigorder, '', this.props.location.price);
+      result.then(res => {
+        if (res.value.data.code === 0) {
+          document.getElementById('bottomdiv').style.height = '80%';
+        } else {
+          document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+        }
+      });
     } else if (value === 'zhifubao') {
       // 支付宝支付
       const data = this.props.AliPay(bigorder);
@@ -114,7 +120,15 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
       // 微信支付
       toast.error('微信支付努力开发中');
     } else if (value === 'coupon') {
-      document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+      const result = this.props.passwordCheck();
+      // @ts-ignore
+      result.then(res => {
+        if (res.value.data.code === 0) {
+          document.getElementById('bottomdiv').style.height = '80%';
+        } else {
+          document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+        }
+      });
     } else {
       toast.error('支付方式异常,请重新选择');
     }

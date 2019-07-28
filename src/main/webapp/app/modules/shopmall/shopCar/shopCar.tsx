@@ -3,8 +3,6 @@ import './shopCar.scss';
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { IRootState } from 'app/shared/reducers';
-import { createFile, setBlob } from 'app/requests/basic/files.reducer';
-import { createFeedback } from 'app/requests/basic/basic.reducer';
 import { getSession } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 // tslint:disable-next-line: no-submodule-imports
@@ -291,12 +289,7 @@ const mapStateToProps = ({ authentication, files }: IRootState) => ({
   account: authentication.account
 });
 
-const mapDispatchToProps = {
-  setBlob,
-  createFile,
-  createFeedback,
-  getSession
-};
+const mapDispatchToProps = { getSession };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

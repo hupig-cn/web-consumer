@@ -60,7 +60,9 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
     return (
       <React.Fragment>
         <SelectAddTitle
+          // @ts-ignore
           productid={this.props.location.productid !== null ? this.props.location.productid : null}
+          // @ts-ignore
           cards={this.props.location.cards !== null ? this.props.location.cards : null}
         />
         <CssBaseline />
