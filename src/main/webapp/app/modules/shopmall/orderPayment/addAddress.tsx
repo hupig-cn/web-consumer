@@ -77,7 +77,9 @@ export class AddAddress extends React.Component<IAddAddressProp> {
         <Title
           name="地址信息"
           back="/selectAddress"
+          // @ts-ignore
           productid={this.props.location.productid !== null ? this.props.location.productid : null}
+          // @ts-ignore
           cards={this.props.location.cards !== null ? this.props.location.cards : null}
         />
         <AvForm onSubmit={this.handleSubmit}>

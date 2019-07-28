@@ -13,6 +13,7 @@ export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentP
 
 export class Payment extends React.Component<IPaymentProp> {
   handleSubmit = (event, errors, { password }) => {
+    // @ts-ignore
     const paymethod = this.props.location.paymethod;
     if (paymethod === 'yue') {
       const result = this.props.yuePay(this.props.location.bigorder, password, null, 50);

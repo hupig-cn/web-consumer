@@ -20,8 +20,6 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import Enddiv from 'app/shared/menu/enddiv';
-// import Swipeabledrawer from 'app/shared/menu/swipeabledrawer';
-import ProductDetail from 'app/modules/shopmall/productDetail/productdetail';
 
 const baseHref = document
   .querySelector('base')
