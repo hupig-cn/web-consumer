@@ -14,6 +14,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Orderlistbox from './orderlistbox';
 import SwipeableViews from 'react-swipeable-views';
+import Title from 'app/modules/public/title';
 
 // tslint:disable-next-line: interface-name
 interface TabContainerProps {
@@ -25,7 +26,7 @@ export const Setlistbox = keys => {
   let temp: any = null;
   switch (keys) {
     case '0':
-      temp = <Orderlistbox />;
+      temp = <Orderlistbox getOrderInfoByOrderId={this.getOrderInfoByOrderId} getAllOrder={this.getAllOrder} />;
       break;
     case '1':
       temp = <Orderlistbox />;
@@ -33,10 +34,13 @@ export const Setlistbox = keys => {
     case '2':
       temp = <Orderlistbox />;
       break;
-    case '3':
-      temp = <Orderlistbox />;
-      break;
-    case '4':
+    // case '3':
+    //   temp = <Orderlistbox />;
+    //   break;
+    // case '4':
+    //   temp = <Orderlistbox />;
+    //   break;
+    case '5':
       temp = <Orderlistbox />;
       break;
     default:
@@ -69,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -78,59 +82,27 @@ export default function SimpleTabs() {
     setValue(newValue);
   }
 
-  function goBack() {
-    history.go(0);
-  }
-
   return (
     <div>
-      <div
-        style={{
-          backgroundColor: '#fe4365',
-          height: '40px',
-          textAlign: 'center',
-          padding: '7px',
-          width: '100%',
-          position: 'fixed',
-          top: '0px',
-          zIndex: 1000
-        }}
-      >
-        <span onClick={goBack} style={{ float: 'left' }}>
-          <img
-            src="./content/images/back.png"
-            style={{
-              width: '24px',
-              height: '24px'
-            }}
-          />
-        </span>
-        <h5
-          style={{
-            color: '#fffde5',
-            marginTop: '3px',
-            fontSize: '1.05rem'
-          }}
-        >
-          订单列表
-        </h5>
-      </div>
+      <Title name="订单列表" back="/personal" />
       <div className={classes.root}>
         <AppBar position="static" id="jh-appbar">
           <Tabs value={value} onChange={handleChange}>
             <Tab label="全部" style={{ width: '20%' }} />
             <Tab label="待付款" style={{ width: '20%' }} />
             <Tab label="待发货" style={{ width: '20%' }} />
-            <Tab label="待收货" style={{ width: '20%' }} />
-            <Tab label="待评价" style={{ width: '20%' }} />
+            {/*<Tab label="待收货" style={{ width: '20%' }} />*/}
+            {/*<Tab label="待评价" style={{ width: '20%' }} />*/}
+            <Tab label="已退款" style={{ width: '20%' }} />
           </Tabs>
         </AppBar>
         <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
           <TabContainer dir={theme.direction}>0</TabContainer>
           <TabContainer dir={theme.direction}>1</TabContainer>
           <TabContainer dir={theme.direction}>2</TabContainer>
-          <TabContainer dir={theme.direction}>3</TabContainer>
-          <TabContainer dir={theme.direction}>4</TabContainer>
+          {/*<TabContainer dir={theme.direction}>3</TabContainer>*/}
+          {/*<TabContainer dir={theme.direction}>4</TabContainer>*/}
+          <TabContainer dir={theme.direction}>5</TabContainer>
         </SwipeableViews>
       </div>
     </div>
