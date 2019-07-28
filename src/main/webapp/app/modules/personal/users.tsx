@@ -82,10 +82,10 @@ export default function LongMenu(props) {
       name = name.substr(0, 4) + '...';
     }
     if (merchant) {
-      name = name + '（商户）';
+      name = name.toString() + '（商户）';
     }
     if (partner) {
-      name = name + '（圆帅）';
+      name = name + '圆帅'.toString();
     }
     return name;
   }
