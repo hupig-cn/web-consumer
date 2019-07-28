@@ -37,9 +37,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export const Loadpages = key => {
-  document.getElementById('app-modules-personal-vipservice-navigation-link-' + key).click();
   if (key === 'key3') {
     window.location.replace('http://app.yuanscore.com:8083');
+  } else {
+    document.getElementById('app-modules-personal-vipservice-navigation-link-' + key).click();
   }
 };
 
