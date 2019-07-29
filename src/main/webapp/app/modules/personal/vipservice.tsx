@@ -37,7 +37,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export const Loadpages = key => {
-  document.getElementById('app-modules-personal-vipservice-navigation-link-' + key).click();
+  if (key === 'key3') {
+    window.location.replace('http://app.yuanscore.com:8083');
+  } else {
+    document.getElementById('app-modules-personal-vipservice-navigation-link-' + key).click();
+  }
 };
 
 export default function LongMenu() {
@@ -58,7 +62,7 @@ export default function LongMenu() {
         {/*<Link id="app-modules-personal-vipservice-navigation-link-" to="/" />*/}
         <BottomNavigationAction label="账号绑定" value="key2" icon={<img src="./content/images/vip2.png" />} />
         {/*<Link id="app-modules-personal-vipservice-navigation-link-" to="/" />*/}
-        <BottomNavigationAction label="合伙人" value="key3" icon={<img src="./content/images/vip3.png" />} />
+        <BottomNavigationAction label="推荐" value="key3" icon={<img src="./content/images/vip3.png" />} />
         {/*<Link id="app-modules-personal-vipservice-navigation-link-" to="/" />*/}
         <BottomNavigationAction label="商家" value="upmerchant" icon={<img src="./content/images/vip4.png" />} />
         <Link id="app-modules-personal-vipservice-navigation-link-upmerchant" to="/upmerchant" />

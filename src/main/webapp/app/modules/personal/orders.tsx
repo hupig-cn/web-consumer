@@ -118,7 +118,6 @@ export default function orderLongMenu() {
         // tslint:disable-next-line: no-invalid-this
         to={{ pathname: '/order', status: 0 }}
       />
-      ;
     </div>
   );
 }

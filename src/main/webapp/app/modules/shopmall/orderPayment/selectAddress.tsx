@@ -76,13 +76,13 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                     id={'app-modules-consumer-quickaccess-button-link-addAddress-' + id}
                     to={{
                       pathname: '/addAddress',
-                      id: { id },
-                      address: { address },
-                      consignee: { consignee },
-                      mobile: { mobile },
-                      isdefault: { isdefault },
-                      areaid: { areaid },
-                      areaName: { areaName },
+                      id,
+                      address,
+                      consignee,
+                      mobile,
+                      isdefault,
+                      areaid,
+                      areaName,
                       // @ts-ignore
                       productid: this.props.location.productid !== null ? this.props.location.productid : null,
                       // @ts-ignore

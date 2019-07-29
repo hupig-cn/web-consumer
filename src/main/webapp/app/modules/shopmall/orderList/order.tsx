@@ -51,8 +51,6 @@ export class Order extends React.Component<IOrderProp> {
         this.setState({
           getAllOrderList: res.value.data.data
         });
-      } else {
-        toast.info('无数据');
       }
     });
   }
@@ -66,8 +64,6 @@ export class Order extends React.Component<IOrderProp> {
         this.setState({
           getUnpaidOrderList: res.value.data.data
         });
-      } else {
-        toast.info('无数据');
       }
     });
   }
@@ -79,10 +75,8 @@ export class Order extends React.Component<IOrderProp> {
     result.then(res => {
       if (res.value.data.data) {
         this.setState({
-          getUnpaidOrderList: res.value.data.data
+          getPaidOrderList: res.value.data.data
         });
-      } else {
-        toast.info('无数据');
       }
     });
   }
@@ -96,8 +90,6 @@ export class Order extends React.Component<IOrderProp> {
         this.setState({
           getRefundOrderList: res.value.data.data
         });
-      } else {
-        toast.info('无数据');
       }
     });
   }

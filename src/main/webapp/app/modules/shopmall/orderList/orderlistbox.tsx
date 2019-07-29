@@ -126,7 +126,7 @@ export default function BottomAppBar(props) {
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"
-                    src={person}
+                    src={'./content/images/shop1.png'}
                     style={{
                       borderRadius: 20,
                       width: 75,
@@ -141,10 +141,11 @@ export default function BottomAppBar(props) {
                   secondary={
                     <React.Fragment>
                       <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
-                        <span style={{ color: '#fe4365' }}>★{createdate}</span> （月销售：{orderstatus}）
+                        <span style={{ fontSize: '1.5rem', color: '#fe4365' }}>¥{sum}</span> （订单状态：
+                        {orderstatus === '1' ? '未支付' : '已支付或已退款'}）
                       </Typography>
-                      <span style={{ float: 'right' }}>{sum}</span>
-                      <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>{consumption}</span>
+                      <span style={{ float: 'right' }}>{consumption}</span>
+                      <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>{createdate}</span>
                     </React.Fragment>
                   }
                 />
