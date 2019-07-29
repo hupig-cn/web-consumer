@@ -214,12 +214,11 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
                     {product.json}
                   </span>
                 </div>
-                <div style={{ width: '75px', float: 'left' }}>
-                  <p style={{ color: 'red', fontSize: '0.5rem' }}>
-                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> {product.price}
-                  </p>
-                  <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
-                    <span>x{product.num}</span>
+                <div style={{ width: '60px', float: 'left' }}>
+                  <p style={{ marginLeft: '20px', marginTop: '7px', color: 'red', fontSize: '0.5rem', width: '72px' }}>
+                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> <span>{product.price}</span>
+                    <span style={{ marginLeft: '10px' }}>x</span>
+                    <span>{product.num}</span>
                   </p>
                 </div>
               </div>
