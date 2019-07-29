@@ -6,6 +6,7 @@ import Title from './title';
 import Informationlistbox from 'app/modules/information/informationlistbox';
 import Selects from 'app/modules/information/selects';
 import Error from 'app/modules/public/error';
+import { Informations } from 'app/modules/information/informations';
 
 export interface IInformationProp extends StateProps, DispatchProps {}
 
@@ -20,9 +21,9 @@ export class Information extends React.Component<IInformationProp> {
       <div>
         {account && account.login ? (
           <div className="jh-information">
-            <Title/>
-            <Selects/>
-            <Informationlistbox/>
+            <Title />
+            {/*<Selects/>*/}
+            <Informations />
           </div>
         ) : (
           <Error />

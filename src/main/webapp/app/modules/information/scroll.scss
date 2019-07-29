@@ -1,0 +1,210 @@
+div[ws-container-id='scrolls'] {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  li {
+    font-size: 20px;
+    width: 100%;
+    list-style: none;
+  }
+  img {
+    width: 100%;
+  }
+  div,
+  .test-ul,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  button {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    line-height: 1.5;
+    padding: 4px 15px;
+    font-size: 12px;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fff;
+    border-color: #d9d9d9;
+    outline: 0;
+    margin-right: 8px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    -webkit-appearance: button;
+    box-sizing: border-box;
+  }
+  .pull-load {
+    position: relative;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pull-load-head {
+    position: absolute;
+    transform: translate3d(0px, -100%, 0px);
+    width: 100%;
+  }
+  .state-refreshing .pull-load-head,
+  .state-refreshed .pull-load-head {
+    position: relative;
+    transform: none;
+  }
+  .pull-load-body {
+    position: relative;
+  }
+  .state-refreshing .pull-load-body {
+    transition: transform 0.2s;
+  }
+  .state-reset .pull-load-body {
+    transition: transform 0.2s;
+  }
+  /*
+    * HeadNode default UI
+    */
+  .pull-load-head-default {
+    text-align: center;
+    font-size: 12px;
+    line-height: 3rem;
+    color: #7676a1;
+  }
+  .state-pulling .pull-load-head-default:after {
+    content: '\4E0B\62C9\5237\65B0';
+  }
+  .state-pulling.enough .pull-load-head-default:after {
+    content: '\677E\5F00\5237\65B0';
+  }
+  .state-refreshing .pull-load-head-default:after {
+    content: '\6B63\5728\5237\65B0...';
+  }
+  .state-refreshed .pull-load-head-default:after {
+    content: '\5237\65B0\6210\529F';
+  }
+  .state-pulling .pull-load-head-default {
+    opacity: 1;
+  }
+  .state-pulling .pull-load-head-default i {
+    display: inline-block;
+    font-size: 2em;
+    margin-right: 0.6em;
+    vertical-align: middle;
+    height: 1em;
+    border-left: 1px solid;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  .state-pulling .pull-load-head-default i:before,
+  .state-pulling .pull-load-head-default i:after {
+    content: '';
+    position: absolute;
+    font-size: 0.5em;
+    width: 1em;
+    bottom: 0px;
+    border-top: 1px solid;
+  }
+  .state-pulling .pull-load-head-default i:before {
+    right: 1px;
+    transform: rotate(50deg);
+    transform-origin: right;
+  }
+  .state-pulling .pull-load-head-default i:after {
+    left: 0px;
+    transform: rotate(-50deg);
+    transform-origin: left;
+  }
+  .state-pulling.enough .pull-load-head-default i {
+    transform: rotate(180deg);
+  }
+  .state-refreshing .pull-load-head-default i {
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #9494b6;
+    border-top-color: #fff;
+    border-radius: 100%;
+    animation: circle 0.8s infinite linear;
+  }
+  .state-refreshed .pull-load-head-default {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  .state-refreshed .pull-load-head-default i {
+    display: inline-block;
+    box-sizing: content-box;
+    vertical-align: middle;
+    margin-right: 10px;
+    font-size: 20px;
+    height: 1em;
+    width: 1em;
+    border: 1px solid;
+    border-radius: 100%;
+    position: relative;
+  }
+  .state-refreshed .pull-load-head-default i:before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 7px;
+    height: 11px;
+    width: 5px;
+    border: solid;
+    border-width: 0 1px 1px 0;
+    transform: rotate(40deg);
+  }
+  .pull-load-footer-default {
+    text-align: center;
+    font-size: 12px;
+    line-height: 3rem;
+    color: #7676a1;
+  }
+  .state-loading .pull-load-footer-default:after {
+    content: '\52A0\8F7D\66F4\591A';
+  }
+  .pull-load-footer-default.nomore:after {
+    content: '\6CA1\6709\66F4\591A';
+  }
+  .state-loading .pull-load-footer-default i {
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #9494b6;
+    border-top-color: #fff;
+    border-radius: 100%;
+    animation: circle 0.8s infinite linear;
+  }
+  @keyframes circle {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
