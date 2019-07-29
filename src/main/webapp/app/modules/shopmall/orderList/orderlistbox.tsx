@@ -142,7 +142,7 @@ export default function BottomAppBar(props) {
                     <React.Fragment>
                       <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
                         <span style={{ fontSize: '1.5rem', color: '#fe4365' }}>¥{sum}</span> （订单状态：
-                        {orderstatus === '1' ? '未支付' : '已支付或已退款'}）
+                        {orderstatus === '1' ? '未支付' : '已支付'}）
                       </Typography>
                       <span style={{ float: 'right' }}>{consumption}</span>
                       <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>{createdate}</span>
