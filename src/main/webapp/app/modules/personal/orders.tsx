@@ -51,21 +51,17 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
-    case 'key1':
-      // tslint:disable-next-line: no-unused-expression
-      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
+    case '1':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist-1').click();
       break;
-    case 'key2':
-      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
+    case '2':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist-2').click();
       break;
-    case 'key3':
-      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
+    case '3':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist-3').click();
       break;
-    case 'key4':
-      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
-      break;
-    case 'order':
-      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
+    case '0':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist-0').click();
       break;
     default:
       temp = null;
@@ -75,13 +71,11 @@ export const Loadpages = key => {
 
 export default function orderLongMenu() {
   const classes = useStyles();
-  const [value, setValue] = React.useState('order');
+  const [value, setValue] = React.useState('0');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
-    status = newValue;
     setValue(newValue);
-    document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
-    // Loadpages(newValue);
+    Loadpages(newValue);
   }
 
   return (
@@ -90,10 +84,9 @@ export default function orderLongMenu() {
         <span style={{ float: 'left' }}>我的订单</span>
       </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="待支付" value="key1" icon={<PaymentRounded />} />
-        <BottomNavigationAction label="待收货" value="key2" icon={<MoveToInboxRounded />} />
-        <BottomNavigationAction label="待评价" value="key3" icon={<ThumbsUpDownRounded />} />
-        <BottomNavigationAction label="售后退款" value="key4" icon={<RateReviewRounded />} />
+        <BottomNavigationAction label="待支付" value="1" icon={<PaymentRounded />} />
+        <BottomNavigationAction label="待收货" value="2" icon={<MoveToInboxRounded />} />
+        <BottomNavigationAction label="售后退款" value="3" icon={<RateReviewRounded />} />
         <BottomNavigationAction
           style={{
             backgroundColor: '#f0f0f0',
@@ -101,14 +94,29 @@ export default function orderLongMenu() {
             fill: '#fe4365'
           }}
           label="我的订单"
-          value="order"
+          value="0"
           icon={<EventNoteRounded />}
         />
       </BottomNavigation>
       <Link
-        id="app-modules-consumer-quickaccess-button-link-orderlist"
+        id="app-modules-consumer-quickaccess-button-link-orderlist-1"
         // tslint:disable-next-line: no-invalid-this
-        to={{ pathname: '/order', status }}
+        to={{ pathname: '/order', status: 1 }}
+      />
+      <Link
+        id="app-modules-consumer-quickaccess-button-link-orderlist-2"
+        // tslint:disable-next-line: no-invalid-this
+        to={{ pathname: '/order', status: 2 }}
+      />
+      <Link
+        id="app-modules-consumer-quickaccess-button-link-orderlist-3"
+        // tslint:disable-next-line: no-invalid-this
+        to={{ pathname: '/order', status: 3 }}
+      />
+      <Link
+        id="app-modules-consumer-quickaccess-button-link-orderlist-0"
+        // tslint:disable-next-line: no-invalid-this
+        to={{ pathname: '/order', status: 0 }}
       />
       ;
     </div>

@@ -115,21 +115,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function BottomAppBar(props) {
   const classes = useStyles();
 
-  function getOrderInfoByOrderId() {
-    // tslint:disable-next-line: no-shadowed-variable
-    const { getOrderInfoByOrderId } = props;
-    // tslint:disable-next-line: no-console
-    console.log(getOrderInfoByOrderId);
-  }
-
   return (
     <React.Fragment>
       <CssBaseline />
       <Paper square className={classes.paper}>
         <List className={classes.list}>
-          {messages.map(({ id, primary, star, sale, distance, consumption, person }) => (
+          {props.messages.map(({ id, ordercode, createdate, orderstatus, sum, consumption, person }) => (
             <React.Fragment key={id}>
-              <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }} onClick={getOrderInfoByOrderId}>
+              <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }}>
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"
@@ -144,13 +137,13 @@ export default function BottomAppBar(props) {
                 </ListItemAvatar>
                 <ListItemText
                   style={{ margin: '0 auto', height: '100px', position: 'relative' }}
-                  primary={primary}
+                  primary={ordercode}
                   secondary={
                     <React.Fragment>
                       <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
-                        <span style={{ color: '#fe4365' }}>★{star}</span> （月销售：{sale}）
+                        <span style={{ color: '#fe4365' }}>★{createdate}</span> （月销售：{orderstatus}）
                       </Typography>
-                      <span style={{ float: 'right' }}>{distance}</span>
+                      <span style={{ float: 'right' }}>{sum}</span>
                       <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>{consumption}</span>
                     </React.Fragment>
                   }
