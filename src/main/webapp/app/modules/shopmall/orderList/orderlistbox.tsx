@@ -17,6 +17,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'react-router-dom';
 
 const messages = [
   {
@@ -115,6 +116,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function BottomAppBar(props) {
   const classes = useStyles();
 
+  function jumpToOrderDetail() {
+    document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -122,7 +127,12 @@ export default function BottomAppBar(props) {
         <List className={classes.list}>
           {props.messages.map(({ id, ordercode, createdate, orderstatus, sum, consumption, person }) => (
             <React.Fragment key={id}>
-              <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }}>
+              <Link
+                id="app-modules-consumer-quickaccess-button-link-orderdetail"
+                // tslint:disable-next-line: no-invalid-this
+                to={{ pathname: '/orderdetail', bigorderid: id }}
+              />
+              <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }} onClick={jumpToOrderDetail}>
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"

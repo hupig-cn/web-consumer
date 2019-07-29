@@ -98,6 +98,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     const price = this.props.PaySum(this.props.location.productid, parseInt(number));
     // @ts-ignore
     price.then(res => {
+      // @ts-ignore
       const result = this.props.createUserOrder(account.id, res.value.data.data[0], this.props.location.productid);
       // @ts-ignore
       result.then(respone => {
