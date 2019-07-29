@@ -21,11 +21,12 @@ interface TabContainerProps {
   children?: React.ReactNode;
   dir?: string;
   deliver?: [];
+  value: number;
 }
 
-export const Setlistbox = (keys, deliver) => {
+export const Setlistbox = (keys, deliver, value) => {
   let temp: any = null;
-  switch (deliver.status) {
+  switch (value) {
     case 1:
       temp = <Orderlistbox messages={deliver.getUnpaidOrderList} />;
       break;
@@ -45,10 +46,10 @@ export const Setlistbox = (keys, deliver) => {
   return temp;
 };
 
-function TabContainer({ children, dir, deliver }: TabContainerProps) {
+function TabContainer({ children, dir, deliver, value }: TabContainerProps) {
   return (
     <Typography component="div" dir={dir} style={{ padding: 0, marginTop: 30 }}>
-      {Setlistbox(children, deliver)}
+      {Setlistbox(children, deliver, value)}
     </Typography>
   );
 }
@@ -91,16 +92,16 @@ export default function SimpleTabs(props) {
           </Tabs>
         </AppBar>
         <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}>
-          <TabContainer dir={theme.direction} deliver={props}>
+          <TabContainer dir={theme.direction} deliver={props} value={0}>
             0
           </TabContainer>
-          <TabContainer dir={theme.direction} deliver={props}>
+          <TabContainer dir={theme.direction} deliver={props} value={1}>
             1
           </TabContainer>
-          <TabContainer dir={theme.direction} deliver={props}>
+          <TabContainer dir={theme.direction} deliver={props} value={2}>
             2
           </TabContainer>
-          <TabContainer dir={theme.direction} deliver={props}>
+          <TabContainer dir={theme.direction} deliver={props} value={3}>
             3
           </TabContainer>
         </SwipeableViews>

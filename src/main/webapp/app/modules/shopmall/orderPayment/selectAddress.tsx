@@ -83,7 +83,9 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                       isdefault: { isdefault },
                       areaid: { areaid },
                       areaName: { areaName },
+                      // @ts-ignore
                       productid: this.props.location.productid !== null ? this.props.location.productid : null,
+                      // @ts-ignore
                       cards: this.props.location.cards !== null ? this.props.location.cards : null
                     }}
                   />

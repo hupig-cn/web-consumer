@@ -5,21 +5,23 @@ import './scroll.scss';
 import ReactPullLoad, { STATS } from 'react-pullload';
 import Axios from 'axios';
 import { IRootState } from 'app/shared/reducers';
-import GridList from '@material-ui/core/GridList';
 import { Link } from 'react-router-dom';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
 import { getProducts } from 'app/requests/basic/result.reducer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { toast } from 'react-toastify';
+// tslint:disable-next-line: no-submodule-imports
+import List from '@material-ui/core/List';
+// tslint:disable-next-line: no-submodule-imports
+import ListItem from '@material-ui/core/ListItem';
+// tslint:disable-next-line: no-submodule-imports
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+// tslint:disable-next-line: no-submodule-imports
+import ListItemText from '@material-ui/core/ListItemText';
+// tslint:disable-next-line: no-submodule-imports
+import Typography from '@material-ui/core/Typography';
+// tslint:disable-next-line: no-submodule-imports
+import Avatar from '@material-ui/core/Avatar';
 const staticData = [
   { person: 'http://p2.qhimgs4.com/t018afa1ba080b39539.jpg' },
   { person: 'http://n1.itc.cn/img8/wb/recom/2016/04/30/146200014549632322.JPEG' },
@@ -144,6 +146,7 @@ export class Informations extends React.Component {
 
     // @ts-ignore
     if (this.state.syncLoadData) {
+      // @ts-ignore
       this.syncLoadResource();
     } else {
       setTimeout(() => {
@@ -188,7 +191,6 @@ export class Informations extends React.Component {
     //   }
     // }).catch(error => window.console.log(error));
     Axios.get('services/login/api/account').then(respone => {
-      console.log(respone);
       if (respone.data.id) {
         // @ts-ignore
         Axios.post('services/basic/api/get-account-information', {
@@ -196,7 +198,6 @@ export class Informations extends React.Component {
           pageNum: this.state.pageNum,
           pageSize: this.state.pageSize
         }).then(res => {
-          console.log(res);
           if (res.data.data) {
             // @ts-ignore
             this.setState({
@@ -273,6 +274,7 @@ export class Informations extends React.Component {
           this.setState({
             data: [...this.state.data, staticData[0], staticData[0]],
             action: STATS.reset,
+            // @ts-ignore
             index: this.state.index - 1
           });
         }
@@ -309,7 +311,7 @@ export class Informations extends React.Component {
           action={this.state.action}
           handleAction={this.handleAction}
           hasMore={hasMore}
-          style={{ paddingTop: 35 }}
+          // style={{ paddingTop: 35 }}
           distanceBottom={1000}
         >
           <List
@@ -344,7 +346,13 @@ export class Informations extends React.Component {
                     primary={title}
                     secondary={
                       <React.Fragment>
-                        <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          // @ts-ignore
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
                           <p
                             style={{
                               width: '100%',
