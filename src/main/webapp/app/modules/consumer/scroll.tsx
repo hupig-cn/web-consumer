@@ -121,7 +121,7 @@ export class Product extends React.Component {
     // 分页页码
     pageNum: 0,
     // 每次获取N条记录
-    pageSize: 2,
+    pageSize: 10,
     files: []
   };
   constructor(props) {
