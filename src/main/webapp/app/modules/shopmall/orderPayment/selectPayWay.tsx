@@ -146,7 +146,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     } else if (value === 'weixin') {
       // 微信支付
       toast.error('微信支付努力开发中');
-    } else if (value === 'coupon') {
+    } else if (value === 'youhuijuan') {
       const result = this.props.passwordCheck();
       // @ts-ignore
       result.then(res => {
