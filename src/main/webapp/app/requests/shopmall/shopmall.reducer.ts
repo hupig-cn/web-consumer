@@ -157,3 +157,49 @@ export const getAllShoppingByUser = (userid: any) => async dispatch => {
   });
   return result;
 };
+
+// 根据大订单号获取订单信息
+export const getOrderInfoByOrderId = (orderid: any) => async dispatch => {
+  const requestUrl = `${apiUrl}/commodity/get-order-info-byorderId/${orderid}`;
+  const result = await dispatch({
+    payload: axios.get(requestUrl)
+  });
+  return result;
+};
+
+const basicUrl = 'services/basic/api';
+// 获取用户全部订单
+export const getAllOrder = (userId: any) => async dispatch => {
+  const requestUrl = `${basicUrl}/userorder/getAllOrder/${userId}`;
+  const result = await dispatch({
+    payload: axios.get(requestUrl)
+  });
+  return result;
+};
+
+// 获取待付款订单
+export const getUnpaidOrder = (userId: any) => async dispatch => {
+  const requestUrl = `${basicUrl}/userorder/getUnpaidOrder/${userId}`;
+  const result = await dispatch({
+    payload: axios.get(requestUrl)
+  });
+  return result;
+};
+
+// 获取待发货（已支付）订单
+export const getPaidOrder = (userId: any) => async dispatch => {
+  const requestUrl = `${basicUrl}/userorder/getPaidOrder/${userId}`;
+  const result = await dispatch({
+    payload: axios.get(requestUrl)
+  });
+  return result;
+};
+
+// 获取退款订单
+export const getRefundOrder = (userId: any) => async dispatch => {
+  const requestUrl = `${basicUrl}/userorder/getRefundOrder/${userId}`;
+  const result = await dispatch({
+    payload: axios.get(requestUrl)
+  });
+  return result;
+};

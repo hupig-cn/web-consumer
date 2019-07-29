@@ -32,6 +32,7 @@ import SetNewPayPass from 'app/modules/shopmall/payPassword/setNewPayPass';
 import SendCodePayPass from 'app/modules/shopmall/payPassword/sendCodePayPass';
 import PayPassSetting from 'app/modules/shopmall/payPassword/payPassSetting';
 import FirstSetPayPass from 'app/modules/shopmall/payPassword/firstSetPayPass';
+import Order from 'app/modules/shopmall/orderList/order';
 
 const Routes = () => (
   <div className="view-routes">
@@ -64,6 +65,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/sendCodePayPass" component={SendCodePayPass} />
       <ErrorBoundaryRoute path="/payPassSetting" component={PayPassSetting} />
       <ErrorBoundaryRoute path="/firstSetPayPass" component={FirstSetPayPass} />
+      <ErrorBoundaryRoute path="/order" component={Order} />
       <ErrorBoundaryRoute path="/" exact component={Consumer} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>

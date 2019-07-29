@@ -74,7 +74,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function LongMenu(props) {
   const classes = useStyles();
-  const { account, state, userassets } = props;
+  const { account, state, userassets, merchant } = props;
+
+  // tslint:disable-next-line: no-shadowed-variable
+  function names(partner: boolean, merchant: boolean) {
+    let name: string = account.firstName;
+    if (name.length > 4) {
+      name = name.substr(0, 4) + '...';
+    }
+    if (merchant) {
+      name = name.toString() + '（商户）';
+    }
+    if (partner) {
+      name = name.toString() + '（圆帅）';
+    }
+    return name;
+  }
 
   return (
     <div>
@@ -95,7 +110,9 @@ export default function LongMenu(props) {
         />
         <div className={classes.namePlusSetting}>
           <span className={classes.name}>
-            {account.firstName}
+            {merchant.id > 0 && account.id.toString() === merchant.userid && merchant.state !== '待审核'
+              ? names(state.partner, true)
+              : names(state.partner, false)}
             <Link style={{ float: 'right' }} to="/mysettings">
               <SettingsRounded style={{ fill: '#fffde5' }} />
             </Link>

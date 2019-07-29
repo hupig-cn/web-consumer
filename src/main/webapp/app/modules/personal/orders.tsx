@@ -15,18 +15,7 @@ import ThumbsUpDownRounded from '@material-ui/icons/ThumbsUpDownRounded';
 import RateReviewRounded from '@material-ui/icons/RateReviewRounded';
 // tslint:disable-next-line: no-submodule-imports
 import EventNoteRounded from '@material-ui/icons/EventNoteRounded';
-import initStore from 'app/config/store';
-import { registerLocale } from 'app/config/translation';
-import Order from 'app/modules/shopmall/orderList/order';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import Enddiv from 'app/shared/menu/enddiv';
-import { toast } from 'react-toastify';
-
-export const bodyEl = document.getElementById('root');
-
-const store = initStore();
-registerLocale(store);
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,41 +52,36 @@ export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
     case 'key1':
-      temp = <Order />;
+      // tslint:disable-next-line: no-unused-expression
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'key2':
-      temp = <Order />;
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'key3':
-      temp = <Order />;
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'key4':
-      temp = <Order />;
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     case 'order':
-      temp = <Order />;
+      document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
       break;
     default:
       temp = null;
       break;
   }
-  ReactDOM.render(
-    <Provider store={store}>
-      {temp}
-      <Enddiv />
-    </Provider>,
-    bodyEl
-  );
 };
 
-export default function LongMenu() {
+export default function orderLongMenu() {
   const classes = useStyles();
   const [value, setValue] = React.useState('order');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
+    status = newValue;
+    setValue(newValue);
+    document.getElementById('app-modules-consumer-quickaccess-button-link-orderlist').click();
     // Loadpages(newValue);
-    // setValue(newValue);
-    toast.info('提示：功能正在开发中.');
   }
 
   return (
@@ -121,6 +105,12 @@ export default function LongMenu() {
           icon={<EventNoteRounded />}
         />
       </BottomNavigation>
+      <Link
+        id="app-modules-consumer-quickaccess-button-link-orderlist"
+        // tslint:disable-next-line: no-invalid-this
+        to={{ pathname: '/order', status }}
+      />
+      ;
     </div>
   );
 }
