@@ -41,7 +41,8 @@ export class Productdetail extends React.Component<IProductDetailProp> {
           price: res.value.data.data[0].price,
           postage: res.value.data.data[0].postage,
           json: res.value.data.data[0].json,
-          num: res.value.data.data[0].num
+          num: res.value.data.data[0].num,
+          model: res.value.data.data[0].model
         });
         const filesEntity = this.props.getMyImg(res.value.data.data[0].fileid);
         // @ts-ignore
@@ -188,11 +189,8 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                   fontSize: '1rem'
                 }}
               >
-                {
-                  // @ts-ignore
-                  this.state.price
-                }{' '}
-                积分兑换
+                {// @ts-ignore
+                this.props.location.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
               </span>
               {/*<span*/}
               {/*  style={{*/}

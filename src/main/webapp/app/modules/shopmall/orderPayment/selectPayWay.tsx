@@ -93,7 +93,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     if (
       value === null ||
       value === '' ||
-      (value !== 'yue' && value !== 'jifen' && value !== 'zhifubao' && value !== 'weixin' && value !== 'coupon')
+      (value !== 'yue' && value !== 'jifen' && value !== 'zhifubao' && value !== 'weixin' && value !== 'youhuijuan')
     ) {
       toast.error('支付方式异常,请重新选择');
     } else {

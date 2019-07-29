@@ -389,7 +389,7 @@ export class Product extends React.Component {
                         <span style={{ float: 'left', width: '100%' }}>
                           <span style={{ float: 'left' }}>
                             <span style={{ fontSize: '0.7rem' }}>
-                              ￥: {tile.price} {'元'}
+                              {tile.id === 1 ? '￥:' + `${tile.price}` + '元' : `${tile.price}` + '元/积分'}
                             </span>
                           </span>
                         </span>
