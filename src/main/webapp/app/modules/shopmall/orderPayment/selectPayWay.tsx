@@ -127,6 +127,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         if (res.value.data.code === 0) {
           document.getElementById('bottomdiv').style.height = '80%';
         } else {
+          // @ts-ignore
           if (this.props.location.productid !== 1) {
             document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
           } else {
@@ -152,6 +153,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         if (res.value.data.code === 0) {
           document.getElementById('bottomdiv').style.height = '80%';
         } else {
+          // @ts-ignore
           if (this.props.location.productid !== 1) {
             document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
           } else {

@@ -16,6 +16,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import { getProducts } from 'app/requests/basic/result.reducer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
+// tslint:disable-next-line: no-submodule-imports
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 const staticData = [
   { person: 'http://p2.qhimgs4.com/t018afa1ba080b39539.jpg' },
