@@ -181,7 +181,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 this.state.price
               }
               <span style={mySpanStyle}>超值优惠</span>
-              <span style={mySpanStyle}>积分精选区</span>
+              <span style={mySpanStyle}>积分精选区 </span>
               <span
                 style={{
                   color: 'blue',
@@ -191,21 +191,21 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 {
                   // @ts-ignore
                   this.state.price
-                }
+                }{' '}
                 积分兑换
               </span>
-              <span
-                style={{
-                  color: 'green',
-                  float: 'right'
-                }}
-              >
-                库存:
-                {
-                  // @ts-ignore
-                  this.state.num
-                }
-              </span>
+              {/*<span*/}
+              {/*  style={{*/}
+              {/*    color: 'green',*/}
+              {/*    float: 'right'*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  库存:*/}
+              {/*  {*/}
+              {/*    // @ts-ignore*/}
+              {/*    this.state.num*/}
+              {/*  }*/}
+              {/*</span>*/}
             </p>
             <p>
               {

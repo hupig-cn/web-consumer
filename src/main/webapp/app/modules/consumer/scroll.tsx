@@ -16,6 +16,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import { getProducts } from 'app/requests/basic/result.reducer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 const staticData = [
   { person: 'http://p2.qhimgs4.com/t018afa1ba080b39539.jpg' },
   { person: 'http://n1.itc.cn/img8/wb/recom/2016/04/30/146200014549632322.JPEG' },
@@ -33,6 +34,79 @@ const staticData = [
   { person: 'http://cdn.duitang.com/uploads/blog/201310/03/20131003193012_TGFX8.thumb.600_0.png' },
   { person: 'http://pic1.nipic.com/2008-11-18/20081118182731958_2.jpg' }
 ];
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      height: '100%',
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: '#f0f0f0'
+    },
+    gridList: {
+      height: '100%'
+    },
+    listTitle: {
+      '& div': {
+        borderRadius: '5px 5px 0px 0px',
+        '& img': {
+          top: 0,
+          left: 0,
+          width: '100%',
+          transform: 'translateY(0%)'
+        },
+        '& div': {
+          borderRadius: '0px 0px 5px 5px',
+          backgroundColor: '#ffffff',
+          color: '#00000095',
+          position: 'sticky',
+          '& div': {
+            '& div': {
+              marginTop: '-22px',
+              float: 'left',
+              color: '#fe4365',
+              width: '100%',
+              padding: '0px 6px 1px 2px'
+            },
+            '& div:first-child': {
+              marginTop: '0px',
+              color: '#00000095',
+              fontSize: '0.85rem',
+              padding: 0
+            }
+          },
+          '& button': {
+            '& span': {
+              transform: 'translateY(0%)'
+            }
+          }
+        }
+      }
+    },
+    icon: {
+      color: '#00000095'
+    },
+    titlebar: {
+      '& div': {
+        color: '#123000095'
+      },
+      '& div:first-child': {
+        marginLeft: 3,
+        marginRight: 3,
+        height: '100%',
+        width: 'calc(100% - 6px)',
+        display: 'block',
+        '& span': {
+          '& span': {
+            fontSize: 20
+          }
+        }
+      }
+    }
+  })
+);
 
 export interface IManageProp extends StateProps, DispatchProps {}
 export class Product extends React.Component {
@@ -54,23 +128,6 @@ export class Product extends React.Component {
   }
   componentDidMount() {
     this.handRefreshing();
-    // @ts-ignore
-    // const product = this.props.getProducts(0, 10);
-    // product.then(res => {
-    //   this.setState({
-    //     products: res.value.data.data
-    //   });
-    //   const arr = [];
-    //   res.value.data.data.map(elment => elment.specificationsDTO.map(spe => arr.push(spe.fileid)));
-    //   // @ts-ignore
-    //   const files = this.props.getMyImgs(arr);
-    //   // tslint:disable-next-line: no-shadowed-variable
-    //   files.then((res: { value: { data: any } }) => {
-    //     this.setState({
-    //       files: res.value.data
-    //     });
-    //   });
-    // });
   }
 
   handleAction = (action: any) => {
@@ -244,7 +301,6 @@ export class Product extends React.Component {
   render() {
     // @ts-ignore
     const { data, hasMore } = this.state;
-
     const fixHeaderStyle = {
       position: 'fixed',
       width: '100%',
@@ -258,7 +314,17 @@ export class Product extends React.Component {
       zIndex: 1
     };
     return (
-      <div ws-container-id="scroll">
+      <div
+        ws-container-id="lable-card"
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-around',
+          overflow: 'hidden',
+          backgroundColor: '#f0f0f0'
+        }}
+      >
         {/*<div style={fixHeaderStyle}> fixed header </div>*/}
         <ReactPullLoad downEnough={150} action={this.state.action} handleAction={this.handleAction} hasMore={hasMore} distanceBottom={1000}>
           <GridList cellHeight={180} style={{ margin: -0, width: '97%' }}>
@@ -287,12 +353,11 @@ export class Product extends React.Component {
                 >
                   <GridListTile
                     key={tile.titleimage}
-                    style={{ height: '200px', width: '50%', maxWidth: '100%', maxHeight: '100%', padding: 4 }}
+                    style={{ height: '50vh', width: '48 vw', maxWidth: '100%', maxHeight: '100%', padding: 4 }}
                   >
                     {// @ts-ignore
                     this.state.files.length !== 0 ? (
                       <img
-                        style={{ height: '200px', width: '200px' }}
                         // @ts-ignore
                         src={`data:${this.state.files[index].fileContentType};base64,${this.state.files[index].file}`}
                         alt={tile.name}
@@ -322,15 +387,10 @@ export class Product extends React.Component {
                       subtitle={
                         <span style={{ float: 'left', width: '100%' }}>
                           <span style={{ float: 'left' }}>
-                            <span style={{ fontSize: '0.65rem' }}>￥:</span>
-                            {tile.price}
+                            <span style={{ fontSize: '0.7rem' }}>
+                              ￥: {tile.price} {'元'}
+                            </span>
                           </span>
-                          <IconButton
-                            aria-label={`info about ${tile.name}`}
-                            style={{ height: '100%', outline: 'none', padding: 0, float: 'right', bottom: '5px' }}
-                          >
-                            …
-                          </IconButton>
                         </span>
                       }
                     />
@@ -353,7 +413,7 @@ const mapStateToProps = ({ authentication }: IRootState) => ({
   isAuthenticated: authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession, getSessionRE, getProducts, getMyImgs };
+const mapDispatchToProps = { getSession, getSessionRE, getProducts, getMyImgs, useStyles };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
