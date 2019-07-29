@@ -74,7 +74,18 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                   <Link
                     // tslint:disable-next-line: jsx-self-close
                     id={'app-modules-consumer-quickaccess-button-link-addAddress-' + id}
-                    to={{ pathname: '/addAddress', id, address, consignee, mobile, isdefault, areaid, areaName }}
+                    to={{
+                      pathname: '/addAddress',
+                      id: { id },
+                      address: { address },
+                      consignee: { consignee },
+                      mobile: { mobile },
+                      isdefault: { isdefault },
+                      areaid: { areaid },
+                      areaName: { areaName },
+                      productid: this.props.location.productid !== null ? this.props.location.productid : null,
+                      cards: this.props.location.cards !== null ? this.props.location.cards : null
+                    }}
                   />
                   <ListItem
                     button

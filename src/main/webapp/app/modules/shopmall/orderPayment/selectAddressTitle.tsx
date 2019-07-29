@@ -23,8 +23,8 @@ export default function PrimarySearchAppBar(props) {
         <Link
           to={{
             pathname: '/createOrder',
-            productid: props.productid !== null ? props.productid : null,
-            cards: props.cards !== null ? props.cards : null
+            productid: props.productid !== null ? props.productid : props.location.productid,
+            cards: props.cards !== null ? props.cards : props.location.cards
           }}
         >
           <ArrowBackIos

@@ -152,20 +152,18 @@ export class Product extends React.Component {
       res => {
         if (res.data.data) {
           const arr = [];
-          if (res.data.data) {
-            res.data.data.map(elment => arr.push(elment.fileid));
-            // @ts-ignore
-            Axios.post('services/basic/api/public/myfiles-list', { ids: arr }).then(respone => {
-              this.setState({
-                files: more ? this.state.files.concat(respone.data) : respone.data,
-                data: more ? this.state.data.concat(res.data.data) : res.data.data,
-                hasMore: true,
-                action: STATS.refreshed,
-                index: this.state.pageSize,
-                pageNum: this.state.pageNum + 1 // 页面递增
-              });
+          res.data.data.map(elment => arr.push(elment.fileid));
+          // @ts-ignore
+          Axios.post('services/basic/api/public/myfiles-list', { ids: arr }).then(respone => {
+            this.setState({
+              files: more ? this.state.files.concat(respone.data) : respone.data,
+              data: more ? this.state.data.concat(res.data.data) : res.data.data,
+              hasMore: true,
+              action: STATS.refreshed,
+              index: this.state.pageSize,
+              pageNum: this.state.pageNum + 1 // 页面递增
             });
-          }
+          });
         } else {
           this.setState({
             action: STATS.reset,
