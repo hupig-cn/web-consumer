@@ -209,7 +209,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
                     <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> {product.price}
                   </p>
                   <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
-                    <span>x1</span>
+                    <span>x{product.num}</span>
                   </p>
                 </div>
               </div>
