@@ -127,7 +127,12 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
         if (res.value.data.code === 0) {
           document.getElementById('bottomdiv').style.height = '80%';
         } else {
-          document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+          // @ts-ignore
+          if (this.props.location.productid !== 1) {
+            document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+          } else {
+            toast.error('圆帅不允许使用积分支付');
+          }
         }
       });
     } else if (value === 'zhifubao') {
@@ -141,14 +146,19 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     } else if (value === 'weixin') {
       // 微信支付
       toast.error('微信支付努力开发中');
-    } else if (value === 'coupon') {
+    } else if (value === 'youhuijuan') {
       const result = this.props.passwordCheck();
       // @ts-ignore
       result.then(res => {
         if (res.value.data.code === 0) {
           document.getElementById('bottomdiv').style.height = '80%';
         } else {
-          document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+          // @ts-ignore
+          if (this.props.location.productid !== 1) {
+            document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
+          } else {
+            toast.error('圆帅不允许使用优惠卷支付');
+          }
         }
       });
     } else {

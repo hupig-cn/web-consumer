@@ -98,7 +98,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     const price = this.props.PaySum(this.props.location.productid, parseInt(number));
     // @ts-ignore
     price.then(res => {
-      const result = this.props.createUserOrder(account.id, res.value.data.data[0]);
+      // @ts-ignore
+      const result = this.props.createUserOrder(account.id, res.value.data.data[0], this.props.location.productid);
       // @ts-ignore
       result.then(respone => {
         if (respone.value.data.code === 1) {
@@ -179,9 +180,13 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                     <div>
                       <div>
                         <span>收货人:</span>
-                        <span id="consignee">{this.state.consignee}</span>
+                        <span id="consignee" style={{ marginLeft: '7px' }}>
+                          {this.state.consignee}
+                        </span>
                         <span style={{ marginLeft: '20px' }}>手机号码:</span>
-                        <span id="mobile">{this.state.mobile}</span>
+                        <span id="mobile" style={{ marginLeft: '7px' }}>
+                          {this.state.mobile}
+                        </span>
                       </div>
                       <div
                         style={{
@@ -189,7 +194,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                           width: '25%',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
-                          fontSize: '0.9rem',
+                          fontSize: '1rem',
                           color: '#666666',
                           marginTop: '0.1rem'
                         }}
@@ -233,7 +238,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                       {/*  src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}*/}
                       {/*/>*/}
                     </div>
-                    <div>博媛官方旗舰店</div>
+                    <div style={{ marginTop: '-15px', marginBottom: '2px' }}>博媛官方旗舰店</div>
                   </div>
                   <div style={{ width: '100%' }}>
                     <div style={{ height: '120px', width: '100px', float: 'left' }}>
@@ -259,11 +264,10 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                       </span>
                     </div>
                     <div style={{ width: '60px', float: 'left' }}>
-                      <p style={{ color: 'red', fontSize: '0.5rem' }}>
-                        <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> {product.price}
-                      </p>
-                      <p style={{ fontSize: '0.5rem', float: 'right', marginRight: '20px', bottom: '20px', position: 'relative' }}>
-                        <span>x {product.number} </span>
+                      <p style={{ marginLeft: '20px', marginTop: '7px', color: 'red', fontSize: '0.5rem', width: '72px' }}>
+                        <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> <span>{product.price}</span>
+                        <span style={{ marginLeft: '10px' }}>x</span>
+                        <span>{product.number}</span>
                       </p>
                     </div>
                   </div>

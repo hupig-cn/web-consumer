@@ -201,10 +201,10 @@ export const PaySum = (id, number) => async dispatch => {
   return result;
 };
 // 创建大订单
-export const createUserOrder = (userId, price) => async dispatch => {
+export const createUserOrder = (userId, price, productid) => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.FETCH_RESULT,
-    payload: axios.post('services/basic/api/userorder/placeAnOrder', { userId, price })
+    payload: axios.post('services/basic/api/userorder/placeAnOrder', { userId, price, productid })
   });
   return result;
 };

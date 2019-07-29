@@ -25,23 +25,6 @@ export class Order extends React.Component<IOrderProp> {
     });
   }
 
-  // this.getOrderInfoByOrderId(res.value.data.data[0].id);
-  getOrderInfoByOrderId(orderid) {
-    const result = this.props.getOrderInfoByOrderId(orderid);
-    alert(orderid);
-    // @ts-ignore
-    // tslint:disable-next-line: no-shadowed-variable
-    result.then(res => {
-      if (res.value.data.data[0].totalAmout > 0) {
-        this.setState({
-          messages: res.value.data.data
-        });
-      } else {
-        toast.info('无数据+1');
-      }
-    });
-  }
-
   getAllOrder(userid) {
     const result = this.props.getAllOrder(userid);
     // @ts-ignore

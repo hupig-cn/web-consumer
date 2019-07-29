@@ -3,12 +3,34 @@ import { connect } from 'react-redux';
 import { getSession } from 'app/shared/reducers/authentication';
 import OdLoopplayimg from './odloopplayimg';
 import Swipeabledrawer from 'app/modules/shopmall/productDetail/swipeabledrawer';
+import { getOrderInfoByOrderId } from 'app/requests/shopmall/shopmall.reducer';
+import { toast } from 'react-toastify';
 
 export interface IOrderDetailProp extends StateProps, DispatchProps {}
 
 export class OrderDetail extends React.Component<IOrderDetailProp> {
+  state = { messages: '' };
   componentDidMount() {
-    this.props.getSession();
+    // @ts-ignore
+    alert(this.props.location.bigorderid);
+    // @ts-ignore
+    this.getOrderInfoByOrderId(this.props.location.bigorderid);
+  }
+
+  getOrderInfoByOrderId(orderid) {
+    const result = this.props.getOrderInfoByOrderId(orderid);
+    // @ts-ignore
+    // tslint:disable-next-line: no-shadowed-variable
+    result.then(res => {
+      if (res.value.data.data.totalAmout !== 0) {
+        this.setState({
+          messages: res.value.data.data
+        });
+        alert(this.state.messages);
+      } else {
+        toast.error('数据异常：该订单号下没有详情');
+      }
+    });
   }
   render() {
     return (
@@ -60,7 +82,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, getOrderInfoByOrderId };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

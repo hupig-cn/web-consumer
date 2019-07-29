@@ -54,7 +54,7 @@ export default function SwipeableTemporaryDrawer(props) {
         <img style={{ height: '120px', width: '100px' }} src={props.img} />
         <ChevronRightRounded style={{ float: 'right' }} />
         <p style={{ float: 'right', fontSize: '2rem' }}>¥{props.price}</p>
-        <p style={{ right: '30px', bottom: '0px', position: 'absolute' }}>库存：{props.num}件</p>
+        {/*<p style={{ right: '30px', bottom: '0px', position: 'absolute' }}>库存：{props.num}件</p>*/}
       </div>
       <div>
         <p style={{ paddingLeft: '15px' }}>
@@ -73,7 +73,7 @@ export default function SwipeableTemporaryDrawer(props) {
           >
             -
           </button>
-          <span id="inputNumber" style={{ paddingLeft: '15px' }}>
+          <span id="inputNumber" style={{ paddingLeft: '10px', marginLeft: '-3px', marginRight: '5px' }}>
             1
           </span>
           <button
