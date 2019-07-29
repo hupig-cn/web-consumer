@@ -25,24 +25,18 @@ interface TabContainerProps {
 
 export const Setlistbox = (keys, deliver) => {
   let temp: any = null;
-  switch (keys) {
-    case '0':
-      temp = <Orderlistbox getAllOrder={deliver.getAllOrder} />;
+  switch (deliver.status) {
+    case 1:
+      temp = <Orderlistbox messages={deliver.getUnpaidOrderList} />;
       break;
-    case '1':
-      temp = <Orderlistbox getUnpaidOrder={deliver.getUnpaidOrder} />;
+    case 2:
+      temp = <Orderlistbox messages={deliver.getPaidOrderList} />;
       break;
-    case '2':
-      temp = <Orderlistbox getPaidOrder={deliver.getPaidOrder} />;
+    case 3:
+      temp = <Orderlistbox messages={deliver.getRefundOrderList} />;
       break;
-    // case '3':
-    //   temp = <Orderlistbox />;
-    //   break;
-    // case '4':
-    //   temp = <Orderlistbox />;
-    //   break;
-    case '5':
-      temp = <Orderlistbox getRefundOrder={deliver.getRefundOrder} />;
+    case 0:
+      temp = <Orderlistbox messages={deliver.getAllOrderList} />;
       break;
     default:
       temp = <p>Error</p>;
@@ -77,7 +71,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SimpleTabs(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const start = props.status;
+  const [value, setValue] = React.useState(start);
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
@@ -92,8 +87,6 @@ export default function SimpleTabs(props) {
             <Tab label="全部" style={{ width: '25%' }} />
             <Tab label="待付款" style={{ width: '25%' }} />
             <Tab label="待发货" style={{ width: '25%' }} />
-            {/*<Tab label="待收货" style={{ width: '20%' }} />*/}
-            {/*<Tab label="待评价" style={{ width: '20%' }} />*/}
             <Tab label="已退款" style={{ width: '25%' }} />
           </Tabs>
         </AppBar>
@@ -107,10 +100,8 @@ export default function SimpleTabs(props) {
           <TabContainer dir={theme.direction} deliver={props}>
             2
           </TabContainer>
-          {/*<TabContainer dir={theme.direction}>3</TabContainer>*/}
-          {/*<TabContainer dir={theme.direction}>4</TabContainer>*/}
           <TabContainer dir={theme.direction} deliver={props}>
-            5
+            3
           </TabContainer>
         </SwipeableViews>
       </div>

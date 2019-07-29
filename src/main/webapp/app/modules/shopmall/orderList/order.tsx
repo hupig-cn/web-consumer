@@ -9,76 +9,98 @@ import Ordertabs from './ordertabs';
 export interface IOrderProp extends StateProps, DispatchProps {}
 
 export class Order extends React.Component<IOrderProp> {
+  state = {
+    getAllOrderList: [],
+    getUnpaidOrderList: [],
+    getPaidOrderList: [],
+    getRefundOrderList: []
+  };
   componentDidMount() {
     // @ts-ignore
-    alert(this.props.location.status);
-    this.props.getSession();
+    this.props.getSession().then(respone => {
+      this.getAllOrder(respone.id);
+      this.getUnpaidOrder(respone.id);
+      this.getPaidOrder(respone.id);
+      this.getRefundOrder(respone.id);
+    });
   }
 
-  getOrderInfoByOrderId = ({ userid }) => {
-    const result = this.props.getOrderInfoByOrderId(userid);
+  // this.getOrderInfoByOrderId(res.value.data.data[0].id);
+  getOrderInfoByOrderId(orderid) {
+    const result = this.props.getOrderInfoByOrderId(orderid);
+    alert(orderid);
     // @ts-ignore
     // tslint:disable-next-line: no-shadowed-variable
     result.then(res => {
-      if (res.value.data.code === 1) {
-        toast.success('成功啦');
+      if (res.value.data.data[0].totalAmout > 0) {
+        this.setState({
+          messages: res.value.data.data
+        });
       } else {
-        toast.error('错误：' + res.value.data.message.toString());
+        toast.info('无数据+1');
       }
     });
-  };
+  }
 
-  getAllOrder = ({ userid }) => {
-    const result = this.props.getOrderInfoByOrderId(userid);
+  getAllOrder(userid) {
+    const result = this.props.getAllOrder(userid);
     // @ts-ignore
     // tslint:disable-next-line: no-shadowed-variable
     result.then(res => {
-      if (res.value.data.code === 1) {
-        toast.success('成功啦');
+      if (res.value.data.data) {
+        this.setState({
+          getAllOrderList: res.value.data.data
+        });
       } else {
-        toast.error('错误：' + res.value.data.message.toString());
+        toast.info('无数据');
       }
     });
-  };
+  }
 
-  getUnpaidOrder = ({ userid }) => {
-    const result = this.props.getOrderInfoByOrderId(userid);
+  getUnpaidOrder(userid) {
+    const result = this.props.getUnpaidOrder(userid);
     // @ts-ignore
     // tslint:disable-next-line: no-shadowed-variable
     result.then(res => {
-      if (res.value.data.code === 1) {
-        toast.success('成功啦');
+      if (res.value.data.data) {
+        this.setState({
+          getUnpaidOrderList: res.value.data.data
+        });
       } else {
-        toast.error('错误：' + res.value.data.message.toString());
+        toast.info('无数据');
       }
     });
-  };
+  }
 
-  getPaidOrder = ({ userid }) => {
-    const result = this.props.getOrderInfoByOrderId(userid);
+  getPaidOrder(userid) {
+    const result = this.props.getPaidOrder(userid);
     // @ts-ignore
     // tslint:disable-next-line: no-shadowed-variable
     result.then(res => {
-      if (res.value.data.code === 1) {
-        toast.success('成功啦');
+      if (res.value.data.data) {
+        this.setState({
+          getUnpaidOrderList: res.value.data.data
+        });
       } else {
-        toast.error('错误：' + res.value.data.message.toString());
+        toast.info('无数据');
       }
     });
-  };
+  }
 
-  getRefundOrder = ({ userid }) => {
-    const result = this.props.getOrderInfoByOrderId(userid);
+  getRefundOrder(userid) {
+    const result = this.props.getRefundOrder(userid);
     // @ts-ignore
     // tslint:disable-next-line: no-shadowed-variable
     result.then(res => {
-      if (res.value.data.code === 1) {
-        toast.success('成功啦');
+      if (res.value.data.data) {
+        this.setState({
+          getRefundOrderList: res.value.data.data
+        });
       } else {
-        toast.error('错误：' + res.value.data.message.toString());
+        toast.info('无数据');
       }
     });
-  };
+  }
 
   render() {
     return (
@@ -86,11 +108,10 @@ export class Order extends React.Component<IOrderProp> {
         <Ordertabs
           // @ts-ignore
           status={this.props.location.status}
-          getOrderInfoByOrderId={this.getOrderInfoByOrderId}
-          getAllOrder={this.getAllOrder}
-          getUnpaidOrder={this.getUnpaidOrder}
-          getPaidOrder={this.getPaidOrder}
-          getRefundOrder={this.getRefundOrder}
+          getAllOrderList={this.state.getAllOrderList}
+          getUnpaidOrderList={this.state.getUnpaidOrderList}
+          getPaidOrderList={this.state.getPaidOrderList}
+          getRefundOrderList={this.state.getRefundOrderList}
         />
       </div>
     );
