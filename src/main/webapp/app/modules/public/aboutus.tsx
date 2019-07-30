@@ -8,7 +8,7 @@ import Enddiv from '../../shared/menu/enddiv';
 
 // 专用接口请求模块
 import { Axios, ShowBodyPlaceholderHtml } from 'app/request';
-import Utils from 'app/utils';
+// import Utils from 'app/utils';
 
 export interface IManageProp extends StateProps, DispatchProps {}
 
