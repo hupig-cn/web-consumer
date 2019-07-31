@@ -191,6 +191,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                   fontSize: '1rem'
                 }}
               >
+                {' '}
                 {this.state.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
               </span>
               {/*<span*/}

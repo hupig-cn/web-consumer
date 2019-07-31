@@ -18,6 +18,7 @@ import { getProducts } from 'app/requests/basic/result.reducer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
 // tslint:disable-next-line: no-submodule-imports
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
 import ShoppingCartOutlined from '@material-ui/icons/ShoppingCartOutlined';
 
 const staticData = [
