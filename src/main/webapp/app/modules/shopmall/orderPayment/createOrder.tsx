@@ -185,7 +185,17 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                           {this.state.consignee}
                         </span>
                       </div>
-                      <div>
+                      <div
+                        style={{
+                          float: 'left',
+                          width: '100%',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          fontSize: '1rem',
+                          marginTop: '0.1rem',
+                          'white-space': 'nowrap'
+                        }}
+                      >
                         <span>手机号码:</span>
                         <span id="mobile" style={{ marginLeft: '7px' }}>
                           {this.state.mobile}

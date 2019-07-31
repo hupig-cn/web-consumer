@@ -93,7 +93,7 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                   />
                   <ListItem
                     button
-                    style={{ height: '80px', borderBottom: '1px solid #f0f0f0', position: 'relative' }}
+                    style={{ height: '100px', borderBottom: '1px solid #f0f0f0', position: 'relative' }}
                     // tslint:disable-next-line: jsx-no-lambda
                     onClick={() => {
                       document.getElementById('app-modules-consumer-quickaccess-button-link-addAddress-' + id).click();
@@ -133,34 +133,36 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                       secondary={
                         <React.Fragment>
                           <Typography component="span" variant="body2" style={{ width: '100%' }} color="textPrimary">
-                            <p
+                            <div
                               style={{
-                                marginTop: '10px',
+                                marginTop: '5px',
+                                float: 'left',
                                 width: '100%',
-                                whiteSpace: 'nowrap',
-                                textOverflow: 'ellipsis',
                                 overflow: 'hidden',
-                                marginBottom: 0
+                                textOverflow: 'ellipsis',
+                                fontSize: '1rem',
+                                'white-space': 'nowrap'
                               }}
                             >
-                              {address}
-                            </p>
+                              手机号码：{mobile}
+                            </div>
+                            <div
+                              style={{
+                                marginTop: '5px',
+                                float: 'left',
+                                width: '100%',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                fontSize: '1rem',
+                                'white-space': 'nowrap'
+                              }}
+                            >
+                              收货地址：{address}
+                            </div>
                           </Typography>
                         </React.Fragment>
                       }
                     />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '8px',
-                        fontSize: '0.875rem',
-                        right: '32px',
-                        width: 'auto',
-                        color: '#00000095'
-                      }}
-                    >
-                      手机号码：{mobile}
-                    </div>
                   </ListItem>
                 </React.Fragment>
               ))}
