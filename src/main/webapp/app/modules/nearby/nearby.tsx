@@ -6,6 +6,7 @@ import { getSession } from 'app/shared/reducers/authentication';
 import LongMenu from '../public/longmenu';
 import Nearbylistbox from './nearbylistbox';
 import { findAllMerchant } from 'app/requests/merchant/merchant.reducer';
+import { getPublicImg } from 'app/requests/basic/files.reducer';
 
 /* vipkwd */
 import '../../../static/css/common.scss';
@@ -13,7 +14,7 @@ import '../../../static/css/common.scss';
 export interface INearbyProp extends StateProps, DispatchProps {}
 
 export class Nearby extends React.Component<INearbyProp> {
-  state = { merchantEntity: [{}], startPage: 0, pageSize: 10 };
+  state = { merchantEntity: [], startPage: 0, pageSize: 10 };
   componentDidMount() {
     this.props.getSession();
     this.props
@@ -22,7 +23,14 @@ export class Nearby extends React.Component<INearbyProp> {
       .then(val => {
         val.value.data.data.map(key => {
           const merchantEntity = this.state.merchantEntity;
-          merchantEntity.push({ phoneOrToken: key.phoneOrToken, time: key.time });
+          merchantEntity.push({
+            id: key.id,
+            name: key.name,
+            merchantphoto: key.merchantphoto,
+            businessid: key.businessid,
+            city: key.city,
+            rebate: key.rebate
+          });
           this.setState({ merchantEntity, startPage: 1 });
         });
       });
@@ -47,32 +55,49 @@ export class Nearby extends React.Component<INearbyProp> {
           if (val.value.data.data !== undefined && undefined !== val.value.data.data.map) {
             const startPage: number = this.state.startPage + 1;
             val.value.data.data.map(key => {
-              const recommenduser = this.state.recommenduser;
-              recommenduser.push({ phoneOrToken: key.phoneOrToken, time: key.time });
-              this.setState({ recommenduser, startPage });
+              const merchantEntity = this.state.merchantEntity;
+              merchantEntity.push({
+                id: key.id,
+                name: key.name,
+                merchantphoto: key.merchantphoto,
+                businessid: key.businessid,
+                city: key.city,
+                rebate: key.rebate
+              });
+              this.setState({ merchantEntity, startPage });
             });
           }
         });
     }
   };
 
+  getimgs = key => {
+    let img = [];
+    this.props
+      .getPublicImg(key)
+      // @ts-ignore
+      .then(photo => {
+        img.push({ file: photo.value.data.file, fileContentType: photo.value.data.fileContentType });
+        return img;
+      });
+  };
+
   render() {
     return (
       <div ws-container-id="nearby">
         <LongMenu />
-        <Nearbylistbox />
+        <Nearbylistbox state={this.state} getimgs={this.getimgs} />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ authentication, merchant }: IRootState) => ({
+const mapStateToProps = ({ authentication }: IRootState) => ({
   account: authentication.account,
-  isAuthenticated: authentication.isAuthenticated,
-  merchantEntity: merchant.entity
+  isAuthenticated: authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession, findAllMerchant };
+const mapDispatchToProps = { getSession, findAllMerchant, getPublicImg };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
