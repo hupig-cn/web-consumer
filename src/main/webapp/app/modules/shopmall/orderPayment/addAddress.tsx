@@ -44,6 +44,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
       // @ts-ignore
       this.props
         .updateUserAddress(this.props.location.state.id, areaid, this.state.userid, address, consignee, isdefault, mobile)
+        // @ts-ignore
         .then(res => {
           if (res.value.data.code === 1) {
             toast.success('修改成功');

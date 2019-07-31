@@ -36,7 +36,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
         this.setState({
           consignee: res.value.data.data[0].consignee,
           mobile: res.value.data.data[0].mobile,
-          address: res.value.data.data[0].address,
+          address: res.value.data.data[0].areaid + res.value.data.data[0].address,
           havaDefault: true
         });
       }
@@ -162,8 +162,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             <div
               style={{
                 margin: '45px 15px 15px 15px',
-                minHeight: '80px',
-                overflow: 'hidden'
+                minHeight: '72px'
               }}
             >
               <Link
@@ -180,12 +179,14 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 {this.state.havaDefault === true ? (
                   <div>
                     <div>
-                      <div>
+                      <div style={{ marginTop: '-30px' }}>
                         <span>收货人:</span>
                         <span id="consignee" style={{ marginLeft: '7px' }}>
                           {this.state.consignee}
                         </span>
-                        <span style={{ marginLeft: '20px' }}>手机号码:</span>
+                      </div>
+                      <div>
+                        <span>手机号码:</span>
                         <span id="mobile" style={{ marginLeft: '7px' }}>
                           {this.state.mobile}
                         </span>
@@ -193,29 +194,27 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                       <div
                         style={{
                           float: 'left',
-                          width: '25%',
+                          width: '100%',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           fontSize: '1rem',
-                          color: '#666666',
-                          marginTop: '0.1rem'
+                          marginTop: '0.1rem',
+                          'white-space': 'nowrap'
                         }}
                       >
                         收货地址：
-                      </div>
-                      <div
-                        style={{
-                          float: 'left',
-                          width: '65%',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          fontSize: '0.9rem',
-                          color: '#666666',
-                          marginTop: '0.1rem'
-                        }}
-                        id="address"
-                      >
-                        {this.state.address}
+                        <span
+                          style={{
+                            width: '65%',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            fontSize: '1rem',
+                            marginTop: '0.1rem'
+                          }}
+                          id="address"
+                        >
+                          {this.state.address}
+                        </span>
                       </div>
                     </div>
                   </div>

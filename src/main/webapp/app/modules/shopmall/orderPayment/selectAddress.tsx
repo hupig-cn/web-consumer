@@ -149,7 +149,7 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                         </React.Fragment>
                       }
                     />
-                    <span
+                    <div
                       style={{
                         position: 'absolute',
                         top: '8px',
@@ -160,7 +160,7 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                       }}
                     >
                       手机号码：{mobile}
-                    </span>
+                    </div>
                   </ListItem>
                 </React.Fragment>
               ))}

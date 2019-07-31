@@ -276,12 +276,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 <img style={{ width: '100%' }} src={`data:${introduce.fileContentType};base64,${introduce.file}`} />
               ))
             ) : (
-              <img
-                style={{ width: '100%' }}
-                src={
-                  'https://img.alicdn.com/imgextra/i2/2201208460196/O1CN015V7HFE1DJo9xwTB3S_!!2201208460196.jpg_2200x2200Q50s50.jpg_.webp'
-                }
-              />
+              <img style={{ width: '100%' }} src={'../../../../content/images/loading05.png'} />
             )}
           </div>
         </div>
