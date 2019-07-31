@@ -41,13 +41,13 @@ export class Mysettings extends React.Component<IMysettingsProp> {
       // @ts-ignore
       .then(valueI => {
         valueI.payload.then(valueII => {
+          this.props
+            .queryAlipay(valueII.data.id)
+            // @ts-ignore
+            .then(mess => {
+              this.setState({ alipay: mess.value.data });
+            });
           if (valueII.data.imageUrl > 0) {
-            this.props
-              .queryAlipay(valueII.data.id)
-              // @ts-ignore
-              .then(mess => {
-                this.setState({ alipay: mess.value.data });
-              });
             this.props
               .getMyImg(valueII.data.imageUrl)
               // @ts-ignore

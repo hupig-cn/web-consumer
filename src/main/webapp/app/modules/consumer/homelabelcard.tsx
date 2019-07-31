@@ -90,7 +90,7 @@ class TitlebarGridList extends React.Component {
                           style={{
                             wordBreak: 'break-all',
                             whiteSpace: 'pre-wrap',
-                            wordWrapL: 'break-word',
+                            wordWrap: 'break-word',
                             overflow: 'hidden',
                             display: '-webkit-box',
                             lineHeight: '19px',

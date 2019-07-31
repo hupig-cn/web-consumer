@@ -77,7 +77,8 @@ public class ConsumerApp implements InitializingBean {
         if (StringUtils.isBlank(contextPath)) {
             contextPath = "/";
         }
-        String hostAddress = "localhost";
+        //String hostAddress = "localhost";
+        String hostAddress = "192.168.1.131";
         try {
             hostAddress = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {

@@ -52,18 +52,46 @@ export default function LabelBottomNavigation() {
 
   return (
     <BottomNavigation showLabels value={value} onChange={handleChange} className={classes.root}>
-      <BottomNavigationAction label="首页" value="consumer" icon={
-        <Badge color="default" variant="dot"><StoreRounded/></Badge>}/>
-      <Link id="app-shared-menu-bottom-navigation-link-consumer" to="/"/>
-      <BottomNavigationAction label="附近" value="nearby" icon={
-        <Badge color="default" variant="dot"><NearMeRounded/></Badge>}/>
-      <Link id="app-shared-menu-bottom-navigation-link-nearby" to="/nearby"/>
-      <BottomNavigationAction label="消息" value="information" icon={
-        <Badge color="default" variant="dot"><TextsmsRounded/></Badge>}/>
-      <Link id="app-shared-menu-bottom-navigation-link-information" to="/information"/>
-      <BottomNavigationAction label="我的" value="personal" icon={
-        <Badge color="default" variant="dot"><AccountCircleRounded/></Badge>}/>
-      <Link id="app-shared-menu-bottom-navigation-link-personal" to="/personal"/>
+      <BottomNavigationAction
+        label="首页"
+        value="consumer"
+        icon={
+          <Badge color="default" variant="dot">
+            <StoreRounded />
+          </Badge>
+        }
+      />
+      <Link id="app-shared-menu-bottom-navigation-link-consumer" to="/" />
+      <BottomNavigationAction
+        label="附近"
+        value="nearby"
+        icon={
+          <Badge color="default" variant="dot">
+            <NearMeRounded />
+          </Badge>
+        }
+      />
+      <Link id="app-shared-menu-bottom-navigation-link-nearby" to="/nearby" />
+      <BottomNavigationAction
+        label="消息"
+        value="information"
+        icon={
+          <Badge color="default" variant="dot">
+            <TextsmsRounded />
+          </Badge>
+        }
+      />
+      <Link id="app-shared-menu-bottom-navigation-link-information" to="/information" />
+      <BottomNavigationAction
+        label="我的"
+        value="personal"
+        icon={
+          <Badge color="default" variant="dot">
+            <AccountCircleRounded />
+          </Badge>
+        }
+      />
+      <Link id="app-shared-menu-bottom-navigation-link-personal" to="/personal" />
     </BottomNavigation>
   );
 }
