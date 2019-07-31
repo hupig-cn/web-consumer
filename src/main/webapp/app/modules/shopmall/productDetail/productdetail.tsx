@@ -25,7 +25,9 @@ export class Productdetail extends React.Component<IProductDetailProp> {
     price: '',
     num: 0,
     json: '',
-    img: ''
+    img: '',
+    // @ts-ignore
+    productid: this.props.location.productid
   };
   constructor(props) {
     super(props);
@@ -189,8 +191,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                   fontSize: '1rem'
                 }}
               >
-                {// @ts-ignore
-                this.props.location.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
+                {this.state.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
               </span>
               {/*<span*/}
               {/*  style={{*/}
