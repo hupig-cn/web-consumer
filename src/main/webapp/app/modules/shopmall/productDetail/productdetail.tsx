@@ -190,7 +190,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 }}
               >
                 {// @ts-ignore
-                this.props.location.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
+                this.props.location.state.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
               </span>
               {/*<span*/}
               {/*  style={{*/}
