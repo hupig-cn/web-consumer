@@ -33,7 +33,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
   componentDidMount() {
     this.props.getSession();
     // @ts-ignore
-    const productdetail = this.props.getProductDetail(this.props.location.productid);
+    const productdetail = this.props.getProductDetail(this.props.location.state.productid);
     // @ts-ignore
     productdetail.then(res => {
       if (res.value.data.code === 1) {
@@ -56,7 +56,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
       }
     });
     // @ts-ignore
-    const data = this.props.getProdcutImg(this.props.location.productid);
+    const data = this.props.getProdcutImg(this.props.location.state.productid);
     const carouselIds = [];
     const introduceIds = [];
     // @ts-ignore
@@ -190,7 +190,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
                 }}
               >
                 {// @ts-ignore
-                this.props.location.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
+                this.props.location.state.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}{' '}
               </span>
               {/*<span*/}
               {/*  style={{*/}
@@ -223,7 +223,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
           <div style={{ position: 'fixed', bottom: '0px', zIndex: 1000, width: '100%', backgroundColor: '#ffffff', height: '50px' }}>
             <Swipeabledrawer
               // @ts-ignore
-              productid={this.props.location.productid}
+              productid={this.props.location.state.productid}
               // @ts-ignore
               num={this.state.num}
               // @ts-ignore

@@ -13,10 +13,10 @@ export interface IPaymentProp extends StateProps, DispatchProps, RouteComponentP
 export class Payment extends React.Component<IPaymentProp> {
   handleSubmit = (event, errors, { password }) => {
     // @ts-ignore
-    const paymethod = this.props.location.paymethod;
+    const paymethod = this.props.location.state.paymethod;
     if (paymethod === 'yue') {
       // @ts-ignore
-      const result = this.props.yuePay(this.props.location.bigorder, password, null, 50);
+      const result = this.props.yuePay(this.props.location.state.bigorder, password, null, 50);
       // @ts-ignore
       result.then(res => {
         // tslint:disable-next-line: no-console
@@ -31,7 +31,7 @@ export class Payment extends React.Component<IPaymentProp> {
       });
     } else if (paymethod === 'jifen') {
       // @ts-ignore
-      const result = this.props.integralPay(this.props.location.bigorder, password, null);
+      const result = this.props.integralPay(this.props.location.state.bigorder, password, null);
       // @ts-ignore
       result.then(res => {
         // tslint:disable-next-line: no-console
@@ -46,7 +46,7 @@ export class Payment extends React.Component<IPaymentProp> {
       });
     } else if (paymethod === 'coupon') {
       // @ts-ignore
-      const result = this.props.couponPay(this.props.location.bigorder, password, null);
+      const result = this.props.couponPay(this.props.location.state.bigorder, password, null);
       // @ts-ignore
       result.then(res => {
         // tslint:disable-next-line: no-console
@@ -67,7 +67,13 @@ export class Payment extends React.Component<IPaymentProp> {
   render() {
     return (
       <div>
-        <Title name="支付页面" back="/selectPayWay" />
+        <Title
+          name="支付页面"
+          back="/selectPayWay"
+          productid={this.props.location.state.productid ? this.props.location.state.productid : undefined}
+          cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
+          bigorder={this.props.location.state.bigorder ? this.props.location.state.bigorder : undefined}
+        />
         <div
           style={{
             height: '60px',

@@ -27,12 +27,12 @@ export class AddAddress extends React.Component<IAddAddressProp> {
         userid: respone.id
       });
       // @ts-ignore
-      this.props.getAddressDetail(this.props.location.id, respone.id).then(res => {
+      this.props.getAddressDetail(this.props.location.state.id, respone.id).then(res => {
         if (res.value.data.code === 1) {
           this.setState({
             messages: res.value.data.data,
             // @ts-ignore
-            addressid: this.props.location.id
+            addressid: this.props.location.state.id
           });
         }
       });
@@ -42,20 +42,28 @@ export class AddAddress extends React.Component<IAddAddressProp> {
   handleSubmit = (event, errors, { areaid, address, consignee, isdefault, mobile }) => {
     if (this.state.addressid !== '') {
       // @ts-ignore
-      this.props.updateUserAddress(this.props.location.id, areaid, this.state.userid, address, consignee, isdefault, mobile).then(res => {
-        if (res.value.data.code === 1) {
-          toast.success('修改成功');
-          this.props.history.push('/selectAddress');
-        } else {
-          toast.error(res.value.data.message);
-        }
-      });
+      this.props
+        .updateUserAddress(this.props.location.state.id, areaid, this.state.userid, address, consignee, isdefault, mobile)
+        .then(res => {
+          if (res.value.data.code === 1) {
+            toast.success('修改成功');
+            this.props.history.push('/selectAddress', {
+              productid: this.props.location.state.productid ? this.props.location.state.productid : undefined,
+              cards: this.props.location.state.cards ? this.props.location.state.cards : undefined
+            });
+          } else {
+            toast.error(res.value.data.message);
+          }
+        });
     } else {
       // @ts-ignore
       this.props.insertUserAddress(areaid, this.state.userid, address, consignee, isdefault, mobile).then(res => {
         if (res.value.data.code === 1) {
           toast.success('新增成功');
-          this.props.history.push('/selectAddress');
+          this.props.history.push('/selectAddress', {
+            productid: this.props.location.state.productid,
+            cards: this.props.location.state.cards
+          });
         } else {
           toast.error(res.value.data.message);
         }
@@ -78,9 +86,9 @@ export class AddAddress extends React.Component<IAddAddressProp> {
           name="地址信息"
           back="/selectAddress"
           // @ts-ignore
-          productid={this.props.location.productid !== null ? this.props.location.productid : null}
+          productid={this.props.location.state.productid ? this.props.location.state.productid : undefined}
           // @ts-ignore
-          cards={this.props.location.cards !== null ? this.props.location.cards : null}
+          cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
         />
         <AvForm onSubmit={this.handleSubmit}>
           <div
@@ -101,7 +109,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                 <AvField
                   name="consignee"
                   // @ts-ignore
-                  defaultValue={this.props.location.consignee}
+                  defaultValue={this.props.location.state.consignee}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>收货人：</span>}
                   placeholder={'请填写收货人'}
                   required
@@ -111,7 +119,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                 <AvField
                   name="mobile"
                   // @ts-ignore
-                  defaultValue={this.props.location.mobile}
+                  defaultValue={this.props.location.state.mobile}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>手机号码：</span>}
                   placeholder={'请填写手机号码'}
                   style={{ width: '70%', float: 'right' }}
@@ -119,7 +127,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                 <AvField
                   name="areaid"
                   // @ts-ignore
-                  defaultValue={this.props.location.areaid}
+                  defaultValue={this.props.location.state.areaid}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>所在地区：</span>}
                   placeholder={'请填写所在地区'}
                   style={{ width: '70%', float: 'right' }}
@@ -127,7 +135,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                 <AvField
                   name="address"
                   // @ts-ignore
-                  defaultValue={this.props.location.address}
+                  defaultValue={this.props.location.state.address}
                   label={<span style={{ float: 'left', marginTop: '7px' }}>详细地址：</span>}
                   placeholder={'街道、楼牌号等'}
                   style={{ width: '70%', float: 'right' }}
@@ -139,7 +147,7 @@ export class AddAddress extends React.Component<IAddAddressProp> {
                       type="checkbox"
                       name="isdefault"
                       // @ts-ignore
-                      defaultValue={this.props.location.isdefault}
+                      defaultValue={this.props.location.state.isdefault}
                     />
                   </Label>
                 </AvGroup>
