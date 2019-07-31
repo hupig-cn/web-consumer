@@ -164,7 +164,7 @@ export const getMyEntityMerchant: ICrudGetAction<IMerchant> = userid => {
 };
 
 export const findAllMerchant = (satrtPage: number, pageSize: number) => {
-  const requestUrl = `${apiUrl}/api/findAllMerchant/?satrtPage=${satrtPage}&pageSize=${pageSize}`;
+  const requestUrl = `${apiUrl}/api/public/findAllMerchant/?satrtPage=${satrtPage}&pageSize=${pageSize}`;
   return {
     payload: axios.get<IMerchant>(requestUrl)
   };
