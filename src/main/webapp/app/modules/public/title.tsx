@@ -8,6 +8,7 @@ export default function PrimarySearchAppBar(text) {
   const titleHeight = '50px';
 
   let infostyle = { float: 'right', width: '5%', height: '5px' };
+  // @ts-ignore
   let info = <span style={infostyle} />;
 
   if (text.infoname) {
@@ -21,6 +22,7 @@ export default function PrimarySearchAppBar(text) {
         </Link>
       );
     }
+    // @ts-ignore
     info = <span style={infostyle}>{info}</span>;
   }
   return (

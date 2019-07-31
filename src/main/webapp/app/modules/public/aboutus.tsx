@@ -55,12 +55,10 @@ export class Manage extends React.Component<IManageProp> {
         key={index + 1}
         onClick={this.changeLi}
         style={{ borderBottom: '1px dashed #E6E6E6', cursor: 'pointer', listStyle: 'none', padding: '0 15px' }}
+        // @ts-ignore
       >
-        <// @ts-ignore
-        b
-          ik={index + 1}
-          style={{ height: '35px', lineHeight: '35px' }}
-        >
+        {' '}
+        <b ik={index + 1} style={{ height: '35px', lineHeight: '35px' }}>
           {item.q}
         </b>
         {state.showLiKey === index + 1 ? (
