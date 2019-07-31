@@ -27,7 +27,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
     json: '',
     img: '',
     // @ts-ignore
-    productid: this.props.location.productid
+    productid: this.props.location.state.productid
   };
   constructor(props) {
     super(props);
