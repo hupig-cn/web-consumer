@@ -13,10 +13,10 @@ import { Axios, ShowBodyPlaceholderHtml } from 'app/request';
 export interface IManageProp extends StateProps, DispatchProps {}
 
 export class Manage extends React.Component<IManageProp> {
+  state = { error: '', loading: true, progressive: true, data: [], showLiKey: 1 };
   constructor(props) {
     super(props);
     // 初始化接口数据结构
-    this.state = { error: '', loading: true, progressive: true, data: [] };
   }
 
   componentDidMount() {
@@ -56,7 +56,11 @@ export class Manage extends React.Component<IManageProp> {
         onClick={this.changeLi}
         style={{ borderBottom: '1px dashed #E6E6E6', cursor: 'pointer', listStyle: 'none', padding: '0 15px' }}
       >
-        <b ik={index + 1} style={{ height: '35px', lineHeight: '35px' }}>
+        <// @ts-ignore
+        b
+          ik={index + 1}
+          style={{ height: '35px', lineHeight: '35px' }}
+        >
           {item.q}
         </b>
         {state.showLiKey === index + 1 ? (
