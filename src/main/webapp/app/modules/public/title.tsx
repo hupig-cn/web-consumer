@@ -44,8 +44,11 @@ export default function PrimarySearchAppBar(text) {
         <Link
           to={{
             pathname: `${text.back}`,
-            productid: text.productid !== null ? text.productid : null,
-            cards: text.cards !== null ? text.cards : null
+            state: {
+              productid: text.productid ? text.productid : undefined,
+              cards: text.cards ? text.cards : undefined,
+              bigorder: text.bigorder ? text.bigorder : undefined
+            }
           }}
         >
           <ArrowBackIos

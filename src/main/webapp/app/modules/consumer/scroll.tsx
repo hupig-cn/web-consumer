@@ -337,19 +337,16 @@ export class Product extends React.Component {
                 <Link
                   to={{
                     pathname: '/Productdetail',
-                    productid: tile.id,
-                    postage: tile.postage,
-                    price: tile.price,
-                    name: tile.name,
-                    json: tile.specifications,
-                    model: tile.model,
-                    num: tile.num,
-                    // @ts-ignore
-                    // img:
-                    //   this.state.files.length !== 0
-                    //     ? `data:${this.state.files[index].fileContentType};base64,${this.state.files[index].file}`
-                    //     : '',
-                    integral: tile.integral
+                    state: {
+                      productid: tile.id,
+                      postage: tile.postage,
+                      price: tile.price,
+                      name: tile.name,
+                      json: tile.specifications,
+                      model: tile.model,
+                      num: tile.num,
+                      integral: tile.integral
+                    }
                   }}
                 >
                   <GridListTile

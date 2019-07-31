@@ -23,8 +23,10 @@ export default function PrimarySearchAppBar(props) {
         <Link
           to={{
             pathname: '/createOrder',
-            productid: props.productid !== null ? props.productid : props.location.productid,
-            cards: props.cards !== null ? props.cards : props.location.cards
+            state: {
+              productid: props.productid ? props.productid : undefined,
+              cards: props.cards ? props.cards : undefined
+            }
           }}
         >
           <ArrowBackIos
@@ -38,8 +40,10 @@ export default function PrimarySearchAppBar(props) {
         <Link
           to={{
             pathname: '/addAddress',
-            productid: props.productid !== null ? props.productid : null,
-            cards: props.cards !== null ? props.cards : null
+            state: {
+              productid: props.productid ? props.productid : undefined,
+              cards: props.cards ? props.cards : undefined
+            }
           }}
         >
           <span style={{ fontSize: '1rem', color: '#ffffff', float: 'right' }}>新增</span>

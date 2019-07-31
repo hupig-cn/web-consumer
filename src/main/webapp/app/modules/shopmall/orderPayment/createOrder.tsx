@@ -36,16 +36,16 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
         this.setState({
           consignee: res.value.data.data[0].consignee,
           mobile: res.value.data.data[0].mobile,
-          address: res.value.data.data[0].address,
+          address: res.value.data.data[0].areaid + res.value.data.data[0].address,
           havaDefault: true
         });
       }
     });
     // 根据商品id获取商品信息
     // @ts-ignore
-    if (this.props.location.cards) {
+    if (this.props.location.state.cards) {
       // @ts-ignore
-      const product = this.props.getOrderInfo(account.id, null, this.props.location.cards, number);
+      const product = this.props.getOrderInfo(account.id, null, this.props.location.state.cards, number);
       // @ts-ignore
       product.then(res => {
         const imgsarr = [];
@@ -69,7 +69,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
       });
     } else {
       // @ts-ignore
-      const product = this.props.getOrderInfo(account.id, this.props.location.productid, null, number);
+      const product = this.props.getOrderInfo(account.id, this.props.location.state.productid, null, number);
       // @ts-ignore
       product.then(res => {
         const imgsarr = [];
@@ -95,11 +95,11 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     // 提交订单前先提交数据到后台获取到订单价格
     // @ts-ignore
     // tslint:disable-next-line: radix
-    const price = this.props.PaySum(this.props.location.productid, parseInt(number));
+    const price = this.props.PaySum(this.props.location.state.productid, parseInt(number));
     // @ts-ignore
     price.then(res => {
       // @ts-ignore
-      const result = this.props.createUserOrder(account.id, res.value.data.data[0], this.props.location.productid);
+      const result = this.props.createUserOrder(account.id, res.value.data.data[0], this.props.location.state.productid);
       // @ts-ignore
       result.then(respone => {
         if (respone.value.data.code === 1) {
@@ -123,7 +123,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
       account.id,
       null,
       // @ts-ignore
-      this.props.location.productid,
+      this.props.location.state.productid,
       number,
       this.state.bigorder,
       consignee,
@@ -154,36 +154,39 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               name="创建订单"
               back="/productdetail"
               // @ts-ignore
-              productid={this.props.location.productid !== null ? this.props.location.productid : null}
+              productid={this.props.location.state.productid ? this.props.location.state.productid : undefined}
               // @ts-ignore
-              cards={this.props.location.cards !== null ? this.props.location.cards : null}
+              cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
             />
             {/*地址模块*/}
             <div
               style={{
                 margin: '45px 15px 15px 15px',
-                minHeight: '80px',
-                overflow: 'hidden'
+                minHeight: '72px'
               }}
             >
               <Link
                 to={{
                   pathname: '/selectAddress',
-                  // @ts-ignore
-                  productid: this.props.location.productid !== null ? this.props.location.productid : null,
-                  // @ts-ignore
-                  cards: this.props.location.cards !== null ? this.props.location.cards : null
+                  state: {
+                    // @ts-ignore
+                    productid: this.props.location.state.productid ? this.props.location.state.productid : undefined,
+                    // @ts-ignore
+                    cards: this.props.location.state.cards ? this.props.location.state.cards : undefined
+                  }
                 }}
               >
                 {this.state.havaDefault === true ? (
                   <div>
                     <div>
-                      <div>
+                      <div style={{ marginTop: '-30px' }}>
                         <span>收货人:</span>
                         <span id="consignee" style={{ marginLeft: '7px' }}>
                           {this.state.consignee}
                         </span>
-                        <span style={{ marginLeft: '20px' }}>手机号码:</span>
+                      </div>
+                      <div>
+                        <span>手机号码:</span>
                         <span id="mobile" style={{ marginLeft: '7px' }}>
                           {this.state.mobile}
                         </span>
@@ -191,29 +194,27 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                       <div
                         style={{
                           float: 'left',
-                          width: '25%',
+                          width: '100%',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           fontSize: '1rem',
-                          color: '#666666',
-                          marginTop: '0.1rem'
+                          marginTop: '0.1rem',
+                          'white-space': 'nowrap'
                         }}
                       >
                         收货地址：
-                      </div>
-                      <div
-                        style={{
-                          float: 'left',
-                          width: '65%',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          fontSize: '0.9rem',
-                          color: '#666666',
-                          marginTop: '0.1rem'
-                        }}
-                        id="address"
-                      >
-                        {this.state.address}
+                        <span
+                          style={{
+                            width: '65%',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            fontSize: '1rem',
+                            marginTop: '0.1rem'
+                          }}
+                          id="address"
+                        >
+                          {this.state.address}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -252,7 +253,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                           style={{ height: '120px', width: '100px' }}
                           src={
                             // @ts-ignore
-                            this.props.location.img
+                            this.props.location.state.img
                           }
                         />
                       )}
@@ -349,14 +350,16 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               // @ts-ignore
               to={{
                 pathname: '/selectpayway',
-                // @ts-ignore
-                bigorder: this.state.bigorder,
-                // @ts-ignore
-                integral: this.props.location.integral,
-                // @ts-ignore
-                productid: this.props.location.productid,
-                // @ts-ignore
-                cars: this.props.cars
+                state: {
+                  // @ts-ignore
+                  bigorder: this.state.bigorder,
+                  // @ts-ignore
+                  integral: this.props.location.state.integral,
+                  // @ts-ignore
+                  productid: this.props.location.state.productid,
+                  // @ts-ignore
+                  cards: this.props.location.state.cards
+                }
               }}
             />
           </div>

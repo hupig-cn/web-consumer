@@ -64,7 +64,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     //     });
     //   });
     // @ts-ignore
-    const OrderInfos = this.props.getOrderInfoByOrderId(this.props.location.bigorder);
+    const OrderInfos = this.props.getOrderInfoByOrderId(this.props.location.state.bigorder);
     // @ts-ignore
     OrderInfos.then(res => {
       const imgarr = [];
@@ -128,7 +128,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           document.getElementById('bottomdiv').style.height = '80%';
         } else {
           // @ts-ignore
-          if (this.props.location.productid !== 1) {
+          if (this.props.location.state.productid !== 1) {
             document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
           } else {
             toast.error('圆帅不允许使用积分支付');
@@ -138,7 +138,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
     } else if (value === 'zhifubao') {
       // 支付宝支付
       // @ts-ignore
-      const data = this.props.AliPay(this.props.location.bigorder);
+      const data = this.props.AliPay(this.props.location.state.bigorder);
       // @ts-ignore
       data.then(res => {
         window.location.replace('alipays://platformapi/startapp?appId=20000067&url=' + res.value.data.data[0]);
@@ -154,7 +154,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           document.getElementById('bottomdiv').style.height = '80%';
         } else {
           // @ts-ignore
-          if (this.props.location.productid !== 1) {
+          if (this.props.location.state.productid !== 1) {
             document.getElementById('app-modules-consumer-quickaccess-button-link-payment').click();
           } else {
             toast.error('圆帅不允许使用优惠卷支付');
@@ -173,9 +173,11 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           name="订单支付"
           back="/createOrder"
           // @ts-ignore
-          productid={this.props.location.productid ? this.props.location.productid : null}
+          productid={this.props.location.state.productid ? this.props.location.state.productid : undefined}
           // @ts-ignore
-          cards={this.props.location.cards ? this.props.location.cards : null}
+          cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
+          // @ts-ignore
+          bigorde={this.props.location.state.bigorder ? this.props.location.state.bigorder : undefined}
         />
         <Divider />
         {/*图片订单编号价格等信息*/}
@@ -265,9 +267,15 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           id="app-modules-consumer-quickaccess-button-link-payment"
           to={{
             pathname: '/payment',
-            paymethod: this.state.payWay !== null ? this.state.payWay : null,
-            // @ts-ignore
-            bigorder: this.props.location.bigorder
+            state: {
+              paymethod: this.state.payWay ? this.state.payWay : undefined,
+              // @ts-ignore
+              bigorder: this.props.location.state.bigorder,
+              // @ts-ignore
+              productid: this.props.location.state.productid ? this.props.location.state.productid : undefined,
+              // @ts-ignore
+              cards: this.props.location.state.cards ? this.props.location.state.cards : undefined
+            }
           }}
         />
       </div>

@@ -61,9 +61,9 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
       <React.Fragment>
         <SelectAddTitle
           // @ts-ignore
-          productid={this.props.location.productid !== null ? this.props.location.productid : null}
+          productid={this.props.location.state.productid ? this.props.location.state.productid : undefined}
           // @ts-ignore
-          cards={this.props.location.cards !== null ? this.props.location.cards : null}
+          cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
         />
         <CssBaseline />
         <Paper square style={paper}>
@@ -76,17 +76,19 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                     id={'app-modules-consumer-quickaccess-button-link-addAddress-' + id}
                     to={{
                       pathname: '/addAddress',
-                      id,
-                      address,
-                      consignee,
-                      mobile,
-                      isdefault,
-                      areaid,
-                      areaName,
-                      // @ts-ignore
-                      productid: this.props.location.productid !== null ? this.props.location.productid : null,
-                      // @ts-ignore
-                      cards: this.props.location.cards !== null ? this.props.location.cards : null
+                      state: {
+                        id,
+                        address,
+                        consignee,
+                        mobile,
+                        isdefault,
+                        areaid,
+                        areaName,
+                        // @ts-ignore
+                        productid: this.props.location.state.productid ? this.props.location.state.productid : undefined,
+                        // @ts-ignore
+                        cards: this.props.location.state.cards ? this.props.location.state.cards : undefined
+                      }
                     }}
                   />
                   <ListItem
@@ -147,7 +149,7 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                         </React.Fragment>
                       }
                     />
-                    <span
+                    <div
                       style={{
                         position: 'absolute',
                         top: '8px',
@@ -158,7 +160,7 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                       }}
                     >
                       手机号码：{mobile}
-                    </span>
+                    </div>
                   </ListItem>
                 </React.Fragment>
               ))}

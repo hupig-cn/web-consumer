@@ -16,14 +16,13 @@ const DEBUG_APP_SERVER_API_URL = 'http://wskj.tpddns.cn:32767/api/web-business';
 // 各接口配置
 export const Api = {
   tsxSettings: {
-    api_debug: '/settings.php',
+    api_debug: '',
     // 店铺信息
-    api_shopinfo: '/merchant/api/findShopInfo/',
+    api_shopinfo: '',
     data: { user: null, bankcard: null, profit: null, entrys: null },
     loading: APP_BODY_HOLD_WAIT,
     error: null
   },
-
   responseParse: (response: object, dataType: object) => {
     const objv = obj => Object.prototype.toString.call(obj) === '[object Object]';
     const arrv = arr => Object.prototype.toString.call(arr) === '[object Array]';
@@ -52,7 +51,7 @@ const instance = axios.create({
 // 初始化
 // instance.defaults.timeout = 2500;
 
-const aiaxLoadTemplate = (n: boolean, props) => (
+const aiaxLoadTemplate = (n: boolean, props: any) => (
   <div style={{ width: '100vw', height: '100vh', textAlign: 'center' }}>
     {n ? (
       <div ws-container-id="nobody" style={{ height: '52vh', lineHeight: '96vh' }}>

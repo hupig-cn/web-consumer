@@ -97,12 +97,12 @@ function SwipeableTextMobileStepper(props) {
             </div>
           ))
         ) : (
-          <img src="https://img.alicdn.com/bao/uploaded/O1CN01Ks0Xie1DJoA7zcatH_!!0-item_pic.jpg_320x320Q50s50.jpg_.webp" />
+          <img src="../../../../content/images/loading05.png" />
         )}
       </AutoPlaySwipeableViews>
       <MobileStepper
         variant="dots"
-        steps={4}
+        steps={props.img.length}
         position="static"
         activeStep={activeStep}
         className={classes.spot}
