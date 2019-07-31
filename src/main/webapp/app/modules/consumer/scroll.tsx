@@ -349,10 +349,7 @@ export class Product extends React.Component {
                     }
                   }}
                 >
-                  <GridListTile
-                    key={tile.titleimage}
-                    style={{ height: '50vh', width: '48 vw', maxWidth: '100%', maxHeight: '100%', padding: 4 }}
-                  >
+                  <GridListTile key={tile.id} style={{ height: '50vh', width: '48 vw', maxWidth: '100%', maxHeight: '100%', padding: 4 }}>
                     {// @ts-ignore
                     this.state.files.length !== 0 ? (
                       <img
