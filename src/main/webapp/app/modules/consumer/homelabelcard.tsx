@@ -53,7 +53,7 @@ class TitlebarGridList extends React.Component {
               tile.specificationsDTO.map((specifications, index) => (
                 <Link
                   to={{
-                    pathname: '/Productdetail',
+                    pathname: '/productdetail',
                     productid: specifications.id,
                     postage: tile.postage,
                     price: specifications.price,
