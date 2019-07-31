@@ -14,11 +14,13 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#ffffff',
       height: '100%',
       display: 'inline-block',
-      '& button': {
+      '& button,& a': {
         outline: 'none',
         color: 'rgba(0, 0, 0, 0.75)',
         height: '100%',
         minWidth: '25%',
+        fontWeight: 'normal',
+        textDecoration: 'none',
         '& img': {
           marginBottom: 5,
           width: 28,
@@ -33,34 +35,30 @@ export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
     case 'key1':
-      break;
     case 'key2':
-      break;
     case 'key3':
-      break;
     case 'key4':
-      break;
     case 'key5':
-      break;
     case 'key6':
-      break;
     case 'key7':
+      toast.info('功能正在开发中.');
       break;
     case 'key8':
       break;
     default:
       temp = null;
+      toast.info('没有发现这个功能.');
       break;
   }
 };
 
 export default function LongMenu() {
+  // @ts-ignore
   const classes = useStyles();
   const [value] = React.useState('home');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
-    toast.info('提示：功能正在开发中.');
   }
   const bottomhomeimg = {
     width: '26px',
@@ -107,7 +105,8 @@ export default function LongMenu() {
           icon={<img style={bottomhomeimg} src="./content/theme/zihong/images/icon7.png" />}
         />
         <BottomNavigationAction
-          label="更多服务"
+          href="/aboutus"
+          label="用户答疑"
           value="key8"
           icon={<img style={bottomhomeimg} src="./content/theme/zihong/images/icon8.png" />}
         />
