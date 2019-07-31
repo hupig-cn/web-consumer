@@ -1,6 +1,6 @@
 import React from 'react';
 import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme, Badge } from '@material-ui/core';
-import { StoreRounded, NearMeRounded, TextsmsRounded, AccountCircleRounded } from '@material-ui/icons';
+import { StoreRounded, DomainRounded, TextsmsRounded, AccountCircleRounded } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,11 +63,11 @@ export default function LabelBottomNavigation() {
       />
       <Link id="app-shared-menu-bottom-navigation-link-consumer" to="/" />
       <BottomNavigationAction
-        label="附近"
+        label="商户"
         value="nearby"
         icon={
           <Badge color="default" variant="dot">
-            <NearMeRounded />
+            <DomainRounded />
           </Badge>
         }
       />
