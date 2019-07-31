@@ -34,7 +34,7 @@ export class Manage extends React.Component<IManageProp> {
 
   changeLi = (e: any) => {
     const prevIk = 1 * this.state.showLiKey;
-    const thisIk = 1 * e.target.getAttribute('ik');
+    const thisIk = 1 * e.target.getAttribute('id').substring(3);
     this.setState({ showLiKey: prevIk === thisIk ? 0 : thisIk });
   };
 
@@ -56,13 +56,18 @@ export class Manage extends React.Component<IManageProp> {
         onClick={this.changeLi}
         style={{ borderBottom: '1px dashed #E6E6E6', cursor: 'pointer', listStyle: 'none', padding: '0 15px' }}
       >
-        <// @ts-ignore
-        b
-          ik={index + 1}
-          style={{ height: '35px', lineHeight: '35px' }}
+        <span
+          id={'ik_' + (index + 1)}
+          style={{
+            display: 'block',
+            width: '90vw',
+            fontWeight: 'bold',
+            height: '35px',
+            lineHeight: '35px'
+          }}
         >
           {item.q}
-        </b>
+        </span>
         {state.showLiKey === index + 1 ? (
           <div
             style={{
