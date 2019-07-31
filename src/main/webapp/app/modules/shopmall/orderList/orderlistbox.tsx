@@ -117,7 +117,7 @@ export default function BottomAppBar(props) {
   const classes = useStyles();
 
   function jumpToOrderDetail() {
-    document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
+    // document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
   }
 
   return (
