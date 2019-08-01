@@ -95,6 +95,31 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
     // 提交订单前先提交数据到后台获取到订单价格
     // @ts-ignore
     // tslint:disable-next-line: radix
+    // const price = this.props.PaySum(this.props.location.state.productid, parseInt(number));
+    // // @ts-ignore
+    // price.then(res => {
+    //   // @ts-ignore
+    //   const result = this.props.createUserOrder(account.id, res.value.data.data[0], this.props.location.state.productid);
+    //   // @ts-ignore
+    //   result.then(respone => {
+    //     if (respone.value.data.code === 1) {
+    //       this.setState({
+    //         bigorder: respone.value.data.data[0]
+    //       });
+    //     } else {
+    //       toast.error('错误：' + respone.value.data.message);
+    //     }
+    //   });
+    // });
+  }
+
+  selectpayway() {
+    const { account } = this.props;
+    const address = document.getElementById('address').innerText;
+    const mobile = document.getElementById('mobile').innerText;
+    const consignee = document.getElementById('consignee').innerText;
+    // @ts-ignore
+    // tslint:disable-next-line: radix
     const price = this.props.PaySum(this.props.location.state.productid, parseInt(number));
     // @ts-ignore
     price.then(res => {
@@ -106,39 +131,32 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
           this.setState({
             bigorder: respone.value.data.data[0]
           });
+          // @ts-ignore
+          const data = this.props.createShopOrder(
+            account.id,
+            null,
+            // @ts-ignore
+            this.props.location.state.productid,
+            number,
+            this.state.bigorder,
+            consignee,
+            mobile,
+            address
+          );
+          // @ts-ignore
+          data.then(datares => {
+            if (res.value.data.code === 1) {
+              toast.success(datares.value.data.message);
+              const info = document.getElementById('app-modules-consumer-quickaccess-button-link-selectpayway');
+              info.click();
+            } else {
+              toast.error('错误：' + datares.value.data.message);
+            }
+          });
         } else {
           toast.error('错误：' + respone.value.data.message);
         }
       });
-    });
-  }
-
-  selectpayway() {
-    const { account } = this.props;
-    const address = document.getElementById('address').innerText;
-    const mobile = document.getElementById('mobile').innerText;
-    const consignee = document.getElementById('consignee').innerText;
-    // @ts-ignore
-    const data = this.props.createShopOrder(
-      account.id,
-      null,
-      // @ts-ignore
-      this.props.location.state.productid,
-      number,
-      this.state.bigorder,
-      consignee,
-      mobile,
-      address
-    );
-    // @ts-ignore
-    data.then(res => {
-      if (res.value.data.code === 1) {
-        toast.success(res.value.data.message);
-        const info = document.getElementById('app-modules-consumer-quickaccess-button-link-selectpayway');
-        info.click();
-      } else {
-        toast.error('错误：' + res.value.data.message);
-      }
     });
   }
 
