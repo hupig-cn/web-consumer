@@ -179,7 +179,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             {/*地址模块*/}
             <div
               style={{
-                margin: '45px 15px 15px 15px',
+                margin: '20px',
                 minHeight: '72px'
               }}
             >
@@ -259,7 +259,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             this.state.products ? (
               this.state.products.map((product, index) => (
                 // tslint:disable-next-line: jsx-key
-                <div style={{ height: '180px', margin: '15px 0px 15px 15px' }}>
+                <div style={{ height: '180px', margin: '15px' }}>
                   <div>
                     <div style={{ float: 'left', marginBottom: '10px' }}>
                       {/*<img*/}
@@ -267,7 +267,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                       {/*  src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}*/}
                       {/*/>*/}
                     </div>
-                    <div style={{ marginTop: '-15px', marginBottom: '2px' }}>博媛官方旗舰店</div>
+                    <div style={{ marginTop: '15px', marginBottom: '2px' }}>博媛官方旗舰店</div>
                   </div>
                   <div style={{ width: '100%' }}>
                     <div style={{ height: '120px', width: '100px', float: 'left' }}>
