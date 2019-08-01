@@ -18,6 +18,9 @@ import { getProducts } from 'app/requests/basic/result.reducer';
 import { getMyImgs } from 'app/requests/basic/files.reducer';
 // tslint:disable-next-line: no-submodule-imports
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+// tslint:disable-next-line: no-submodule-imports
+import ShoppingCartOutlined from '@material-ui/icons/ShoppingCartOutlined';
+
 const staticData = [
   { person: 'http://p2.qhimgs4.com/t018afa1ba080b39539.jpg' },
   { person: 'http://n1.itc.cn/img8/wb/recom/2016/04/30/146200014549632322.JPEG' },
@@ -44,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap',
       justifyContent: 'space-around',
       overflow: 'hidden',
-      backgroundColor: '#f0f0f0'
+      backgroundColor: '#f0f0f0 !important'
     },
     gridList: {
       height: '100%'
@@ -328,7 +331,7 @@ export class Product extends React.Component {
       >
         {/*<div style={fixHeaderStyle}> fixed header </div>*/}
         <ReactPullLoad downEnough={150} action={this.state.action} handleAction={this.handleAction} hasMore={hasMore} distanceBottom={1000}>
-          <GridList cellHeight={180} style={{ margin: -0, width: '97%' }}>
+          <GridList cellHeight={180} style={{ margin: -0, width: '100%' }}>
             {// @ts-ignore
             this.state.data ? (
               // @ts-ignore
@@ -348,11 +351,25 @@ export class Product extends React.Component {
                       integral: tile.integral
                     }
                   }}
+                  style={{
+                    height: '100%',
+                    borderRadius: '5px'
+                  }}
                 >
-                  <GridListTile key={tile.id} style={{ height: '50vh', width: '48 vw', maxWidth: '100%', maxHeight: '100%', padding: 4 }}>
+                  <GridListTile key={tile.id} style={{ maxWidth: '100%', maxHeight: '100%' }}>
                     {// @ts-ignore
                     this.state.files.length !== 0 ? (
                       <img
+                        style={{
+                          width: '100%',
+                          height: 'auto',
+                          minWidth: '100%',
+                          minHeight: '100px',
+                          transform: 'initial',
+                          borderRadius: '5px 5px 0px 0px',
+                          position: 'initial',
+                          backgroundColor: '#fff'
+                        }}
                         // @ts-ignore
                         src={`data:${this.state.files[index].fileContentType};base64,${this.state.files[index].file}`}
                         alt={tile.name}
@@ -361,30 +378,63 @@ export class Product extends React.Component {
                       <img src="" />
                     )}
                     <GridListTileBar
+                      style={{
+                        width: '100%',
+                        position: 'initial',
+                        backgroundColor: '#fff',
+                        borderRadius: '0px 0px 5px 5px'
+                      }}
                       title={
                         <p
                           style={{
                             wordBreak: 'break-all',
                             whiteSpace: 'pre-wrap',
-                            wordWrapL: 'break-word',
                             overflow: 'hidden',
                             display: '-webkit-box',
-                            lineHeight: '19px',
                             height: '2.4rem',
                             fontSize: '0.8rem',
-                            position: 'relative',
-                            margin: '0px'
+                            position: 'absolute',
+                            color: 'rgba(0, 0, 0, 0.584)',
+                            margin: '-26px 0px 0px -16px',
+                            width: '100%',
+                            padding: '0px 5px',
+                            lineHeight: '17px'
                           }}
                         >
                           {tile.name} + {tile.specifications}
                         </p>
                       }
                       subtitle={
-                        <span style={{ float: 'left', width: '100%' }}>
+                        <span
+                          style={{
+                            float: 'left',
+                            width: '100%',
+                            color: '#e24f37',
+                            position: 'absolute',
+                            margin: '10px 0px 0px -16px',
+                            padding: '0px 5px'
+                          }}
+                        >
                           <span style={{ float: 'left' }}>
                             <span style={{ fontSize: '0.7rem' }}>
-                              {tile.id === 1 ? '￥:' + `${tile.price}` + '元' : `${tile.price}` + '元/积分'}
+                              {tile.id === 1 ? (
+                                <span>
+                                  ￥: <span style={{ fontSize: '1.5rem' }}>{tile.price}</span> 元{' '}
+                                </span>
+                              ) : (
+                                <span>
+                                  <span style={{ fontSize: '1.5rem' }}>{tile.price}</span> 积分{' '}
+                                </span>
+                              )}
                             </span>
+                          </span>
+                          <span style={{ float: 'right' }}>
+                            <ShoppingCartOutlined
+                              style={{
+                                fill: '#00000095',
+                                width: '15px'
+                              }}
+                            />
                           </span>
                         </span>
                       }

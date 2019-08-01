@@ -67,7 +67,7 @@ export default function LongMenu() {
   };
 
   return (
-    <div ws-container-id="normal-service-link" style={{ marginTop: '10px', paddingBottom: '8px', backgroundColor: 'white' }}>
+    <div ws-container-id="normal-service-link" style={{ paddingBottom: '8px', backgroundColor: 'white' }}>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
         <BottomNavigationAction
           label="积分精选"

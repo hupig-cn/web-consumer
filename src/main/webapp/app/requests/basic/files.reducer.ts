@@ -164,6 +164,13 @@ export const getMyImg: ICrudGetAction<IFiles> = (id: string) => {
     payload: axios.get<IFiles>(requestUrl)
   };
 };
+export const getPublicImg: ICrudGetAction<IFiles> = (id: string) => {
+  const requestUrl = `services/basic/api/public/myfiles/${id}`;
+  return {
+    type: ACTION_TYPES.FETCH_FILES,
+    payload: axios.get<IFiles>(requestUrl)
+  };
+};
 export const getMyImgs: ICrudGetAction<IFiles> = (ids: any) => {
   const requestUrl = `services/basic/api/public/myfiles-list`;
   return {

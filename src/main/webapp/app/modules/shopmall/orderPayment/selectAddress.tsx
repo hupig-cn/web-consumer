@@ -157,7 +157,8 @@ export class SelectAddress extends React.Component<ISelectAddressProp> {
                                 'white-space': 'nowrap'
                               }}
                             >
-                              收货地址：{address}
+                              收货地址：{areaid}
+                              {address}
                             </div>
                           </Typography>
                         </React.Fragment>

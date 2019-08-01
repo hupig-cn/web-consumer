@@ -111,21 +111,22 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function BottomAppBar() {
+export default function BottomAppBar(props) {
   const classes = useStyles();
+  const { state, getimgs } = props;
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Paper square className={classes.paper}>
         <List className={classes.list}>
-          {messages.map(({ id, primary, star, sale, distance, consumption, person }) => (
-            <React.Fragment key={id}>
+          {state.merchantEntity.map(val => (
+            <React.Fragment key={val.id}>
               <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }}>
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"
-                    src={person}
+                    src={val.merchantphoto}
                     style={{
                       borderRadius: 0,
                       width: 75,
@@ -136,14 +137,14 @@ export default function BottomAppBar() {
                 </ListItemAvatar>
                 <ListItemText
                   style={{ margin: '0 auto', height: '100px', position: 'relative' }}
-                  primary={primary}
+                  primary={val.name}
                   secondary={
                     <React.Fragment>
                       <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
-                        <span style={{ color: '#fe4365' }}>★{star}</span> （月销售：{sale}）
+                        <span style={{ color: '#fe4365' }}>★5.0</span> （月销售：0）
                       </Typography>
-                      <span style={{ float: 'right' }}>{distance}</span>
-                      <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>{consumption}</span>
+                      <span style={{ float: 'right' }}>{val.city}</span>
+                      <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>人均 ￥00 积分 {val.rebate}%</span>
                     </React.Fragment>
                   }
                 />

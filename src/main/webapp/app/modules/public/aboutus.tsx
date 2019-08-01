@@ -181,6 +181,9 @@ export class Manage extends React.Component<IManageProp> {
             <img style={{ width: '100vw' }} src="./content/doc/qa_table_item2.png" alt="角色收益配比展示表" />
           </div>
         </div>
+        <div ws-container-id="placeholder" style={{ height: '60px', width: '100%', border: '0' }}>
+          &nbsp;
+        </div>
       </div>
     );
   }
