@@ -179,7 +179,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 {this.state.havaDefault === true ? (
                   <div>
                     <div>
-                      <div style={{ marginTop: '-30px' }}>
+                      <div>
                         <span>收货人:</span>
                         <span id="consignee" style={{ marginLeft: '7px' }}>
                           {this.state.consignee}

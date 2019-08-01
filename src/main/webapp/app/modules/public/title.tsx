@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 
 export default function PrimarySearchAppBar(text) {
-  // ������ͨ��߶�
-  const titleHeight = '50px';
+  const titleHeight = '45px';
 
   let infostyle = { float: 'right', width: '5%', height: '5px' };
   // @ts-ignore

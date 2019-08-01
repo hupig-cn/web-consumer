@@ -82,8 +82,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2, 2, 0)
     },
     paper: {
-      paddingBottom: 0,
-      marginTop: '66px'
+      paddingBottom: 0
     },
     list: {
       fontFamily: '黑体',
