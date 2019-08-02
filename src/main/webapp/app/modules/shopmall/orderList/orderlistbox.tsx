@@ -116,7 +116,7 @@ export default function BottomAppBar(props) {
   const classes = useStyles();
 
   function jumpToOrderDetail() {
-    document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
+    // document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
   }
 
   return (
@@ -130,11 +130,11 @@ export default function BottomAppBar(props) {
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"
-                    src={'./content/images/shop2.png'}
+                    src={'./content/images/user.png'}
                     style={{
                       borderRadius: 20,
-                      width: 75,
-                      height: 100,
+                      width: 60,
+                      height: 60,
                       marginRight: 10
                     }}
                   />
