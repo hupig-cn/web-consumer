@@ -116,7 +116,7 @@ export default function BottomAppBar(props) {
   const classes = useStyles();
 
   function jumpToOrderDetail() {
-    // document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
+    document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
   }
 
   return (
@@ -126,16 +126,11 @@ export default function BottomAppBar(props) {
         <List className={classes.list}>
           {props.messages.map(({ id, ordercode, createdate, orderstatus, sum, consumption, person }) => (
             <React.Fragment key={id}>
-              <Link
-                id="app-modules-consumer-quickaccess-button-link-orderdetail"
-                // tslint:disable-next-line: no-invalid-this
-                to={{ pathname: '/orderdetail', bigorderid: id }}
-              />
               <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }} onClick={jumpToOrderDetail}>
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"
-                    src={'./content/images/shop1.png'}
+                    src={'./content/images/shop2.png'}
                     style={{
                       borderRadius: 20,
                       width: 75,
@@ -159,6 +154,11 @@ export default function BottomAppBar(props) {
                   }
                 />
               </ListItem>
+              <Link
+                id="app-modules-consumer-quickaccess-button-link-orderdetail"
+                // tslint:disable-next-line: no-invalid-this
+                to={{ pathname: '/orderdetail', bigorderid: id }}
+              />
             </React.Fragment>
           ))}
         </List>

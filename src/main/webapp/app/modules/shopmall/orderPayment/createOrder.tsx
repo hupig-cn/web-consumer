@@ -262,12 +262,9 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 <div style={{ height: '180px', margin: '15px' }}>
                   <div>
                     <div style={{ float: 'left', marginBottom: '10px' }}>
-                      {/*<img*/}
-                      {/*  style={{ height: '18px', width: '15px' }}*/}
-                      {/*  src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}*/}
-                      {/*/>*/}
+                      <img style={{ height: '24px', width: '24px' }} src={'./content/images/user.png'} />
                     </div>
-                    <div style={{ marginTop: '15px', marginBottom: '2px' }}>博媛官方旗舰店</div>
+                    <div style={{ margin: '15px' }}>博媛官方旗舰店</div>
                   </div>
                   <div style={{ width: '100%' }}>
                     <div style={{ height: '120px', width: '100px', float: 'left' }}>
@@ -292,9 +289,10 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                         {product.name} {product.attr}{' '}
                       </span>
                     </div>
-                    <div style={{ width: '60px', float: 'left' }}>
-                      <p style={{ marginLeft: '20px', marginTop: '7px', color: 'red', fontSize: '0.5rem', width: '72px' }}>
-                        <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> <span>{product.price}</span>
+                    <div style={{ width: '100px', float: 'right' }}>
+                      <p style={{ color: 'red', fontSize: '0.5rem', width: '100px' }}>
+                        <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span>{' '}
+                        <span style={{ fontSize: '1.2rem' }}>{product.price}</span>
                         <span style={{ marginLeft: '10px' }}>x</span>
                         <span>{product.number}</span>
                       </p>
