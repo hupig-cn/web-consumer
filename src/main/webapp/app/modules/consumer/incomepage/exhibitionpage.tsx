@@ -18,36 +18,37 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
   componentDidUpdate() {
     if (this.props.merchantEntity.id > 0) {
       const qrcode = document.getElementById('qrcode-canvas-key') as HTMLCanvasElement; // 二维码
-      const bgImg = document.getElementById('qrcode-image') as HTMLImageElement;
-      const qrcodeImg = new Image();
-      if (qrcode !== null) {
-        qrcodeImg.src = qrcode.toDataURL('image/png');
-        // tslint:disable-next-line: only-arrow-functions
-        qrcodeImg.onload = () => {
-          const canvas = document.getElementById('myCanvas') as HTMLCanvasElement; // 空画板
-          const ctx = canvas.getContext('2d');
-          const patBg = ctx.createPattern(bgImg, 'repeat');
-          ctx.rect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = patBg;
-          ctx.fill();
-          ctx.drawImage(qrcodeImg, 49, 144, 128, 128);
-          ctx.font = '14px bold 黑体';
-          ctx.fillStyle = '#fe4365';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          let name = this.props.merchantEntity.name;
-          name = name.length > 9 ? name.substr(0, 9) + '...' : name;
-          ctx.fillText(name, 113, 288);
-          const overImg = new Image();
-          overImg.src = canvas.toDataURL('image/png');
+      const bgImg = new Image();
+      bgImg.src = './content/images/income.png';
+      bgImg.onload = () => {
+        const qrcodeImg = new Image();
+        if (qrcode !== null) {
+          qrcodeImg.src = qrcode.toDataURL('image/png');
           // tslint:disable-next-line: only-arrow-functions
-          overImg.onload = () => {
-            const saveImage = document.getElementById('saveImage') as HTMLCanvasElement; // 显示位置
-            saveImage.innerHTML = '';
-            saveImage.append(overImg);
+          qrcodeImg.onload = () => {
+            const canvas = document.getElementById('myCanvas') as HTMLCanvasElement; // 空画板
+            const ctx = canvas.getContext('2d');
+            const patBg = ctx.createPattern(bgImg, 'repeat');
+            ctx.rect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = patBg;
+            ctx.fill();
+            ctx.drawImage(qrcodeImg, 158, 460, 403, 403);
+            ctx.font = '36px bold 黑体';
+            ctx.fillStyle = '#fe4365';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(this.props.merchantEntity.name, 360, 915);
+            const overImg = new Image();
+            overImg.src = canvas.toDataURL('image/png');
+            // tslint:disable-next-line: only-arrow-functions
+            overImg.onload = () => {
+              const saveImage = document.getElementById('saveImage') as HTMLCanvasElement; // 显示位置
+              saveImage.innerHTML = '';
+              saveImage.append(overImg);
+            };
           };
-        };
-      }
+        }
+      };
     }
   }
 
@@ -79,18 +80,17 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
                 id="qrcode-canvas-key"
                 value={'http://app.yuanscore.com/?id=' + merchantEntity.id}
                 renderAs="canvas"
-                size={128}
+                size={403}
                 fgColor="#000000"
                 bgColor="#ffffff"
               />
             ) : (
               // @ts-ignore
-              <QRCode id="qrcode-canvas-key" value={'error'} renderAs="canvas" size={128} fgColor="#ffffff" bgColor="#ffffff" />
+              <QRCode id="qrcode-canvas-key" value={'error'} renderAs="canvas" size={403} fgColor="#ffffff" bgColor="#ffffff" />
             )}
-            <canvas id="myCanvas" width="227" height="340">
+            <canvas id="myCanvas" width="720" height="1080">
               {' '}
             </canvas>
-            <img id="qrcode-image" src="./content/images/income.png" />
           </div>
           <div id="saveImage">&nbsp;</div>
           <Button
@@ -100,6 +100,10 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
             // onClick={loadbgimg(merchantEntity.name)}
           >
             长按图像可保存到手机
+            <br />
+            如无背景图请返回后重新进入
+            <br />
+            建议打印尺寸8cm × 12cm
           </Button>
         </div>
       </div>
