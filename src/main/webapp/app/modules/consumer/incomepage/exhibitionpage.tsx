@@ -96,7 +96,7 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           <Button
             variant="contained"
             color={'secondary'}
-            style={{ position: 'fixed', top: '90%', left: '20%', width: '60%' }}
+            style={{ position: 'fixed', top: '85%', left: '20%', width: '60%' }}
             // onClick={loadbgimg(merchantEntity.name)}
           >
             长按图像可保存到手机
