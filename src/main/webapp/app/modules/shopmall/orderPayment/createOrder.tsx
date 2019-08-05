@@ -176,6 +176,15 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               // @ts-ignore
               cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
             />
+            <div
+              style={{
+                height: '35px',
+                width: '100vw',
+                margin: 0,
+                padding: 0,
+                border: 'none'
+              }}
+            />
             {/*地址模块*/}
             <div
               style={{

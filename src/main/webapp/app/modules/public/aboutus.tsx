@@ -45,6 +45,15 @@ export class Manage extends React.Component<IManageProp> {
       return (
         <div className="jh-personal">
           <Title name="问答中心" back="/" />
+          <div
+            style={{
+              height: '55px',
+              width: '100vw',
+              margin: 0,
+              padding: 0,
+              border: 'none'
+            }}
+          />
           <ShowBodyPlaceholderHtml msgtext={state.error} />
         </div>
       );
@@ -94,7 +103,15 @@ export class Manage extends React.Component<IManageProp> {
     return (
       <div className="jh-personal">
         <Title name="问答中心" back="/" />
-
+        <div
+          style={{
+            height: '35px',
+            width: '100vw',
+            margin: 0,
+            padding: 0,
+            border: 'none'
+          }}
+        />
         <div ws-container-id="main" style={{ fontSize: '0.9rem' }}>
           <div style={{ height: '140px', backgroundColor: '#F2F2F2' }}>
             <div
