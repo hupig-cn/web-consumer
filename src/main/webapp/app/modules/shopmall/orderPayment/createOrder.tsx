@@ -146,7 +146,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
           // @ts-ignore
           data.then(datares => {
             if (res.value.data.code === 1) {
-              toast.success(datares.value.data.message);
+              // toast.success(datares.value.data.message);
               const info = document.getElementById('app-modules-consumer-quickaccess-button-link-selectpayway');
               info.click();
             } else {

@@ -85,9 +85,9 @@ export default function SwipeableTemporaryDrawer(props) {
         </p>
       </div>
       <Divider />
-      <div className={classes.mydiv}>
+      <div className={classes.mydiv} style={{ padding: '15px' }}>
         <span style={{ textAlign: 'center', display: 'block' }}>{props.integral} 积分兑换</span>
-        <ChevronRightRounded style={{ float: 'right' }} />
+        {/*<ChevronRightRounded style={{ float: 'right' }} />*/}
         {/*<div style={{ right: '15px', bottom: '10px', position: 'absolute' }}>*/}
         {/*<Switch />*/}
         {/*</div>*/}
