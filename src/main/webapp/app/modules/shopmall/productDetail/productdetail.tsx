@@ -222,7 +222,18 @@ export class Productdetail extends React.Component<IProductDetailProp> {
               }
             </p>
           </div>
-          <div style={{ position: 'fixed', bottom: '0px', zIndex: 1000, width: '100%', backgroundColor: '#ffffff', height: '50px' }}>
+          <div
+            style={{
+              borderTop: '1px solid #f0f0f0',
+              position: 'fixed',
+              bottom: '0px',
+              zIndex: 1000,
+              width: '100%',
+              backgroundColor: '#ffffff',
+              height: '55px',
+              padding: '0px 0px 10px 0px'
+            }}
+          >
             <Swipeabledrawer
               // @ts-ignore
               productid={this.props.location.state.productid}
@@ -254,19 +265,30 @@ export class Productdetail extends React.Component<IProductDetailProp> {
             style={{ backgroundColor: '#ffffff', margin: '5px 0px', width: '100%', padding: '5px 10px', borderBottom: '1px solid #eeeeee' }}
           >
             <p style={{ marginBottom: '0px', color: '#717171' }}>
-              服务<span style={{ color: '#000000', margin: '0px 20px' }}>24小时内发货 · 积分兑换</span>
+              服务<span style={{ color: '#000000', margin: '0px 20px' }}>24小时内发货 · 积分兑换(圆帅不可用)</span>
             </p>
           </div>
           <div
             style={{ backgroundColor: '#ffffff', margin: '5px 0px', width: '100%', padding: '5px 10px', borderBottom: '1px solid #eeeeee' }}
           >
             <p style={{ marginBottom: '0px', color: '#717171' }}>
-              选择<span style={{ color: '#000000', margin: '0px 20px' }}>所有颜色和分类</span>
+              规格<span style={{ color: '#000000', margin: '0px 20px' }}>已显示所有规格</span>
             </p>
           </div>
           <div style={{ backgroundColor: '#ffffff', margin: '5px 0px', width: '100%', padding: '5px 10px' }}>
             <p style={{ marginBottom: '5px', color: '#717171' }}>
-              参数<span style={{ color: '#000000', margin: '0px 20px' }}>品牌和型号</span>
+              说明
+              <p style={{ color: '#000000', margin: '0px 0px 0px 50px' }}>
+                除圆帅以外，所有商品均可使用：
+                <br />
+                积分、优惠卷、余额、支付宝、微信，付款。
+                <br />
+                当使用(支付宝、微信、余额)付款时。
+                <br />
+                将获得50%商品价格的积分。并赠送50%商品价格的优惠卷。
+                <br />
+                (优惠卷可进行线下实体店付款。)
+              </p>
             </p>
           </div>
           <div style={{ textAlign: 'center', boxShadow: '#f8f9fa 0px 0px 0px 8px' }}>

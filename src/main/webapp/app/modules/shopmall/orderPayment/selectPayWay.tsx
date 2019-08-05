@@ -210,16 +210,21 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
                     />
                   )}
                 </div>
-                <div style={{ width: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
+                <div style={{ width: 'calc(100% - 100px)', float: 'left', padding: '8px 0px 0px 10px', height: '85px' }}>
                   <span>
                     {product.name}
                     {product.json}
                   </span>
                 </div>
-                <div style={{ width: '60px', float: 'left' }}>
-                  <p style={{ marginLeft: '20px', marginTop: '7px', color: 'red', fontSize: '0.5rem', width: '72px' }}>
-                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> <span>{product.price}</span>
-                    <span style={{ marginLeft: '10px' }}>x</span>
+                <div style={{ width: '100%' }}>
+                  <p
+                    style={{
+                      color: '#fe4365',
+                      fontSize: '1rem',
+                      float: 'right'
+                    }}
+                  >
+                    <span>¥</span> <span style={{ fontSize: '1.5rem' }}>{product.price}</span> <span>x</span>
                     <span>{product.num}</span>
                   </p>
                 </div>
@@ -230,7 +235,7 @@ export class SelectPayWay extends React.Component<ISelectPayWayProp> {
           )}
         </div>
         <Divider />
-        <div style={{ textAlign: 'center' }}>总价:{this.state.totalAmout}元</div>
+        <div style={{ textAlign: 'center', margin: '10px 0px' }}>总价:{this.state.totalAmout}元</div>
         {/*支付方式选择*/}
         {this.state.payMethod.length !== 0 ? (
           <Radiobuttons handlepay={this.handleChoosePayWay} paymethod={this.state.payMethod} />

@@ -96,12 +96,10 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           <Button
             variant="contained"
             color={'secondary'}
-            style={{ position: 'fixed', top: '85%', left: '20%', width: '60%' }}
+            style={{ position: 'fixed', top: '88%', left: '20%', width: '60%' }}
             // onClick={loadbgimg(merchantEntity.name)}
           >
             长按图像可保存到手机
-            <br />
-            如无背景图请返回后重新进入
             <br />
             建议打印尺寸8cm × 12cm
           </Button>

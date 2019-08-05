@@ -259,7 +259,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             this.state.products ? (
               this.state.products.map((product, index) => (
                 // tslint:disable-next-line: jsx-key
-                <div style={{ height: '180px', margin: '15px' }}>
+                <div style={{ height: '160px', margin: '15px' }}>
                   <div>
                     <div style={{ float: 'left', marginBottom: '10px' }}>
                       <img style={{ height: '24px', width: '24px' }} src={'./content/images/user.png'} />
@@ -283,7 +283,9 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                         />
                       )}
                     </div>
-                    <div style={{ maxWidth: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
+                    <div
+                      style={{ maxWidth: '100%', width: 'calc(100% - 100px)', float: 'left', padding: '8px 0px 0px 10px', height: '85px' }}
+                    >
                       <span>
                         {' '}
                         {product.name} {product.attr}{' '}
@@ -309,8 +311,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 backgroundColor: '#ffffff',
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
-                borderTop: '1px solid #B1B1B1',
-                borderBottom: '1px solid #B1B1B1',
+                borderTop: '1px solid #e0e0e0',
+                borderBottom: '1px solid #e0e0e0',
                 textAlign: 'right'
               }}
             >
@@ -323,7 +325,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 backgroundColor: '#ffffff',
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
-                borderBottom: '1px solid #B1B1B1',
+                borderBottom: '1px solid #e0e0e0',
                 textAlign: 'right'
               }}
             >
@@ -336,7 +338,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 backgroundColor: '#ffffff',
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
-                borderBottom: '1px solid #B1B1B1',
+                borderBottom: '1px solid #e0e0e0',
                 textAlign: 'right'
               }}
             >
