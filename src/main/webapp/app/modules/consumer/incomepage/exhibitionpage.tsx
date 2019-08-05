@@ -30,12 +30,14 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
           ctx.rect(0, 0, canvas.width, canvas.height);
           ctx.fillStyle = patBg;
           ctx.fill();
-          ctx.drawImage(qrcodeImg, 90, 264, 233, 233);
-          ctx.font = '24px bold 黑体';
+          ctx.drawImage(qrcodeImg, 49, 144, 128, 128);
+          ctx.font = '14px bold 黑体';
           ctx.fillStyle = '#fe4365';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText(this.props.merchantEntity.name, 200, 530);
+          let name = this.props.merchantEntity.name;
+          name = name.length > 9 ? name.substr(0, 9) + '...' : name;
+          ctx.fillText(name, 113, 288);
           const overImg = new Image();
           overImg.src = canvas.toDataURL('image/png');
           // tslint:disable-next-line: only-arrow-functions
@@ -77,15 +79,15 @@ export class Exhibitionpage extends React.Component<IExhibitionpageProp> {
                 id="qrcode-canvas-key"
                 value={'http://app.yuanscore.com/?id=' + merchantEntity.id}
                 renderAs="canvas"
-                size={233}
+                size={128}
                 fgColor="#000000"
                 bgColor="#ffffff"
               />
             ) : (
               // @ts-ignore
-              <QRCode id="qrcode-canvas-key" value={'error'} renderAs="canvas" size={233} fgColor="#ffffff" bgColor="#ffffff" />
+              <QRCode id="qrcode-canvas-key" value={'error'} renderAs="canvas" size={128} fgColor="#ffffff" bgColor="#ffffff" />
             )}
-            <canvas id="myCanvas" width="414" height="621">
+            <canvas id="myCanvas" width="227" height="340">
               {' '}
             </canvas>
             <img id="qrcode-image" src="./content/images/income.png" />

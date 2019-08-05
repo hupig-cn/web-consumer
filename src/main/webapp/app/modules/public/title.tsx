@@ -28,8 +28,8 @@ export default function PrimarySearchAppBar(text) {
     <div ws-container-id="title">
       <div
         style={{
-          height: titleHeight,
-          lineHeight: titleHeight,
+          height: '35px',
+          lineHeight: '35px',
           width: '100vw',
           color: '#fffde5',
           backgroundColor: '#fe4365',
@@ -54,23 +54,14 @@ export default function PrimarySearchAppBar(text) {
             style={{
               float: 'left',
               fill: '#fffde5',
-              height: titleHeight,
-              lineHeight: titleHeight
+              height: '35px',
+              lineHeight: '35px'
             }}
           />
         </Link>
         <span style={{ fontSize: '1rem', marginTop: '3px', marginLeft: '2px' }}>{text.name}</span>
         {info}
       </div>
-      <div
-        style={{
-          height: titleHeight,
-          width: '100vw',
-          margin: 0,
-          padding: 0,
-          border: 'none'
-        }}
-      />
     </div>
   );
 }
