@@ -187,6 +187,12 @@ export const queryAlipay = (userid: string) => {
     payload: axios.get(requestUrl)
   };
 };
+export const queryWeChat = (userid: string) => {
+  const requestUrl = `services/basic/api/public/queryWeChat/?userid=${userid}`;
+  return {
+    payload: axios.get(requestUrl)
+  };
+};
 
 export const setDefaultAddress = (id: any) => async dispatch => {
   const result = await dispatch({
