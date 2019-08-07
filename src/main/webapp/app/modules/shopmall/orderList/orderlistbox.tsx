@@ -126,6 +126,17 @@ export default function BottomAppBar(props) {
         <List className={classes.list}>
           {props.messages.map(({ id, ordercode, createdate, orderstatus, sum, consumption, person }) => (
             <React.Fragment key={id}>
+              <Link
+                id="app-modules-consumer-quickaccess-button-link-orderdetail"
+                // tslint:disable-next-line: no-invalid-this
+                to={{
+                  pathname: '/orderdetail',
+                  state: {
+                    bigorderid: id,
+                    productid: id
+                  }
+                }}
+              />
               <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }} onClick={jumpToOrderDetail}>
                 <ListItemAvatar>
                   <Avatar
@@ -154,11 +165,6 @@ export default function BottomAppBar(props) {
                   }
                 />
               </ListItem>
-              <Link
-                id="app-modules-consumer-quickaccess-button-link-orderdetail"
-                // tslint:disable-next-line: no-invalid-this
-                to={{ pathname: '/orderdetail', bigorderid: id }}
-              />
             </React.Fragment>
           ))}
         </List>

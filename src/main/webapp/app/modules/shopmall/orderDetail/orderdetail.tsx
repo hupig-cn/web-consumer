@@ -47,7 +47,7 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
     // @ts-ignore
     if (this.props.location.state.cards) {
       // @ts-ignore
-      const product = this.props.getOrderInfo(account.id, null, this.props.location.state.cards, number);
+      const product = this.props.getOrderInfo(account.id, null, this.props.location.state.cards, 1);
       // @ts-ignore
       product.then(res => {
         const imgsarr = [];
@@ -71,7 +71,7 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
       });
     } else {
       // @ts-ignore
-      const product = this.props.getOrderInfo(account.id, this.props.location.state.productid, null, number);
+      const product = this.props.getOrderInfo(account.id, this.props.location.state.productid, null, 1);
       // @ts-ignore
       product.then(res => {
         const imgsarr = [];
@@ -114,9 +114,9 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
     //   });
     // });
     // @ts-ignore
-    alert(this.props.location.bigorderid);
+    alert(this.props.location.state.bigorderid);
     // @ts-ignore
-    this.getOrderInfoByOrderId(this.props.location.bigorderid);
+    this.getOrderInfoByOrderId(this.props.location.state.bigorderid);
   }
 
   getOrderInfoByOrderId(orderid) {
@@ -128,7 +128,6 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
         this.setState({
           messages: res.value.data.data
         });
-        alert(this.state.messages);
       } else {
         toast.error('数据异常：该订单号下没有详情');
       }
@@ -142,7 +141,7 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
     const consignee = document.getElementById('consignee').innerText;
     // @ts-ignore
     // tslint:disable-next-line: radix
-    const price = this.props.PaySum(this.props.location.state.productid, parseInt(number));
+    const price = this.props.PaySum(this.props.location.state.productid, parseInt(1));
     // @ts-ignore
     price.then(res => {
       // @ts-ignore
@@ -159,7 +158,7 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
             null,
             // @ts-ignore
             this.props.location.state.productid,
-            number,
+            1,
             this.state.bigorder,
             consignee,
             mobile,
@@ -195,8 +194,6 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
               back="/productdetail"
               // @ts-ignore
               productid={this.props.location.state.productid ? this.props.location.state.productid : undefined}
-              // @ts-ignore
-              cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
             />
             <div
               style={{
@@ -219,9 +216,7 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
                   pathname: '/selectAddress',
                   state: {
                     // @ts-ignore
-                    productid: this.props.location.state.productid ? this.props.location.state.productid : undefined,
-                    // @ts-ignore
-                    cards: this.props.location.state.cards ? this.props.location.state.cards : undefined
+                    productid: this.props.location.state.productid ? this.props.location.state.productid : undefined
                   }
                 }}
               >
@@ -415,9 +410,7 @@ export class OrderDetail extends React.Component<IOrderDetailProp> {
                   // @ts-ignore
                   integral: this.props.location.state.integral,
                   // @ts-ignore
-                  productid: this.props.location.state.productid,
-                  // @ts-ignore
-                  cards: this.props.location.state.cards
+                  productid: this.props.location.state.productid
                 }
               }}
             />
