@@ -68,7 +68,7 @@ export class Binding extends React.Component<IBindingProp> {
             style={{ position: 'fixed', top: '80%', left: '20%', width: '60%' }}
             onClick={this.goto}
           >
-            点击可打开微信扫一扫
+            打开微信扫一扫
           </Button>
         </div>
       </div>
