@@ -339,7 +339,7 @@ export class Product extends React.Component {
                 // tslint:disable-next-line:jsx-key
                 <Link
                   to={{
-                    pathname: '/Productdetail',
+                    pathname: '/productdetail',
                     state: {
                       productid: tile.id,
                       postage: tile.postage,
