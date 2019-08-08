@@ -19,7 +19,17 @@ class SampleComponent extends React.Component {
           topics={['/users/' + `${this.props.userid}` + '/message']}
           /* tslint:disable-next-line:jsx-no-lambda */
           onMessage={msg => {
-            toast.success(msg);
+            if (msg.type === '2') {
+              const str = msg.message.split(',');
+              const xx = new SpeechSynthesisUtterance('圆积分' + str[1]);
+              xx.volume = 100;
+              xx.rate = 1;
+              xx.pitch = 1.5;
+              window.speechSynthesis.speak(xx);
+              toast.success(msg.message);
+            } else {
+              toast.success(msg.message);
+            }
           }}
           ref={client => {
             this.clientRef = client;

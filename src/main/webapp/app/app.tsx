@@ -77,4 +77,5 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
+  // @ts-ignore
 )(hot(module)(App));
