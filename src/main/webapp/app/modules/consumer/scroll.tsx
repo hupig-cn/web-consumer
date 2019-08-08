@@ -339,7 +339,7 @@ export class Product extends React.Component {
                 // tslint:disable-next-line:jsx-key
                 <Link
                   to={{
-                    pathname: '/Productdetail',
+                    pathname: '/productdetail',
                     state: {
                       productid: tile.id,
                       postage: tile.postage,
@@ -382,7 +382,8 @@ export class Product extends React.Component {
                         width: '100%',
                         position: 'initial',
                         backgroundColor: '#fff',
-                        borderRadius: '0px 0px 5px 5px'
+                        borderRadius: '0px 0px 5px 5px',
+                        height: '85px'
                       }}
                       title={
                         <p
@@ -395,7 +396,7 @@ export class Product extends React.Component {
                             fontSize: '0.8rem',
                             position: 'absolute',
                             color: 'rgba(0, 0, 0, 0.584)',
-                            margin: '-26px 0px 0px -16px',
+                            margin: '-35px 0px 0px -16px',
                             width: '100%',
                             padding: '0px 5px',
                             lineHeight: '17px'

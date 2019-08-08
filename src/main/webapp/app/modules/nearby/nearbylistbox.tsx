@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function BottomAppBar(props) {
   const classes = useStyles();
-  const { state, getimgs } = props;
+  const { state } = props;
 
   return (
     <React.Fragment>
@@ -126,7 +126,8 @@ export default function BottomAppBar(props) {
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"
-                    src={val.merchantphoto}
+                    // src={val.merchantphoto}
+                    src={'./content/images/user.png'}
                     style={{
                       borderRadius: 0,
                       width: 75,

@@ -14,6 +14,7 @@ import Switch from '@material-ui/core/Switch';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { Pathname } from 'history';
+import { AddRounded, RemoveOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   list: {
@@ -53,7 +54,9 @@ export default function SwipeableTemporaryDrawer(props) {
       <div className={classes.mydiv}>
         <img style={{ height: '120px', width: '100px' }} src={props.img} />
         <ChevronRightRounded style={{ float: 'right' }} />
-        <p style={{ float: 'right', fontSize: '2rem' }}>¥{props.price}</p>
+        <p style={{ float: 'right', fontSize: '2rem' }}>
+          <span style={{ fontSize: '1.2rem', color: '#fe4365' }}>¥</span> <span style={{ color: '#fe4365' }}>{props.price}</span>
+        </p>
         {/*<p style={{ right: '30px', bottom: '0px', position: 'absolute' }}>库存：{props.num}件</p>*/}
       </div>
       <div>
@@ -67,27 +70,43 @@ export default function SwipeableTemporaryDrawer(props) {
         </p>
         <p style={{ paddingLeft: '15px' }}>
           换购数量：
-          <button
-            // tslint:disable-next-line: jsx-no-lambda
-            onClick={() => downValue()}
+          <span
+            style={{
+              border: '2px solid rgb(100, 100, 100)',
+              borderRadius: '20px',
+              marginLeft: '15px'
+            }}
           >
-            -
-          </button>
-          <span id="inputNumber" style={{ paddingLeft: '10px', marginLeft: '-3px', marginRight: '5px' }}>
-            1
+            <RemoveOutlined
+              // tslint:disable-next-line: jsx-no-lambda
+              onClick={() => downValue()}
+              style={{
+                width: '20px',
+                height: '20px',
+                margin: '0px 0px 3px 5px',
+                fill: 'rgb(100, 100, 100)'
+              }}
+            />
+            <span id="inputNumber" style={{ paddingLeft: '10px', marginLeft: '-3px', marginRight: '5px' }}>
+              1
+            </span>
+            <AddRounded
+              // tslint:disable-next-line: jsx-no-lambda
+              onClick={() => upValue()}
+              style={{
+                width: '20px',
+                height: '20px',
+                margin: '0px 5px 3px 0px',
+                fill: 'rgb(100, 100, 100)'
+              }}
+            />
           </span>
-          <button
-            // tslint:disable-next-line: jsx-no-lambda
-            onClick={() => upValue()}
-          >
-            +
-          </button>
         </p>
       </div>
       <Divider />
-      <div className={classes.mydiv}>
+      <div className={classes.mydiv} style={{ padding: '5px 15px 0px 15px' }}>
         <span style={{ textAlign: 'center', display: 'block' }}>{props.integral} 积分兑换</span>
-        <ChevronRightRounded style={{ float: 'right' }} />
+        {/*<ChevronRightRounded style={{ float: 'right' }} />*/}
         {/*<div style={{ right: '15px', bottom: '10px', position: 'absolute' }}>*/}
         {/*<Switch />*/}
         {/*</div>*/}
@@ -109,11 +128,12 @@ export default function SwipeableTemporaryDrawer(props) {
             backgroundColor: '#fe4365',
             width: '80%',
             color: 'white',
-            margin: '5px 0px',
+            margin: '10px 0px',
             borderRadius: '20px',
             zIndex: 1002,
             fontSize: '1rem',
-            height: '38px'
+            height: '38px',
+            border: 'none'
           }}
           // tslint:disable-next-line: jsx-no-lambda
           onClick={() => createOrder()}

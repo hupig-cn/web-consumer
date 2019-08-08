@@ -82,8 +82,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2, 2, 0)
     },
     paper: {
-      paddingBottom: 0,
-      marginTop: '66px'
+      paddingBottom: 0
     },
     list: {
       fontFamily: '黑体',
@@ -130,17 +129,23 @@ export default function BottomAppBar(props) {
               <Link
                 id="app-modules-consumer-quickaccess-button-link-orderdetail"
                 // tslint:disable-next-line: no-invalid-this
-                to={{ pathname: '/orderdetail', bigorderid: id }}
+                to={{
+                  pathname: '/orderdetail',
+                  state: {
+                    bigorderid: id,
+                    productid: id
+                  }
+                }}
               />
               <ListItem button style={{ borderBottom: '1px solid #f0f0f0' }} onClick={jumpToOrderDetail}>
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile Picture"
-                    src={'./content/images/shop1.png'}
+                    src={'./content/images/user.png'}
                     style={{
                       borderRadius: 20,
-                      width: 75,
-                      height: 100,
+                      width: 60,
+                      height: 60,
                       marginRight: 10
                     }}
                   />

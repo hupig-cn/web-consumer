@@ -72,7 +72,7 @@ export class Nearby extends React.Component<INearbyProp> {
   };
 
   getimgs = key => {
-    let img = [];
+    const img = [];
     this.props
       .getPublicImg(key)
       // @ts-ignore

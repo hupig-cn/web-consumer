@@ -79,7 +79,6 @@ export class AddAddress extends React.Component<IAddAddressProp> {
           backgroundColor: '#00000010',
           width: '100%',
           height: '100%',
-          margin: '30px 0px 0px 0px',
           padding: '0px'
         }}
       >

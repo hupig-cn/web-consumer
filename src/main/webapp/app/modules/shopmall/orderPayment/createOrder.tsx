@@ -146,7 +146,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
           // @ts-ignore
           data.then(datares => {
             if (res.value.data.code === 1) {
-              toast.success(datares.value.data.message);
+              // toast.success(datares.value.data.message);
               const info = document.getElementById('app-modules-consumer-quickaccess-button-link-selectpayway');
               info.click();
             } else {
@@ -176,10 +176,19 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
               // @ts-ignore
               cards={this.props.location.state.cards ? this.props.location.state.cards : undefined}
             />
+            <div
+              style={{
+                height: '35px',
+                width: '100vw',
+                margin: 0,
+                padding: 0,
+                border: 'none'
+              }}
+            />
             {/*地址模块*/}
             <div
               style={{
-                margin: '45px 15px 15px 15px',
+                margin: '20px',
                 minHeight: '72px'
               }}
             >
@@ -197,7 +206,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 {this.state.havaDefault === true ? (
                   <div>
                     <div>
-                      <div style={{ marginTop: '-30px' }}>
+                      <div>
                         <span>收货人:</span>
                         <span id="consignee" style={{ marginLeft: '7px' }}>
                           {this.state.consignee}
@@ -259,15 +268,12 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
             this.state.products ? (
               this.state.products.map((product, index) => (
                 // tslint:disable-next-line: jsx-key
-                <div style={{ height: '180px', margin: '15px 0px 15px 15px' }}>
+                <div style={{ height: '160px', margin: '15px' }}>
                   <div>
                     <div style={{ float: 'left', marginBottom: '10px' }}>
-                      {/*<img*/}
-                      {/*  style={{ height: '18px', width: '15px' }}*/}
-                      {/*  src={'http://img0.imgtn.bdimg.com/it/u=2519501909,294206455&fm=26&gp=0.jpg'}*/}
-                      {/*/>*/}
+                      <img style={{ height: '24px', width: '24px' }} src={'./content/images/user.png'} />
                     </div>
-                    <div style={{ marginTop: '-15px', marginBottom: '2px' }}>博媛官方旗舰店</div>
+                    <div style={{ margin: '15px' }}>博媛官方旗舰店</div>
                   </div>
                   <div style={{ width: '100%' }}>
                     <div style={{ height: '120px', width: '100px', float: 'left' }}>
@@ -286,15 +292,18 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                         />
                       )}
                     </div>
-                    <div style={{ maxWidth: '50%', float: 'left', padding: '8px 0px 0px 10px', height: '120px' }}>
+                    <div
+                      style={{ maxWidth: '100%', width: 'calc(100% - 100px)', float: 'left', padding: '8px 0px 0px 10px', height: '85px' }}
+                    >
                       <span>
                         {' '}
                         {product.name} {product.attr}{' '}
                       </span>
                     </div>
-                    <div style={{ width: '60px', float: 'left' }}>
-                      <p style={{ marginLeft: '20px', marginTop: '7px', color: 'red', fontSize: '0.5rem', width: '72px' }}>
-                        <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span> <span>{product.price}</span>
+                    <div style={{ width: '100px', float: 'right' }}>
+                      <p style={{ color: 'red', fontSize: '0.5rem', width: '100px' }}>
+                        <span style={{ fontSize: '1rem', marginLeft: '5px' }}>¥</span>{' '}
+                        <span style={{ fontSize: '1.2rem' }}>{product.price}</span>
                         <span style={{ marginLeft: '10px' }}>x</span>
                         <span>{product.number}</span>
                       </p>
@@ -311,8 +320,8 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 backgroundColor: '#ffffff',
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
-                borderTop: '1px solid #B1B1B1',
-                borderBottom: '1px solid #B1B1B1',
+                borderTop: '1px solid #e0e0e0',
+                borderBottom: '1px solid #e0e0e0',
                 textAlign: 'right'
               }}
             >
@@ -325,7 +334,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 backgroundColor: '#ffffff',
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
-                borderBottom: '1px solid #B1B1B1',
+                borderBottom: '1px solid #e0e0e0',
                 textAlign: 'right'
               }}
             >
@@ -338,7 +347,7 @@ export class CreateOrder extends React.Component<ICreateOrderProp> {
                 backgroundColor: '#ffffff',
                 padding: '15px 5px 15px 15px',
                 margin: '1px 0px',
-                borderBottom: '1px solid #B1B1B1',
+                borderBottom: '1px solid #e0e0e0',
                 textAlign: 'right'
               }}
             >

@@ -9,7 +9,7 @@ import { IRootState } from 'app/shared/reducers';
 import { getSession, getSessionRE, passwordCheck } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { getMyImg } from 'app/requests/basic/files.reducer';
-import { getMyRecommendName, queryAlipay } from 'app/requests/basic/basic.reducer';
+import { getMyRecommendName, queryAlipay, queryWeChat } from 'app/requests/basic/basic.reducer';
 // tslint:disable-next-line: no-submodule-imports
 import Dialog from '@material-ui/core/Dialog';
 // tslint:disable-next-line: no-submodule-imports
@@ -33,7 +33,7 @@ import FirstSetPayPass from 'app/modules/shopmall/payPassword/firstSetPayPass';
 export interface IMysettingsProp extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Mysettings extends React.Component<IMysettingsProp> {
-  state = { alipay: '未绑定', file: '', fileContentType: '', open: false, name: '无' };
+  state = { alipay: '未绑定', wechat: '未绑定', file: '', fileContentType: '', open: false, name: '无' };
   componentDidMount() {
     this.props.getSession();
     this.props
@@ -46,6 +46,12 @@ export class Mysettings extends React.Component<IMysettingsProp> {
             // @ts-ignore
             .then(mess => {
               this.setState({ alipay: mess.value.data });
+            });
+          this.props
+            .queryWeChat(valueII.data.id)
+            // @ts-ignore
+            .then(mess => {
+              this.setState({ wechat: mess.value.data });
             });
           if (valueII.data.imageUrl > 0) {
             this.props
@@ -104,7 +110,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
   };
 
   bindingWeChat = () => {
-    toast.success('提示：用来绑定微信。');
+    this.props.history.push('/binding');
   };
   bindingAlipay = () => {
     this.props.history.push('/personal');
@@ -193,11 +199,21 @@ export class Mysettings extends React.Component<IMysettingsProp> {
           </div>
           <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
           <div style={mydiv}>
-            <span style={{ float: 'left' }}>微信账号</span>
-            <div style={{ overflow: 'auto' }} onClick={this.bindingWeChat}>
-              <span>绑定</span>
-              <ChevronRightRounded style={{ float: 'right' }} />
-            </div>
+            {this.state.wechat === '未绑定' ? (
+              <div>
+                <span style={{ float: 'left' }}>微信账号(未绑定)</span>
+                <div style={{ overflow: 'auto' }} onClick={this.bindingWeChat}>
+                  <span>立即绑定</span>
+                  <ChevronRightRounded style={{ float: 'right' }} />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <span style={{ float: 'left' }}>微信账号</span>
+                <span>已绑定</span>
+                <RemoveRounded style={{ float: 'right' }} />
+              </div>
+            )}
           </div>
           <div style={mydiv}>
             {this.state.alipay === '未绑定' ? (
@@ -259,7 +275,8 @@ const mapDispatchToProps = {
   getlinkusers,
   getMyRecommendName,
   getSessionRE,
-  queryAlipay
+  queryAlipay,
+  queryWeChat
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

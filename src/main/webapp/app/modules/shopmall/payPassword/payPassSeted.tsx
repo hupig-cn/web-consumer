@@ -35,6 +35,15 @@ export class PayPassSeted extends React.Component<IPayPassSetedProp> {
           }}
         >
           <Title name="设置支付密码" back="/mysettings" />
+          <div
+            style={{
+              height: '5px',
+              width: '100vw',
+              margin: 0,
+              padding: 0,
+              border: 'none'
+            }}
+          />
           <div style={mydiv}>
             <span style={{ float: 'left' }}>修改支付密码</span>
             <Link to="/updatePayPass">
