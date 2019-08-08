@@ -20,6 +20,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import Enddiv from 'app/shared/menu/enddiv';
+import SampleComponent from 'app/modules/consumer/SampleComponent';
 
 const baseHref = document
   .querySelector('base')
@@ -35,6 +36,7 @@ export class App extends React.Component<IAppProps> {
   }
 
   render() {
+    const { account } = this.props;
     return (
       <Router basename={baseHref}>
         <div className="app-container">
@@ -50,6 +52,7 @@ export class App extends React.Component<IAppProps> {
           <ErrorBoundary>
             <BottomNavigation />
           </ErrorBoundary>
+          <SampleComponent userid={account.id} />
         </div>
       </Router>
     );
@@ -59,6 +62,7 @@ export class App extends React.Component<IAppProps> {
 const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootState) => ({
   currentLocale: locale.currentLocale,
   isAuthenticated: authentication.isAuthenticated,
+  account: authentication.account,
   isAdmin: hasAnyAuthority(authentication.account.authorities, [AUTHORITIES.ADMIN]),
   ribbonEnv: applicationProfile.ribbonEnv,
   isInProduction: applicationProfile.inProduction,
