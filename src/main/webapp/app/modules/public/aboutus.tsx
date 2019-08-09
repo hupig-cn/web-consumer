@@ -71,8 +71,7 @@ export class Manage extends React.Component<IManageProp> {
             display: 'block',
             width: '90vw',
             fontWeight: 'bold',
-            height: '35px',
-            lineHeight: '35px'
+            lineHeight: '30px'
           }}
         >
           {item.q}
