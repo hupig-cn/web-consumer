@@ -107,6 +107,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inline: {
       display: 'inline'
+    },
+    listRight: {
+      margin: '0 auto',
+      height: '80px',
+      position: 'relative',
+
+      '& > span': {
+        overflow: 'hidden',
+        display: 'inline-block',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%'
+      }
     }
   })
 );
@@ -129,15 +142,15 @@ export default function BottomAppBar(props) {
                     // src={val.merchantphoto}
                     src={'./content/images/user.png'}
                     style={{
-                      borderRadius: 0,
+                      borderRadius: '50%',
                       width: 75,
-                      height: 100,
+                      height: 75,
                       marginRight: 10
                     }}
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  style={{ margin: '0 auto', height: '100px', position: 'relative' }}
+                  className={classes.listRight}
                   primary={val.name}
                   secondary={
                     <React.Fragment>
