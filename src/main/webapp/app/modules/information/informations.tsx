@@ -317,8 +317,9 @@ export class Informations extends React.Component {
           <List
             style={{
               fontFamily: '黑体',
-              padding: 0,
-              height: window.outerHeight
+              padding: '0px 10px',
+              height: window.outerHeight,
+              marginTop: '35px'
             }}
             id="messageHtml"
           >
@@ -358,8 +359,10 @@ export class Informations extends React.Component {
                               width: '100%',
                               whiteSpace: 'nowrap',
                               textOverflow: 'ellipsis',
-                              overflow: 'hidden',
-                              marginBottom: 0
+                              overflow: 'auto',
+                              marginBottom: '0px',
+                              marginTop: '20px',
+                              fontSize: '0.85rem'
                             }}
                           >
                             {content}
@@ -368,17 +371,19 @@ export class Informations extends React.Component {
                       </React.Fragment>
                     }
                   />
-                  <span
+                  <p
                     style={{
                       position: 'absolute',
                       top: '8px',
-                      fontSize: '0.875rem',
+                      fontSize: '0.8rem',
                       right: '16px',
                       width: 'auto',
-                      color: '#00000095'
+                      color: '#777777',
+                      marginTop: '-5px'
                     }}
-                  />
-                  {createdate}
+                  >
+                    {createdate}
+                  </p>
                 </ListItem>
               </React.Fragment>
             ))}
