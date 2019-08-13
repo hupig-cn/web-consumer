@@ -265,7 +265,10 @@ export class Productdetail extends React.Component<IProductDetailProp> {
             style={{ backgroundColor: '#ffffff', margin: '5px 0px', width: '100%', padding: '5px 10px', borderBottom: '1px solid #eeeeee' }}
           >
             <p style={{ marginBottom: '0px', color: '#717171' }}>
-              服务<span style={{ color: '#000000', margin: '0px 20px' }}>24小时内发货 · 积分兑换(圆帅不可用)</span>
+              服务
+              <span style={{ color: '#000000', margin: '0px 20px' }}>
+                24小时内发货 · {this.state.productid !== 1 ? this.state.price + '积分兑换' : '圆帅不允许积分兑换'}
+              </span>
             </p>
           </div>
           <div
@@ -279,9 +282,7 @@ export class Productdetail extends React.Component<IProductDetailProp> {
             <p style={{ marginBottom: '5px', color: '#717171' }}>
               说明
               <p style={{ color: '#000000', margin: '0px 0px 0px 50px' }}>
-                除圆帅以外，所有商品均可使用：
-                <br />
-                积分、优惠卷、余额、支付宝、微信，付款。
+                商品均可使用（微信，支付宝，积分，余额，优惠券）兑付
                 <br />
                 当使用(支付宝、微信、余额)付款时。
                 <br />
