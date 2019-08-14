@@ -118,7 +118,8 @@ export default function BottomAppBar(props) {
   function jumpToOrderDetail() {
     // 对订单状态进行判断
     // 只有订单状态为已支付和退货中的订单才传入订单状态值,其他的均设置为null或者undefind
-    document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
+    // document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
+    // document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
   }
 
   return (
