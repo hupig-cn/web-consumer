@@ -52,6 +52,12 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 <AvGroup check inline style={{ float: 'right' }}>
                   <Label className="form-check-label">
                     <span>
+                      <Link to={'/resetPassword'} className="alert-link" style={{ color: '#fe4365', textDecoration: 'underline' }}>
+                        忘记密码
+                      </Link>
+                    </span>
+                    <span style={{ marginLeft: '10px' }} />
+                    <span>
                       <Link to={'/register'} className="alert-link" style={{ color: '#fe4365', textDecoration: 'underline' }}>
                         注册账户
                       </Link>

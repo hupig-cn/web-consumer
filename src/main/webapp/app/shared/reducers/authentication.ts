@@ -132,6 +132,20 @@ export const register = (login: any, password: any, lastName: any) => async (dis
     payload: axios.post('services/login/api/public/phone-user', { login, password, lastName })
   });
 };
+// tslint:disable-next-line: no-shadowed-variable
+export const resetPassword = (phone: any, password: any, code: any) => async (dispatch: any) => {
+  // tslint:disable-next-line: ter-arrow-body-style
+  return dispatch({
+    payload: axios.post('services/login/api/public/reset-password/code-phone', { phone, password, code })
+  });
+};
+// tslint:disable-next-line: no-shadowed-variable
+export const resetPasswordByOldPassword = (currentPassword: any, newPassword: any) => async (dispatch: any) => {
+  // tslint:disable-next-line: ter-arrow-body-style
+  return dispatch({
+    payload: axios.post('services/login/api/accountOverride/change-password', { currentPassword, newPassword })
+  });
+};
 
 // tslint:disable-next-line: no-shadowed-variable
 export const updateMyimgurl = (id: any, login: any, imageUrl: any) => async dispatch => {
@@ -178,6 +192,12 @@ export const clearAuthentication = messageKey => (dispatch, getState) => {
 export const sendPayPasswordCode = (phone: any) => async (dispatch: any) => {
   return dispatch({
     payload: axios.post('services/login/api/public/send-pay-password-code', { phone })
+  });
+};
+// tslint:disable-next-line: ter-arrow-body-style
+export const sendPasswordCode = (phone: any) => async (dispatch: any) => {
+  return dispatch({
+    payload: axios.post('services/login/api/public/send-password-code', { phone })
   });
 };
 

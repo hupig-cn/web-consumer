@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import Login from 'app/modules/login/login';
 import Register from 'app/modules/register/register';
+import ResetPassword from 'app/modules/resetpassword/ResetPasswrod';
 import Logout from 'app/modules/login/logout';
 import Consumer from 'app/modules/consumer/consumer';
 import Incomepage from 'app/modules/consumer/incomepage/incomepage';
@@ -28,6 +29,7 @@ import Complete from 'app/modules/shopmall/orderPayment/complete';
 import ShopCar from 'app/modules/shopmall/shopCar/shopCar';
 import PayPassSeted from 'app/modules/shopmall/payPassword/payPassSeted';
 import UpdatePayPass from 'app/modules/shopmall/payPassword/updatePayPass';
+import UpdatePassword from 'app/modules/shopmall/payPassword/UpdatePassword';
 import SetNewPayPass from 'app/modules/shopmall/payPassword/setNewPayPass';
 import SendCodePayPass from 'app/modules/shopmall/payPassword/sendCodePayPass';
 import PayPassSetting from 'app/modules/shopmall/payPassword/payPassSetting';
@@ -41,6 +43,8 @@ const Routes = () => (
     <Switch>
       <ErrorBoundaryRoute path="/login" component={Login} />
       <ErrorBoundaryRoute path="/register" component={Register} />
+      <ErrorBoundaryRoute path="/updatePassword" component={UpdatePassword} />
+      <ErrorBoundaryRoute path="/resetPassword" component={ResetPassword} />
       <ErrorBoundaryRoute path="/logout" component={Logout} />
       <ErrorBoundaryRoute path="/nearby" component={Nearby} />
       <ErrorBoundaryRoute path="/information" component={Information} />

@@ -197,6 +197,13 @@ export class Mysettings extends React.Component<IMysettingsProp> {
               <ChevronRightRounded style={{ float: 'right' }} />
             </div>
           </div>
+          <div style={mydiv}>
+            <span style={{ float: 'left' }}>登录密码</span>
+            <Link to="/updatePassword">
+              <span>修改密码</span>
+              <ChevronRightRounded style={{ float: 'right' }} />
+            </Link>
+          </div>
           <div style={{ backgroundColor: '#00000005', width: '100%', height: '10px' }} />
           <div style={mydiv}>
             {this.state.wechat === '未绑定' ? (
