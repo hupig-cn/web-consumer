@@ -116,6 +116,8 @@ export default function BottomAppBar(props) {
   const classes = useStyles();
 
   function jumpToOrderDetail() {
+    // 对订单状态进行判断
+    // 只有订单状态为已支付和退货中的订单才传入订单状态值,其他的均设置为null或者undefind
     document.getElementById('app-modules-consumer-quickaccess-button-link-orderdetail').click();
   }
 
@@ -133,7 +135,7 @@ export default function BottomAppBar(props) {
                   pathname: '/orderdetail',
                   state: {
                     bigorderid: id,
-                    productid: id
+                    orderstatus: orderstatus === 1 ? orderstatus : orderstatus === 5 ? orderstatus : null
                   }
                 }}
               />
@@ -157,7 +159,7 @@ export default function BottomAppBar(props) {
                     <React.Fragment>
                       <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
                         <span style={{ fontSize: '1.5rem', color: '#fe4365' }}>¥{sum}</span> （订单状态：
-                        {orderstatus === '1' ? '未支付' : '已支付'}）
+                        {orderstatus === '1' ? '未支付' : orderstatus === '2' ? '待发货' : orderstatus === '3' ? '已发货' : '其他'})
                       </Typography>
                       <span style={{ float: 'right' }}>{consumption}</span>
                       <span style={{ float: 'left', position: 'absolute', bottom: 0, left: 0 }}>{createdate}</span>
