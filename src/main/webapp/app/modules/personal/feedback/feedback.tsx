@@ -19,7 +19,12 @@ export class Feedback extends React.Component<IFeedbackProps> {
     this.props.setBlob('fileI', undefined, undefined);
   }
   handleSubmit = (event, errors, { title, name, content, imageurl }) => {
-    if (imageurl.length < 1) {
+    const regname = /^[\u4e00-\u9fa5]+$/;
+    if (!(regname.test(name) && name.length > 1 && name.length < 5)) {
+      toast.info('提示：请输入正确的中文姓名。');
+    } else if (!(regname.test(title) && name.length > 1 && name.length < 50)) {
+      toast.info('提示：请用中文描述问题主题。');
+    } else if (imageurl.length < 1) {
       toast.info('提示：请上传问题截图。');
     } else if (imageurl.length > 8000000) {
       toast.info('提示：问题截图过大，请上传6M以内的文件。');
