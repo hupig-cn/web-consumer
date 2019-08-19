@@ -10,7 +10,7 @@ import { setBlob, createFile } from 'app/requests/basic/files.reducer';
 import { createFeedback } from 'app/requests/basic/basic.reducer';
 import { toast } from 'react-toastify';
 import { getSession } from 'app/shared/reducers/authentication';
-
+import lrz from 'lrz';
 export interface IFeedbackProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 export class Feedback extends React.Component<IFeedbackProps> {
@@ -18,7 +18,7 @@ export class Feedback extends React.Component<IFeedbackProps> {
     this.props.getSession();
     this.props.setBlob('fileI', undefined, undefined);
   }
-  handleSubmit = (event, errors, { title, name, content, imageurl }) => {
+  handleSubmit = (event, errors, { title, name, content, imageurl, filetype }) => {
     if (imageurl.length < 1) {
       toast.info('提示：请上传问题截图。');
     } else if (imageurl.length > 8000000) {
@@ -28,27 +28,30 @@ export class Feedback extends React.Component<IFeedbackProps> {
     } else if (content.trim().length < 1) {
       toast.info('提示：请输入反馈内容。');
     } else {
-      this.submitFeedback(title, name, content, imageurl);
+      this.submitFeedback(title, name, content, imageurl, filetype);
     }
   };
-  submitFeedback = (title, name, content, imageurl) => {
-    const fileid = this.props.createFile(this.props.account.id, imageurl.length, imageurl, this.props.filesEntity.fileIContentType);
-    // @ts-ignore
-    fileid.then((result: number) => {
-      if (!isNaN(result)) {
-        // @ts-ignore
-        // tslint:disable-next-line: no-shadowed-variable
-        this.props.createFeedback(name, title, content, result, this.props.account.id).then((result: any) => {
-          if (result.value.data.code.toString() === '1') {
-            toast.success('提示：反馈成功，请等候处理。');
-            this.props.history.push('/personal');
-          } else {
-            toast.error(result.value.data.message);
-          }
-        });
-      } else {
-        toast.info('提示：照片上传失败。');
-      }
+  submitFeedback = (title, name, content, imageurl, filetype) => {
+    lrz(`data:${filetype};base64,${imageurl}`, { quality: 0.7 }).then(res => {
+      const arr = res.base64.split(',');
+      const fileid = this.props.createFile(this.props.account.id, res.fileLen, arr[1], this.props.filesEntity.fileIContentType);
+      // @ts-ignore
+      fileid.then((result: number) => {
+        if (!isNaN(result)) {
+          // @ts-ignore
+          // tslint:disable-next-line: no-shadowed-variable
+          this.props.createFeedback(name, title, content, result, this.props.account.id).then((result: any) => {
+            if (result.value.data.code.toString() === '1') {
+              toast.success('提示：反馈成功，请等候处理。');
+              this.props.history.push('/personal');
+            } else {
+              toast.error(result.value.data.message);
+            }
+          });
+        } else {
+          toast.info('提示：照片上传失败。');
+        }
+      });
     });
   };
 
@@ -151,6 +154,7 @@ export class Feedback extends React.Component<IFeedbackProps> {
                         accept="image/*"
                       />
                       <AvInput type="hidden" name="imageurl" value={fileI} />
+                      <AvInput type="hidden" name="filetype" value={fileIContentType} />
                       {fileI ? (
                         <div>
                           <span style={{ float: 'right', width: '50%', height: '100%' }}>

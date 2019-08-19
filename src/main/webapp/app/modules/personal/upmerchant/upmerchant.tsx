@@ -17,7 +17,7 @@ import { getSession } from 'app/shared/reducers/authentication';
 import Info from 'app/modules/public/info';
 import { queryRealName } from 'app/requests/basic/linkuser.reducer';
 import Error from './info';
-
+import lrz from 'lrz';
 export interface IUpmerchantProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
 const concession = [
@@ -58,7 +58,21 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     event,
     errors,
     // tslint:disable-next-line: no-shadowed-variable
-    { shopphoto, buslicenseimage, name, creditcode, businessid, province, city, county, address, concession, agreement }
+    {
+      shopphoto,
+      buslicenseimage,
+      name,
+      creditcode,
+      businessid,
+      province,
+      city,
+      county,
+      address,
+      concession,
+      agreement,
+      shopphototype,
+      buslicensetype
+    }
   ) => {
     if (!agreement) {
       toast.info('提示：请先阅读并同意《用户协议》。');
@@ -81,37 +95,71 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     } else if (concession.length < 1) {
       toast.info('提示：请选择让利比。');
     } else {
-      this.onApply(shopphoto, buslicenseimage, name, businessid, address, province, city, county, concession, creditcode);
+      this.onApply(
+        shopphoto,
+        buslicenseimage,
+        name,
+        businessid,
+        address,
+        province,
+        city,
+        county,
+        concession,
+        creditcode,
+        shopphototype,
+        buslicensetype
+      );
     }
   };
 
   // tslint:disable-next-line: no-shadowed-variable
-  onApply = (shopphoto, creditcode, name, businessid, address, province, city, county, concession, creditcodes) => {
-    const fileid = this.props.createFile(this.props.account.id, shopphoto.length, shopphoto, this.props.filesEntity.fileIContentType);
-    // @ts-ignore
-    fileid.then((result: number) => {
-      if (!isNaN(result)) {
-        if (creditcode.length > 0) {
-          const fileidII = this.props.createFile(
-            this.props.account.id,
-            creditcode.length,
-            creditcode,
-            this.props.filesEntity.fileIIContentType
-          );
-          // @ts-ignore
-          fileidII.then((resultII: number) => {
-            if (!isNaN(resultII)) {
-              this.createMerchants(result, name, businessid, address, province, city, county, concession, resultII, creditcodes);
-            } else {
-              toast.info('提示：营业执照上传失败。');
-            }
-          });
+  onApply = (
+    shopphoto,
+    creditcode,
+    name,
+    businessid,
+    address,
+    province,
+    city,
+    county,
+    concession,
+    creditcodes,
+    shopphototype,
+    buslicensetype
+  ) => {
+    lrz(`data:${shopphototype};base64,${creditcode}`, { quality: 0.7 }).then(res => {
+      const arr = res.base64.split(',');
+      const fileid = this.props.createFile(this.props.account.id, res.fileLen, arr[1], this.props.filesEntity.fileIContentType);
+      // @ts-ignore
+      fileid.then((result: number) => {
+        if (!isNaN(result)) {
+          if (creditcode.length > 0) {
+            // 上传营业执照 开始
+            lrz(`data:${buslicensetype};base64,${creditcode}`, { quality: 0.7 }).then(respone => {
+              const arrII = respone.base64.split(',');
+              const fileidII = this.props.createFile(
+                this.props.account.id,
+                respone.fileLen,
+                arrII[1],
+                this.props.filesEntity.fileIIContentType
+              );
+              // @ts-ignore
+              fileidII.then((resultII: number) => {
+                if (!isNaN(resultII)) {
+                  this.createMerchants(result, name, businessid, address, province, city, county, concession, resultII, creditcodes);
+                } else {
+                  toast.info('提示：营业执照上传失败。');
+                }
+              });
+            });
+            // 上传营业执照结束
+          } else {
+            this.createMerchants(result, name, businessid, address, province, city, county, concession, null, creditcodes);
+          }
         } else {
-          this.createMerchants(result, name, businessid, address, province, city, county, concession, null, creditcodes);
+          toast.info('提示：店铺照片上传失败。');
         }
-      } else {
-        toast.info('提示：店铺照片上传失败。');
-      }
+      });
     });
   };
 
@@ -242,6 +290,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                               accept="image/*"
                             />
                             <AvInput type="hidden" name="shopphoto" value={fileI} />
+                            <AvInput type="hidden" name="shopphototype" value={fileIContentType} />
                             {fileI ? (
                               <div>
                                 <span style={{ float: 'right', width: '50%', height: '100%' }}>
@@ -300,6 +349,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
                               accept="image/*"
                             />
                             <AvInput type="hidden" name="buslicenseimage" value={fileII} />
+                            <AvInput type="hidden" name="buslicensetype" value={fileIIContentType} />
                             {fileII ? (
                               <div>
                                 <span style={{ float: 'right', width: '50%', height: '100%' }}>

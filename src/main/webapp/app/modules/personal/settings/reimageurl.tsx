@@ -8,6 +8,7 @@ import { getMyImg } from 'app/requests/basic/files.reducer';
 import { Button } from '@material-ui/core';
 import { ModalFooter } from 'reactstrap';
 import { setFileData } from 'react-jhipster';
+import lrz from 'lrz';
 // tslint:disable-next-line: no-duplicate-imports
 import { setBlob, createFile } from 'app/requests/basic/files.reducer';
 import { toast } from 'react-toastify';
@@ -19,7 +20,7 @@ export interface IMysettingsProp extends StateProps, DispatchProps, RouteCompone
 
 export class Mysettings extends React.Component<IMysettingsProp> {
   state = { file: '', fileContentType: '' };
-  handleSubmit = (event, errors, { imageurl }) => {
+  handleSubmit = (event, errors, { imageurl, filetype }) => {
     if (imageurl.length < 1) {
       toast.info('提示：请上传头像。');
     } else if (imageurl.length > 8000000) {
@@ -27,23 +28,26 @@ export class Mysettings extends React.Component<IMysettingsProp> {
     } else if (this.props.filesEntity.fileIContentType === undefined) {
       toast.info('提示：请上传新的头像文件');
     } else {
-      const fileid = this.props.createFile(this.props.account.id, imageurl.length, imageurl, this.props.filesEntity.fileIContentType);
-      // @ts-ignore
-      fileid.then((result: number) => {
-        if (!isNaN(result)) {
-          // @ts-ignore
-          // tslint:disable-next-line: no-shadowed-variable
-          this.props.updateMyimgurl(this.props.account.id, this.props.account.login, result).then((result: any) => {
-            if (result.value.data === '修改成功') {
-              toast.success('提示：修改成功。');
-              this.props.history.push('/mysettings');
-            } else {
-              toast.error(result.value.data);
-            }
-          });
-        } else {
-          toast.error('提示：头像上传失败。');
-        }
+      lrz(`data:${filetype};base64,${imageurl}`, { quality: 0.7 }).then(res => {
+        const arr = res.base64.split(',');
+        const fileid = this.props.createFile(this.props.account.id, res.fileLen, arr[1], this.props.filesEntity.fileIContentType);
+        // @ts-ignore
+        fileid.then((result: number) => {
+          if (!isNaN(result)) {
+            // @ts-ignore
+            // tslint:disable-next-line: no-shadowed-variable
+            this.props.updateMyimgurl(this.props.account.id, this.props.account.login, result).then((result: any) => {
+              if (result.value.data === '修改成功') {
+                toast.success('提示：修改成功。');
+                this.props.history.push('/mysettings');
+              } else {
+                toast.error(result.value.data);
+              }
+            });
+          } else {
+            toast.error('提示：头像上传失败。');
+          }
+        });
       });
     }
   };
@@ -100,6 +104,7 @@ export class Mysettings extends React.Component<IMysettingsProp> {
                     accept="image/*"
                   />
                   <AvInput type="hidden" name="imageurl" value={this.state.file} />
+                  <AvInput type="hidden" name="filetype" value={this.state.fileContentType} />
                   {this.state.file ? (
                     <div style={{ position: 'relative', paddingTop: '100%' }}>
                       <img

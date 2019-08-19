@@ -18,6 +18,7 @@
     "bootstrap": "4.3.1",
     "loaders.css": "0.1.2",
     "lodash": "4.17.11",
+    "lrz": "^4.9.40",
     "moment": "2.24.0",
     "qrcode.react": "^0.9.3",
     "react": "16.8.5",
