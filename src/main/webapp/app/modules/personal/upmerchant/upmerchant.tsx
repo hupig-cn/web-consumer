@@ -68,6 +68,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
       city,
       county,
       address,
+      // tslint:disable-next-line: no-shadowed-variable
       concession,
       agreement,
       shopphototype,
@@ -122,6 +123,7 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     province,
     city,
     county,
+    // tslint:disable-next-line: no-shadowed-variable
     concession,
     creditcodes,
     shopphototype,

@@ -52,10 +52,7 @@ export class App extends React.Component<IAppProps> {
           <ErrorBoundary>
             <BottomNavigation />
           </ErrorBoundary>
-          <// @ts-ignore
-          SampleComponent
-            userid={account.id}
-          />
+          <SampleComponent userid={account.id} />
         </div>
       </Router>
     );
