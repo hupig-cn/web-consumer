@@ -95,14 +95,14 @@ const tutorialSteps = [
     test: '下单赢红包好礼',
     imgPath: './content/images/tool5.png',
     pathId: 'app-modules-personal-mytool-button-link-key5',
-    toPath: '/'
+    toPath: '/personal'
   },
   {
     label: '领卷中心',
     test: '领取大额优惠卷',
     imgPath: './content/images/tool6.png',
     pathId: 'app-modules-personal-mytool-button-link-key6',
-    toPath: '/'
+    toPath: '/personal'
   }
 ];
 
