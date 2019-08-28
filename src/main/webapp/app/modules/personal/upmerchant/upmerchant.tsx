@@ -59,7 +59,9 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     errors,
     // tslint:disable-next-line: no-shadowed-variable
     {
+      // 门头
       shopphoto,
+      // 营业执照
       buslicenseimage,
       name,
       creditcode,
@@ -114,7 +116,9 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
 
   // tslint:disable-next-line: no-shadowed-variable
   onApply = (
+    // 门头
     shopphoto,
+    // 营业执照
     creditcode,
     name,
     businessid,
@@ -127,7 +131,8 @@ export class Upmerchant extends React.Component<IUpmerchantProps> {
     shopphototype,
     buslicensetype
   ) => {
-    lrz(`data:${shopphototype};base64,${creditcode}`, { quality: 0.7 }).then(res => {
+    // 门头
+    lrz(`data:${shopphototype};base64,${shopphoto}`, { quality: 0.7 }).then(res => {
       const arr = res.base64.split(',');
       const fileid = this.props.createFile(this.props.account.id, res.fileLen, arr[1], this.props.filesEntity.fileIContentType);
       // @ts-ignore
