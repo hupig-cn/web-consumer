@@ -36,7 +36,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
           padding: '0px'
         }}
       >
-        <Title name="园积分收款" back="/" />
+        <Title name="圆积分收款" back="/" />
         <div
           style={{
             width: '100%',
@@ -95,7 +95,7 @@ export class Incomepage extends React.Component<IIncomepageProp> {
                             <AssignmentTurnedInRounded style={{ fill: '#fe4365', marginTop: '-5px' }} />
                             <span style={{ color: '#fe4365' }}>收款码贴纸</span>
                             <ChevronRightRounded style={{ float: 'right' }} />
-                            <span style={{ float: 'right' }}>3折园积分收款码</span>
+                            <span style={{ float: 'right' }}>3折圆积分收款码</span>
                           </div>
                         </div>
                       </div>
